@@ -1,42 +1,30 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/mark-dark.svg">
-  <img alt="Dojo logo" align="right" width="120" src=".github/mark-light.svg">
-</picture>
+# TheOrugginTrail
+A MUD (and eventually also Dojo, World Engine, and who-knows) based Zork-like experiment in fully onchain text adventures, onchain games framework interoperability, and the engines that drive them.
+What lies ahead, is anyone's guess...
 
-<a href="https://twitter.com/dojostarknet">
-<img src="https://img.shields.io/twitter/follow/dojostarknet?style=social"/>
-</a>
-<a href="https://github.com/dojoengine/dojo">
-<img src="https://img.shields.io/github/stars/dojoengine/dojo?style=social"/>
-</a>
+![ad_2_final](https://github.com/ArchetypalTech/TheOrugginTrail/assets/983878/b90bcc55-2ba1-4564-94e1-d08184c1e49c)
 
-[![discord](https://img.shields.io/badge/join-dojo-green?logo=discord&logoColor=white)](https://discord.gg/PwDa2mKhR4)
-[![Telegram Chat][tg-badge]][tg-url]
 
-[tg-badge]: https://img.shields.io/endpoint?color=neon&logo=telegram&label=chat&style=flat-square&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fdojoengine
-[tg-url]: https://t.me/dojoengine
 
-# Dojo Starter: Official Guide
+This project is a test-case for taking a zork-like text adventure engine and reimagining it in onchain gaming engines and frameworks like MUD, Dojo, and World Engine... and from there seeing if interesting interoperability between the engines can be connected and experimented with. This will also give an opportunity to see if any of the differences and affordances between frameworks and onchain game engines generate varied or new gameplay paradigms and directions.
 
-The official Dojo Starter guide, the quickest and most streamlined way to get your Dojo provable game up and running. This guide will assist you with the initial setup, from cloning the repository to deploying your world.
+We are porting / reinterpreting the MIT Zork design and architecture for text adventure engines onchain, this model eventually became the base for Infocom games and such favoured classics as Commodore64's The Hitchikers Guide To The Galaxy, one of the most ambitious and complex text adventures ever made. To get a primer and learn more about the engine and explore it's history and and the engineering principles under the hood please read these resources:
 
-Read the full tutorial [here](https://book.dojoengine.org/tutorial/dojo-starter#hello-dojo)
+https://mud.co.uk/richard/zork.htm
 
----
+https://github.com/MITDDC/zork
 
-## Contribution
+https://medium.com/swlh/zork-the-great-inner-workings-b68012952bdc
 
-This starter project is a constant work in progress and contributions are greatly appreciated!
+This Zork-like engine will be piloted by a text adventure called the O'ruggin Trail.
 
-1. **Report a Bug**
+WARNING: attempting a crossing to the frontiers of crypto country ultimately always results in horrible death... physical, moral, ego, or otherwise.
 
-   - If you think you have encountered a bug, and we should know about it, feel free to report it [here](https://github.com/dojoengine/dojo-starter/issues) and we will take care of it.
+Your pre death checklist:
 
-2. **Request a Feature**
+it's a cairo/strknet/rust project
 
-   - You can also request for a feature [here](https://github.com/dojoengine/dojo-starter/issues), and if it's viable, it will be picked for development.
+it uses the Dojo Frameowrk so you'll need a working install of that tooling.
+[dojo setup](https://book.dojoengine.org/getting-started)
 
-3. **Create a Pull Request**
-   - It can't get better then this, your pull request will be appreciated by the community.
-
-Happy coding!
+now prepare to die from __fun__!
