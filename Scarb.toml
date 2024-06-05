@@ -1,6 +1,6 @@
 [package]
-cairo-version = "2.5.4"
-name = "dojo_starter"
+cairo-version = "2.6.3"
+name = "the_oruggin_trail"
 version = "0.1.0"
 
 [cairo]
