@@ -8,7 +8,11 @@ mod tests {
     // import test utils
     use the_oruggin_trail::{
         systems::{actions::{actions, IActionsDispatcher, IActionsDispatcherTrait}},
-        models::{position::{Position, Vec2, position}, moves::{Moves, Direction, moves}}
+        models::{
+            position::{Position, Vec2, position}, 
+            moves::{Moves, Direction, moves},
+            zrk_enums::{MaterialType}
+        }
     };
 
     #[test]
