@@ -24,7 +24,6 @@ enum RoomType {
     Store,
     Cavern,
     StoneCabin,
-    WoodCabin,
     Fort,
     Room,
     Plain,
@@ -45,6 +44,26 @@ enum MaterialType {
     Iron,
     Shit,
     Mud,
+}
+
+/// MaterialType -> short_string or felt252
+/// 
+/// implements the Into trait and gives a <= 32 char i.e 32 * 8 bits  
+impl MT_to_Felt252 of Into<MaterialType, felt252>  {
+    fn into(self: MaterialType) -> felt252 {
+        match self {
+            MaterialType::Wood => 'wood',
+            MaterialType::Dirt => 'dirt',
+            MaterialType::Stone => 'stone',
+            MaterialType::Flesh => 'flesh',
+            MaterialType::Glass => 'glass ',
+            MaterialType::IKEA => 'IKEA',
+            MaterialType::Iron => 'iron',
+            MaterialType::Shit => 'shit',       
+            MaterialType::Mud => 'mud',            
+            _ => 'none',               
+        }
+    }
 }
 
 /// Direction Type

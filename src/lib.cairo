@@ -5,6 +5,7 @@ mod systems {
 mod models {
     mod moves;
     mod position;
+    mod zrk_enums;
 }
 
 mod tests {
