@@ -14,6 +14,13 @@ mod tests {
             zrk_enums::{MaterialType}
         }
     };
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_types() {
+        let wood_desc: felt252 = MaterialType::Wood.into();
+        assert(wood_desc == 'wood', 'Wrong type');
+    }
 
     #[test]
     #[available_gas(30000000)]
@@ -44,7 +51,7 @@ mod tests {
         // casting right direction
         let right_dir_felt: felt252 = Direction::Right.into();
 
-        // check moves
+                // check moves
         assert(moves.remaining == 99, 'moves is wrong');
 
         // check last direction
