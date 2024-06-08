@@ -17,6 +17,7 @@ check_program() {
 }
 
 run_command() {
+  echo "--> called with $@"
   if check_program "$1"; then
     if [ "$#" -gt 2 ] || [ "$#" -eq 2 ]; then
       echo "run cmd: -- $1 ${@:2} --"
@@ -35,29 +36,77 @@ run_background_command() {
     pid_path="$PWD/local_log/$pid_file"
     $1 ${@:2} >"$log_path" &
     pid=$!
-    echo "$pid" >> $pid_path
+    echo "$pid" >>$pid_path
     echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
   else
     echo "$1 not found"
   fi
 }
 
-get_world_address() {
-  out=$()
+comment_toml() {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    sed -i '' '/^world_address/s/^/#/' "$1" #we need the '' for BSD sed
+  else
+    sed -i '/^world_address/s/^/#/' "$1"
+  fi
 }
 
-# run_command "sozo"
+uncomment_toml() {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    sed -i '' 's/^#world_address/world_address/' "$1" #we need the '' for BSD sed
+  else
+    sed -i '/^#world_address/world_address/' "$1"
+  fi
+}
+
+# called with 2 params
+# toml_path in $1
+# wrld_addr in #2 where the addr_str is the new world_address
+add_new_address() {
+  local filename="$1"
+  local new_hex_string="$2"
+  local new_line_content="world_address = \"$2\""
+  echo "nl: $new_line_content"
+  if [[ "$(uname)" == "Darwin" ]]; then
+    sed -i "" "/^world_address/s/.*/$new_line_content/" $filename
+  else
+    sed -i '/^world_address/s/.*/$new_line_content/' $filename
+  fi
+}
+
+get_world_address() {
+  echo "Migrating world"
+  out=$(sozo migrate apply)
+  # echo "--->sozo $out"
+  if [ $? -eq 0 ]; then
+    echo "migration applied"
+    addr=$(echo "$out" | grep "Successfully migrated World" | awk '{print $NF}')
+  else
+    echo "Error: $?"
+  fi
+}
 
 # Function to run the build chain
 run_build_chain() {
   echo "Starting build..."
   run_command "sozo" "build"
   run_background_command "katana" "--disable-fee"
+  comment_toml Scarb.toml
   addr=get_world_address
+  echo "World migrated. Addr: $addr"
   # Call other functions or commands here
 }
 
-run_build_chain
+# main entry point of script
+# Check for the function name passed as an argument
+if declare -f "$1" >/dev/null; then
+  # Call the function by passing arguments
+  "$@"
+else
+  echo "Error: Function $1 does not exist."
+fi
+
+# run_build_chain
 # Check if the program exists
 # check_program "sozo"
 
