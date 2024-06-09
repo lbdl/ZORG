@@ -17,30 +17,43 @@ check_program() {
 }
 
 run_command() {
-  echo "--> called with $@"
   if check_program "$1"; then
     if [ "$#" -gt 2 ] || [ "$#" -eq 2 ]; then
       echo "run cmd: -- $1 ${@:2} --"
       $1 ${@:2}
     fi
   else
-    echo "$1 does not exist"
+    err_handler "$0" "$1 not found"
   fi
 }
 
 run_background_command() {
   if check_program "$1"; then
-    log_file="log_$(date +%Y%m%d%H%M%S)_$$.log"
-    pid_file="pid_$(date +%Y%m%d%H%M%S)_$$.log"
+    log_file="log_$1_$(date +%Y%m%d%H%M%S)_$$.log"
+    pid_file="pid_$1_$(date +%Y%m%d%H%M%S)_$$.log"
     log_path="$PWD/local_log/$log_file"
     pid_path="$PWD/local_log/$pid_file"
     $1 ${@:2} >"$log_path" &
     pid=$!
     echo "$pid" >>$pid_path
     echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
-  else
-    echo "$1 not found"
   fi
+}
+
+wait_for_server() {
+  local retries=5
+  local wait_time=3 # wait 5 seconds between tries
+
+  echo "Waiting for server to start on port "$1"..."
+  until nc -z localhost $1; do
+    retries=$((retries - 1))
+    if [ $retries -le 0 ]; then
+      echo "Server failed to start in time."
+      exit 1
+    fi
+    sleep $wait_time
+  done
+  echo "Server is up and running on port $1."
 }
 
 comment_toml() {
@@ -66,35 +79,64 @@ add_new_address() {
   local filename="$1"
   local new_hex_string="$2"
   local new_line_content="world_address = \"$2\""
-  echo "nl: $new_line_content"
   if [[ "$(uname)" == "Darwin" ]]; then
     sed -i "" "/^world_address/s/.*/$new_line_content/" $filename
   else
-    sed -i '/^world_address/s/.*/$new_line_content/' $filename
+    sed -i "/^world_address/s/.*/$new_line_content/" $filename
   fi
 }
 
 get_world_address() {
-  echo "Migrating world"
   out=$(sozo migrate apply)
-  # echo "--->sozo $out"
-  if [ $? -eq 0 ]; then
-    echo "migration applied"
+  local status=$?
+
+  if [ $status -eq 0 ]; then
     addr=$(echo "$out" | grep "Successfully migrated World" | awk '{print $NF}')
+    echo -n $addr
   else
-    echo "Error: $?"
+    err_handler "$0" "$?"
   fi
 }
 
+cleanup() {
+  local processes=("katana" "torii") # Example process names
+  for process in "${processes[@]}"; do
+    echo "PKILL $process..."
+    pkill "$process" || echo "Failed to kill $process e: $?, continuing..."
+  done
+}
+
 # Function to run the build chain
-run_build_chain() {
+run() {
   echo "Starting build..."
   run_command "sozo" "build"
-  run_background_command "katana" "--disable-fee"
-  comment_toml Scarb.toml
-  addr=get_world_address
-  echo "World migrated. Addr: $addr"
-  # Call other functions or commands here
+  echo "Testing for local katana"
+  if ! pgrep -x "katana" >/dev/null; then
+    echo "Starting katana"
+    comment_toml Scarb.toml
+    run_background_command "katana" "--disable-fee"
+    wait_for_server 5050
+  fi
+  echo "Getting world address"
+  ad=$(get_world_address)
+  echo "Found World Addr: $ad"
+  uncomment_toml Scarb.toml
+  echo "Amending Scarb.toml"
+  add_new_address Scarb.toml "$ad"
+  echo "Testing for torii"
+  if ! pgrep -x "torii"; then
+    echo "Starting torii with world $ad"
+    run_background_command "torii" "--world" "$ad"
+    wait_for_server 8080
+  fi
+  echo "build complete..."
+  popd >/dev/null
+}
+
+err_handler() {
+  popd >/dev/null
+  echo "Command $1 \n\tfailed: $2"
+  exit 1
 }
 
 # main entry point of script
@@ -104,16 +146,8 @@ if declare -f "$1" >/dev/null; then
   "$@"
 else
   echo "Error: Function $1 does not exist."
+  return 1
 fi
-
-# run_build_chain
-# Check if the program exists
-# check_program "sozo"
-
-# Run the program
-# echo "Running sozo build..."
-
-# sozo build
 
 # Test the return code of the program
 if [ $? -ne 0 ]; then
@@ -121,10 +155,3 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Run the build chain if the program ran successfully
-# run_build_chain
-
-echo "Script completed successfully."
-
-# Restore the original working directory
-popd >/dev/null
