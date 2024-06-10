@@ -106,8 +106,8 @@ cleanup() {
   done
 }
 
-build_manifest() {
-    echo "Starting build..."
+generate_manifest {
+    echo "Generating manifests"
     run_command "sozo" "build"
 }
 
