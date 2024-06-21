@@ -17,7 +17,7 @@ mod actions {
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
-        fn spawn(world: IWorldDispatcher) {
+        fn spawn(world: @IWorldDispatcher) {
             // Get the address of the current caller, possibly the player's address.
             let player = get_caller_address();
             // Retrieve the player's current position from the world.
@@ -38,7 +38,7 @@ mod actions {
         }
 
         // Implementation of the move function for the ContractState struct.
-        fn move(world: IWorldDispatcher, direction: Direction) {
+        fn move(world: @IWorldDispatcher, direction: Direction) {
             // Get the address of the current caller, possibly the player's address.
             let player = get_caller_address();
 
