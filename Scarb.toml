@@ -12,7 +12,7 @@ spawn = "./scripts/spawn.sh"
 move = "./scripts/move.sh"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v0.7.0-alpha.5" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v0.7.2" }
 
 [[target.dojo]]
 
@@ -29,8 +29,8 @@ world_address = "0x1c4cc5c5e85c9aa35805c0f135ecf79bfe0171a37e896a9b6f29d14147cb3
 [tool.dojo.world]
 name = "The Oruggin Trail"
 description = "The official unauthorised and unwanted onchain text adventure engine. hoorah!"
-cover_uri = "file://assets/cover.png"
-icon_uri = "file://assets/icon.png"
+#cover_uri = "file://assets/cover.png"
+#icon_uri = "file://assets/icon.png"
 website = "https://github.com/ArchetypalTech/TheOrugginTrail-DoJo/tree/main"
 
 [tool.dojo.world.socials]

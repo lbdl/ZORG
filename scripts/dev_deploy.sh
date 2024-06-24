@@ -28,17 +28,31 @@ run_command() {
 }
 
 run_background_command() {
-  if check_program "$1"; then
-    log_file="log_$1_$(date +%Y%m%d%H%M%S)_$$.log"
-    pid_file="pid_$1_$(date +%Y%m%d%H%M%S)_$$.log"
-    log_path="$PWD/local_log/$log_file"
-    pid_path="$PWD/local_log/$pid_file"
-    $1 ${@:2} >"$log_path" &
-    pid=$!
-    echo "$pid" >>$pid_path
-    echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
-  fi
+    if check_program "$1"; then
+        tmp_dir=$(mktemp -d)
+        log_file="log_$1_$(date +%Y%m%d%H%M%S)_$$.log"
+        pid_file="pid_$1_$(date +%Y%m%d%H%M%S)_$$.log"
+        log_path="$tmp_dir/$log_file"
+        pid_path="$tmp_dir/$pid_file"
+        $1 ${@:2} >"$log_path" &
+        pid=$!
+        echo "$pid" >>$pid_path
+        echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
+    fi
 }
+
+#run_background_command() {
+  #if check_program "$1"; then
+    #log_file="log_$1_$(date +%Y%m%d%H%M%S)_$$.log"
+    #pid_file="pid_$1_$(date +%Y%m%d%H%M%S)_$$.log"
+    #log_path="$PWD/local_log/$log_file"
+    #pid_path="$PWD/local_log/$pid_file"
+    #$1 ${@:2} >"$log_path" &
+    #pid=$!
+    #echo "$pid" >>$pid_path
+    #echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
+  #fi
+#}
 
 wait_for_server() {
   local retries=5
