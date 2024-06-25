@@ -1,10 +1,10 @@
 use starknet::ContractAddress;
 
-#[derive(Copy, Drop, Serde)]
+#[derive(Drop, Serde)]
 #[dojo::model]
 struct Output {
     #[key]
-    playerId: u32,
-    text: felt252,
+    playerId: ContractAddress,
+    text: ByteArray
 }
 
