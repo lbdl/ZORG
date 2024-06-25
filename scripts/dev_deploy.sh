@@ -34,7 +34,11 @@ run_background_command() {
         pid_file="pid_$1_$(date +%Y%m%d%H%M%S)_$$.log"
         log_path="$tmp_dir/$log_file"
         pid_path="$tmp_dir/$pid_file"
-        $1 ${@:2} >"$log_path" &
+        local cmd=$1
+        shift
+        local params=("$@")
+        "$cmd" "${params[@]}" >"$log_path" &
+        #$1 ${@:2} >"$log_path" &
         pid=$!
         echo "$pid" >>$pid_path
         echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
@@ -145,7 +149,7 @@ run() {
   echo "Testing for torii"
   if ! pgrep -x "torii"; then
     echo "Starting torii with world $ad"
-    run_background_command "torii" "--world" "$ad"
+    run_background_command "torii" "--world" "$ad" "--allowed-origins" "*"
     wait_for_server 8080
   fi
   echo "build complete..."
