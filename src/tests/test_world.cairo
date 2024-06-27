@@ -7,11 +7,14 @@ mod tests {
     use dojo::test_utils::{spawn_test_world, deploy_contract};
     // import test utils
     use the_oruggin_trail::{
-        systems::{actions::{actions, IActionsDispatcher, IActionsDispatcherTrait}},
+        systems::{
+            actions::{actions, IActionsDispatcher, IActionsDispatcherTrait},
+            outputter::{outputter, IOutputterDispatcher, IOutputterDispatcherTrait}},
         models::{
             position::{Position, Vec2, position}, 
             moves::{Moves, Direction, moves},
-            zrk_enums::{MaterialType}
+            zrk_enums::{MaterialType},
+            output::{Output, output}
         }
     };
     
@@ -20,6 +23,25 @@ mod tests {
     fn test_types() {
         let wood_desc: felt252 = MaterialType::Wood.into();
         assert(wood_desc == 'wood', 'Wrong type');
+    }
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_outputter() {
+        let caller = starknet::contract_address_const::<0x0>();
+        let mut models = array![output::TEST_CLASS_HASH];
+        let world = spawn_test_world(models);
+        
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract('salt', outputter::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+        let output_system = IOutputterDispatcher { contract_address };
+        output_system.updateOutput("FOOBAR!");
+        
+        let _out = get!(world, caller, Output);
+        let actual_out = _out.text;
+        let expected_out: ByteArray = "FOOBAR!";
+        assert(actual_out == expected_out, 'Bad meat....');
     }
 
     #[test]

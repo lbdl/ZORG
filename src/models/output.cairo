@@ -7,4 +7,3 @@ struct Output {
     playerId: ContractAddress,
     text: ByteArray
 }
-
