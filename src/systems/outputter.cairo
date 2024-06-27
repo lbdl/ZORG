@@ -20,7 +20,6 @@ mod outputter {
 
         fn updateOutput(world: @IWorldDispatcher, txt: ByteArray) {
             let player = get_caller_address();
-            let newText: ByteArray = "FoobyBarby";
             set!(
                 world,
                 (

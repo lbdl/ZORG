@@ -1,0 +1,119 @@
+[world]
+kind = "WorldContract"
+class_hash = "0x3f63cecdc4964acafb921ba2934c6507d1b3c344edb64c2762cf08053169ab9"
+original_class_hash = "0x3f63cecdc4964acafb921ba2934c6507d1b3c344edb64c2762cf08053169ab9"
+abi = "manifests/dev/abis/deployments/dojo_world_world.json"
+address = "0x5112adeb35112eccb3f3bc823bac1bfe73693a0872f7a579045e510e9219b49"
+transaction_hash = "0x93e492a4542f3712913ce369381e0e4d119cf8878d8eda3844137109835887"
+block_number = 3
+seed = "the_oruggin_trail"
+name = "dojo::world::world"
+
+[world.metadata]
+profile_name = "dev"
+rpc_url = "http://localhost:5050/"
+
+[base]
+kind = "Class"
+class_hash = "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46"
+original_class_hash = "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46"
+name = "dojo::base::base"
+
+[[contracts]]
+kind = "DojoContract"
+address = "0x68d70420390be33149d1c82e49096fff612fe1c95abd5528aa559e7c6527f78"
+class_hash = "0x60d7a2e1baf1f2703152648c6a6fcbbb986300a00a87db92b0120d1358c04cd"
+original_class_hash = "0x60d7a2e1baf1f2703152648c6a6fcbbb986300a00a87db92b0120d1358c04cd"
+base_class_hash = "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46"
+abi = "manifests/dev/abis/deployments/contracts/the_oruggin_trail_systems_actions_actions.json"
+reads = []
+writes = []
+computed = []
+init_calldata = []
+name = "the_oruggin_trail::systems::actions::actions"
+
+[[contracts]]
+kind = "DojoContract"
+address = "0x5351273085d5dfbf7ab213b6712cd0cd81b12eefcfa278b8f2791e9061af146"
+class_hash = "0x475a4c54dcac00aafe8663d978bf67507f044b7965430f320f71da796ffd2fb"
+original_class_hash = "0x475a4c54dcac00aafe8663d978bf67507f044b7965430f320f71da796ffd2fb"
+base_class_hash = "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46"
+abi = "manifests/dev/abis/deployments/contracts/the_oruggin_trail_systems_outputter_outputter.json"
+reads = []
+writes = []
+computed = []
+init_calldata = []
+name = "the_oruggin_trail::systems::outputter::outputter"
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x9766b6618effd6ee6f9493613a8a9e1d9fec3359789fd62f47d421412f974"
+original_class_hash = "0x9766b6618effd6ee6f9493613a8a9e1d9fec3359789fd62f47d421412f974"
+abi = "manifests/dev/abis/deployments/models/the_oruggin_trail_models_moves_moves.json"
+name = "the_oruggin_trail::models::moves::moves"
+
+[[models.members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "remaining"
+type = "u8"
+key = false
+
+[[models.members]]
+name = "last_direction"
+type = "Direction"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x37078b2efdbe769371a22ae579f9f025b942b306d8136b8a659edf208ce9f9d"
+original_class_hash = "0x37078b2efdbe769371a22ae579f9f025b942b306d8136b8a659edf208ce9f9d"
+abi = "manifests/dev/abis/deployments/models/the_oruggin_trail_models_output_output.json"
+name = "the_oruggin_trail::models::output::output"
+
+[[models.members]]
+name = "playerId"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "text"
+type = "ByteArray"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x1a9fdaa927512078da6d45422e7ff428b5a3e0fe169adbbd3bf100d1e8b918f"
+original_class_hash = "0x1a9fdaa927512078da6d45422e7ff428b5a3e0fe169adbbd3bf100d1e8b918f"
+abi = "manifests/dev/abis/deployments/models/the_oruggin_trail_models_player_player.json"
+name = "the_oruggin_trail::models::player::player"
+
+[[models.members]]
+name = "player_adr"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "player_id"
+type = "u32"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x5ca715dc4ef8eddcb6ead8784bdbb171a4dc1bd738b1920473efd1361485248"
+original_class_hash = "0x5ca715dc4ef8eddcb6ead8784bdbb171a4dc1bd738b1920473efd1361485248"
+abi = "manifests/dev/abis/deployments/models/the_oruggin_trail_models_position_position.json"
+name = "the_oruggin_trail::models::position::position"
+
+[[models.members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "vec"
+type = "Vec2"
+key = false
