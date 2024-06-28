@@ -27,7 +27,7 @@ enum RoomType {
     Fort,
     Room,
     Plain,
-} 
+}
 
 /// Material Type
 /// used later in the LOOK system and others to compose
@@ -49,7 +49,7 @@ enum MaterialType {
 /// MaterialType -> short_string or felt252
 /// 
 /// implements the Into trait and gives a <= 32 char i.e 32 * 8 bits  
-impl MT_to_Felt252 of Into<MaterialType, felt252>  {
+impl MT_to_Felt252 of Into<MaterialType, felt252> {
     fn into(self: MaterialType) -> felt252 {
         match self {
             MaterialType::Wood => 'wood',
@@ -59,9 +59,9 @@ impl MT_to_Felt252 of Into<MaterialType, felt252>  {
             MaterialType::Glass => 'glass ',
             MaterialType::IKEA => 'IKEA',
             MaterialType::Iron => 'iron',
-            MaterialType::Shit => 'shit',       
-            MaterialType::Mud => 'mud',            
-            _ => 'none',               
+            MaterialType::Shit => 'shit',
+            MaterialType::Mud => 'mud',
+            _ => 'none',
         }
     }
 }
@@ -71,7 +71,6 @@ impl MT_to_Felt252 of Into<MaterialType, felt252>  {
 /// and ofc the direction of things in the world
 #[derive(Serde, Copy, Drop, Introspect)]
 enum DirectionType {
-    None,
     North,
     East,
     South,
@@ -81,3 +80,39 @@ enum DirectionType {
     Left,
     Right,
 }
+
+
+/// Action Type
+/// used later in the VRB/ACTION handling system and others to compose
+/// behaviour handling operations
+#[derive(Serde, Copy, Drop, Introspect)]
+enum ActionType {
+    Move,
+    Look,
+    Kick,
+    Hit,
+    Drink,
+    Fight,
+    Sleep,
+    Smash,
+    Pray,
+}
+
+/// felt252 -> ActionType
+/// 
+/// implements the Into trait and gives a <= 32 char i.e 32 * 8 bits  
+fn from_str(s: felt252) -> Option<ActionType> {
+    match s {
+        'move' => Option::Some(ActionType::Move),
+        'look' => Option::Some(ActionType::Look),
+        'kick' => Option::Some(ActionType::Kick),
+        'hit' => Option::Some(ActionType::Hit),
+        'drink' => Option::Some(ActionType::Drink),
+        'fight' => Option::Some(ActionType::Fight),
+        'sleep' => Option::Some(ActionType::Sleep),
+        'smash' => Option::Some(ActionType::Smash),
+        _ => Option::None,
+    }
+}
+
+/// ActionType -> felt252

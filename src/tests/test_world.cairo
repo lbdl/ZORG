@@ -14,7 +14,8 @@ mod tests {
             position::{Position, Vec2, position}, 
             moves::{Moves, Direction, moves},
             zrk_enums::{MaterialType},
-            output::{Output, output}
+            output::{Output, output},
+            ears::{Ears, ears}
         }
     };
     
@@ -23,6 +24,16 @@ mod tests {
     fn test_types() {
         let wood_desc: felt252 = MaterialType::Wood.into();
         assert(wood_desc == 'wood', 'Wrong type');
+    }
+
+    #[test]
+    #[available_gas(30000000)]
+    fn test_inputter() {
+        let caller = starknet::contract_address_const::<0x0>();
+        let mut models = array![ears::TEST_CLASS_HASH];
+        let world = spawn_test_world(models);
+        //  contract
+
     }
     
     #[test]
