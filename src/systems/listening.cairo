@@ -20,25 +20,23 @@ mod listening {
     #[abi(embed_v0)]
     impl ListenImpl of IListening<ContractState> {
         fn listen(world: @IWorldDispatcher, command: Array<felt252>) -> Result<Prayer, felt252> {
-            let pl = get_caller_address();
-            let rt: Prayer = Prayer{
-                playerId: pl,
-                vrb: ActionType::Move,
-                dobj: ObjectType::None,
-                iobj: ObjectType::None
-            };
-            Result::Ok(rt)
-            // if command.len() >= 16 {
-            //     Err('TOK len >= 16')
-            // } else {
-            //     let player = get_caller_address();
-            //     Ok(Prayer{
-            //         playerId: player,
-            //         vrb: ActionType::Smash,
-            //         dobj: ObjectType::Door,
-            //         iobj: ObjectType::None,  
-            //     })
-            // }
+            let player = get_caller_address();
+            // let rt: Prayer = Prayer{
+            //     playerId: pl,
+            //     vrb: ActionType::Move,
+            //     dobj: ObjectType::None,
+            //     iobj: ObjectType::None
+            // };
+            if command.len() >= 16 {
+                Result::Err('TOK len >= 16')
+            } else {
+                Result::Ok(Prayer{
+                    playerId: player,
+                    vrb: ActionType::Smash,
+                    dobj: ObjectType::Door,
+                    iobj: ObjectType::None,  
+                })
+            }
         }
     }
 }
