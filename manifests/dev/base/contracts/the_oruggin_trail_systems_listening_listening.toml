@@ -1,0 +1,10 @@
+kind = "DojoContract"
+class_hash = "0x43544c593a926b69b840e33fa056f922cb9a5a6d11a818a92b00f4b198b6316"
+original_class_hash = "0x43544c593a926b69b840e33fa056f922cb9a5a6d11a818a92b00f4b198b6316"
+base_class_hash = "0x0"
+abi = "manifests/dev/abis/base/contracts/the_oruggin_trail_systems_listening_listening.json"
+reads = []
+writes = []
+computed = []
+init_calldata = []
+name = "the_oruggin_trail::systems::listening::listening"

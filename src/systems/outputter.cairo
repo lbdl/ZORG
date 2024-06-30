@@ -1,6 +1,6 @@
 use the_oruggin_trail::models::output::Output;
 
- #[dojo::interface]
+#[dojo::interface]
 trait IOutputter {
     fn spawn();
     fn updateOutput(txt: ByteArray);
