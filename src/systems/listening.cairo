@@ -21,12 +21,6 @@ mod listening {
     impl ListenImpl of IListening<ContractState> {
         fn listen(world: @IWorldDispatcher, command: Array<felt252>) -> Result<Prayer, felt252> {
             let player = get_caller_address();
-            // let rt: Prayer = Prayer{
-            //     playerId: pl,
-            //     vrb: ActionType::Move,
-            //     dobj: ObjectType::None,
-            //     iobj: ObjectType::None
-            // };
             if command.len() >= 16 {
                 Result::Err('TOK len >= 16')
             } else {
