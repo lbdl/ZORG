@@ -319,30 +319,26 @@
   },
   {
     "type": "impl",
-    "name": "playerImpl",
-    "interface_name": "the_oruggin_trail::models::player::Iplayer"
+    "name": "earsImpl",
+    "interface_name": "the_oruggin_trail::models::ears::Iears"
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::models::player::Player",
+    "name": "the_oruggin_trail::models::ears::Ears",
     "members": [
       {
-        "name": "player_adr",
+        "name": "playerId",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "player_id",
-        "type": "core::integer::u32"
-      },
-      {
-        "name": "location",
-        "type": "core::felt252"
+        "name": "input_stream",
+        "type": "core::array::Array::<core::felt252>"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::models::player::Iplayer",
+    "name": "the_oruggin_trail::models::ears::Iears",
     "items": [
       {
         "type": "function",
@@ -350,7 +346,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "the_oruggin_trail::models::player::Player"
+            "type": "the_oruggin_trail::models::ears::Ears"
           }
         ],
         "outputs": [],
@@ -360,7 +356,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::models::player::player::Event",
+    "name": "the_oruggin_trail::models::ears::ears::Event",
     "kind": "enum",
     "variants": []
   }

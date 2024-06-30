@@ -34,7 +34,6 @@ enum RoomType {
 /// description strings and to determine base functionality
 #[derive(Serde, Copy, Drop, Introspect)]
 enum MaterialType {
-    None,
     Wood,
     Dirt,
     Stone,
@@ -44,6 +43,7 @@ enum MaterialType {
     Iron,
     Shit,
     Mud,
+    None,
 }
 
 /// MaterialType -> short_string or felt252
@@ -79,6 +79,7 @@ enum DirectionType {
     Down,
     Left,
     Right,
+    None,
 }
 
 
@@ -96,23 +97,15 @@ enum ActionType {
     Sleep,
     Smash,
     Pray,
+    None,
 }
 
-/// felt252 -> ActionType
-/// 
-/// implements the Into trait and gives a <= 32 char i.e 32 * 8 bits  
-fn from_str(s: felt252) -> Option<ActionType> {
-    match s {
-        'move' => Option::Some(ActionType::Move),
-        'look' => Option::Some(ActionType::Look),
-        'kick' => Option::Some(ActionType::Kick),
-        'hit' => Option::Some(ActionType::Hit),
-        'drink' => Option::Some(ActionType::Drink),
-        'fight' => Option::Some(ActionType::Fight),
-        'sleep' => Option::Some(ActionType::Sleep),
-        'smash' => Option::Some(ActionType::Smash),
-        _ => Option::None,
-    }
+/// Object Types
+#[derive(Serde, Copy, Drop, Introspect)]
+enum ObjectType {
+    Ball,
+    Window,
+    Door,
+    Hit,
+    None,
 }
-
-/// ActionType -> felt252
