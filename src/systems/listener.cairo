@@ -1,8 +1,8 @@
-use the_oruggin_trail::models::prayers::Prayer;
+use the_oruggin_trail::models::prayers::Prayers;
 
 #[dojo::interface]
 trait IListener {
-    fn listen(command: Array<felt252>) -> Result<Prayer, felt252>;
+    fn listen(cmd: Array<felt252>) -> Result<Prayers, felt252>;
 }
 
 
@@ -14,17 +14,17 @@ mod listener {
         ears::{Ears}, 
         output::{Output}, 
         zrk_enums::{ActionType, ObjectType},
-        prayers::{ Prayer }
+        prayers::{ Prayers }
     };
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
-        fn listen(world: @IWorldDispatcher, command: Array<felt252>) -> Result<Prayer, felt252> {
+        fn listen(world: @IWorldDispatcher, cmd: Array<felt252>) -> Result<Prayers, felt252> {
             let player = get_caller_address();
-            if command.len() >= 16 {
+            if cmd.len() >= 16 {
                 Result::Err('TOK len >= 16')
             } else {
-                Result::Ok(Prayer{
+                Result::Ok(Prayers{
                     playerId: player,
                     vrb: ActionType::Smash,
                     dobj: ObjectType::Door,

@@ -1,7 +1,7 @@
 mod systems {
     mod actions;
     mod outputter;
-    mod listening;
+    mod listener;
 }
 
 mod models {
@@ -16,4 +16,5 @@ mod models {
 
 mod tests {
     mod test_world;
+    mod test_listener;
 }

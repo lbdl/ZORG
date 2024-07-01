@@ -3,7 +3,7 @@ use the_oruggin_trail::models::zrk_enums::{ActionType, ObjectType};
 
 #[derive(Drop, Serde)]
 #[dojo::model]
-struct Prayer {
+struct Prayers {
     #[key]
     playerId: ContractAddress,
     vrb: ActionType,

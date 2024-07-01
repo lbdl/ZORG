@@ -56,7 +56,7 @@
   {
     "type": "impl",
     "name": "ListenImpl",
-    "interface_name": "the_oruggin_trail::systems::listening::IListening"
+    "interface_name": "the_oruggin_trail::systems::listener::IListener"
   },
   {
     "type": "enum",
@@ -168,7 +168,7 @@
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::systems::listening::IListening",
+    "name": "the_oruggin_trail::systems::listener::IListener",
     "items": [
       {
         "type": "function",
@@ -191,11 +191,11 @@
   {
     "type": "impl",
     "name": "IDojoInitImpl",
-    "interface_name": "the_oruggin_trail::systems::listening::listening::IDojoInit"
+    "interface_name": "the_oruggin_trail::systems::listener::listener::IDojoInit"
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::systems::listening::listening::IDojoInit",
+    "name": "the_oruggin_trail::systems::listener::listener::IDojoInit",
     "items": [
       {
         "type": "function",
@@ -255,7 +255,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::systems::listening::listening::Event",
+    "name": "the_oruggin_trail::systems::listener::listener::Event",
     "kind": "enum",
     "variants": [
       {
