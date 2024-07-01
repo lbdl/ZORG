@@ -41,4 +41,29 @@ mod tests {
         let expected = ActionType::Smash;
         assert_eq!(ActionType::Smash, ActionType::Smash, "verbs do not match");
     }
+
+    #[test]
+    #[available_gas(30000000)]
+    fn test_listener_too_many_tokens() {
+        let caller = starknet::contract_address_const::<0x0>();
+        
+        let mut models = array![output::TEST_CLASS_HASH, 
+            prayers::TEST_CLASS_HASH, 
+            ears::TEST_CLASS_HASH,
+            ];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+        let sut = IListenerDispatcher { contract_address };
+
+        // we use felt252 as in the inputs so we can just use numerics here
+        // despite the actual system using the short string form
+        let failing_input = array![0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+
+        assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
+    }
 }
