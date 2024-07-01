@@ -18,6 +18,26 @@ mod tests {
 
     #[test]
     #[available_gas(30000000)]
+    fn test_actions_tokenising() {
+        let caller = starknet::contract_address_const::<0x0>();
+        let mut models = array![output::TEST_CLASS_HASH, 
+            prayers::TEST_CLASS_HASH, 
+            ears::TEST_CLASS_HASH,
+            ];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+
+        // let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
+        let sut = IListenerDispatcher { contract_address };
+    }
+
+    #[test]
+    #[available_gas(30000000)]
     fn test_listener_success() {
         let caller = starknet::contract_address_const::<0x0>();
         
@@ -33,7 +53,7 @@ mod tests {
                 'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
         let sut = IListenerDispatcher { contract_address };
-        let input = array!['foo', 'bar'];
+        let input = array!["foo", "bar"];
         
         let out = sut.listen(input);  
         // the unwrap should not panic here as the input is < 16
@@ -62,7 +82,7 @@ mod tests {
 
         // we use felt252 as in the inputs so we can just use numerics here
         // despite the actual system using the short string form
-        let failing_input = array![0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+        let failing_input: Array<ByteArray> = array!["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
 
         assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
     }

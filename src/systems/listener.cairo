@@ -2,7 +2,7 @@ use the_oruggin_trail::models::prayers::Prayers;
 
 #[dojo::interface]
 trait IListener {
-    fn listen(cmd: Array<felt252>) -> Result<Prayers, felt252>;
+    fn listen(cmd: Array<ByteArray>) -> Result<Prayers, felt252>;
 }
 
 
@@ -19,7 +19,7 @@ mod listener {
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
-        fn listen(world: @IWorldDispatcher, cmd: Array<felt252>) -> Result<Prayers, felt252> {
+        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) -> Result<Prayers, felt252> {
             let player = get_caller_address();
             if cmd.len() >= 16 {
                 Result::Err('TOK len >= 16')
@@ -33,4 +33,5 @@ mod listener {
             }
         }
     }
+
 }
