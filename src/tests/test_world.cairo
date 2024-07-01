@@ -13,7 +13,7 @@ mod tests {
         models::{
             position::{Position, Vec2, position}, 
             moves::{Moves, Direction, moves},
-            zrk_enums::{MaterialType, ActionType, AT_from_str},
+            zrk_enums::{MaterialType, ActionType},
             output::{Output, output},
             ears::{Ears, ears}
         }
