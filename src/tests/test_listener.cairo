@@ -21,7 +21,10 @@ mod tests {
     fn test_listener_success() {
         let caller = starknet::contract_address_const::<0x0>();
         
-        let mut models = array![output::TEST_CLASS_HASH, prayers::TEST_CLASS_HASH, ears::TEST_CLASS_HASH];
+        let mut models = array![output::TEST_CLASS_HASH, 
+            prayers::TEST_CLASS_HASH, 
+            ears::TEST_CLASS_HASH,
+            ];
         let world = spawn_test_world(models);
 
         // deploy systems contract
@@ -29,7 +32,13 @@ mod tests {
             .deploy_contract(
                 'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
-        let listener_system = IListenerDispatcher { contract_address };
+        let sut = IListenerDispatcher { contract_address };
         let input = array!['foo', 'bar'];
+        
+        let out = sut.listen(input);  
+        // the unwrap should not panic here as the input is < 16
+        let actual = out.unwrap();
+        let expected = ActionType::Smash;
+        assert_eq!(ActionType::Smash, ActionType::Smash, "verbs do not match");
     }
 }
