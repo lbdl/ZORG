@@ -34,6 +34,7 @@ mod tests {
 
         // let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
         let sut = IListenerDispatcher { contract_address };
+        assert(true == false, 'fix test');
     }
 
     #[test]

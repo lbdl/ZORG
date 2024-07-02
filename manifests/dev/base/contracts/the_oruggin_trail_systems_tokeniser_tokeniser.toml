@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x4f2f156240ee7e1a2079ab4aed3aa817a7165dee3072177e07fae8ac50fe831"
-original_class_hash = "0x4f2f156240ee7e1a2079ab4aed3aa817a7165dee3072177e07fae8ac50fe831"
+class_hash = "0x1e5c4a70b7efadc01968d234e4e33685485116527325f5bfc3005d2ad823741"
+original_class_hash = "0x1e5c4a70b7efadc01968d234e4e33685485116527325f5bfc3005d2ad823741"
 base_class_hash = "0x0"
 abi = "manifests/dev/abis/base/contracts/the_oruggin_trail_systems_tokeniser_tokeniser.json"
 reads = []
