@@ -32,6 +32,12 @@ mod tests {
 
         // let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
         let sut = ITokeniserDispatcher { contract_address };
-        assert(true == false, 'fix test');
+        let bad_str = 'foo';
+        let good_str = 'move';
+        let tok_good = sut.str_to_AT(good_str);
+        let tok_none = sut.str_to_AT(bad_str);
+        assert(tok_good == ActionType::Move, 'expected MOVE');
+        assert(tok_none == ActionType::None, 'expected NONE');
+        //assert(true == false, 'fix test');
     }
 }
