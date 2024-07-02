@@ -30,7 +30,6 @@ mod tests {
                 'salt', tokeniser::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
 
-        // let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
         let sut = ITokeniserDispatcher { contract_address };
         let bad_str = 'foo';
         let good_str = 'move';
@@ -38,6 +37,5 @@ mod tests {
         let tok_none = sut.str_to_AT(bad_str);
         assert(tok_good == ActionType::Move, 'expected MOVE');
         assert(tok_none == ActionType::None, 'expected NONE');
-        //assert(true == false, 'fix test');
     }
 }

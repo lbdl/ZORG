@@ -8,6 +8,8 @@ use the_oruggin_trail::models::{
 #[dojo::interface]
 trait ITokeniser {
     fn str_to_AT(str: felt252) -> ActionType;
+    fn str_to_MT(str: felt252) -> MaterialType;
+    fn str_to_OT(str: felt252) -> ObjectType;
 }
 
 #[dojo::contract]
@@ -30,6 +32,32 @@ mod tokeniser {
             ActionType::None
           }
         }
+
+        fn str_to_OT(world: @IWorldDispatcher, str: felt252) -> ObjectType {
+          if str == 'ball' {
+            ObjectType::Ball
+          } else if str == 'window' {
+            ObjectType::Window
+          } else if str == 'door' {
+            ObjectType::Door
+          } else {
+            ObjectType::None
+          }
+        
+        }
+
+        fn str_to_MT(world: @IWorldDispatcher, str: felt252) -> MaterialType {
+          if str == 'wood' {
+            MaterialType::Wood
+          } else if str == 'dirt' {
+            MaterialType::Dirt
+          } else if str == 'glass' {
+            MaterialType::Glass
+          } else {
+            MaterialType::None
+          }
+        }
+ 
     }
 }
 

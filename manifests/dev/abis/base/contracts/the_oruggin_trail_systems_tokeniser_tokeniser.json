@@ -105,6 +105,78 @@
     ]
   },
   {
+    "type": "enum",
+    "name": "the_oruggin_trail::models::zrk_enums::MaterialType",
+    "variants": [
+      {
+        "name": "Wood",
+        "type": "()"
+      },
+      {
+        "name": "Dirt",
+        "type": "()"
+      },
+      {
+        "name": "Stone",
+        "type": "()"
+      },
+      {
+        "name": "Flesh",
+        "type": "()"
+      },
+      {
+        "name": "Glass",
+        "type": "()"
+      },
+      {
+        "name": "IKEA",
+        "type": "()"
+      },
+      {
+        "name": "Iron",
+        "type": "()"
+      },
+      {
+        "name": "Shit",
+        "type": "()"
+      },
+      {
+        "name": "Mud",
+        "type": "()"
+      },
+      {
+        "name": "None",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "the_oruggin_trail::models::zrk_enums::ObjectType",
+    "variants": [
+      {
+        "name": "Ball",
+        "type": "()"
+      },
+      {
+        "name": "Window",
+        "type": "()"
+      },
+      {
+        "name": "Door",
+        "type": "()"
+      },
+      {
+        "name": "Hit",
+        "type": "()"
+      },
+      {
+        "name": "None",
+        "type": "()"
+      }
+    ]
+  },
+  {
     "type": "interface",
     "name": "the_oruggin_trail::systems::tokeniser::ITokeniser",
     "items": [
@@ -120,6 +192,38 @@
         "outputs": [
           {
             "type": "the_oruggin_trail::models::zrk_enums::ActionType"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "str_to_MT",
+        "inputs": [
+          {
+            "name": "str",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "the_oruggin_trail::models::zrk_enums::MaterialType"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "str_to_OT",
+        "inputs": [
+          {
+            "name": "str",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "the_oruggin_trail::models::zrk_enums::ObjectType"
           }
         ],
         "state_mutability": "view"
