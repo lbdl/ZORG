@@ -15,3 +15,4 @@ struct ObjectTokens {
     tok_str: felt252,
     tok_val: ObjectType
 }
+

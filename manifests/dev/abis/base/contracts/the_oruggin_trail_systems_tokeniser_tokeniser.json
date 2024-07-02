@@ -123,6 +123,13 @@
           }
         ],
         "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "setup_types",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "view"
       }
     ]
   },
