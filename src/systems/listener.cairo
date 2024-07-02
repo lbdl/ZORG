@@ -1,5 +1,8 @@
 use the_oruggin_trail::models::prayers::Prayers;
 
+// we are gonna need the tokeniser system to convert types
+// include here and we will need the dispatcher traits as
+
 #[dojo::interface]
 trait IListener {
     fn listen(cmd: Array<ByteArray>) -> Result<Prayers, felt252>;
@@ -33,5 +36,20 @@ mod listener {
             }
         }
     }
+
+    fn fish_tokens(toks: Array<ByteArray>) -> Result<Prayers, felt252> {
+        //chop out the first token.
+        // this can be a VRB or a MVRB
+        let pl = get_caller_address();
+        let res = Prayers {
+            playerId: pl,
+            vrb: ActionType::None,
+            dobj: ObjectType::None,
+            iobj: ObjectType::None,
+        };
+        Result::Ok(res)
+    }
+
+    
 
 }

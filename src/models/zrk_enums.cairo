@@ -69,7 +69,7 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
 /// Direction Type
 /// used by the direction syetm to determine movement
 /// and ofc the direction of things in the world
-#[derive(Serde, Copy, Drop, Introspect)]
+#[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum DirectionType {
     North,
     East,
@@ -86,7 +86,7 @@ enum DirectionType {
 /// Action Type
 /// used later in the VRB/ACTION handling system and others to compose
 /// behaviour handling operations
-#[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
+#[derive(Serde, Drop, Copy, Destruct, Introspect, Debug, PartialEq, Felt252DictValue)]
 enum ActionType {
     Move,
     Look,
@@ -100,8 +100,9 @@ enum ActionType {
     None,
 }
 
+
 /// Object Types
-#[derive(Serde, Copy, Drop, Introspect)]
+#[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum ObjectType {
     Ball,
     Window,

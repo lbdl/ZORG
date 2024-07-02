@@ -59,6 +59,24 @@
     "interface_name": "the_oruggin_trail::systems::listener::IListener"
   },
   {
+    "type": "struct",
+    "name": "core::byte_array::ByteArray",
+    "members": [
+      {
+        "name": "data",
+        "type": "core::array::Array::<core::bytes_31::bytes31>"
+      },
+      {
+        "name": "pending_word",
+        "type": "core::felt252"
+      },
+      {
+        "name": "pending_word_len",
+        "type": "core::integer::u32"
+      }
+    ]
+  },
+  {
     "type": "enum",
     "name": "the_oruggin_trail::models::zrk_enums::ActionType",
     "variants": [
@@ -132,7 +150,7 @@
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::models::prayers::Prayer",
+    "name": "the_oruggin_trail::models::prayers::Prayers",
     "members": [
       {
         "name": "playerId",
@@ -154,11 +172,11 @@
   },
   {
     "type": "enum",
-    "name": "core::result::Result::<the_oruggin_trail::models::prayers::Prayer, core::felt252>",
+    "name": "core::result::Result::<the_oruggin_trail::models::prayers::Prayers, core::felt252>",
     "variants": [
       {
         "name": "Ok",
-        "type": "the_oruggin_trail::models::prayers::Prayer"
+        "type": "the_oruggin_trail::models::prayers::Prayers"
       },
       {
         "name": "Err",
@@ -175,13 +193,13 @@
         "name": "listen",
         "inputs": [
           {
-            "name": "command",
-            "type": "core::array::Array::<core::felt252>"
+            "name": "cmd",
+            "type": "core::array::Array::<core::byte_array::ByteArray>"
           }
         ],
         "outputs": [
           {
-            "type": "core::result::Result::<the_oruggin_trail::models::prayers::Prayer, core::felt252>"
+            "type": "core::result::Result::<the_oruggin_trail::models::prayers::Prayers, core::felt252>"
           }
         ],
         "state_mutability": "view"
