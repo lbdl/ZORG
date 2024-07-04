@@ -17,7 +17,7 @@ mod tests {
 
     #[test]
     #[available_gas(30000000)]
-    fn test_str_to_felt() {
+    fn test_str_splitting() {
         let _ = starknet::contract_address_const::<0x0>();
         let mut models = array![ 
             ];
@@ -68,11 +68,11 @@ mod tests {
                 'salt', tokeniser::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
         let sut = ITokeniserDispatcher { contract_address };
-        let bad_str = 'foo';
-        let good_str = 'ball';
+        let bad_str: ByteArray = "foo";
+        let good_str: ByteArray = "ball";
         let tok_good = sut.str_to_OT(good_str);
         let tok_none = sut.str_to_OT(bad_str);
-        assert(tok_good == ObjectType::Ball, 'expected MOVE');
+        assert(tok_good == ObjectType::Ball, 'expected BALL');
         assert(tok_none == ObjectType::None, 'expected NONE');
 
     }

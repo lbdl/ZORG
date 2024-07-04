@@ -10,7 +10,7 @@ trait IListener {
 
 
 #[dojo::contract]
-mod listener {
+mod meatpuppet {
     use super::{IListener};
     use starknet::{ContractAddress, get_caller_address};
     use the_oruggin_trail::models::{

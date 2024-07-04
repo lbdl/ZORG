@@ -8,7 +8,7 @@ use the_oruggin_trail::models::{
 #[dojo::interface]
 trait ITokeniser {
     fn str_to_AT(str: ByteArray) -> ActionType;
-    fn str_to_OT(str: felt252) -> ObjectType;
+    fn str_to_OT(str: ByteArray) -> ObjectType;
     // fn str_to_felt(str: ByteArray) -> felt252;
 }
 
@@ -33,12 +33,12 @@ mod tokeniser {
           }
         }
 
-        fn str_to_OT(world: @IWorldDispatcher, str: felt252) -> ObjectType {
-          if str == 'ball' {
+        fn str_to_OT(world: @IWorldDispatcher, str: ByteArray) -> ObjectType {
+          if str == "ball" {
             ObjectType::Ball
-          } else if str == 'window' {
+          } else if str == "window" {
             ObjectType::Window
-          } else if str == 'door' {
+          } else if str == "door" {
             ObjectType::Door
           } else {
             ObjectType::None

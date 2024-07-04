@@ -7,7 +7,7 @@ mod tests {
     use dojo::test_utils::{spawn_test_world, deploy_contract};
     // import test utils
     use the_oruggin_trail::{
-        systems::{listener::{listener, IListenerDispatcher, IListenerDispatcherTrait}},
+        systems::{meatpuppet::{meatpuppet, IListenerDispatcher, IListenerDispatcherTrait}},
         models::{
             zrk_enums::{MaterialType, ActionType}, 
             output::{Output, output}, 
@@ -51,7 +51,7 @@ mod tests {
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
-                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
         let sut = IListenerDispatcher { contract_address };
         let input = array!["foo", "bar"];
@@ -77,7 +77,7 @@ mod tests {
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
-                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
         let sut = IListenerDispatcher { contract_address };
 

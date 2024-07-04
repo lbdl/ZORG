@@ -56,7 +56,7 @@
   {
     "type": "impl",
     "name": "ListenImpl",
-    "interface_name": "the_oruggin_trail::systems::listener::IListener"
+    "interface_name": "the_oruggin_trail::systems::meatpuppet::IListener"
   },
   {
     "type": "struct",
@@ -186,7 +186,7 @@
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::systems::listener::IListener",
+    "name": "the_oruggin_trail::systems::meatpuppet::IListener",
     "items": [
       {
         "type": "function",
@@ -209,11 +209,11 @@
   {
     "type": "impl",
     "name": "IDojoInitImpl",
-    "interface_name": "the_oruggin_trail::systems::listener::listener::IDojoInit"
+    "interface_name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::IDojoInit"
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::systems::listener::listener::IDojoInit",
+    "name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::IDojoInit",
     "items": [
       {
         "type": "function",
@@ -273,7 +273,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::systems::listener::listener::Event",
+    "name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::Event",
     "kind": "enum",
     "variants": [
       {
