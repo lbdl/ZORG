@@ -27,6 +27,7 @@ mod listener {
             if cmd.len() >= 16 {
                 Result::Err('TOK len >= 16')
             } else {
+                // call out to tokeniser and check error type
                 Result::Ok(Prayers{
                     playerId: player,
                     vrb: ActionType::Smash,
