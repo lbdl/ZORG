@@ -1,7 +1,5 @@
 use the_oruggin_trail::models::{
-    prayers::Prayers,
-    zrk_enums::{ActionType, ObjectType, MaterialType},
-    tokens:: { ActionTokens }
+    zrk_enums::{ActionType, ObjectType, MaterialType}
 };
 
 
@@ -9,7 +7,6 @@ use the_oruggin_trail::models::{
 trait ITokeniser {
     fn str_to_AT(str: ByteArray) -> ActionType;
     fn str_to_OT(str: ByteArray) -> ObjectType;
-    // fn str_to_felt(str: ByteArray) -> felt252;
 }
 
 #[dojo::contract]

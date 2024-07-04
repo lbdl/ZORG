@@ -17,7 +17,7 @@ mod tests {
 
     #[test]
     #[available_gas(30000000)]
-    fn test_str_splitting() {
+    fn test_tok_fishing() {
         let _ = starknet::contract_address_const::<0x0>();
         let mut models = array![ 
             ];

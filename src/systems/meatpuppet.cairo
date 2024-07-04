@@ -42,6 +42,9 @@ mod meatpuppet {
         //chop out the first token.
         // this can be a VRB or a MVRB
         let pl = get_caller_address();
+
+        
+
         let res = Prayers {
             playerId: pl,
             vrb: ActionType::None,

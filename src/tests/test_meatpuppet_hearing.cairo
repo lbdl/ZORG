@@ -18,8 +18,8 @@ mod tests {
 
     #[test]
     #[available_gas(30000000)]
-    fn test_actions_tokenising() {
-        let caller = starknet::contract_address_const::<0x0>();
+    fn test_semantic_parse_DOBJ_IOBJ() {
+        let _ = starknet::contract_address_const::<0x0>();
         let mut models = array![output::TEST_CLASS_HASH, 
             prayers::TEST_CLASS_HASH, 
             ears::TEST_CLASS_HASH,
@@ -32,14 +32,59 @@ mod tests {
                 'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
 
-        // let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
+        let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
+        let sut = IListenerDispatcher { contract_address };
+        assert(true == false, 'fix test');
+    }
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_semantic_parse_DOBJ() {
+        let _ = starknet::contract_address_const::<0x0>();
+        let mut models = array![output::TEST_CLASS_HASH, 
+            prayers::TEST_CLASS_HASH, 
+            ears::TEST_CLASS_HASH,
+            ];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+
+        let input_arr: Array<ByteArray> = array!["kick", "ball"];
+        let sut = IListenerDispatcher { contract_address };
+        assert(true == false, 'fix test');
+    }
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_semantic_parse_MOVE() {
+        let _ = starknet::contract_address_const::<0x0>();
+        let mut models = array![output::TEST_CLASS_HASH, 
+            prayers::TEST_CLASS_HASH, 
+            ears::TEST_CLASS_HASH,
+            ];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+
+        let input_arr: Array<ByteArray> = array!["kick", "ball"];
         let sut = IListenerDispatcher { contract_address };
         assert(true == false, 'fix test');
     }
 
+    
+    // TODO: refactor to take command and fail with some
+    // kind of decent error ID
     #[test]
     #[available_gas(30000000)]
-    fn test_listener_success() {
+    fn test_listener_BADF00D() {
         let caller = starknet::contract_address_const::<0x0>();
         
         let mut models = array![output::TEST_CLASS_HASH, 
