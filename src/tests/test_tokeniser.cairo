@@ -19,7 +19,7 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_actions_tokenising() {
-        let caller = starknet::contract_address_const::<0x0>();
+        let _ = starknet::contract_address_const::<0x0>();
         let mut models = array![ 
             ];
         let world = spawn_test_world(models);
@@ -37,5 +37,29 @@ mod tests {
         let tok_none = sut.str_to_AT(bad_str);
         assert(tok_good == ActionType::Move, 'expected MOVE');
         assert(tok_none == ActionType::None, 'expected NONE');
+    }
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_objects_tokenising() {
+        let _ = starknet::contract_address_const::<0x0>();
+        let mut models = array![ 
+            ];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', tokeniser::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+
+        let sut = ITokeniserDispatcher { contract_address };
+        let bad_str = 'foo';
+        let good_str = 'ball';
+        let tok_good = sut.str_to_AT(good_str);
+        let tok_none = sut.str_to_AT(bad_str);
+        assert(tok_good == ObjectType::Ball, 'expected MOVE');
+        assert(tok_none == ObjectType::None, 'expected NONE');
+
     }
 }
