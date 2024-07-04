@@ -12,13 +12,19 @@ trait IListener {
 #[dojo::contract]
 mod meatpuppet {
     use super::{IListener};
-    use starknet::{ContractAddress, get_caller_address};
+    use starknet::{ContractAddress, ClassHash, get_caller_address};
     use the_oruggin_trail::models::{
         ears::{Ears}, 
         output::{Output}, 
         zrk_enums::{ActionType, ObjectType},
         prayers::{ Prayers }
     };
+
+    #[storage]
+    struct Storage {
+        tokeniser_adr: ContractAddress,
+        tokeniser_cls: ClassHash,
+    }
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
@@ -38,6 +44,16 @@ mod meatpuppet {
         }
     }
 
+    fn dojo_init(
+        world: @IWorldDispatcher,
+        tokeinser_address: ContractAddress,
+        tokeniser_class: ClassHash,
+    ) {
+        // TODO: add a model to store the systems we want to call
+        // then set the values from here
+    }
+
+
     fn fish_tokens(toks: Array<ByteArray>) -> Result<Prayers, felt252> {
         //chop out the first token.
         // this can be a VRB or a MVRB
@@ -53,7 +69,5 @@ mod meatpuppet {
         };
         Result::Ok(res)
     }
-
-    
 
 }

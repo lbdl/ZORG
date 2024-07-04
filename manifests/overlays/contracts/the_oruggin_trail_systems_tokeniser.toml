@@ -1,0 +1,4 @@
+name = "the_oruggin_trail::systems::tokeniser"
+reads = []
+writes = []
+init_calldata = ["$contract_address:the_oruggin_trail::systems::tokeniser", "$contract_address:the_oruggin_trail::systems::tokeniser"]

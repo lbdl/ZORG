@@ -218,7 +218,16 @@
       {
         "type": "function",
         "name": "dojo_init",
-        "inputs": [],
+        "inputs": [
+          {
+            "name": "tokeinser_address",
+            "type": "core::starknet::contract_address::ContractAddress"
+          },
+          {
+            "name": "tokeniser_class",
+            "type": "core::starknet::class_hash::ClassHash"
+          }
+        ],
         "outputs": [],
         "state_mutability": "view"
       }
