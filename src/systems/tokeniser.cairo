@@ -1,45 +1,31 @@
-use the_oruggin_trail::models::{
-    zrk_enums::{ActionType, ObjectType, MaterialType}
-};
+use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
 
-
-// #[dojo::interface]
-// trait ITokeniser {
-//     fn str_to_AT(str: ByteArray) -> ActionType;
-//     fn str_to_OT(str: ByteArray) -> ObjectType;
-// }
-
-#[dojo::contract]
 mod tokeniser {
-    use the_oruggin_trail::models:: {
-        zrk_enums::{ActionType, ObjectType, MaterialType}
-    };
+    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
 
-    #[generate_trait] 
-    impl TokeniseImpl of ITokeniser {
-        fn str_to_AT(world: @IWorldDispatcher, str: ByteArray) -> ActionType {
-          if str == "move" {
+    fn str_to_AT(str: ByteArray) -> ActionType {
+        if str == "move" {
             ActionType::Move
-          } else if str == "look" {
+        } else if str == "look" {
             ActionType::Look
-          } else if str == "kick" {
+        } else if str == "kick" {
             ActionType::Kick
-          } else {
+        } else {
             ActionType::None
-          }
-        }
-
-        fn str_to_OT(world: @IWorldDispatcher, str: ByteArray) -> ObjectType {
-          if str == "ball" {
-            ObjectType::Ball
-          } else if str == "window" {
-            ObjectType::Window
-          } else if str == "door" {
-            ObjectType::Door
-          } else {
-            ObjectType::None
-          }
         }
     }
+
+    fn str_to_OT(str: ByteArray) -> ObjectType {
+        if str == "ball" {
+            ObjectType::Ball
+        } else if str == "window" {
+            ObjectType::Window
+        } else if str == "door" {
+            ObjectType::Door
+        } else {
+            ObjectType::None
+        }
+    }
+// }
 }
 
