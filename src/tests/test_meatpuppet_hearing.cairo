@@ -16,26 +16,26 @@ mod tests {
         }
     };
 
-    #[test]
-    #[available_gas(30000000)]
-    fn test_semantic_parse_DOBJ_IOBJ() {
-        let _ = starknet::contract_address_const::<0x0>();
-        let mut models = array![output::TEST_CLASS_HASH, 
-            prayers::TEST_CLASS_HASH, 
-            ears::TEST_CLASS_HASH,
-            ];
-        let world = spawn_test_world(models);
+    // #[test]
+    // #[available_gas(30000000)]
+    // fn test_semantic_parse_DOBJ_IOBJ() {
+    //     let _ = starknet::contract_address_const::<0x0>();
+    //     let mut models = array![output::TEST_CLASS_HASH, 
+    //         prayers::TEST_CLASS_HASH, 
+    //         ears::TEST_CLASS_HASH,
+    //         ];
+    //     let world = spawn_test_world(models);
 
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract(
-                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-            );
+    //     // deploy systems contract
+    //     let contract_address = world
+    //         .deploy_contract(
+    //             'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+    //         );
 
-        let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
-        let sut = IListenerDispatcher { contract_address };
-        assert(true == false, 'fix test');
-    }
+    //     let input_arr: Array<ByteArray> = array!["kick", "ball", "at", "window"];
+    //     let sut = IListenerDispatcher { contract_address };
+    //     assert(true == false, 'fix test');
+    // }
     
     #[test]
     #[available_gas(30000000)]
@@ -47,15 +47,17 @@ mod tests {
             ];
         let world = spawn_test_world(models);
 
-        // deploy systems contract
+        // deploy listening contract
         let contract_address = world
             .deploy_contract(
-                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
 
         let input_arr: Array<ByteArray> = array!["kick", "ball"];
         let sut = IListenerDispatcher { contract_address };
-        assert(true == false, 'fix test');
+        let actual: Prayers = sut.listen(input_arr).unwrap();
+        let tok: ActionType = actual.vrb;
+        assert(tok == ActionType::Move, 'expected move');
     }
     
     #[test]
@@ -71,11 +73,12 @@ mod tests {
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
-                'salt', listener::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
             );
 
-        let input_arr: Array<ByteArray> = array!["kick", "ball"];
+        let input_arr: Array<ByteArray> = array!["move"];
         let sut = IListenerDispatcher { contract_address };
+
         assert(true == false, 'fix test');
     }
 

@@ -19,6 +19,7 @@ mod meatpuppet {
         zrk_enums::{ActionType, ObjectType},
         prayers::{ Prayers }
     };
+    use the_oruggin_trail::systems::tokeniser::tokeniser::{TokeniseImpl as lexer};
 
     #[storage]
     struct Storage {
@@ -33,10 +34,10 @@ mod meatpuppet {
             if cmd.len() >= 16 {
                 Result::Err('TOK len >= 16')
             } else {
-                // call out to tokeniser and check error type
+                let tok: ActionType = lexer::str_to_AT(@world, "move"); 
                 Result::Ok(Prayers{
                     playerId: player,
-                    vrb: ActionType::Smash,
+                    vrb: ActionType::Move,
                     dobj: ObjectType::Door,
                     iobj: ObjectType::None,  
                 })

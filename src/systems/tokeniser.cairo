@@ -3,21 +3,20 @@ use the_oruggin_trail::models::{
 };
 
 
-#[dojo::interface]
-trait ITokeniser {
-    fn str_to_AT(str: ByteArray) -> ActionType;
-    fn str_to_OT(str: ByteArray) -> ObjectType;
-}
+// #[dojo::interface]
+// trait ITokeniser {
+//     fn str_to_AT(str: ByteArray) -> ActionType;
+//     fn str_to_OT(str: ByteArray) -> ObjectType;
+// }
 
 #[dojo::contract]
 mod tokeniser {
-    use super::ITokeniser;
     use the_oruggin_trail::models:: {
         zrk_enums::{ActionType, ObjectType, MaterialType}
     };
 
-    #[abi(embed_v0)]
-    impl TokeniseImpl of ITokeniser<ContractState> {
+    #[generate_trait] 
+    impl TokeniseImpl of ITokeniser {
         fn str_to_AT(world: @IWorldDispatcher, str: ByteArray) -> ActionType {
           if str == "move" {
             ActionType::Move
