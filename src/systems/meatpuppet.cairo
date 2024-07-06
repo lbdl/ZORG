@@ -1,13 +1,10 @@
 use the_oruggin_trail::models::prayers::Prayers;
 
-// we are gonna need the tokeniser system to convert types
-// include here and we will need the dispatcher traits as
-
+// export a function for rpc calls
 #[dojo::interface]
 trait IListener {
     fn listen(cmd: Array<ByteArray>) -> Result<Prayers, felt252>;
 }
-
 
 #[dojo::contract]
 mod meatpuppet {
@@ -19,7 +16,10 @@ mod meatpuppet {
         zrk_enums::{ActionType, ObjectType},
         prayers::{ Prayers }
     };
-    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+    use the_oruggin_trail::systems::tokeniser::{
+        tokeniser as lexer, 
+        confessor, 
+        confessor::Garble};
 
     #[storage]
     struct Storage {
