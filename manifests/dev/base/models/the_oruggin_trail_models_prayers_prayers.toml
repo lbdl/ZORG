@@ -1,0 +1,25 @@
+kind = "DojoModel"
+class_hash = "0x61b91d7723be615ebe4477e8419509bf8cd309e2d1e6186fe49a69946f56f51"
+original_class_hash = "0x61b91d7723be615ebe4477e8419509bf8cd309e2d1e6186fe49a69946f56f51"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_prayers_prayers.json"
+name = "the_oruggin_trail::models::prayers::prayers"
+
+[[members]]
+name = "playerId"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "vrb"
+type = "ActionType"
+key = false
+
+[[members]]
+name = "dobj"
+type = "ObjectType"
+key = false
+
+[[members]]
+name = "iobj"
+type = "ObjectType"
+key = false
