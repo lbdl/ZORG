@@ -1,11 +1,21 @@
-use the_oruggin_trail::models::prayers::Prayers;
 
-// export a function for rpc calls
+/// The main Inerface for the system
+/// 
+/// Exprected to take an array of str from an RPC call
+/// and to then lex and extract semantic information 
+/// pre passing this information on to the rest
+/// of the system.
 #[dojo::interface]
 trait IListener {
-    fn listen(cmd: Array<ByteArray>) -> Result<Prayers, felt252>;
+    fn listen(cmd: Array<ByteArray>);
 }
 
+/// Impl of the listener
+/// acts as a main() and takes a command
+/// which is then lexed and then has semantic
+/// meaning extracted into a small struct
+/// which can then be passed along to the next
+/// logical block/system
 #[dojo::contract]
 mod meatpuppet {
     use super::{IListener};
@@ -13,67 +23,52 @@ mod meatpuppet {
     use the_oruggin_trail::models::{
         ears::{Ears}, 
         output::{Output}, 
-        zrk_enums::{ActionType, ObjectType},
-        prayers::{ Prayers }
+        zrk_enums::{ActionType, ObjectType}
     };
     use the_oruggin_trail::systems::tokeniser::{
         tokeniser as lexer, 
         confessor, 
         confessor::Garble};
 
+    use the_oruggin_trail::constants::zrk_constants;
+
     #[storage]
     struct Storage {
         tokeniser_adr: ContractAddress,
         tokeniser_cls: ClassHash,
     }
-
-    #[abi(embed_v0)]
-    impl ListenImpl of IListener<ContractState> {
-        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) -> Result<Prayers, felt252> {
-            let player = get_caller_address();
-            if cmd.len() >= 16 {
-                Result::Err('TOK len >= 16')
-            } else {
-                // grab the command stream array and extract a Garble type
-                match confessor::confess(cmd){
-                    Result::Ok(r) => {},
-                    Result::Err(r) => {}
-                }
-                // let tok: ActionType = lexer::str_to_AT("move"); 
-                Result::Ok(Prayers{
-                    playerId: player,
-                    vrb: ActionType::Move,
-                    dobj: ObjectType::Door,
-                    iobj: ObjectType::None,  
-                })
-            }
-        }
-    }
-
+    
+    /// we use this to take an overlay and store the 
+    /// contract addresses we will ned to call, this will
+    /// go away at some point in the release cycle when we
+    /// can get this info via the world itself
     fn dojo_init(
         world: @IWorldDispatcher,
-        tokeinser_address: ContractAddress,
+        tokeniser_address: ContractAddress,
         tokeniser_class: ClassHash,
     ) {
         // TODO: add a model to store the systems we want to call
         // then set the values from here
     }
 
-
-    fn fish_tokens(toks: Array<ByteArray>) -> Result<Prayers, felt252> {
-        //chop out the first token.
-        // this can be a VRB or a MVRB
-        let pl = get_caller_address();
-
-        
-
-        let res = Prayers {
-            playerId: pl,
-            vrb: ActionType::None,
-            dobj: ObjectType::None,
-            iobj: ObjectType::None,
-        };
-        Result::Ok(res)
+    #[abi(embed_v0)]
+    impl ListenImpl of IListener<ContractState> {
+        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>){
+            let player = get_caller_address();
+            if cmd.len() >= 16 {
+                // we have bad food make an error and pass along to 
+                // the error outputter system
+                let e: Result<Garble, felt252> = Result::Err(zrk_constants::BAD_LEN);
+            } else {
+                // grab the command stream array and extract a Garble type
+                match confessor::confess(cmd){
+                    Result::Ok(r) => {},
+                    Result::Err(r) => {}
+                }
+            }
+        }
     }
+
+    
 
 }
