@@ -1,8 +1,5 @@
 #[cfg(test)]
 mod tests {
-    // use starknet::class_hash::Felt252TryIntoClassHash;
-    // use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
-    // use dojo::test_utils::{spawn_test_world, deploy_contract};
     use the_oruggin_trail::{
         systems::{
             tokeniser::{tokeniser, confessor, confessor::Garble}
@@ -13,7 +10,7 @@ mod tests {
     };
 
     #[test]
-    #[available_gas(30000000)]
+    // #[available_gas(30000000)]
     fn test_lexer_actions() {
         let bad_str: ByteArray = "foo";
         let good_str: ByteArray = "move";
@@ -24,7 +21,7 @@ mod tests {
     }
     
     #[test]
-    #[available_gas(30000000)]
+    // #[available_gas(30000000)]
     fn test_lexer_objects() {
         let bad_str: ByteArray = "foo";
         let good_str: ByteArray = "ball";
