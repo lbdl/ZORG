@@ -1,31 +1,35 @@
-use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
+use the_oruggin_trail::models::{
+    zrk_enums::{ActionType, ObjectType, MaterialType}
+};
 
 mod tokeniser {
-    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
+    use the_oruggin_trail::models:: {
+        zrk_enums::{ActionType, ObjectType, MaterialType}
+    };
 
-    fn str_to_AT(str: ByteArray) -> ActionType {
-        if str == "move" {
+        fn str_to_AT(str: ByteArray) -> ActionType {
+          if str == "move" {
             ActionType::Move
-        } else if str == "look" {
+          } else if str == "look" {
             ActionType::Look
-        } else if str == "kick" {
+          } else if str == "kick" {
             ActionType::Kick
-        } else {
+          } else {
             ActionType::None
+          }
         }
-    }
 
-    fn str_to_OT(str: ByteArray) -> ObjectType {
-        if str == "ball" {
+        fn str_to_OT(str: ByteArray) -> ObjectType {
+          if str == "ball" {
             ObjectType::Ball
-        } else if str == "window" {
+          } else if str == "window" {
             ObjectType::Window
-        } else if str == "door" {
+          } else if str == "door" {
             ObjectType::Door
-        } else {
+          } else {
             ObjectType::None
+          }
         }
-    }
-// }
+    // }
 }
 
