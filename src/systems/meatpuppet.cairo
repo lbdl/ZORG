@@ -37,35 +37,7 @@ mod meatpuppet {
         tokeniser_adr: ContractAddress,
         tokeniser_cls: ClassHash,
     }
-<<<<<<< HEAD
-    
-    /// we use this to take an overlay and store the 
-    /// contract addresses we will ned to call, this will
-    /// go away at some point in the release cycle when we
-    /// can get this info via the world itself
-=======
 
-    #[abi(embed_v0)]
-    impl ListenImpl of IListener<ContractState> {
-        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) -> Result<Prayers, felt252> {
-            let player = get_caller_address();
-            if cmd.len() >= 16 {
-                Result::Err('TOK len >= 16')
-            } else {
-                // we have a legit len so do we
-                // have a legit Prayer?
-                let tok: ActionType = tokeniser::str_to_AT("move"); 
-                Result::Ok(Prayers{
-                    playerId: player,
-                    vrb: ActionType::Move,
-                    dobj: ObjectType::Door,
-                    iobj: ObjectType::None,  
-                })
-            }
-        }
-    }
-
->>>>>>> 56b67aa0 ( Add a contracts model for interop)
     fn dojo_init(
         world: @IWorldDispatcher,
         tokeniser_address: ContractAddress,
