@@ -6,11 +6,11 @@ mod tests {
             },
         models::{
             zrk_enums::{MaterialType, ActionType, ObjectType}
-        }
+        },
+        constants::{zrk_constants as e}
     };
 
     #[test]
-    // #[available_gas(30000000)]
     fn test_lexer_actions() {
         let bad_str: ByteArray = "foo";
         let good_str: ByteArray = "move";
@@ -21,7 +21,6 @@ mod tests {
     }
     
     #[test]
-    // #[available_gas(30000000)]
     fn test_lexer_objects() {
         let bad_str: ByteArray = "foo";
         let good_str: ByteArray = "ball";
@@ -29,5 +28,13 @@ mod tests {
         let tok_none = tokeniser::str_to_OT(bad_str);
         assert(tok_good == ObjectType::Ball, 'expected BALL');
         assert(tok_none == ObjectType::None, 'expected NONE');
+    }
+
+    #[test]
+    fn test_sem_action_bad_parse() {
+        let bad_str: ByteArray = "foo";
+        let _in: Array<ByteArray> = array![bad_str];
+        let actual: Result<Garble, felt252> = confessor::confess(_in);
+        assert_eq!(actual, Result::Err(e::BAD_IMPL), "Expected err got {:?}", actual) 
     }
 }

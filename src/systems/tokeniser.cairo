@@ -28,6 +28,7 @@ mod tokeniser {
 
 mod confessor {
     use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
+    use the_oruggin_trail::constants::zrk_constants;
     use super::tokeniser as lexer;
 
     #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
@@ -46,6 +47,7 @@ mod confessor {
       let t0 = lexer::str_to_AT(s0);
 
 
-      Result::Err('impl_me_now')
+      // return result
+      Result::Err(zrk_constants::BAD_IMPL)
     }
 }
