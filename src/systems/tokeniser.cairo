@@ -41,10 +41,12 @@ mod confessor {
 
     fn confess(sin: Array<ByteArray>) -> Result<Garble, felt252> {
 
+      // get the first token from the command
       let snap = @sin;
       let i0 = snap.at(0);
       let s0 = i0.clone();
       let t0 = lexer::str_to_AT(s0);
+
 
 
       Result::Err('impl_me_now')
