@@ -5,7 +5,7 @@ mod tests {
             tokeniser::{tokeniser, confessor, confessor::Garble}
             },
         models::{
-            zrk_enums::{MaterialType, ActionType, ObjectType}
+            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}
         },
         constants::{zrk_constants as e}
     };
@@ -36,5 +36,15 @@ mod tests {
         let _in: Array<ByteArray> = array![bad_str];
         let actual: Result<Garble, felt252> = confessor::confess(_in);
         assert_eq!(actual, Result::Err(e::BAD_IMPL), "Expected err got {:?}", actual) 
+    }
+
+    #[test]
+    fn test_sem_move_parse() {
+        let str_m: ByteArray = "go";
+        let str_d: ByteArray = "north";
+        let _in: Array<ByteArray> = array![str_m, str_d];
+        let expected = Result::Ok(Garble{vrb: ActionType::Move, dir: DirectionType::North, dobj: ObjectType::None, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 }

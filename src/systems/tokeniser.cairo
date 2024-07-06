@@ -1,8 +1,8 @@
 mod tokeniser {
-    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
+    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}};
 
     fn str_to_AT(str: ByteArray) -> ActionType {
-        if str == "move" {
+        if str == "move" || str == "go" {
             ActionType::Move
         } else if str == "look" {
             ActionType::Look
@@ -10,6 +10,24 @@ mod tokeniser {
             ActionType::Kick
         } else {
             ActionType::None
+        }
+    }
+
+    fn str_to_DT(str: ByteArray) -> DirectionType {
+        if str == "north" {
+            DirectionType::North
+        } else if str == "south" {
+            DirectionType::South
+        } else if str == "east" {
+            DirectionType::East
+        } else if str == "west" {
+            DirectionType::West
+        } else if str == "up" {
+            DirectionType::Up
+        } else if str == "down" {
+            DirectionType::Down
+        } else {
+            DirectionType::None
         }
     }
 
@@ -27,13 +45,19 @@ mod tokeniser {
 }
 
 mod confessor {
-    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType}};
+    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}};
     use the_oruggin_trail::constants::zrk_constants;
     use super::tokeniser as lexer;
 
+    /// Garble, the main semantic message type
+    /// 
+    /// it mainly is VRB, THING, THING (ie kick ball at troll)
+    /// it can also be a MOVE, DIR (ie go north, or north) etc
+    /// the later systems need to handle this specialisation
     #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
     struct Garble {
       vrb: ActionType,
+      dir: DirectionType,
       dobj: ObjectType,
       iobj: ObjectType,
     }
