@@ -3,42 +3,49 @@ mod tokeniser {
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
 
-    fn str_to_AT(str: ByteArray) -> ActionType {
-        if str == "move" || str == "go" {
+    fn str_to_AT(s: ByteArray) -> ActionType {
+        if s == "move"
+            || s == "go"
+            || s == "north"
+            || s == "south"
+            || s == "east"
+            || s == "west"
+            || s == "up"
+            || s == "down" {
             ActionType::Move
-        } else if str == "look" {
+        } else if s == "look" {
             ActionType::Look
-        } else if str == "kick" {
+        } else if s == "kick" {
             ActionType::Kick
         } else {
             ActionType::None
         }
     }
 
-    fn str_to_DT(str: ByteArray) -> DirectionType {
-        if str == "north" {
+    fn str_to_DT(s: ByteArray) -> DirectionType {
+        if s == "north" || s == "n" {
             DirectionType::North
-        } else if str == "south" {
+        } else if s == "south" || s == "s" {
             DirectionType::South
-        } else if str == "east" {
+        } else if s == "east" || s == "e" {
             DirectionType::East
-        } else if str == "west" {
+        } else if s == "west" || s == "w" {
             DirectionType::West
-        } else if str == "up" {
+        } else if s == "up" {
             DirectionType::Up
-        } else if str == "down" {
+        } else if s == "down" {
             DirectionType::Down
         } else {
             DirectionType::None
         }
     }
 
-    fn str_to_OT(str: ByteArray) -> ObjectType {
-        if str == "ball" {
+    fn str_to_OT(s: ByteArray) -> ObjectType {
+        if s == "ball" {
             ObjectType::Ball
-        } else if str == "window" {
+        } else if s == "window" {
             ObjectType::Window
-        } else if str == "door" {
+        } else if s == "door" {
             ObjectType::Door
         } else {
             ObjectType::None
@@ -83,6 +90,19 @@ mod confessor {
     }
 
     fn handle_moves(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
+        let mut t: DirectionType = DirectionType::None;
+        // we know we have a move type 
+        if cmd.len() > 1 {
+          //! long form movement command
+            let s = cmd.at(cmd.len() - 1);
+            let s0 = s.clone();
+            t = lexer::str_to_DT(s0);
+        } else {
+          //! alias form movement command
+            let s = cmd.at(0);
+            let s0 = s.clone();
+            t = lexer::str_to_DT(s0);
+        }
         Result::Err(zrk_constants::BAD_IMPL)
     }
 }
