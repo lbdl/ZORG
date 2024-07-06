@@ -1,14 +1,11 @@
 #[cfg(test)]
 mod tests {
-    use starknet::class_hash::Felt252TryIntoClassHash;
-    // import world dispatcher
-    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
-    // import test utils
-    use dojo::test_utils::{spawn_test_world, deploy_contract};
-    // import test utils
+    // use starknet::class_hash::Felt252TryIntoClassHash;
+    // use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+    // use dojo::test_utils::{spawn_test_world, deploy_contract};
     use the_oruggin_trail::{
         systems::{
-            tokeniser::{tokeniser}
+            tokeniser::{tokeniser, confessor, confessor::Garble}
             },
         models::{
             zrk_enums::{MaterialType, ActionType, ObjectType}
@@ -17,7 +14,7 @@ mod tests {
 
     #[test]
     #[available_gas(30000000)]
-    fn test_actions_tokenising() {
+    fn test_lexer_actions() {
         let bad_str: ByteArray = "foo";
         let good_str: ByteArray = "move";
         let tok_good = tokeniser::str_to_AT(good_str);
@@ -28,7 +25,7 @@ mod tests {
     
     #[test]
     #[available_gas(30000000)]
-    fn test_objects_tokenising() {
+    fn test_lexer_objects() {
         let bad_str: ByteArray = "foo";
         let good_str: ByteArray = "ball";
         let tok_good = tokeniser::str_to_OT(good_str);

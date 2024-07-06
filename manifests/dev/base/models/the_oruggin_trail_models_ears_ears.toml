@@ -1,0 +1,15 @@
+kind = "DojoModel"
+class_hash = "0x5323a01ecc4c3eaadd02c18560478ff75624e74a42e6117ff4a1b024872ff13"
+original_class_hash = "0x5323a01ecc4c3eaadd02c18560478ff75624e74a42e6117ff4a1b024872ff13"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_ears_ears.json"
+name = "the_oruggin_trail::models::ears::ears"
+
+[[members]]
+name = "playerId"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "input_stream"
+type = "Array<felt252>"
+key = false
