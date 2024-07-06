@@ -103,6 +103,11 @@ mod confessor {
             let s0 = s.clone();
             t = lexer::str_to_DT(s0);
         }
-        Result::Err(zrk_constants::BAD_IMPL)
+
+        if t == DirectionType::None {
+          Result::Err(zrk_constants::BAD_MOVE)
+        } else {
+              Result::Ok(Garble{vrb: ActionType::Move, dir: t, dobj: ObjectType::None, iobj: ObjectType::None})
+        }
     }
 }

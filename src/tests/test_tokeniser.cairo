@@ -39,11 +39,31 @@ mod tests {
     }
 
     #[test]
-    fn test_sem_move_parse() {
+    fn test_sem_move_parse_long() {
         let str_m: ByteArray = "go";
+        let str_p: ByteArray = "to";
+        let str_pp: ByteArray = "the";
         let str_d: ByteArray = "north";
-        let _in: Array<ByteArray> = array![str_m, str_d];
+        let _in: Array<ByteArray> = array![str_m, str_p, str_pp, str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Move, dir: DirectionType::North, dobj: ObjectType::None, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+    
+    #[test]
+    fn test_sem_move_parse_short() {
+        let str_d: ByteArray = "north";
+        let _in: Array<ByteArray> = array![str_d];
+        let expected = Result::Ok(Garble{vrb: ActionType::Move, dir: DirectionType::North, dobj: ObjectType::None, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+
+    #[test]
+    fn test_sem_move_parse_badfood() {
+        let str_d: ByteArray = "go";
+        let _in: Array<ByteArray> = array![str_d];
+        let expected = Result::Err(e::BAD_MOVE);
         let actual: Result<Garble, felt252> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
