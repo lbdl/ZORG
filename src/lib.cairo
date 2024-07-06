@@ -5,6 +5,10 @@ mod systems {
     mod tokeniser;
 }
 
+mod constants {
+    mod zrk_constants;
+}
+
 mod models {
     mod moves;
     mod position;
