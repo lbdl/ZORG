@@ -35,8 +35,11 @@ mod meatpuppet {
                 Result::Err('TOK len >= 16')
             } else {
                 // grab the command stream array and extract a Garble type
-                // from this
-                let tok: ActionType = lexer::str_to_AT("move"); 
+                match confessor::confess(cmd){
+                    Result::Ok(r) => {},
+                    Result::Err(r) => {}
+                }
+                // let tok: ActionType = lexer::str_to_AT("move"); 
                 Result::Ok(Prayers{
                     playerId: player,
                     vrb: ActionType::Move,
