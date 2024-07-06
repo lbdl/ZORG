@@ -16,7 +16,6 @@ mod models {
     mod output;
     mod player;
     mod ears;
-    mod prayers;
 }
 
 mod tests {
