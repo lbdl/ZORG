@@ -1,7 +1,11 @@
 mod tokeniser {
+<<<<<<< HEAD
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
+=======
+    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType}};
+>>>>>>> 56b67aa0 ( Add a contracts model for interop)
 
     fn str_to_AT(s: ByteArray) -> ActionType {
         if s == "move"
@@ -51,6 +55,55 @@ mod tokeniser {
             ObjectType::None
         }
     }
+<<<<<<< HEAD
+=======
+}
+
+mod prayer_builder {
+    use core::array::ArrayTrait;
+    use super::tokeniser as lexer;
+    use the_oruggin_trail::models::{zrk_enums::{ActionType, ObjectType}};
+
+    struct Garble {
+        vrb: ActionType,
+        dobj: ObjectType,
+        iobj: ObjectType,
+    }
+
+    fn confess(ref sin: Array<ByteArray>) -> Result<Garble, felt252> {
+        //check for valid tok[0]
+    
+        let val = sin.at(0);
+        let new: ByteArray = val.clone();
+        let foo = lexer::str_to_AT(new);
+
+        if foo == ActionType::None {
+            println!("foo is NONE");
+        }
+
+            Result::Err('none');
+
+        // let mut span_ = sin.clone();
+        // match sin.get(0) {
+        //     Option::Some(x) => {
+        //         let tk = *x.unbox();
+        //         let t = lexer::str_to_AT(tk);
+        //         match t {
+        //             ActionType::None => {
+        //                 Result::Err('badF00D')
+        //             },
+        //             _ => {
+        //                 Result::Ok(Garble{vrb: t, dobj: ObjectType::None, iobj: ObjectType::None})
+        //             }
+        //         }
+        //     },
+        //     Option::None => {
+        //         Result::Err('badF00D')
+        //     }
+        // }
+
+    }
+>>>>>>> 56b67aa0 ( Add a contracts model for interop)
 }
 
 mod confessor {
