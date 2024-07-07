@@ -113,12 +113,50 @@ mod tests {
 
     // ACTION tests
     #[test]
-    fn test_sem_action_parse_() {
+    fn test_sem_action_parse_dobj() {
         //! kick the ball at the window
         let str_v: ByteArray = "kick";
-        let str_d: ByteArray = "troll";
+        let str_d: ByteArray = "ball";
         let _in: Array<ByteArray> = array![str_v, str_d];
-        let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::Troll, iobj: ObjectType::None});
+        let expected = Result::Ok(Garble{vrb: ActionType::Kick, dir: DirectionType::None, dobj: ObjectType::Ball, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+    
+    #[test]
+    fn test_sem_action_parse_dobj_iobj() {
+        //! kick the ball at the window
+        let str_v: ByteArray = "kick";
+        let str_d: ByteArray = "ball";
+        let str_a: ByteArray = "the";
+        let str_pp: ByteArray = "at";
+        let str_a2: ByteArray = "the";
+        let str_io: ByteArray = "window";
+        let _in: Array<ByteArray> = array![str_v, str_d, str_a, str_pp, str_a2, str_io];
+        let expected = Result::Ok(Garble{vrb: ActionType::Kick, dir: DirectionType::None, dobj: ObjectType::Ball, iobj: ObjectType::Window});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+
+    #[test]
+    fn test_sem_action_parse_no_obj() {
+        //! kick the ball at the window
+        let str_v: ByteArray = "kick";
+        let _in: Array<ByteArray> = array![str_v];
+        let expected = Result::Err(e::NUL_CMD_OBJ);
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+
+    #[test]
+    fn test_sem_action_parse_garbage() {
+        //! kick the ball at the window
+        let str_v: ByteArray = "kick";
+        let str_d: ByteArray = "ball";
+        let str_p: ByteArray = "at";
+        let str_io: ByteArray = "foop";
+        let _in: Array<ByteArray> = array![str_v, str_d, str_p, str_io];
+        let expected = Result::Err(e::NUL_CMD_IOBJ);
         let actual: Result<Garble, felt252> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }

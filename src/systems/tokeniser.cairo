@@ -93,17 +93,32 @@ mod confessor {
             ActionType::Move => { parse_moves(snap) },
             ActionType::Look => { parse_look(snap) },
             ActionType::None => { Result::Err(e::BAD_IMPL) },
-            _ => { parse_action(snap, @t0) },
+            _ => { parse_action(snap, t0) },
         }
     }
 
     /// General VERBS
     /// 
     /// non movement and loooking verbs, i.e the general case 
-    fn parse_action(cmd: @Array<ByteArray>, at: @ActionType) -> Result<Garble, felt252> {
+    fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
         let mut do: ObjectType = ObjectType::None;
         let mut io: ObjectType = ObjectType::None;
-        let mut vb: ActionType = ActionType::None;
+
+        let s = cmd.at(cmd.len() - 1);
+        let s0 = s.clone();
+        let do = lexer::str_to_OT(s0);
+
+        let lng_frm = cmd.len() > 3;
+
+        if do == ObjectType::None {
+            Result::Err(e::NUL_CMD_OBJ)
+        } else if do != ObjectType::None && !lng_frm {
+            Result::Ok(
+                Garble { vrb: at, dir: DirectionType::None, dobj: do, iobj: ObjectType::None, }
+            )
+        } else {
+            Result::Err(e::BAD_IMPL)
+        }
 
         Result::Err(e::BAD_IMPL)
     }
