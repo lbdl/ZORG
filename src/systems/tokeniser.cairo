@@ -117,10 +117,10 @@ mod confessor {
                 Garble { vrb: at, dir: DirectionType::None, dobj: do, iobj: ObjectType::None, }
             )
         } else {
+          // long form toks > 3
+          // TODO
             Result::Err(e::BAD_IMPL)
         }
-
-        Result::Err(e::BAD_IMPL)
     }
 
     /// LOOK command
