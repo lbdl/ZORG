@@ -105,12 +105,12 @@ mod confessor {
         // let mut io: ObjectType = ObjectType::None;
 
         let s = cmd.at(cmd.len() - 1);
-        let s0 = s.clone();
-        let do = lexer::str_to_OT(s0);
+        let sn = s.clone();
+        let do = lexer::str_to_OT(sn);
 
         let lng_frm = cmd.len() > 3;
 
-        if do == ObjectType::None {
+        if do == ObjectType::None && cmd.len() < 2 {
             Result::Err(e::NUL_CMD_OBJ)
         } else if do != ObjectType::None && !lng_frm {
             Result::Ok(

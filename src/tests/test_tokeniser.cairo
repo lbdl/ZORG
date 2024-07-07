@@ -133,7 +133,14 @@ mod tests {
         let str_a2: ByteArray = "the";
         let str_io: ByteArray = "window";
         let _in: Array<ByteArray> = array![str_v, str_d, str_a, str_pp, str_a2, str_io];
-        let expected = Result::Ok(Garble{vrb: ActionType::Kick, dir: DirectionType::None, dobj: ObjectType::Ball, iobj: ObjectType::Window});
+        let expected = Result::Ok(
+            Garble{
+                vrb: ActionType::Kick, 
+                dir: DirectionType::None, 
+                dobj: ObjectType::Ball, 
+                iobj: ObjectType::Window
+            }
+        );
         let actual: Result<Garble, felt252> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
@@ -156,7 +163,7 @@ mod tests {
         let str_p: ByteArray = "at";
         let str_io: ByteArray = "foop";
         let _in: Array<ByteArray> = array![str_v, str_d, str_p, str_io];
-        let expected = Result::Err(e::NUL_CMD_IOBJ);
+        let expected = Result::Ok(Garble{vrb: ActionType::Kick, dir: DirectionType::None, dobj: ObjectType::Ball, iobj: ObjectType::None});
         let actual: Result<Garble, felt252> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
