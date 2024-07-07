@@ -102,7 +102,7 @@ mod confessor {
     /// non movement and non looking verbs, i.e the general case 
     fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
         let mut do: ObjectType = ObjectType::None;
-        let mut io: ObjectType = ObjectType::None;
+        // let mut io: ObjectType = ObjectType::None;
 
         let s = cmd.at(cmd.len() - 1);
         let s0 = s.clone();
@@ -117,13 +117,69 @@ mod confessor {
                 Garble { vrb: at, dir: DirectionType::None, dobj: do, iobj: ObjectType::None, }
             )
         } else {
-          // long form toks > 3
-          long_form(cmd, at)
+            long_form(cmd, at)
         }
     }
 
     fn long_form(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
-            Result::Err(e::BAD_IMPL)
+        //! verb, [the], thing, (at | to | with), [the], thing  
+        //! this currently checks for direct article by assuming that if tok[2] is
+        //! an object then there is a direct article, we should probaly actually check
+        //! so that we can give better errors.
+        //! see the final case, `vrb, the, ~thing~, ..., ~thing~`
+        //! we dont really know if it's a `the` so we just use the final
+        //! token as a direct object. The same is true for the `at` preposition
+        //! in case vrb, ~the~, thing, ..., ~thing~
+        //! again we don't actually check. We should    
+        let s_ = cmd.at(1);
+        let s = s_.clone();
+        let do = lexer::str_to_OT(s);
+
+        let s_ = cmd.at(cmd.len() - 1);
+        let s = s_.clone();
+        let io = lexer::str_to_OT(s);
+
+        if io != ObjectType::None && do != ObjectType::None {
+            //! vrb, ~the~, thing, ..., thing
+            Result::Ok(Garble { vrb: at, dir: DirectionType::None, dobj: do, iobj: io, })
+        } else {
+            //! vrb, ~the~, thing, ..., ~thing~
+            if io == ObjectType::None {
+                Result::Ok(
+                    Garble{
+                        vrb: at,
+                        dir: DirectionType::None,
+                        dobj: do,
+                        iobj: ObjectType::None,
+                    }
+                )
+            } else {
+               //! vrb, the, ?thing, ..., thing 
+                let s_ = cmd.at(2);
+                let s = s_.clone();
+                let do = lexer::str_to_OT(s);       
+                if do != ObjectType::None {
+                    Result::Ok(
+                        Garble { 
+                            vrb: at, 
+                            dir: DirectionType::None, 
+                            dobj: do, 
+                            iobj: io, 
+                        }
+                    )
+                } else {
+                    //! vrb, the, ~thing~, ..., ~thing~
+                    Result::Ok(
+                        Garble { 
+                            vrb: at, 
+                            dir: DirectionType::None, 
+                            dobj: io, 
+                            iobj: ObjectType::None, 
+                        }
+                    )
+                }
+            }
+        }
     }
 
     /// LOOK command
