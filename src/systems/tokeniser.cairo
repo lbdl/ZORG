@@ -99,7 +99,7 @@ mod confessor {
 
     /// General VERBS
     /// 
-    /// non movement and loooking verbs, i.e the general case 
+    /// non movement and non looking verbs, i.e the general case 
     fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
         let mut do: ObjectType = ObjectType::None;
         let mut io: ObjectType = ObjectType::None;
@@ -118,9 +118,12 @@ mod confessor {
             )
         } else {
           // long form toks > 3
-          // TODO
-            Result::Err(e::BAD_IMPL)
+          long_form(cmd, at)
         }
+    }
+
+    fn long_form(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
+            Result::Err(e::BAD_IMPL)
     }
 
     /// LOOK command
