@@ -13,7 +13,7 @@ mod tokeniser {
             || s == "up"
             || s == "down" {
             ActionType::Move
-        } else if s == "look" {
+        } else if s == "look" || s == "examine" || s == "stare" {
             ActionType::Look
         } else if s == "kick" {
             ActionType::Kick
@@ -73,6 +73,12 @@ mod confessor {
         iobj: ObjectType,
     }
 
+    /// The Confessor - mumble your shameful desires here and receive a message
+    /// 
+    /// the main entrance of the parsing system, takes an array of str
+    /// and then lexes and runs semantic analysis on the lexed tokens
+    /// to extract meaning and create a simple message type that can be
+    /// passed around the system logic to make things happen in the world
     fn confess(sin: Array<ByteArray>) -> Result<Garble, felt252> {
         // get the first token from the command
         let snap = @sin;
@@ -89,25 +95,35 @@ mod confessor {
         }
     }
 
+    fn handle_look(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
+        //! LOOK is a single action but it can be specialised to look at things
+        //! more like examine
+        Result::Err(zrk_constants::BAD_IMPL)
+    }
+
     fn handle_moves(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
         let mut t: DirectionType = DirectionType::None;
         // we know we have a move type 
         if cmd.len() > 1 {
-          //! long form movement command
+            //! long form movement command
             let s = cmd.at(cmd.len() - 1);
             let s0 = s.clone();
             t = lexer::str_to_DT(s0);
         } else {
-          //! alias form movement command
+            //! alias form movement command
             let s = cmd.at(0);
             let s0 = s.clone();
             t = lexer::str_to_DT(s0);
         }
 
         if t == DirectionType::None {
-          Result::Err(zrk_constants::BAD_MOVE)
+            Result::Err(zrk_constants::BAD_MOVE)
         } else {
-              Result::Ok(Garble{vrb: ActionType::Move, dir: t, dobj: ObjectType::None, iobj: ObjectType::None})
+            Result::Ok(
+                Garble {
+                    vrb: ActionType::Move, dir: t, dobj: ObjectType::None, iobj: ObjectType::None
+                }
+            )
         }
     }
 }
