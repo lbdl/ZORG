@@ -10,6 +10,7 @@ mod tests {
         constants::{zrk_constants as e}
     };
 
+    // LEX tests
     #[test]
     fn test_lexer_actions() {
         let bad_str: ByteArray = "foo";
@@ -29,7 +30,8 @@ mod tests {
         assert(tok_good == ObjectType::Ball, 'expected BALL');
         assert(tok_none == ObjectType::None, 'expected NONE');
     }
-
+    
+    // MOVE tests
     #[test]
     fn test_sem_action_bad_parse() {
         let bad_str: ByteArray = "foo";
@@ -64,6 +66,47 @@ mod tests {
         let str_d: ByteArray = "go";
         let _in: Array<ByteArray> = array![str_d];
         let expected = Result::Err(e::BAD_MOVE);
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+
+   // LOOK tests 
+    #[test]
+    fn test_sem_look_parse_short() {
+        let str_v: ByteArray = "look";
+        let _in: Array<ByteArray> = array![str_v];
+        let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    } 
+    
+    #[test]
+    fn test_sem_look_parse_long() {
+        let str_v: ByteArray = "look";
+        let str_d: ByteArray = "around";
+        let _in: Array<ByteArray> = array![str_v, str_d];
+        let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    } 
+
+    #[test]
+    fn test_sem_look_parse_thing() {
+        let str_v: ByteArray = "look";
+        let str_p: ByteArray = "at";
+        let str_d: ByteArray = "troll";
+        let _in: Array<ByteArray> = array![str_v, str_p, str_d];
+        let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::Troll, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
+
+    #[test]
+    fn test_sem_look_parse_examine() {
+        let str_v: ByteArray = "examine";
+        let str_d: ByteArray = "troll";
+        let _in: Array<ByteArray> = array![str_v, str_d];
+        let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::Troll, iobj: ObjectType::None});
         let actual: Result<Garble, felt252> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }

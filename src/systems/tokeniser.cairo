@@ -47,6 +47,8 @@ mod tokeniser {
             ObjectType::Window
         } else if s == "door" {
             ObjectType::Door
+        } else if s == "troll" {
+            ObjectType::Troll
         } else {
             ObjectType::None
         }
@@ -57,7 +59,7 @@ mod confessor {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
-    use the_oruggin_trail::constants::zrk_constants;
+    use the_oruggin_trail::constants::zrk_constants as e;
     use super::tokeniser as lexer;
 
     /// Garble, the main semantic message type
@@ -89,16 +91,40 @@ mod confessor {
         // now handle the semantic analysis
         match t0 {
             ActionType::Move => { handle_moves(snap) },
-            ActionType::Look => { Result::Err(zrk_constants::BAD_IMPL) },
-            ActionType::None => { Result::Err(zrk_constants::BAD_IMPL) },
-            _ => { Result::Err(zrk_constants::BAD_IMPL) },
+            ActionType::Look => { handle_look(snap) },
+            ActionType::None => { Result::Err(e::BAD_IMPL) },
+            _ => { Result::Err(e::BAD_IMPL) },
         }
     }
 
+    /// LOOK command
+    /// 
+    /// can be LOOK or LOOK AT THING, EXAMINE THING
     fn handle_look(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
         //! LOOK is a single action but it can be specialised to look at things
-        //! more like examine
-        Result::Err(zrk_constants::BAD_IMPL)
+        let s = cmd.at(cmd.len() - 1);
+        let s0 = s.clone();
+        let t0 = lexer::str_to_OT(s0);
+
+        if t0 != ObjectType::None {
+            Result::Ok(
+                Garble {
+                    vrb: ActionType::Look,
+                    dir: DirectionType::None,
+                    dobj: t0,
+                    iobj: ObjectType::None,
+                }
+            )
+        } else {
+            Result::Ok(
+                Garble {
+                    vrb: ActionType::Look,
+                    dir: DirectionType::None,
+                    dobj: ObjectType::None,
+                    iobj: ObjectType::None,
+                }
+            )
+        }
     }
 
     fn handle_moves(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
@@ -117,7 +143,7 @@ mod confessor {
         }
 
         if t == DirectionType::None {
-            Result::Err(zrk_constants::BAD_MOVE)
+            Result::Err(e::BAD_MOVE)
         } else {
             Result::Ok(
                 Garble {

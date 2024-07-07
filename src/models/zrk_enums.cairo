@@ -108,5 +108,6 @@ enum ObjectType {
     Window,
     Door,
     Hit,
+    Troll,
     None,
 }
