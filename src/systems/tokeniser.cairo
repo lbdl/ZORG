@@ -90,17 +90,28 @@ mod confessor {
 
         // now handle the semantic analysis
         match t0 {
-            ActionType::Move => { handle_moves(snap) },
-            ActionType::Look => { handle_look(snap) },
+            ActionType::Move => { parse_moves(snap) },
+            ActionType::Look => { parse_look(snap) },
             ActionType::None => { Result::Err(e::BAD_IMPL) },
-            _ => { Result::Err(e::BAD_IMPL) },
+            _ => { parse_action(snap, @t0) },
         }
+    }
+
+    /// General VERBS
+    /// 
+    /// non movement and loooking verbs, i.e the general case 
+    fn parse_action(cmd: @Array<ByteArray>, at: @ActionType) -> Result<Garble, felt252> {
+        let mut do: ObjectType = ObjectType::None;
+        let mut io: ObjectType = ObjectType::None;
+        let mut vb: ActionType = ActionType::None;
+
+        Result::Err(e::BAD_IMPL)
     }
 
     /// LOOK command
     /// 
     /// can be LOOK or LOOK AT THING, EXAMINE THING
-    fn handle_look(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
+    fn parse_look(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
         //! LOOK is a single action but it can be specialised to look at things
         let s = cmd.at(cmd.len() - 1);
         let s0 = s.clone();
@@ -127,7 +138,10 @@ mod confessor {
         }
     }
 
-    fn handle_moves(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
+    /// MOVE/GO commands
+    /// 
+    /// can be GO TO THE NORTH, NORTH, GO NORTH, MOVE NORTH etc
+    fn parse_moves(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
         let mut t: DirectionType = DirectionType::None;
         // we know we have a move type 
         if cmd.len() > 1 {

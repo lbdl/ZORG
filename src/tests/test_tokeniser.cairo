@@ -110,4 +110,16 @@ mod tests {
         let actual: Result<Garble, felt252> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
+
+    // ACTION tests
+    #[test]
+    fn test_sem_action_parse_() {
+        //! kick the ball at the window
+        let str_v: ByteArray = "kick";
+        let str_d: ByteArray = "troll";
+        let _in: Array<ByteArray> = array![str_v, str_d];
+        let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::Troll, iobj: ObjectType::None});
+        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
+    }
 }
