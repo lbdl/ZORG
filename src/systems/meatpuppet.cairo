@@ -29,7 +29,7 @@ mod meatpuppet {
         confessor, 
         confessor::Garble};
 
-    use the_oruggin_trail::constants::zrk_constants;
+    use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
 
     #[storage]
     struct Storage {
@@ -53,7 +53,7 @@ mod meatpuppet {
             if cmd.len() >= 16 {
                 // we have bad food make an error and pass along to 
                 // the error outputter system
-                let e: Result<Garble, felt252> = Result::Err(zrk_constants::BAD_LEN);
+                let e: Result<Garble, ec> = Result::Err(ec::BadLen);
             } else {
                 // grab the command stream array and extract a Garble type
                 match confessor::confess(cmd){
@@ -63,12 +63,5 @@ mod meatpuppet {
             }
         }
     }
-
-    /// take the results of lexing and parsing
-    fn handle_garble(msg: Garble) {
-
-    }
-
-    
 
 }

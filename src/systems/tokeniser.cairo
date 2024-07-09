@@ -59,7 +59,7 @@ mod confessor {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
-    use the_oruggin_trail::constants::zrk_constants as e;
+    use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
     use super::tokeniser as lexer;
 
     /// Garble, the main semantic message type
@@ -81,7 +81,7 @@ mod confessor {
     /// and then lexes and runs semantic analysis on the lexed tokens
     /// to extract meaning and create a simple message type that can be
     /// passed around the system logic to make things happen in the world
-    fn confess(sin: Array<ByteArray>) -> Result<Garble, felt252> {
+    fn confess(sin: Array<ByteArray>) -> Result<Garble, ec> {
         // get the first token from the command
         let snap = @sin;
         let i0 = snap.at(0);
@@ -92,15 +92,19 @@ mod confessor {
         match t0 {
             ActionType::Move => { parse_moves(snap) },
             ActionType::Look => { parse_look(snap) },
-            ActionType::None => { Result::Err(e::BAD_IMPL) },
+            ActionType::None => { Result::Err(ec::BadImpl) },
             _ => { parse_action(snap, t0) },
         }
+    }
+
+    fn bullshit() -> Result<Garble, ec> {
+          Result::Err(ec::BadFood)
     }
 
     /// General VERBS
     /// 
     /// non movement and non looking verbs, i.e the general case 
-    fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
+    fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, ec> {
         let mut do: ObjectType = ObjectType::None;
         // let mut io: ObjectType = ObjectType::None;
 
@@ -111,7 +115,7 @@ mod confessor {
         let lng_frm = cmd.len() > 3;
 
         if do == ObjectType::None && cmd.len() < 2 {
-            Result::Err(e::NUL_CMD_OBJ)
+            Result::Err(ec::NulCmdO(at))
         } else if do != ObjectType::None && !lng_frm {
             Result::Ok(
                 Garble { vrb: at, dir: DirectionType::None, dobj: do, iobj: ObjectType::None, }
@@ -121,7 +125,7 @@ mod confessor {
         }
     }
 
-    fn long_form(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, felt252> {
+    fn long_form(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, ec> {
         //! verb, [the], thing, (at | to | with), [the], thing  
         //! this currently checks for direct article by assuming that if tok[2] is
         //! an object then there is a direct article, we should probaly actually check
@@ -185,7 +189,7 @@ mod confessor {
     /// LOOK command
     /// 
     /// can be LOOK or LOOK AT THING, EXAMINE THING
-    fn parse_look(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
+    fn parse_look(cmd: @Array<ByteArray>) -> Result<Garble, ec> {
         //! LOOK is a single action but it can be specialised to look at things
         let s = cmd.at(cmd.len() - 1);
         let s0 = s.clone();
@@ -215,7 +219,7 @@ mod confessor {
     /// MOVE/GO commands
     /// 
     /// can be GO TO THE NORTH, NORTH, GO NORTH, MOVE NORTH etc
-    fn parse_moves(cmd: @Array<ByteArray>) -> Result<Garble, felt252> {
+    fn parse_moves(cmd: @Array<ByteArray>) -> Result<Garble, ec> {
         let mut t: DirectionType = DirectionType::None;
         // we know we have a move type 
         if cmd.len() > 1 {
@@ -231,7 +235,7 @@ mod confessor {
         }
 
         if t == DirectionType::None {
-            Result::Err(e::BAD_MOVE)
+            Result::Err(ec::BadMove(ActionType::Move))
         } else {
             Result::Ok(
                 Garble {

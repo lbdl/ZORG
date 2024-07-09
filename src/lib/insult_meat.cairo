@@ -2,10 +2,10 @@
 // generate some text output which we can pass back to the caller
 
 mod insulter {
-    use the_oruggin_trail::constants::zrk_constants as e;
+    use the_oruggin_trail::constants::zrk_constants;
 
-    fn opine(err: felt252) -> ByteArray {
-        "foppyPoopy"
+    fn opine(err: felt252, cmd: @Array<ByteArray>) -> ByteArray {
+      "foo" 
     }
 
 }
