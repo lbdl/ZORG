@@ -21,7 +21,6 @@ mod meatpuppet {
     use super::{IListener};
     use starknet::{ContractAddress, ClassHash, get_caller_address};
     use the_oruggin_trail::models::{
-        ears::{Ears}, 
         output::{Output}, 
         zrk_enums::{ActionType, ObjectType}
     };
@@ -63,6 +62,11 @@ mod meatpuppet {
                 }
             }
         }
+    }
+
+    /// take the results of lexing and parsing
+    fn handle_garble(msg: Garble) {
+
     }
 
     

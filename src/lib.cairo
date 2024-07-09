@@ -9,13 +9,16 @@ mod constants {
     mod zrk_constants;
 }
 
+mod lib {
+    mod insult_meat;
+}
+
 mod models {
     mod moves;
     mod position;
     mod zrk_enums;
     mod output;
     mod player;
-    mod ears;
 }
 
 mod tests {

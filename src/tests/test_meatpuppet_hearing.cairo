@@ -10,8 +10,7 @@ mod tests {
         systems::{meatpuppet::{meatpuppet, IListenerDispatcher, IListenerDispatcherTrait}},
         models::{
             zrk_enums::{MaterialType, ActionType}, 
-            output::{Output, output}, 
-            ears::{Ears, ears}
+            output::{Output, output} 
         }
     };
 
