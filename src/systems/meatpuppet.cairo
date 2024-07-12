@@ -40,16 +40,30 @@ mod meatpuppet {
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
         fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) {
-            if cmd.len() >= 16 {
+            let mut isErr: ec =  ec::None;
+            let l_cmd = @cmd;
+            let l_cmd_cpy = l_cmd.clone();
+            if l_cmd.len() >= 16 {
                 // we have bad food make an error and pass along to 
                 // the error outputter system
-                speak_of_errors(world, ec::BadLen, @cmd);
+                // first set the err flag
+                isErr = ec::BadLen;
             } else {
                 // grab the command stream array and extract a Garble type
-                match confessor::confess(cmd) {
+                match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {},
                     Result::Err(r) => {}
                 }
+            }
+
+            if isErr != ec::None {
+                // exit routine
+                // let cmd_snap = cmd.clone();
+                // let cmd_cpy = cmd_snap.clone();
+                let speech = mouth::opine_on_errors(isErr, l_cmd);
+                let bogus_id = 23;
+                let speech = "foopy pants";
+                set!(world, Output { playerId: bogus_id, text_o_vision: speech,});
             }
         }
     }
@@ -59,6 +73,6 @@ mod meatpuppet {
         let speech = mouth::opine_on_errors(err, words);
         //! this should really be looked up and tied to somr kind of player store
         let bogus_id = 23;
-        set!(world, Output { playerId: bogus_id, text_o_vision: speech, });
+        // set!(world, Output { playerId: bogus_id, text_o_vision: speech, });
     }
 }

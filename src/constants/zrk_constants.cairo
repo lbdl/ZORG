@@ -9,4 +9,5 @@ enum ErrCode {
     BadLook: ActionType,     // no object given            
     NulCmdO: ActionType,     // no object given to action 
     NulCmdI: ActionType,     // no i-object given to action
+    None,                       // success, handly sometimes
 }
