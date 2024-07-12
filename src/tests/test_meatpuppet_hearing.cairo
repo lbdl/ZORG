@@ -110,6 +110,7 @@ mod tests {
         // assert_eq!(ActionType::Smash, ActionType::Smash, "verbs do not match");
     }
 
+    // do this first
     #[test]
     #[available_gas(30000000)]
     fn test_listener_too_many_tokens() {
@@ -127,8 +128,6 @@ mod tests {
             );
         let sut = IListenerDispatcher { contract_address };
 
-        // we use felt252 as in the inputs so we can just use numerics here
-        // despite the actual system using the short string form
         let failing_input: Array<ByteArray> = array!["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
 
         sut.listen(failing_input);
