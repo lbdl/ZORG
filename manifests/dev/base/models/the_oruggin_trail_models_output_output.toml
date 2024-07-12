@@ -1,15 +1,15 @@
 kind = "DojoModel"
-class_hash = "0x37078b2efdbe769371a22ae579f9f025b942b306d8136b8a659edf208ce9f9d"
-original_class_hash = "0x37078b2efdbe769371a22ae579f9f025b942b306d8136b8a659edf208ce9f9d"
+class_hash = "0x34ddfa43b5d8ac44d6e3557d4a029087b24c841e3cfa9cbb5de699693829919"
+original_class_hash = "0x34ddfa43b5d8ac44d6e3557d4a029087b24c841e3cfa9cbb5de699693829919"
 abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_output_output.json"
 name = "the_oruggin_trail::models::output::output"
 
 [[members]]
 name = "playerId"
-type = "ContractAddress"
+type = "felt252"
 key = true
 
 [[members]]
-name = "text"
-type = "ByteArray"
+name = "text_o_vision"
+type = "Array<ByteArray>"
 key = false

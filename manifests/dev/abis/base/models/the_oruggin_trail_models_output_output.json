@@ -328,11 +328,11 @@
     "members": [
       {
         "name": "playerId",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
-        "name": "text",
-        "type": "core::byte_array::ByteArray"
+        "name": "text_o_vision",
+        "type": "core::array::Array::<core::byte_array::ByteArray>"
       }
     ]
   },

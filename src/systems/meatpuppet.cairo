@@ -1,4 +1,3 @@
-
 /// The main Inerface for the system
 /// 
 /// Exprected to take an array of str from an RPC call
@@ -20,16 +19,11 @@ trait IListener {
 mod meatpuppet {
     use super::{IListener};
     use starknet::{ContractAddress, ClassHash, get_caller_address};
-    use the_oruggin_trail::models::{
-        output::{Output}, 
-        zrk_enums::{ActionType, ObjectType}
-    };
-    use the_oruggin_trail::systems::tokeniser::{
-        tokeniser as lexer, 
-        confessor, 
-        confessor::Garble};
+    use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
 
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
+    use the_oruggin_trail::lib::insult_meat::insulter as mouth;
 
     #[storage]
     struct Storage {
@@ -38,30 +32,35 @@ mod meatpuppet {
     }
 
     fn dojo_init(
-        world: @IWorldDispatcher,
-        tokeniser_address: ContractAddress,
-        tokeniser_class: ClassHash,
-    ) {
-        // TODO: add a model to store the systems we want to call
-        // then set the values from here
+        world: @IWorldDispatcher, tokeniser_address: ContractAddress, tokeniser_class: ClassHash,
+    ) {// TODO: add a model to store the systems we want to call
+    // then set the values from here
     }
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
-        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>){
-            let player = get_caller_address();
+        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) {
             if cmd.len() >= 16 {
                 // we have bad food make an error and pass along to 
                 // the error outputter system
-                let e: Result<Garble, ec> = Result::Err(ec::BadLen);
+                speak_of_errors(world, ec::BadLen, @cmd);
             } else {
                 // grab the command stream array and extract a Garble type
-                match confessor::confess(cmd){
+                match confessor::confess(cmd) {
                     Result::Ok(r) => {},
                     Result::Err(r) => {}
                 }
             }
+            // let cp = array!["foo", "bar"];
+            // set!(world, Output { playerId: 23, text_o_vision: cp, });
         }
     }
 
+    fn speak_of_errors(world: IWorldDispatcher, err: ec, words: @Array<ByteArray>) {
+        let speech = mouth::opine_on_errors(err, words);
+        //! this should really be looked up and tied to somr kind of player store
+        let bogus_id = 23;
+        let l_txt = array!["bar", "foo"];//words.clone();
+        set!(world, Output { playerId: bogus_id, text_o_vision: l_txt, });
+    }
 }

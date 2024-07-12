@@ -4,6 +4,6 @@ use starknet::ContractAddress;
 #[dojo::model]
 struct Output {
     #[key]
-    playerId: ContractAddress,
-    text: ByteArray
+    playerId: felt252,
+    text_o_vision: Array<ByteArray>,
 }

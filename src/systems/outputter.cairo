@@ -19,11 +19,12 @@ mod outputter {
         }
 
         fn updateOutput(world: @IWorldDispatcher, txt: ByteArray) {
-            let player = get_caller_address();
+            // let in = txt.clone();
+            let out = array![txt];  
             set!(
                 world,
                 (
-                    Output{playerId: player, text: txt}
+                    Output{playerId: 23, text_o_vision: out}
                 )
             ) 
         }
