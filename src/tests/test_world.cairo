@@ -29,7 +29,7 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_outputter() {
-        let caller = starknet::contract_address_const::<0x0>();
+        let player_id = 23;
         let mut models = array![output::TEST_CLASS_HASH];
         let world = spawn_test_world(models);
         
@@ -39,10 +39,10 @@ mod tests {
         let output_system = IOutputterDispatcher { contract_address };
         output_system.updateOutput("FOOBAR!");
         
-        let _out = get!(world, caller, Output);
+        let _out = get!(world, player_id, Output);
         let actual_out = _out.text_o_vision;
         let expected_out: ByteArray = "FOOBAR!";
-        assert(actual_out == expected_out, 'Bad meat....');
+        assert_eq!(actual_out, expected_out, "expected {:?}, got {:?}", expected_out, actual_out);
     }
 
     #[test]

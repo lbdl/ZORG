@@ -130,11 +130,13 @@ mod tests {
         // we use felt252 as in the inputs so we can just use numerics here
         // despite the actual system using the short string form
         let failing_input: Array<ByteArray> = array!["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+
         sut.listen(failing_input);
+
         let expected: ByteArray = "Whoa, slow down pilgrim. Enunciate...";
         let output = get!(world, 23, Output);
         let actual = output.text_o_vision;
-
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
         // assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
     }
 }
