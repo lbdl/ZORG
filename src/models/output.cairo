@@ -5,5 +5,5 @@ use starknet::ContractAddress;
 struct Output {
     #[key]
     playerId: felt252,
-    text_o_vision: Array<ByteArray>,
+    text_o_vision: ByteArray,
 }

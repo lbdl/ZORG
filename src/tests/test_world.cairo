@@ -40,7 +40,7 @@ mod tests {
         output_system.updateOutput("FOOBAR!");
         
         let _out = get!(world, caller, Output);
-        let actual_out = _out.text;
+        let actual_out = _out.text_o_vision;
         let expected_out: ByteArray = "FOOBAR!";
         assert(actual_out == expected_out, 'Bad meat....');
     }

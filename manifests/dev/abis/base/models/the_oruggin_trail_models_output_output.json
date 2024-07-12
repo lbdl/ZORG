@@ -332,7 +332,7 @@
       },
       {
         "name": "text_o_vision",
-        "type": "core::array::Array::<core::byte_array::ByteArray>"
+        "type": "core::byte_array::ByteArray"
       }
     ]
   },

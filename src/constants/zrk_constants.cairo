@@ -1,6 +1,6 @@
 use the_oruggin_trail::models::zrk_enums::{ActionType};
 
-#[derive(Copy, Drop)]
+#[derive(Copy, Drop, PartialEq, Introspect, Debug)]
 enum ErrCode {
     BadLen,                      // input len >16 || 0
     BadFood,                     // input has no useable tokens

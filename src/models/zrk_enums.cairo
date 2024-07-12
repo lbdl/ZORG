@@ -86,7 +86,7 @@ enum DirectionType {
 /// Action Type
 /// used later in the VRB/ACTION handling system and others to compose
 /// behaviour handling operations
-#[derive(Serde, Drop, Copy, Destruct, Introspect, Debug, PartialEq, Felt252DictValue)]
+#[derive(Serde, Drop, Copy, Destruct, Introspect, Debug, PartialEq)]
 enum ActionType {
     Move,
     Look,

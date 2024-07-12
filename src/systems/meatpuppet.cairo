@@ -51,16 +51,14 @@ mod meatpuppet {
                     Result::Err(r) => {}
                 }
             }
-            // let cp = array!["foo", "bar"];
-            // set!(world, Output { playerId: 23, text_o_vision: cp, });
         }
     }
 
     fn speak_of_errors(world: IWorldDispatcher, err: ec, words: @Array<ByteArray>) {
+        //! fetch the error string
         let speech = mouth::opine_on_errors(err, words);
         //! this should really be looked up and tied to somr kind of player store
         let bogus_id = 23;
-        let l_txt = array!["bar", "foo"];//words.clone();
-        set!(world, Output { playerId: bogus_id, text_o_vision: l_txt, });
+        set!(world, Output { playerId: bogus_id, text_o_vision: speech, });
     }
 }

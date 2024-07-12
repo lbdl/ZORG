@@ -7,7 +7,7 @@ mod tests {
         models::{
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}
         },
-        constants::{zrk_constants as e}
+        constants::{zrk_constants::ErrCode as E}
     };
 
     // LEX tests
@@ -36,8 +36,8 @@ mod tests {
     fn test_sem_action_bad_parse() {
         let bad_str: ByteArray = "foo";
         let _in: Array<ByteArray> = array![bad_str];
-        let actual: Result<Garble, felt252> = confessor::confess(_in);
-        assert_eq!(actual, Result::Err(e::BAD_IMPL), "Expected err got {:?}", actual) 
+        let actual: Result<Garble, E> = confessor::confess(_in);
+        assert_eq!(actual, Result::Err(E::BadLen), "Expected err got {:?}", actual) 
     }
 
     #[test]
@@ -48,7 +48,7 @@ mod tests {
         let str_d: ByteArray = "north";
         let _in: Array<ByteArray> = array![str_m, str_p, str_pp, str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Move, dir: DirectionType::North, dobj: ObjectType::None, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
     
@@ -57,7 +57,7 @@ mod tests {
         let str_d: ByteArray = "north";
         let _in: Array<ByteArray> = array![str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Move, dir: DirectionType::North, dobj: ObjectType::None, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 
@@ -65,8 +65,8 @@ mod tests {
     fn test_sem_move_parse_badfood() {
         let str_d: ByteArray = "go";
         let _in: Array<ByteArray> = array![str_d];
-        let expected = Result::Err(e::BAD_MOVE);
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let expected = Result::Err(E::BadMove(ActionType::Move));
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 
@@ -76,7 +76,7 @@ mod tests {
         let str_v: ByteArray = "look";
         let _in: Array<ByteArray> = array![str_v];
         let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     } 
     
@@ -86,7 +86,7 @@ mod tests {
         let str_d: ByteArray = "around";
         let _in: Array<ByteArray> = array![str_v, str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     } 
 
@@ -97,7 +97,7 @@ mod tests {
         let str_d: ByteArray = "troll";
         let _in: Array<ByteArray> = array![str_v, str_p, str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::Troll, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 
@@ -107,7 +107,7 @@ mod tests {
         let str_d: ByteArray = "troll";
         let _in: Array<ByteArray> = array![str_v, str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Look, dir: DirectionType::None, dobj: ObjectType::Troll, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 
@@ -119,7 +119,7 @@ mod tests {
         let str_d: ByteArray = "ball";
         let _in: Array<ByteArray> = array![str_v, str_d];
         let expected = Result::Ok(Garble{vrb: ActionType::Kick, dir: DirectionType::None, dobj: ObjectType::Ball, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
     
@@ -141,7 +141,7 @@ mod tests {
                 iobj: ObjectType::Window
             }
         );
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 
@@ -150,8 +150,8 @@ mod tests {
         //! kick the ball at the window
         let str_v: ByteArray = "kick";
         let _in: Array<ByteArray> = array![str_v];
-        let expected = Result::Err(e::NUL_CMD_OBJ);
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let expected = Result::Err(E::NulCmdO(ActionType::Kick));
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 
@@ -164,7 +164,7 @@ mod tests {
         let str_io: ByteArray = "foop";
         let _in: Array<ByteArray> = array![str_v, str_d, str_p, str_io];
         let expected = Result::Ok(Garble{vrb: ActionType::Kick, dir: DirectionType::None, dobj: ObjectType::Ball, iobj: ObjectType::None});
-        let actual: Result<Garble, felt252> = confessor::confess(_in); 
+        let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
 }

@@ -113,24 +113,27 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_listener_too_many_tokens() {
-        // let caller = starknet::contract_address_const::<0x0>();
+        let caller = starknet::contract_address_const::<0x0>();
         
-        // let mut models = array![output::TEST_CLASS_HASH, 
-        //     prayers::TEST_CLASS_HASH, 
-        //     ears::TEST_CLASS_HASH,
-        //     ];
-        // let world = spawn_test_world(models);
+        let mut models = array![output::TEST_CLASS_HASH, 
+            output::TEST_CLASS_HASH 
+            ];
+        let world = spawn_test_world(models);
 
-        // // deploy systems contract
-        // let contract_address = world
-        //     .deploy_contract(
-        //         'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-        //     );
-        // let sut = IListenerDispatcher { contract_address };
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+        let sut = IListenerDispatcher { contract_address };
 
-        // // we use felt252 as in the inputs so we can just use numerics here
-        // // despite the actual system using the short string form
-        // let failing_input: Array<ByteArray> = array!["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        // we use felt252 as in the inputs so we can just use numerics here
+        // despite the actual system using the short string form
+        let failing_input: Array<ByteArray> = array!["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        sut.listen(failing_input);
+        let expected: ByteArray = "Whoa, slow down pilgrim. Enunciate...";
+        let output = get!(world, 23, Output);
+        let actual = output.text_o_vision;
 
         // assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
     }

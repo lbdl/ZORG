@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x34ddfa43b5d8ac44d6e3557d4a029087b24c841e3cfa9cbb5de699693829919"
-original_class_hash = "0x34ddfa43b5d8ac44d6e3557d4a029087b24c841e3cfa9cbb5de699693829919"
+class_hash = "0x3f6355a9868d63f69a9a6a3f04954be845165a553945fc94fe5ac787f3c7b75"
+original_class_hash = "0x3f6355a9868d63f69a9a6a3f04954be845165a553945fc94fe5ac787f3c7b75"
 abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_output_output.json"
 name = "the_oruggin_trail::models::output::output"
 
@@ -11,5 +11,5 @@ key = true
 
 [[members]]
 name = "text_o_vision"
-type = "Array<ByteArray>"
+type = "ByteArray"
 key = false

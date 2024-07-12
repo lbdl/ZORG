@@ -19,12 +19,10 @@ mod outputter {
         }
 
         fn updateOutput(world: @IWorldDispatcher, txt: ByteArray) {
-            // let in = txt.clone();
-            let out = array![txt];  
             set!(
                 world,
                 (
-                    Output{playerId: 23, text_o_vision: out}
+                    Output{playerId: 23, text_o_vision: txt}
                 )
             ) 
         }
