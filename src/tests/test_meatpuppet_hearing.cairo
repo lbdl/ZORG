@@ -8,10 +8,7 @@ mod tests {
     // import test utils
     use the_oruggin_trail::{
         systems::{meatpuppet::{meatpuppet, IListenerDispatcher, IListenerDispatcherTrait}},
-        models::{
-            zrk_enums::{MaterialType, ActionType}, 
-            output::{Output, output} 
-        }
+        models::{zrk_enums::{MaterialType, ActionType}, output::{Output, output}}
     };
 
     // #[test]
@@ -34,7 +31,7 @@ mod tests {
     //     let sut = IListenerDispatcher { contract_address };
     //     assert(true == false, 'fix test');
     // }
-    
+
     #[test]
     #[available_gas(30000000)]
     fn test_semantic_parse_DOBJ() {
@@ -58,7 +55,7 @@ mod tests {
         // assert(tok == ActionType::Move, 'expected move');
         assert(true == false, 'fix test');
     }
-    
+
     #[test]
     #[available_gas(30000000)]
     fn test_semantic_parse_MOVE() {
@@ -81,33 +78,32 @@ mod tests {
         assert(true == false, 'fix test');
     }
 
-    
+
     // TODO: refactor to take command and fail with some
     // kind of decent error ID
     #[test]
     #[available_gas(30000000)]
-    fn test_listener_BADF00D() {
-        // let caller = starknet::contract_address_const::<0x0>();
-        
-        // let mut models = array![output::TEST_CLASS_HASH, 
-        //     prayers::TEST_CLASS_HASH, 
-        //     ears::TEST_CLASS_HASH,
-        //     ];
-        // let world = spawn_test_world(models);
+    fn test_listener_BADF00D() {// let caller = starknet::contract_address_const::<0x0>();
 
-        // // deploy systems contract
-        // let contract_address = world
-        //     .deploy_contract(
-        //         'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-        //     );
-        // let sut = IListenerDispatcher { contract_address };
-        // let input = array!["foo", "bar"];
-        
-        // let out = sut.listen(input);  
-        // // the unwrap should not panic here as the input is < 16
-        // let actual = out.unwrap();
-        // let expected = ActionType::Smash;
-        // assert_eq!(ActionType::Smash, ActionType::Smash, "verbs do not match");
+    // let mut models = array![output::TEST_CLASS_HASH, 
+    //     prayers::TEST_CLASS_HASH, 
+    //     ears::TEST_CLASS_HASH,
+    //     ];
+    // let world = spawn_test_world(models);
+
+    // // deploy systems contract
+    // let contract_address = world
+    //     .deploy_contract(
+    //         'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+    //     );
+    // let sut = IListenerDispatcher { contract_address };
+    // let input = array!["foo", "bar"];
+
+    // let out = sut.listen(input);  
+    // // the unwrap should not panic here as the input is < 16
+    // let actual = out.unwrap();
+    // let expected = ActionType::Smash;
+    // assert_eq!(ActionType::Smash, ActionType::Smash, "verbs do not match");
     }
 
     // do this first
@@ -115,10 +111,8 @@ mod tests {
     #[available_gas(30000000)]
     fn test_listener_too_many_tokens() {
         let caller = starknet::contract_address_const::<0x0>();
-        
-        let mut models = array![output::TEST_CLASS_HASH, 
-            output::TEST_CLASS_HASH 
-            ];
+
+        let mut models = array![output::TEST_CLASS_HASH];
         let world = spawn_test_world(models);
 
         // deploy systems contract
@@ -128,7 +122,9 @@ mod tests {
             );
         let sut = IListenerDispatcher { contract_address };
 
-        let failing_input: Array<ByteArray> = array!["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        let failing_input: Array<ByteArray> = array![
+            "foo", "bar", "fizz", "buzz"
+        ]; //,"4","5","6","7","8","9","10","11","12","13","14","15","16"];
 
         sut.listen(failing_input);
 
@@ -136,6 +132,6 @@ mod tests {
         let output = get!(world, 23, Output);
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
-        // assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
+    // assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
     }
 }

@@ -25,28 +25,30 @@ mod meatpuppet {
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
     use the_oruggin_trail::lib::insult_meat::insulter as mouth;
 
-    #[storage]
-    struct Storage {
-        tokeniser_adr: ContractAddress,
-        tokeniser_cls: ClassHash,
-    }
+    // #[storage]
+    // struct Storage {
+    //     tokeniser_adr: ContractAddress,
+    //     tokeniser_cls: ClassHash,
+    // }
 
-    fn dojo_init(
-        world: @IWorldDispatcher, tokeniser_address: ContractAddress, tokeniser_class: ClassHash,
-    ) {// TODO: add a model to store the systems we want to call
-    // then set the values from here
-    }
+    // fn dojo_init(
+    //     world: @IWorldDispatcher, tokeniser_address: ContractAddress, tokeniser_class: ClassHash,
+    // ) {// TODO: add a model to store the systems we want to call
+    // // then set the values from here
+    // }
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
         fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) {
+            //! we use this as an error flag to kick us into error
+            //! catching routines later as we run the parses over
+            //! the command string
             let mut isErr: ec =  ec::None;
             let l_cmd = @cmd;
             let l_cmd_cpy = l_cmd.clone();
             if l_cmd.len() >= 16 {
                 // we have bad food make an error and pass along to 
                 // the error outputter system
-                // first set the err flag
                 isErr = ec::BadLen;
             } else {
                 // grab the command stream array and extract a Garble type
@@ -58,9 +60,7 @@ mod meatpuppet {
 
             if isErr != ec::None {
                 // exit routine
-                // let cmd_snap = cmd.clone();
-                // let cmd_cpy = cmd_snap.clone();
-                let speech = mouth::opine_on_errors(isErr, l_cmd);
+                // let speech = mouth::opine_on_errors(isErr, l_cmd);
                 let bogus_id = 23;
                 let speech = "foopy pants";
                 set!(world, Output { playerId: bogus_id, text_o_vision: speech,});
@@ -68,11 +68,4 @@ mod meatpuppet {
         }
     }
 
-    fn speak_of_errors(world: IWorldDispatcher, err: ec, words: @Array<ByteArray>) {
-        //! fetch the error string
-        let speech = mouth::opine_on_errors(err, words);
-        //! this should really be looked up and tied to somr kind of player store
-        let bogus_id = 23;
-        // set!(world, Output { playerId: bogus_id, text_o_vision: speech, });
-    }
 }

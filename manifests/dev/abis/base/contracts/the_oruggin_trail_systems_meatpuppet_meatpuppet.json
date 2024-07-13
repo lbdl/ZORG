@@ -55,33 +55,6 @@
   },
   {
     "type": "impl",
-    "name": "IDojoInitImpl",
-    "interface_name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::IDojoInit"
-  },
-  {
-    "type": "interface",
-    "name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::IDojoInit",
-    "items": [
-      {
-        "type": "function",
-        "name": "dojo_init",
-        "inputs": [
-          {
-            "name": "tokeniser_address",
-            "type": "core::starknet::contract_address::ContractAddress"
-          },
-          {
-            "name": "tokeniser_class",
-            "type": "core::starknet::class_hash::ClassHash"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "view"
-      }
-    ]
-  },
-  {
-    "type": "impl",
     "name": "ListenImpl",
     "interface_name": "the_oruggin_trail::systems::meatpuppet::IListener"
   },
@@ -116,6 +89,24 @@
             "type": "core::array::Array::<core::byte_array::ByteArray>"
           }
         ],
+        "outputs": [],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "IDojoInitImpl",
+    "interface_name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::IDojoInit"
+  },
+  {
+    "type": "interface",
+    "name": "the_oruggin_trail::systems::meatpuppet::meatpuppet::IDojoInit",
+    "items": [
+      {
+        "type": "function",
+        "name": "dojo_init",
+        "inputs": [],
         "outputs": [],
         "state_mutability": "view"
       }
