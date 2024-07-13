@@ -9,11 +9,10 @@ mod insulter {
     /// generates an output string for error handling
     ///  doesnt have any randomness as yet but needs it
     fn opine_on_errors(err: ec, cmd: @Array<ByteArray>) -> ByteArray {
-        "foo bar you mofo"
-    //   match err {
-    //     ZErr::BadFood => { "foo" },
-    //     _ => { "bar" },
-    //   } 
+      match err {
+        ec::BadLen => { "Whoa, slow down pilgrim. Enunciate... less noise... more signal" },
+        _ => { "bar" },
+      } 
     }
 
 }

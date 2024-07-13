@@ -83,8 +83,7 @@ mod tests {
     // kind of decent error ID
     #[test]
     #[available_gas(30000000)]
-    fn test_listener_BADF00D() {// let caller = starknet::contract_address_const::<0x0>();
-
+    fn test_listener_BADF00D() { // let caller = starknet::contract_address_const::<0x0>();
     // let mut models = array![output::TEST_CLASS_HASH, 
     //     prayers::TEST_CLASS_HASH, 
     //     ears::TEST_CLASS_HASH,
@@ -123,12 +122,28 @@ mod tests {
         let sut = IListenerDispatcher { contract_address };
 
         let failing_input: Array<ByteArray> = array![
-            "foo", "bar", "fizz", "buzz"
-        ]; //,"4","5","6","7","8","9","10","11","12","13","14","15","16"];
+            "foo",
+            "bar",
+            "fizz",
+            "buzz",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+        ];
 
         sut.listen(failing_input);
 
-        let expected: ByteArray = "Whoa, slow down pilgrim. Enunciate...";
+        let expected: ByteArray = "Whoa, slow down pilgrim. Enunciate... less noise... more signal";
         let output = get!(world, 23, Output);
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);

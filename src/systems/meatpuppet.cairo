@@ -60,9 +60,9 @@ mod meatpuppet {
 
             if isErr != ec::None {
                 // exit routine
-                // let speech = mouth::opine_on_errors(isErr, l_cmd);
+                let speech = mouth::opine_on_errors(isErr, l_cmd);
                 let bogus_id = 23;
-                let speech = "foopy pants";
+                // let speech = "foopy pants";
                 set!(world, Output { playerId: bogus_id, text_o_vision: speech,});
             }
         }
