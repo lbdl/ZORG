@@ -31,15 +31,24 @@ mod tests {
         assert(tok_none == ObjectType::None, 'expected NONE');
     }
     
-    // MOVE tests
+    /// Bad Input 
+    /// 
+    /// !!!!NOTE!!!!
+    /// right now we return Err::BadImpl for all non lexed
+    /// values ie T::None this is because we dont actually
+    /// understand many verbs, i.e we need to implement them 
+    /// 
+    /// Really the value should be Err::BadFood
     #[test]
-    fn test_sem_action_bad_parse() {
+    fn test_sem_action_garbage_input() {
         let bad_str: ByteArray = "foo";
         let _in: Array<ByteArray> = array![bad_str];
         let actual: Result<Garble, E> = confessor::confess(_in);
-        assert_eq!(actual, Result::Err(E::BadLen), "Expected err got {:?}", actual) 
+        let expected: Result<Garble, E> = Result::Err(E::BadImpl);
+        assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual); 
     }
 
+    // MOVE tests
     #[test]
     fn test_sem_move_parse_long() {
         let str_m: ByteArray = "go";

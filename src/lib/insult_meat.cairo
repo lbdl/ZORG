@@ -11,7 +11,8 @@ mod insulter {
     fn opine_on_errors(err: ec, cmd: @Array<ByteArray>) -> ByteArray {
       match err {
         ec::BadLen => { "Whoa, slow down pilgrim. Enunciate... less noise... more signal" },
-        _ => { "bar" },
+        ec::BadFood => { "Nope ..., errm .... just no, it makes no sense at all" },
+        _ => { "impl me" },
       } 
     }
 

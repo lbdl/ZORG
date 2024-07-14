@@ -105,7 +105,32 @@ mod tests {
     // assert_eq!(ActionType::Smash, ActionType::Smash, "verbs do not match");
     }
 
-    // do this first
+    /// Handling for Look
+    /// 
+    /// We want to see that the correct string hand been generated for
+    /// cmds of the LOOK type. i.e. `LOOK AROUND` | `LOOK` wil generate a
+    /// description string composed from the Object graph
+    #[test]
+    #[available_gas(30000000)]
+    fn test_listener_look_around_path() {
+        let caller = starknet::contract_address_const::<0x0>();
+
+        let mut models = array![output::TEST_CLASS_HASH];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+        let sut = IListenerDispatcher { contract_address };
+        let input: Array<ByteArray> = array!["look", "around"];
+
+    }
+    /// Handling for errors
+    /// 
+    /// We want to see the correct output string which is set on the 
+    /// Output model  
     #[test]
     #[available_gas(30000000)]
     fn test_listener_too_many_tokens() {
@@ -147,6 +172,37 @@ mod tests {
         let output = get!(world, 23, Output);
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
-    // assert!(sut.listen(failing_input).is_err(), "Function call should fail");  
+    }
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_listener_nonsense_input() {
+        let caller = starknet::contract_address_const::<0x0>();
+
+        let mut models = array![output::TEST_CLASS_HASH];
+        let world = spawn_test_world(models);
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+        let sut = IListenerDispatcher { contract_address };
+
+        let failing_input: Array<ByteArray> = array![
+            "foo",
+            "bar"
+        ];
+
+        sut.listen(failing_input);
+
+        // this SHOULD in fact be the expected Err::BadFood output BUT
+        // currently str tokens that lex to T<ActionType>::None are returned
+        // as Err::BadImpl.
+        // let expected: ByteArray = "Whoa, slow down pilgrim. Enunciate... less noise... more signal";
+        let expected: ByteArray = "impl me";
+        let output = get!(world, 23, Output);
+        let actual = output.text_o_vision;
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
 }

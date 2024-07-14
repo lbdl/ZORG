@@ -54,7 +54,9 @@ mod meatpuppet {
                 // grab the command stream array and extract a Garble type
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {},
-                    Result::Err(r) => {}
+                    Result::Err(r) => {
+                        isErr = r;
+                    }
                 }
             }
 
