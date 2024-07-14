@@ -23,7 +23,7 @@ mod meatpuppet {
     use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
 
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
-    use the_oruggin_trail::lib::insult_meat::insulter as mouth;
+    use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
 
     // #[storage]
     // struct Storage {
@@ -62,12 +62,14 @@ mod meatpuppet {
 
             if isErr != ec::None {
                 // exit routine
-                let speech = mouth::opine_on_errors(isErr, l_cmd);
+                let speech = badmouth::opine_on_errors(isErr, l_cmd);
                 let bogus_id = 23;
                 // let speech = "foopy pants";
                 set!(world, Output { playerId: bogus_id, text_o_vision: speech,});
             }
         }
     }
+
+    // fn handleGarble() -> 
 
 }
