@@ -22,35 +22,41 @@ mod spawner {
     #[abi(embed_v0)]
     impl SpawnImpl of ISetup<ContractState> {
         fn spawn(world: @IWorldDispatcher) {
-            let desc_l: ByteArray = "foopy poopy doopy pathy wathy";
-            let desc_s: ByteArray = "a mountain pass";
-            set!(
-                world , (
-                    TxtDefStore {
-                        txtDefId: 23,
-                        owner: 23,
-                        txtDefType: zrk::TxtDefType::Place,
-                        value: "FFOO BBAARR"
-                    },
-                )
-            );
+            // let desc_l: ByteArray = "foopy poopy doopy pathy wathy";
+            // let desc_s: ByteArray = "a mountain pass";
+            // set!(
+            //     world , (
+            //         TxtDefStore {
+            //             txtDefId: 23,
+            //             owner: 23,
+            //             txtDefType: zrk::TxtDefType::Place,
+            //             value: "FFOO BBAARR"
+            //         },
+            //     )
+            // );
 
-            // make_pass(world);
+            make_pass(world);
         }
     }
 
-    // fn make_pass(w: IWorldDispatcher) {
-    //     let desc_l: ByteArray = "foopy poopy doopy pathy wathy";
-    //     let desc_s: ByteArray = "a mountain pass";
+    fn make_pass(w: IWorldDispatcher) {
+        let desc_l: ByteArray = "foopy poopy doopy pathy wathy";
+        let desc_s: ByteArray = "a mountain pass";
 
-    //     store_txt(w, 23, 20, zrk::TxtDefType::Place, desc_l);
+        store_txt(w, 23, 20, zrk::TxtDefType::Place, desc_l);
 
-    // }    
+    }    
 
-    // fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, t: zrk::TxtDefType, val: ByteArray) {
-    //     set!(
-    //       world ,
-    //       TxtDefStore{txtDefId: id, owner: ownedBy, txtDefType: t, value: val }, 
-    //     );
-    // }
+    fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, t: zrk::TxtDefType, val: ByteArray) {
+        set!(
+                world , (
+                    TxtDefStore {
+                        txtDefId: id,
+                        owner: ownedBy,
+                        txtDefType: t,
+                        value: val
+                    },
+                )
+            );
+    }
 }
