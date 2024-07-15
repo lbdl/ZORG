@@ -1,8 +1,8 @@
 kind = "DojoModel"
-class_hash = "0x13a00d4cc1fc3fe65f722157e8de082764690c13aa731db046d6ff9c3725be0"
-original_class_hash = "0x13a00d4cc1fc3fe65f722157e8de082764690c13aa731db046d6ff9c3725be0"
-abi = "manifests/dev/abis/base/models/the_oruggin_trail_meat_space_meat_world_object_store.json"
-name = "the_oruggin_trail::meat_space::meat_world::object_store"
+class_hash = "0x45bbc3581ee6ce68c266bee1ab619a60f439ba1cc11633166fb49ba72276699"
+original_class_hash = "0x45bbc3581ee6ce68c266bee1ab619a60f439ba1cc11633166fb49ba72276699"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_meat_space_objectstore_object_store.json"
+name = "the_oruggin_trail::meat_space::objectstore::object_store"
 
 [[members]]
 name = "objectId"

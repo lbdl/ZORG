@@ -319,43 +319,31 @@
   },
   {
     "type": "impl",
-    "name": "dirsImpl",
-    "interface_name": "the_oruggin_trail::meat_space::meat_world::Idirs"
+    "name": "txt_def_storeImpl",
+    "interface_name": "the_oruggin_trail::meat_space::txtdefstore::Itxt_def_store"
   },
   {
     "type": "enum",
-    "name": "the_oruggin_trail::models::zrk_enums::DirectionType",
+    "name": "the_oruggin_trail::models::zrk_enums::TxtDefType",
     "variants": [
       {
-        "name": "North",
+        "name": "DirObj",
         "type": "()"
       },
       {
-        "name": "East",
+        "name": "Dir",
         "type": "()"
       },
       {
-        "name": "South",
+        "name": "Place",
         "type": "()"
       },
       {
-        "name": "West",
+        "name": "Object",
         "type": "()"
       },
       {
-        "name": "Up",
-        "type": "()"
-      },
-      {
-        "name": "Down",
-        "type": "()"
-      },
-      {
-        "name": "Left",
-        "type": "()"
-      },
-      {
-        "name": "Right",
+        "name": "Action",
         "type": "()"
       },
       {
@@ -366,25 +354,29 @@
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::meat_space::meat_world::Dirs",
+    "name": "the_oruggin_trail::meat_space::txtdefstore::TxtDefStore",
     "members": [
       {
-        "name": "key",
+        "name": "txtDefId",
         "type": "core::felt252"
       },
       {
-        "name": "dir",
-        "type": "the_oruggin_trail::models::zrk_enums::DirectionType"
+        "name": "owner",
+        "type": "core::felt252"
       },
       {
-        "name": "tok",
+        "name": "txtDefType",
+        "type": "the_oruggin_trail::models::zrk_enums::TxtDefType"
+      },
+      {
+        "name": "value",
         "type": "core::byte_array::ByteArray"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::meat_space::meat_world::Idirs",
+    "name": "the_oruggin_trail::meat_space::txtdefstore::Itxt_def_store",
     "items": [
       {
         "type": "function",
@@ -392,7 +384,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "the_oruggin_trail::meat_space::meat_world::Dirs"
+            "type": "the_oruggin_trail::meat_space::txtdefstore::TxtDefStore"
           }
         ],
         "outputs": [],
@@ -402,7 +394,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::meat_space::meat_world::dirs::Event",
+    "name": "the_oruggin_trail::meat_space::txtdefstore::txt_def_store::Event",
     "kind": "enum",
     "variants": []
   }

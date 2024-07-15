@@ -319,164 +319,84 @@
   },
   {
     "type": "impl",
-    "name": "object_storeImpl",
-    "interface_name": "the_oruggin_trail::meat_space::meat_world::Iobject_store"
+    "name": "room_storeImpl",
+    "interface_name": "the_oruggin_trail::meat_space::roomstore::Iroom_store"
   },
   {
     "type": "enum",
-    "name": "the_oruggin_trail::models::zrk_enums::ObjectType",
+    "name": "the_oruggin_trail::models::zrk_enums::RoomType",
     "variants": [
-      {
-        "name": "Ball",
-        "type": "()"
-      },
-      {
-        "name": "Window",
-        "type": "()"
-      },
-      {
-        "name": "Door",
-        "type": "()"
-      },
-      {
-        "name": "Hit",
-        "type": "()"
-      },
-      {
-        "name": "Troll",
-        "type": "()"
-      },
       {
         "name": "None",
         "type": "()"
-      }
-    ]
-  },
-  {
-    "type": "enum",
-    "name": "the_oruggin_trail::models::zrk_enums::DirectionType",
-    "variants": [
+      },
       {
-        "name": "North",
+        "name": "WoodCabin",
         "type": "()"
       },
       {
-        "name": "East",
+        "name": "Store",
         "type": "()"
       },
       {
-        "name": "South",
+        "name": "Cavern",
         "type": "()"
       },
       {
-        "name": "West",
+        "name": "StoneCabin",
         "type": "()"
       },
       {
-        "name": "Up",
+        "name": "Fort",
         "type": "()"
       },
       {
-        "name": "Down",
+        "name": "Room",
         "type": "()"
       },
       {
-        "name": "Left",
-        "type": "()"
-      },
-      {
-        "name": "Right",
-        "type": "()"
-      },
-      {
-        "name": "None",
-        "type": "()"
-      }
-    ]
-  },
-  {
-    "type": "enum",
-    "name": "the_oruggin_trail::models::zrk_enums::MaterialType",
-    "variants": [
-      {
-        "name": "Wood",
-        "type": "()"
-      },
-      {
-        "name": "Dirt",
-        "type": "()"
-      },
-      {
-        "name": "Stone",
-        "type": "()"
-      },
-      {
-        "name": "Flesh",
-        "type": "()"
-      },
-      {
-        "name": "Glass",
-        "type": "()"
-      },
-      {
-        "name": "IKEA",
-        "type": "()"
-      },
-      {
-        "name": "Iron",
-        "type": "()"
-      },
-      {
-        "name": "Shit",
-        "type": "()"
-      },
-      {
-        "name": "Mud",
-        "type": "()"
-      },
-      {
-        "name": "None",
+        "name": "Plain",
         "type": "()"
       }
     ]
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::meat_space::meat_world::ObjectStore",
+    "name": "the_oruggin_trail::meat_space::roomstore::RoomStore",
     "members": [
       {
-        "name": "objectId",
+        "name": "roomId",
         "type": "core::felt252"
       },
       {
-        "name": "objType",
-        "type": "the_oruggin_trail::models::zrk_enums::ObjectType"
-      },
-      {
-        "name": "dirType",
-        "type": "the_oruggin_trail::models::zrk_enums::DirectionType"
-      },
-      {
-        "name": "destId",
-        "type": "core::felt252"
-      },
-      {
-        "name": "matType",
-        "type": "the_oruggin_trail::models::zrk_enums::MaterialType"
-      },
-      {
-        "name": "objectActionIds",
-        "type": "core::array::Array::<core::felt252>"
+        "name": "roomType",
+        "type": "the_oruggin_trail::models::zrk_enums::RoomType"
       },
       {
         "name": "txtDefId",
         "type": "core::felt252"
+      },
+      {
+        "name": "shortTxt",
+        "type": "core::byte_array::ByteArray"
+      },
+      {
+        "name": "objectIds",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "dirObjIds",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "players",
+        "type": "core::array::Array::<core::felt252>"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::meat_space::meat_world::Iobject_store",
+    "name": "the_oruggin_trail::meat_space::roomstore::Iroom_store",
     "items": [
       {
         "type": "function",
@@ -484,7 +404,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "the_oruggin_trail::meat_space::meat_world::ObjectStore"
+            "type": "the_oruggin_trail::meat_space::roomstore::RoomStore"
           }
         ],
         "outputs": [],
@@ -494,7 +414,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::meat_space::meat_world::object_store::Event",
+    "name": "the_oruggin_trail::meat_space::roomstore::room_store::Event",
     "kind": "enum",
     "variants": []
   }

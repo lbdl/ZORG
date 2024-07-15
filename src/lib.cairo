@@ -15,7 +15,12 @@ mod lib {
 }
 
 mod meat_space {
-    mod meat_world;
+    mod actionstore;
+    mod roomstore;
+    mod txtdefstore;
+    mod objectstore;
+    mod playerstore;
+    // mod dirstore;
 }
 
 mod models {

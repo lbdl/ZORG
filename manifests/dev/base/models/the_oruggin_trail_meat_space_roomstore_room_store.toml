@@ -1,8 +1,8 @@
 kind = "DojoModel"
-class_hash = "0x2cc2f4aa41504a8753c7c0c0b6d502995e6f8581e9fc7cdee6cdf84368b7f70"
-original_class_hash = "0x2cc2f4aa41504a8753c7c0c0b6d502995e6f8581e9fc7cdee6cdf84368b7f70"
-abi = "manifests/dev/abis/base/models/the_oruggin_trail_meat_space_meat_world_room_store.json"
-name = "the_oruggin_trail::meat_space::meat_world::room_store"
+class_hash = "0x1950cd1544dbfc9b2c141d79b6dcbb8132fa784efcf0725b477ef5c54bbf6c9"
+original_class_hash = "0x1950cd1544dbfc9b2c141d79b6dcbb8132fa784efcf0725b477ef5c54bbf6c9"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_meat_space_roomstore_room_store.json"
+name = "the_oruggin_trail::meat_space::roomstore::room_store"
 
 [[members]]
 name = "roomId"
