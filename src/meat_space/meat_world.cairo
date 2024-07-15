@@ -25,7 +25,7 @@ struct RoomStore {
 
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct ActionStruct {
+struct ActionStore {
     #[key]
     actionId: felt252,
     actionType: zrk::ActionType,
@@ -37,25 +37,20 @@ struct ActionStruct {
     affectedByActionId: felt252
 }
 
+#[derive(Clone, Drop, Serde)]
+#[dojo::model]
+struct DirObjStore {
+    #[key]
+    dirObjId: felt252,
+    objType: zrk::ObjectType,
+    dirType: zrk::DirectionType, 
+    matType: zrk::MaterialType,
+    destId: felt252,
+    txtDefId: felt252,
+    objectActionIds: Array<felt252>
+}
 
-// // attach to rooms/paths to set the exits
-// // give it a DirObjType like DOOR
-// // then give it a directionType like NORTH
-// // then give it an Action like OPEN or LOCKED
-// // or BOTH!
-// DirObjectStore: {
-//     keySchema: {
-//         dirObjId: "uint32",
-//     },
-//     valueSchema: {
-//         objType: "DirObjectType", // Door/Window/CaveMouth etc
-//         dirType: "DirectionType", // North, South, Up etc
-//         matType: "MaterialType",
-//         destId: "uint32",
-//         txtDefId: "bytes32",
-//         objectActionIds: "uint32[32]" // Open/Lock/Break etc
-//     },
-// },
+
 // ObjectStore: {
 //     keySchema: {
 //         objectId: "uint32",

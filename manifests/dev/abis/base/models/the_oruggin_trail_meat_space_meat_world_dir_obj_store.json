@@ -319,23 +319,23 @@
   },
   {
     "type": "impl",
-    "name": "action_structImpl",
-    "interface_name": "the_oruggin_trail::meat_space::meat_world::Iaction_struct"
+    "name": "dir_obj_storeImpl",
+    "interface_name": "the_oruggin_trail::meat_space::meat_world::Idir_obj_store"
   },
   {
     "type": "enum",
-    "name": "the_oruggin_trail::models::zrk_enums::ActionType",
+    "name": "the_oruggin_trail::models::zrk_enums::ObjectType",
     "variants": [
       {
-        "name": "Move",
+        "name": "Ball",
         "type": "()"
       },
       {
-        "name": "Look",
+        "name": "Window",
         "type": "()"
       },
       {
-        "name": "Kick",
+        "name": "Door",
         "type": "()"
       },
       {
@@ -343,23 +343,7 @@
         "type": "()"
       },
       {
-        "name": "Drink",
-        "type": "()"
-      },
-      {
-        "name": "Fight",
-        "type": "()"
-      },
-      {
-        "name": "Sleep",
-        "type": "()"
-      },
-      {
-        "name": "Smash",
-        "type": "()"
-      },
-      {
-        "name": "Pray",
+        "name": "Troll",
         "type": "()"
       },
       {
@@ -370,59 +354,129 @@
   },
   {
     "type": "enum",
-    "name": "core::bool",
+    "name": "the_oruggin_trail::models::zrk_enums::DirectionType",
     "variants": [
       {
-        "name": "False",
+        "name": "North",
         "type": "()"
       },
       {
-        "name": "True",
+        "name": "East",
+        "type": "()"
+      },
+      {
+        "name": "South",
+        "type": "()"
+      },
+      {
+        "name": "West",
+        "type": "()"
+      },
+      {
+        "name": "Up",
+        "type": "()"
+      },
+      {
+        "name": "Down",
+        "type": "()"
+      },
+      {
+        "name": "Left",
+        "type": "()"
+      },
+      {
+        "name": "Right",
+        "type": "()"
+      },
+      {
+        "name": "None",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "the_oruggin_trail::models::zrk_enums::MaterialType",
+    "variants": [
+      {
+        "name": "Wood",
+        "type": "()"
+      },
+      {
+        "name": "Dirt",
+        "type": "()"
+      },
+      {
+        "name": "Stone",
+        "type": "()"
+      },
+      {
+        "name": "Flesh",
+        "type": "()"
+      },
+      {
+        "name": "Glass",
+        "type": "()"
+      },
+      {
+        "name": "IKEA",
+        "type": "()"
+      },
+      {
+        "name": "Iron",
+        "type": "()"
+      },
+      {
+        "name": "Shit",
+        "type": "()"
+      },
+      {
+        "name": "Mud",
+        "type": "()"
+      },
+      {
+        "name": "None",
         "type": "()"
       }
     ]
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::meat_space::meat_world::ActionStruct",
+    "name": "the_oruggin_trail::meat_space::meat_world::DirObjStore",
     "members": [
       {
-        "name": "actionId",
+        "name": "dirObjId",
         "type": "core::felt252"
       },
       {
-        "name": "actionType",
-        "type": "the_oruggin_trail::models::zrk_enums::ActionType"
+        "name": "objType",
+        "type": "the_oruggin_trail::models::zrk_enums::ObjectType"
       },
       {
-        "name": "dBitTxt",
+        "name": "dirType",
+        "type": "the_oruggin_trail::models::zrk_enums::DirectionType"
+      },
+      {
+        "name": "matType",
+        "type": "the_oruggin_trail::models::zrk_enums::MaterialType"
+      },
+      {
+        "name": "destId",
         "type": "core::felt252"
       },
       {
-        "name": "enabled",
-        "type": "core::bool"
-      },
-      {
-        "name": "revertable",
-        "type": "core::bool"
-      },
-      {
-        "name": "dBit",
-        "type": "core::bool"
-      },
-      {
-        "name": "affectsActionId",
+        "name": "txtDefId",
         "type": "core::felt252"
       },
       {
-        "name": "affectedByActionId",
-        "type": "core::felt252"
+        "name": "objectActionIds",
+        "type": "core::array::Array::<core::felt252>"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::meat_space::meat_world::Iaction_struct",
+    "name": "the_oruggin_trail::meat_space::meat_world::Idir_obj_store",
     "items": [
       {
         "type": "function",
@@ -430,7 +484,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "the_oruggin_trail::meat_space::meat_world::ActionStruct"
+            "type": "the_oruggin_trail::meat_space::meat_world::DirObjStore"
           }
         ],
         "outputs": [],
@@ -440,7 +494,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::meat_space::meat_world::action_struct::Event",
+    "name": "the_oruggin_trail::meat_space::meat_world::dir_obj_store::Event",
     "kind": "enum",
     "variants": []
   }

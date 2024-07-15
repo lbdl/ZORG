@@ -1,0 +1,40 @@
+kind = "DojoModel"
+class_hash = "0x1f2ac81c7c013912a540ddf2694983ee22fb8d7881c1dddf6eaa7c8b42c3c3b"
+original_class_hash = "0x1f2ac81c7c013912a540ddf2694983ee22fb8d7881c1dddf6eaa7c8b42c3c3b"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_meat_space_meat_world_dir_obj_store.json"
+name = "the_oruggin_trail::meat_space::meat_world::dir_obj_store"
+
+[[members]]
+name = "dirObjId"
+type = "felt252"
+key = true
+
+[[members]]
+name = "objType"
+type = "zrk::ObjectType"
+key = false
+
+[[members]]
+name = "dirType"
+type = "zrk::DirectionType"
+key = false
+
+[[members]]
+name = "matType"
+type = "zrk::MaterialType"
+key = false
+
+[[members]]
+name = "destId"
+type = "felt252"
+key = false
+
+[[members]]
+name = "txtDefId"
+type = "felt252"
+key = false
+
+[[members]]
+name = "objectActionIds"
+type = "Array<felt252>"
+key = false
