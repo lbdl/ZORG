@@ -25,7 +25,7 @@ mod tests {
         let wood_desc: felt252 = MaterialType::Wood.into();
         assert(wood_desc == 'wood', 'Wrong type');
     }
-    
+
     #[test]
     #[available_gas(30000000)]
     fn test_outputter() {
