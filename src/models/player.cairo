@@ -4,8 +4,8 @@ use starknet::ContractAddress;
 #[dojo::model]
 struct Player {
     #[key]
-    player_adr: ContractAddress,
     player_id: u32,
+    player_adr: ContractAddress,
     location: felt252
 }
 
