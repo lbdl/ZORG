@@ -14,21 +14,13 @@ mod lib {
     mod insult_meat;
 }
 
-mod meat_space {
-    mod actionstore;
-    mod roomstore;
-    mod txtdefstore;
-    mod objectstore;
-    mod playerstore;
-    // mod dirstore;
-}
-
 mod models {
     mod moves;
     mod position;
     mod zrk_enums;
     mod output;
     mod player;
+    mod txtdef;
 }
 
 mod tests {

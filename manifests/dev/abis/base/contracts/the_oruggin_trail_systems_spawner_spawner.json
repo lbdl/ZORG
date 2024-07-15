@@ -55,16 +55,16 @@
   },
   {
     "type": "impl",
-    "name": "SpawnImpl",
-    "interface_name": "the_oruggin_trail::systems::spawner::ISetup"
+    "name": "SpawnerImpl",
+    "interface_name": "the_oruggin_trail::systems::spawner::ISpawner"
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::systems::spawner::ISetup",
+    "name": "the_oruggin_trail::systems::spawner::ISpawner",
     "items": [
       {
         "type": "function",
-        "name": "spawn",
+        "name": "setup",
         "inputs": [],
         "outputs": [],
         "state_mutability": "view"

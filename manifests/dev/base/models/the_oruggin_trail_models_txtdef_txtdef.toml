@@ -1,0 +1,20 @@
+kind = "DojoModel"
+class_hash = "0x32a59769ebeb3afdf9bf8c9379a812c93ddd92d989fa5e7adff250caf329960"
+original_class_hash = "0x32a59769ebeb3afdf9bf8c9379a812c93ddd92d989fa5e7adff250caf329960"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_txtdef_txtdef.json"
+name = "the_oruggin_trail::models::txtdef::txtdef"
+
+[[members]]
+name = "id"
+type = "felt252"
+key = true
+
+[[members]]
+name = "owner"
+type = "felt252"
+key = false
+
+[[members]]
+name = "text"
+type = "ByteArray"
+key = false
