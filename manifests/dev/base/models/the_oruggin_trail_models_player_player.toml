@@ -1,0 +1,20 @@
+kind = "DojoModel"
+class_hash = "0x5350a5baeddb067420428a0cb3f468012e74b407fba0d958518bff62efc0af5"
+original_class_hash = "0x5350a5baeddb067420428a0cb3f468012e74b407fba0d958518bff62efc0af5"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_player_player.json"
+name = "the_oruggin_trail::models::player::player"
+
+[[members]]
+name = "player_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "player_adr"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "location"
+type = "felt252"
+key = false

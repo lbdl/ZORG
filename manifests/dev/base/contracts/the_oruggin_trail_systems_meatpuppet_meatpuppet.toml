@@ -1,0 +1,10 @@
+kind = "DojoContract"
+class_hash = "0xfefd52e479f24d6bcb42598474112555a9a7ae32b618e84f3fbc81f41fd166"
+original_class_hash = "0xfefd52e479f24d6bcb42598474112555a9a7ae32b618e84f3fbc81f41fd166"
+base_class_hash = "0x0"
+abi = "manifests/dev/abis/base/contracts/the_oruggin_trail_systems_meatpuppet_meatpuppet.json"
+reads = []
+writes = []
+computed = []
+init_calldata = []
+name = "the_oruggin_trail::systems::meatpuppet::meatpuppet"
