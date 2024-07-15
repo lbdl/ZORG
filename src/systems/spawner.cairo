@@ -24,7 +24,7 @@ mod spawner {
     }
 
     fn make_pass(w: IWorldDispatcher) {
-        let desc_l: ByteArray = "foopy poopy doopy pathy wathy";
+        let desc_l: ByteArray = "a high mountain pass that winds along...";
         let desc_s: ByteArray = "a mountain pass";
 
         store_txt(w, 23, 20, desc_l);
