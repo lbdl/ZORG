@@ -1,0 +1,45 @@
+kind = "DojoModel"
+class_hash = "0x22fc3f99473355f5ae6dc690045ff86f06cb42ad3e4305e1a224c17deb2dc17"
+original_class_hash = "0x22fc3f99473355f5ae6dc690045ff86f06cb42ad3e4305e1a224c17deb2dc17"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_meat_space_meat_world_action_struct.json"
+name = "the_oruggin_trail::meat_space::meat_world::action_struct"
+
+[[members]]
+name = "actionId"
+type = "felt252"
+key = true
+
+[[members]]
+name = "actionType"
+type = "zrk::ActionType"
+key = false
+
+[[members]]
+name = "dBitTxt"
+type = "felt252"
+key = false
+
+[[members]]
+name = "enabled"
+type = "bool"
+key = false
+
+[[members]]
+name = "revertable"
+type = "bool"
+key = false
+
+[[members]]
+name = "dBit"
+type = "bool"
+key = false
+
+[[members]]
+name = "affectsActionId"
+type = "felt252"
+key = false
+
+[[members]]
+name = "affectedByActionId"
+type = "felt252"
+key = false
