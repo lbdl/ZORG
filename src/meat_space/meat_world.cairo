@@ -39,15 +39,15 @@ struct ActionStore {
 
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct DirObjStore {
+struct ObjectStore {
     #[key]
-    dirObjId: felt252,
+    objectId: felt252,
     objType: zrk::ObjectType,
     dirType: zrk::DirectionType, 
-    matType: zrk::MaterialType,
     destId: felt252,
-    txtDefId: felt252,
-    objectActionIds: Array<felt252>
+    matType: zrk::MaterialType,
+    objectActionIds: Array<felt252>,
+    txtDefId: felt252
 }
 
 

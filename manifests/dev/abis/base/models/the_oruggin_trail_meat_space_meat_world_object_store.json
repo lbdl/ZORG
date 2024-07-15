@@ -319,8 +319,8 @@
   },
   {
     "type": "impl",
-    "name": "dir_obj_storeImpl",
-    "interface_name": "the_oruggin_trail::meat_space::meat_world::Idir_obj_store"
+    "name": "object_storeImpl",
+    "interface_name": "the_oruggin_trail::meat_space::meat_world::Iobject_store"
   },
   {
     "type": "enum",
@@ -442,10 +442,10 @@
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::meat_space::meat_world::DirObjStore",
+    "name": "the_oruggin_trail::meat_space::meat_world::ObjectStore",
     "members": [
       {
-        "name": "dirObjId",
+        "name": "objectId",
         "type": "core::felt252"
       },
       {
@@ -457,26 +457,26 @@
         "type": "the_oruggin_trail::models::zrk_enums::DirectionType"
       },
       {
-        "name": "matType",
-        "type": "the_oruggin_trail::models::zrk_enums::MaterialType"
-      },
-      {
         "name": "destId",
         "type": "core::felt252"
       },
       {
-        "name": "txtDefId",
-        "type": "core::felt252"
+        "name": "matType",
+        "type": "the_oruggin_trail::models::zrk_enums::MaterialType"
       },
       {
         "name": "objectActionIds",
         "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "txtDefId",
+        "type": "core::felt252"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::meat_space::meat_world::Idir_obj_store",
+    "name": "the_oruggin_trail::meat_space::meat_world::Iobject_store",
     "items": [
       {
         "type": "function",
@@ -484,7 +484,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "the_oruggin_trail::meat_space::meat_world::DirObjStore"
+            "type": "the_oruggin_trail::meat_space::meat_world::ObjectStore"
           }
         ],
         "outputs": [],
@@ -494,7 +494,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::meat_space::meat_world::dir_obj_store::Event",
+    "name": "the_oruggin_trail::meat_space::meat_world::object_store::Event",
     "kind": "enum",
     "variants": []
   }
