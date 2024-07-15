@@ -1,6 +1,7 @@
 use the_oruggin_trail::models::{zrk_enums as zrk};
 
-#[derive(Copy, Drop, Serde, PartialEq, Introspect, Debug)]
+/// we probably dont actually need this model
+#[derive(Clone, Drop, Serde, PartialEq, Introspect, Debug)]
 #[dojo::model]
 struct Dirs {
     #[key]
@@ -9,26 +10,20 @@ struct Dirs {
     tok: ByteArray
 }
 
+#[derive(Clone, Drop, Serde)]
+#[dojo::model]
+struct RoomStore {
+    #[key]
+    roomId: felt252,
+    roomType: zrk::RoomType,
+    txtDefId: felt252,
+    shortTxt: ByteArray,
+    objectIds: Array<felt252>,
+    dirObjIds: Array<felt252>,
+    players: Array<felt252>
+}
 
 
-
-
-
-
-
-
-// Vrbs: {
-//     keySchema: {
-//         val: "ActionType",
-//     },
-//     valueSchema: {
-//         dirType: "string",
-//     },
-// },
-// RoomStore: { // add
-//     keySchema: {
-//         roomId: "uint32",
-//     },
 //     valueSchema: {
 //         roomType: "RoomType",
 //         txtDefId: "bytes32",
