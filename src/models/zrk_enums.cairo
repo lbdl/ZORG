@@ -100,6 +100,16 @@ enum ActionType {
     None,
 }
 
+/// Text Definition Types
+#[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
+enum TxtDefType {
+    DirObj,
+    Dir,
+    Place,
+    Object,
+    Action,
+    None,
+}
 
 /// Object Types
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]

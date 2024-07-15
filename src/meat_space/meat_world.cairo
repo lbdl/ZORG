@@ -37,6 +37,8 @@ struct ActionStore {
     affectedByActionId: felt252
 }
 
+/// Objects are both Objects/things and now Direction things
+/// like doors etc
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
 struct ObjectStore {
@@ -50,16 +52,22 @@ struct ObjectStore {
     txtDefId: felt252
 }
 
+#[derive(Clone, Drop, Serde)]
+#[dojo::model]
+struct TxtDefStore {
+    #[key]
+    txtDefId: felt252,
+    owner: felt252, // grab the mat type from the owning object
+    txtDefType: zrk::TxtDefType,
+    value: ByteArray
+}
 
-// ObjectStore: {
-//     keySchema: {
-//         objectId: "uint32",
-//     },
-//     valueSchema: {
-//         objectType: "ObjectType",
-//         materialType: "MaterialType",
-//         txtDefId: "bytes32",
-//         objectActionIds: "uint32[32]",
-//         description: "string"
-//     },
-// },
+
+#[derive(Clone, Drop, Serde)]
+#[dojo::model]
+struct Player {
+    #[key]
+    playerId: felt252,
+    roomId: felt252,
+    objectIds: Array<felt252> 
+}
