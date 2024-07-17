@@ -14,18 +14,34 @@ mod spawner {
         txtdef::{Txtdef}
     };
 
+    use the_oruggin_trail::constants::zrk_constants as zc;
     
 
     #[abi(embed_v0)]
     impl SpawnerImpl of ISpawner<ContractState> {
         fn setup(world: @IWorldDispatcher) {
-            make_pass(world);
+            make_rooms(world, 23);
         }
     }
 
-    fn make_pass(w: IWorldDispatcher) {
+    fn make_rooms(w: IWorldDispatcher, pl: felt252    ) {
+        //pass
+        pass_gen(w, pl);
+        // barn_gen(w, pl);
+    }
+    
+    fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
+        let pass_desc: ByteArray = "a high mountain pass that winds along...";
+    }
+    
+    fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
+        let pass_desc: ByteArray = "a high mountain pass that winds along...";
+        let rmid = zc::roomid::PASS;
+        store_txt(w, 23, rmid, pass_desc);
+    }
+
+    fn make_txt(w: IWorldDispatcher, id :felt252, owner: felt252, txt: ByteArray, ) {
         let desc_l: ByteArray = "a high mountain pass that winds along...";
-        let desc_s: ByteArray = "a mountain pass";
 
         store_txt(w, 23, 20, desc_l);
     }    

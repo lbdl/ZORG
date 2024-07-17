@@ -21,6 +21,7 @@ mod models {
     mod output;
     mod player;
     mod txtdef;
+    mod action;
 }
 
 mod tests {
