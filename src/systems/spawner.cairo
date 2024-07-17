@@ -7,7 +7,8 @@ trait ISpawner {
 #[dojo::contract]
 mod spawner {
 
-    use super::ISpawner;
+    use core::option::OptionTrait;
+use super::ISpawner;
 
     use the_oruggin_trail::models::{
         zrk_enums as zrk,
@@ -15,6 +16,9 @@ mod spawner {
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
+
+    use core::poseidon::PoseidonTrait;
+    use core::hash::{HashStateTrait, HashStateExTrait};
     
 
     #[abi(embed_v0)]
@@ -37,7 +41,7 @@ mod spawner {
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
         let pass_desc: ByteArray = "a high mountain pass that winds along...";
         let rmid = zc::roomid::PASS;
-        store_txt(w, 23, rmid, pass_desc);
+        store_txt(w, rmid, rmid, pass_desc);
     }
 
     fn make_txt(w: IWorldDispatcher, id :felt252, owner: felt252, txt: ByteArray, ) {

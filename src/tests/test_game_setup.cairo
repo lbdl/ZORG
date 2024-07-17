@@ -9,6 +9,7 @@ mod tests {
 
     use the_oruggin_trail::{
         systems::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
+        constants::zrk_constants::roomid as room,
         models::{
             txtdef::{Txtdef, txtdef},
             action::{Action, action}, 
@@ -30,7 +31,7 @@ mod tests {
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
         
-        let model = get!(world, 23, (Txtdef));
+        let model = get!(world, room::PASS, (Txtdef));
         let expected: ByteArray = "a high mountain pass that winds along...";
         let actual = model.text;
         assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
@@ -52,7 +53,7 @@ mod tests {
             );
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
-        let model = get!(world, 23, (Txtdef));
+        let model = get!(world, room::PASS, (Txtdef));
         let expected: ByteArray = "a high mountain pass that winds along...";
         let actual = model.text;
         assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
