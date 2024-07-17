@@ -16,6 +16,7 @@ use super::ISpawner;
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
+    use the_oruggin_trail::constants::zrk_constants::roomid as rm;
 
     use core::poseidon::PoseidonTrait;
     use core::hash::{HashStateTrait, HashStateExTrait};
@@ -39,15 +40,18 @@ use super::ISpawner;
     }
     
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
-        let pass_desc: ByteArray = "a high mountain pass that winds along...";
         let rmid = zc::roomid::PASS;
+        let pass_desc: ByteArray = make_txt(rmid);
         store_txt(w, rmid, rmid, pass_desc);
+        
     }
 
-    fn make_txt(w: IWorldDispatcher, id :felt252, owner: felt252, txt: ByteArray, ) {
-        let desc_l: ByteArray = "a high mountain pass that winds along...";
-
-        store_txt(w, 23, 20, desc_l);
+    fn make_txt(id: felt252) -> ByteArray {
+        if id == rm::PASS {
+            "a high mountain pass that winds along..."
+        } else {
+            "nothing, empty space, you slowly dissolve to nothingness..."
+        }
     }    
 
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
