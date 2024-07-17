@@ -46,6 +46,10 @@ use super::ISpawner;
         
     }
 
+    fn make_direction(id: felt252, dir: zrk::DirectionType, d_type: zrk::ObjectType, mat: zrk::MaterialType, txt: ByteArray,) {
+
+    }
+
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
             "a high mountain pass that winds along..."
