@@ -51,11 +51,12 @@ mod spawner {
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
         store_txt(w, rmid, rmid, pass_desc);
+        let a_id = gen_action_id(w);
     // let a_west = Action{actionId:  };
 
     }
 
-    fn get_action_id(w: IWorldDispatcher) -> felt252 {
+    fn gen_action_id(w: IWorldDispatcher) -> felt252 {
         let sc: Spawncount = get!(w, 666, (Spawncount));
         let mut at = sc.a_c;
         at += 1;
