@@ -33,9 +33,8 @@ mod tests {
 
         let counter = get!(world, 666, (Spawncount));
         assert_eq!(counter.a_c, 1, "got {:?}, expected {:?}", counter.a_c, 1);
-        assert_eq!(counter.d_c, 0, "got {:?}, expected {:?}", 0, 0);
-        assert_eq!(counter.o_c, 0, "got {:?}, expected {:?}", 0, 0);
-
+        assert_eq!(counter.d_c, 1, "got {:?}, expected {:?}", counter.d_c, 1);
+        assert_eq!(counter.o_c, 1, "got {:?}, expected {:?}", counter.o_c, 1);
     }
 
     #[test]

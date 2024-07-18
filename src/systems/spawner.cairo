@@ -51,20 +51,61 @@ mod spawner {
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
         store_txt(w, rmid, rmid, pass_desc);
+
         let a_id = gen_action_id(w);
+        let d_id = gen_door_id(w);
+        let o_id = gen_obj_id(w);
     // let a_west = Action{actionId:  };
 
     }
 
+   /// Counters
+   /// 
+   /// Used to increment an id for a given action which is then used to 
+   /// access that from other systems. Needs to be set at init but this
+   /// should be some kind of automated post deploy type thing anyway 
+   /// 
+   /// We hav 3 functions and it should be a generic over a type like the
+   /// enums we have defined
     fn gen_action_id(w: IWorldDispatcher) -> felt252 {
+        //! this should be genetic over a T like enum but
+        //! am unsure how to implement, probably by a trait 
+        //! that returns a comparable value rather than a variant ?
         let sc: Spawncount = get!(w, 666, (Spawncount));
-        let mut at = sc.a_c;
-        at += 1;
+        let mut ac = sc.a_c;
+        ac += 1;
         set!(w, (
-            Spawncount{id: 666, a_c: at, d_c: sc.d_c, o_c: sc.o_c},
+            Spawncount{id: 666, a_c: ac, d_c: sc.d_c, o_c: sc.o_c},
         ));
-        at
+        ac
     }
+    
+    fn gen_door_id(w: IWorldDispatcher) -> felt252 {
+        //! this should be genetic over a T like enum but
+        //! am unsure how to implement, probably by a trait 
+        //! that returns a comparable value rather than a variant ?
+        let sc: Spawncount = get!(w, 666, (Spawncount));
+        let mut dc = sc.d_c;
+        dc += 1;
+        set!(w, (
+            Spawncount{id: 666, a_c: sc.a_c, d_c: dc, o_c: sc.o_c},
+        ));
+        dc
+    }
+ 
+    fn gen_obj_id(w: IWorldDispatcher) -> felt252 {
+        //! this should be genetic over a T like enum but
+        //! am unsure how to implement, probably by a trait 
+        //! that returns a comparable value rather than a variant ?
+        let sc: Spawncount = get!(w, 666, (Spawncount));
+        let mut oc = sc.o_c;
+        oc += 1;
+        set!(w, (
+            Spawncount{id: 666, a_c: sc.a_c, d_c: sc.d_c, o_c: oc},
+        ));
+        oc
+    }
+
 
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
