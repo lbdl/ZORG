@@ -20,6 +20,7 @@ use super::ISpawner;
     use the_oruggin_trail::constants::zrk_constants as zc;
     use the_oruggin_trail::constants::zrk_constants::roomid as rm;
 
+    #[derive(Default)]
     #[storage]
     struct Storage {
         a_c: felt252, 
@@ -58,6 +59,10 @@ use super::ISpawner;
         } else {
             "nothing, empty space, you slowly dissolve to nothingness..."
         }
+
+    }
+    fn store_action(vrb: zrk::ActionType, desc: ByteArray, enabled: bool, dBit: bool, revert: bool, affects: felt252, afftectedBy: felt252 ) {
+
     }
 
 
