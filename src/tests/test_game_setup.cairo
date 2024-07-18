@@ -13,9 +13,30 @@ mod tests {
         models::{
             txtdef::{Txtdef, txtdef},
             action::{Action, action}, 
+            spawncount::{Spawncount, spawncount},
             zrk_enums::{MaterialType, ActionType}}
     };
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_spawn_counter() {
+        let mut models = array![txtdef::TEST_CLASS_HASH];
+        let world = spawn_test_world(models);
 
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
+        let sut = ISpawnerDispatcher { contract_address };
+        sut.setup();
+
+        let counter = get!(world, 666, (Spawncount));
+        assert_eq!(counter.a_c, 0, "got {:?}, expected {:?}", 0, 0);
+        assert_eq!(counter.d_c, 0, "got {:?}, expected {:?}", 0, 0);
+        assert_eq!(counter.o_c, 0, "got {:?}, expected {:?}", 0, 0);
+
+    }
 
     #[test]
     #[available_gas(30000000)]
@@ -61,7 +82,7 @@ mod tests {
 
 #[test]
     #[available_gas(30000000)]
-    fn test_spawn_room_doors() {
+    fn test_spawn_room_w_doors() {
         let mut models = array![
             txtdef::TEST_CLASS_HASH,
             action::TEST_CLASS_HASH
@@ -75,7 +96,7 @@ mod tests {
             );
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
-        assert_eq!(true, false, "IMPL INCOMPLETE-got {:?}, expected {:?}", actual, expected);
+        assert_eq!(true, false, "IMPL INCOMPLETE-got {:?}, expected {:?}", true, false);
     }
 
 }

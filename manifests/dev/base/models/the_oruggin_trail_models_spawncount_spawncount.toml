@@ -1,0 +1,25 @@
+kind = "DojoModel"
+class_hash = "0xf219bf207179f1f8ad6b89c4338d86cfab9a4955539144febe8c03c411c2a2"
+original_class_hash = "0xf219bf207179f1f8ad6b89c4338d86cfab9a4955539144febe8c03c411c2a2"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_spawncount_spawncount.json"
+name = "the_oruggin_trail::models::spawncount::spawncount"
+
+[[members]]
+name = "id"
+type = "felt252"
+key = true
+
+[[members]]
+name = "a_c"
+type = "felt252"
+key = false
+
+[[members]]
+name = "d_c"
+type = "felt252"
+key = false
+
+[[members]]
+name = "o_c"
+type = "felt252"
+key = false
