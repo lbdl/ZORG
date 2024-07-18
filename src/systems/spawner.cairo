@@ -56,11 +56,13 @@ mod spawner {
     }
 
     fn get_action_id(w: IWorldDispatcher) -> felt252 {
-        //    let mut a_id = self.a_c.read();
         let sc: Spawncount = get!(w, 666, (Spawncount));
-        let mut ct = sc.a_c;
-        ct += 1;
-        ct
+        let mut at = sc.a_c;
+        at += 1;
+        set!(w, (
+            Spawncount{id: 666, a_c: at, d_c: sc.d_c, o_c: sc.o_c},
+        ));
+        at
     }
 
     fn make_txt(id: felt252) -> ByteArray {
