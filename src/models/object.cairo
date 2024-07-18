@@ -4,7 +4,7 @@ use the_oruggin_trail::models::{zrk_enums as zrk};
 /// like doors etc
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct ObjectStore {
+struct Object {
     #[key]
     objectId: felt252,
     objType: zrk::ObjectType,

@@ -12,15 +12,20 @@ use super::ISpawner;
 
     use the_oruggin_trail::models::{
         zrk_enums as zrk,
-        txtdef::{Txtdef}
+        txtdef::{Txtdef},
+        action::{Action},
+        object::{Object}
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
     use the_oruggin_trail::constants::zrk_constants::roomid as rm;
 
-    use core::poseidon::PoseidonTrait;
-    use core::hash::{HashStateTrait, HashStateExTrait};
-    
+    #[storage]
+    struct Storage {
+        a_c: felt252, 
+        d_c: felt252,
+        o_c: felt252,
+    }
 
     #[abi(embed_v0)]
     impl SpawnerImpl of ISpawner<ContractState> {
@@ -43,11 +48,8 @@ use super::ISpawner;
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
         store_txt(w, rmid, rmid, pass_desc);
+        // let open = Action{actionId:  };
         
-    }
-
-    fn make_direction(id: felt252, dir: zrk::DirectionType, d_type: zrk::ObjectType, mat: zrk::MaterialType, txt: ByteArray,) {
-
     }
 
     fn make_txt(id: felt252) -> ByteArray {
@@ -56,7 +58,14 @@ use super::ISpawner;
         } else {
             "nothing, empty space, you slowly dissolve to nothingness..."
         }
-    }    
+    }
+
+
+    fn store_direction(dir: zrk::DirectionType, id: felt252, 
+        d_type: zrk::ObjectType, mat: zrk::MaterialType, 
+        txt: ByteArray, actionIds: Array<felt252>) {
+
+    }
 
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
         set!(

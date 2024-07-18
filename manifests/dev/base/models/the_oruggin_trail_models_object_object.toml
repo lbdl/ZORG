@@ -1,0 +1,40 @@
+kind = "DojoModel"
+class_hash = "0x6f712250e187b399cb9925473b1c2eccc36a8c0135c5acfa9a37de54de3b39b"
+original_class_hash = "0x6f712250e187b399cb9925473b1c2eccc36a8c0135c5acfa9a37de54de3b39b"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_object_object.json"
+name = "the_oruggin_trail::models::object::object"
+
+[[members]]
+name = "objectId"
+type = "felt252"
+key = true
+
+[[members]]
+name = "objType"
+type = "zrk::ObjectType"
+key = false
+
+[[members]]
+name = "dirType"
+type = "zrk::DirectionType"
+key = false
+
+[[members]]
+name = "destId"
+type = "felt252"
+key = false
+
+[[members]]
+name = "matType"
+type = "zrk::MaterialType"
+key = false
+
+[[members]]
+name = "objectActionIds"
+type = "Array<felt252>"
+key = false
+
+[[members]]
+name = "txtDefId"
+type = "felt252"
+key = false

@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x525aec2e036bd3dcb67248b047ca61fa876dc9d30a88dc10b106f1544153963"
-original_class_hash = "0x525aec2e036bd3dcb67248b047ca61fa876dc9d30a88dc10b106f1544153963"
+class_hash = "0x1099130f4384611389b1c2b5ffd4d4b5a459215492f2db9e0999cfa25eb6f00"
+original_class_hash = "0x1099130f4384611389b1c2b5ffd4d4b5a459215492f2db9e0999cfa25eb6f00"
 base_class_hash = "0x0"
 abi = "manifests/dev/abis/base/contracts/the_oruggin_trail_systems_spawner_spawner.json"
 reads = []
