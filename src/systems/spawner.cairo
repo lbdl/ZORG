@@ -6,7 +6,8 @@ trait ISpawner {
 
 #[dojo::contract]
 mod spawner {
-    use core::option::OptionTrait;
+    use core::array::ArrayTrait;
+use core::option::OptionTrait;
     use super::ISpawner;
 
     use the_oruggin_trail::models::{
@@ -33,7 +34,7 @@ mod spawner {
     fn init_counter(w: IWorldDispatcher) {
         set!(
             w,
-            ( {Spawncount{ id: 666, a_c: 0, d_c: 0, o_c: 0 }}, )
+            ( Spawncount{ id: 666, a_c: 0, d_c: 0, o_c: 0, t_c: 0 } )
         )
     }
 
@@ -48,15 +49,98 @@ mod spawner {
     }
 
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
+        // // KPATH -> W
+        // uint32 open_2_west = createAction(ActionType.Open, "the path is passable", true, true, false, 0, 0);
+        // uint32[MAX_OBJ] memory path_actions;
+        // path_actions[0] = open_2_west;
+
+        // uint32[MAX_OBJ] memory dirObjs;
+        // uint32[MAX_OBJ] memory objs;
+        let mut actions: Array<Action> = ArrayTrait::new();        
+        
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
+
+        // set main description text in world store
+        // for the place/area/room
         store_txt(w, rmid, rmid, pass_desc);
 
+        // make an open action for the path west
+        // and store it on the world
         let a_id = gen_action_id(w);
-        let d_id = gen_door_id(w);
-        let o_id = gen_obj_id(w);
-    // let a_west = Action{actionId:  };
+        let a_west = Action{actionId: a_id, actionType: zrk::ActionType::Open, 
+            dBitTxt: "the path winds west, it is open", enabled: true, 
+            revertable: false, dBit: true, 
+            affectsActionId: 0, affectedByActionId: 0};
+        
+        store_actions(w, array![a_west]);
 
+        // now add this action id to a path object
+        let d_id = gen_door_id(w); // owner
+        let td_id_p = gen_door_id(w); // text
+        
+        store_txt(w, td_id_p, d_id, "path");
+
+        let p_west = Object{
+            objectId: d_id, 
+            objType: zrk::ObjectType::Path, 
+            dirType: zrk::DirectionType::West, 
+            destId: zc::roomid::PLAIN, 
+            matType: zrk::MaterialType::Dirt,
+            objectActionIds: array![a_id],
+            txtDefId: td_id_p 
+         };
+
+         store_objects(w, array![p_west]);
+    }
+
+    fn make_txt(id: felt252) -> ByteArray {
+        if id == rm::PASS {
+            "a high mountain pass that winds along..."
+        } else {
+            "nothing, empty space, you slowly dissolve to nothingness..."
+        }
+    }
+
+    fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
+        let mut i = 0;
+        while i < t.len() {
+            let a: Object = t.at(i).clone();
+            set!(w, (a));
+            i += 1 + i;
+        }
+    }
+
+    fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
+        let mut i = 0;
+        while i < t.len() {
+            let a: Action = t.at(i).clone();
+            set!(w, (a));
+            i += 1 + i;
+        }
+    }
+
+    // fn store<T, +Clone<T>, +Drop<T>, +Serde<T> >(w: IWorldDispatcher, t: Array<T>) {
+    //     let mut i = 0;
+    //     while i < t.len() {
+    //         let a = t.at(i).clone();
+    //         set!(w, (a));
+    //         i += 1 + i;
+    //     }
+    // }
+
+
+    // fn store_direction(
+    //     dir: zrk::DirectionType,
+    //     id: felt252,
+    //     d_type: zrk::ObjectType,
+    //     mat: zrk::MaterialType,
+    //     txt: ByteArray,
+    //     actionIds: Array<felt252>
+    // ) {}
+
+    fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
+        set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
     }
 
    /// Counters
@@ -75,7 +159,7 @@ mod spawner {
         let mut ac = sc.a_c;
         ac += 1;
         set!(w, (
-            Spawncount{id: 666, a_c: ac, d_c: sc.d_c, o_c: sc.o_c},
+            Spawncount{id: 666, a_c: ac, d_c: sc.d_c, o_c: sc.o_c, t_c: sc.t_c},
         ));
         ac
     }
@@ -88,7 +172,7 @@ mod spawner {
         let mut dc = sc.d_c;
         dc += 1;
         set!(w, (
-            Spawncount{id: 666, a_c: sc.a_c, d_c: dc, o_c: sc.o_c},
+            Spawncount{id: 666, a_c: sc.a_c, d_c: dc, o_c: sc.o_c, t_c: sc.t_c},
         ));
         dc
     }
@@ -101,41 +185,23 @@ mod spawner {
         let mut oc = sc.o_c;
         oc += 1;
         set!(w, (
-            Spawncount{id: 666, a_c: sc.a_c, d_c: sc.d_c, o_c: oc},
+            Spawncount{id: 666, a_c: sc.a_c, d_c: sc.d_c, o_c: oc, t_c: sc.t_c},
         ));
         oc
     }
-
-
-    fn make_txt(id: felt252) -> ByteArray {
-        if id == rm::PASS {
-            "a high mountain pass that winds along..."
-        } else {
-            "nothing, empty space, you slowly dissolve to nothingness..."
-        }
+    
+    fn gen_txt_id(w: IWorldDispatcher) -> felt252 {
+        //! this should be genetic over a T like enum but
+        //! am unsure how to implement, probably by a trait 
+        //! that returns a comparable value rather than a variant ?
+        let sc: Spawncount = get!(w, 666, (Spawncount));
+        let mut tc = sc.t_c;
+        tc += 1;
+        set!(w, (
+            Spawncount{id: 666, a_c: sc.a_c, d_c: sc.d_c, o_c: sc.o_c, t_c: tc},
+        ));
+        tc
     }
 
-    fn store_action(
-        vrb: zrk::ActionType,
-        desc: ByteArray,
-        enabled: bool,
-        dBit: bool,
-        revert: bool,
-        affects: felt252,
-        afftectedBy: felt252
-    ) {}
 
-
-    fn store_direction(
-        dir: zrk::DirectionType,
-        id: felt252,
-        d_type: zrk::ObjectType,
-        mat: zrk::MaterialType,
-        txt: ByteArray,
-        actionIds: Array<felt252>
-    ) {}
-
-    fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
-        set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
-    }
 }

@@ -97,6 +97,7 @@ enum ActionType {
     Sleep,
     Smash,
     Pray,
+    Open,
     None,
 }
 

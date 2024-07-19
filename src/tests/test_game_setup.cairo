@@ -13,8 +13,9 @@ mod tests {
         models::{
             txtdef::{Txtdef, txtdef},
             action::{Action, action}, 
+            object::{Object, object},
             spawncount::{Spawncount, spawncount},
-            zrk_enums::{MaterialType, ActionType}}
+            zrk_enums::{MaterialType, ActionType, ObjectType}}
     };
     
     #[test]
@@ -84,7 +85,8 @@ mod tests {
     fn test_spawn_room_w_doors() {
         let mut models = array![
             txtdef::TEST_CLASS_HASH,
-            action::TEST_CLASS_HASH
+            action::TEST_CLASS_HASH,
+            object::TEST_CLASS_HASH
             ];
         let world = spawn_test_world(models);
 
@@ -95,7 +97,10 @@ mod tests {
             );
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
-        assert_eq!(true, false, "IMPL INCOMPLETE-got {:?}, expected {:?}", true, false);
+        let sc  = get!(world, 666, (Spawncount));
+        let pass_id = 1;
+        let pass = get!(world, pass_id, (Object));
+        assert_eq!(pass.objType, ObjectType::Path, "got {:?}, expected {:?}", true, false);
     }
 
 }

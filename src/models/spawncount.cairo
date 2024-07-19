@@ -6,4 +6,5 @@
         a_c: felt252,
         d_c: felt252,
         o_c: felt252,
+        t_c: felt252,
     }

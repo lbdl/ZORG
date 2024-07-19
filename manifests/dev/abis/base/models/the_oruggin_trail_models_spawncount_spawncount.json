@@ -341,6 +341,10 @@
       {
         "name": "o_c",
         "type": "core::felt252"
+      },
+      {
+        "name": "t_c",
+        "type": "core::felt252"
       }
     ]
   },

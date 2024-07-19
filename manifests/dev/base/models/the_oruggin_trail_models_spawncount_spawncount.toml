@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0xf219bf207179f1f8ad6b89c4338d86cfab9a4955539144febe8c03c411c2a2"
-original_class_hash = "0xf219bf207179f1f8ad6b89c4338d86cfab9a4955539144febe8c03c411c2a2"
+class_hash = "0x3fdacbfce076e707875b2eea50e38e1f6ed89b2c81ed0940b50445b8de01561"
+original_class_hash = "0x3fdacbfce076e707875b2eea50e38e1f6ed89b2c81ed0940b50445b8de01561"
 abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_spawncount_spawncount.json"
 name = "the_oruggin_trail::models::spawncount::spawncount"
 
@@ -21,5 +21,10 @@ key = false
 
 [[members]]
 name = "o_c"
+type = "felt252"
+key = false
+
+[[members]]
+name = "t_c"
 type = "felt252"
 key = false

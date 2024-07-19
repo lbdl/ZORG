@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x6cc5f57d366e49e01a268ca47cb926d2e6dc582e077c9e08ff567bc3d043cfd"
-original_class_hash = "0x6cc5f57d366e49e01a268ca47cb926d2e6dc582e077c9e08ff567bc3d043cfd"
+class_hash = "0x370c4638798ca5d349655dfcb4b13703437a196ae29b5e4bbb3c665e35dba1f"
+original_class_hash = "0x370c4638798ca5d349655dfcb4b13703437a196ae29b5e4bbb3c665e35dba1f"
 abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_action_action.json"
 name = "the_oruggin_trail::models::action::action"
 
