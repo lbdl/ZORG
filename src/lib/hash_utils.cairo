@@ -4,6 +4,19 @@ mod hashutils {
     use core::poseidon::poseidon_hash_span;
     use core::hash::{HashStateTrait, HashStateExTrait};
 
+    use the_oruggin_trail::models::{
+        room::{Room}, 
+        object::{Object},
+        action::{Action}
+    };
+
+    fn obj_hash(obj: @Object) -> felt252 {
+        666
+    }
+
+    fn action_hash(vrb: @Action) -> felt252 {
+        666
+    }
 
     fn str_hash(txt: @ByteArray) -> felt252 {
 
