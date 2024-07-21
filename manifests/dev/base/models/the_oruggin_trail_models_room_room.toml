@@ -1,0 +1,40 @@
+kind = "DojoModel"
+class_hash = "0x6d358545e726fcf025cd1eb7283a39da8082c94e52a557a8a1a899c080ffbc8"
+original_class_hash = "0x6d358545e726fcf025cd1eb7283a39da8082c94e52a557a8a1a899c080ffbc8"
+abi = "manifests/dev/abis/base/models/the_oruggin_trail_models_room_room.json"
+name = "the_oruggin_trail::models::room::room"
+
+[[members]]
+name = "roomId"
+type = "felt252"
+key = true
+
+[[members]]
+name = "roomType"
+type = "zrk::RoomType"
+key = false
+
+[[members]]
+name = "txtDefId"
+type = "felt252"
+key = false
+
+[[members]]
+name = "shortTxt"
+type = "ByteArray"
+key = false
+
+[[members]]
+name = "objectIds"
+type = "Array<felt252>"
+key = false
+
+[[members]]
+name = "dirObjIds"
+type = "Array<felt252>"
+key = false
+
+[[members]]
+name = "players"
+type = "Array<felt252>"
+key = false

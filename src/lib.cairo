@@ -24,6 +24,7 @@ mod models {
     mod action;
     mod object;
     mod spawncount;
+    mod room;
 }
 
 mod tests {

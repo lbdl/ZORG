@@ -2,7 +2,7 @@ use the_oruggin_trail::models::{zrk_enums as zrk};
 
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct RoomStore {
+struct Room{
     #[key]
     roomId: felt252,
     roomType: zrk::RoomType,
