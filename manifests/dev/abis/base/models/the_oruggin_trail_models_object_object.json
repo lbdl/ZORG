@@ -339,7 +339,11 @@
         "type": "()"
       },
       {
-        "name": "Hit",
+        "name": "Stairs",
+        "type": "()"
+      },
+      {
+        "name": "Place",
         "type": "()"
       },
       {

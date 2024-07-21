@@ -6,8 +6,9 @@ trait ISpawner {
 
 #[dojo::contract]
 mod spawner {
-    use core::array::ArrayTrait;
-use core::option::OptionTrait;
+    use core::byte_array::ByteArrayTrait;
+use core::array::ArrayTrait;
+    use core::option::OptionTrait;
     use super::ISpawner;
 
     use the_oruggin_trail::models::{
@@ -18,6 +19,9 @@ use core::option::OptionTrait;
     use the_oruggin_trail::constants::zrk_constants as zc;
     use the_oruggin_trail::constants::zrk_constants::roomid as rm;
 
+    use core::poseidon::PoseidonTrait;
+    use core::poseidon::poseidon_hash_span;
+    use core::hash::{HashStateTrait, HashStateExTrait};
 
     // fn dojo_init(w: IWorldDispatcher) {
     //     set!(world, (SpawnCount { id: 666, a_c: 0, d_c: 0, o_c: 0 },))
@@ -60,13 +64,15 @@ use core::option::OptionTrait;
         
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
+        let _txt_id = str_hash(@pass_desc);
 
         // set main description text in world store
         // for the place/area/room
-        store_txt(w, rmid, rmid, pass_desc);
+        store_txt(w, _txt_id, rmid, pass_desc);
 
         // make an open action for the path west
         // and store it on the world
+        // probs should be a txt_def
         let a_id = gen_action_id(w);
         let a_west = Action{actionId: a_id, actionType: zrk::ActionType::Open, 
             dBitTxt: "the path winds west, it is open", enabled: true, 
@@ -76,8 +82,11 @@ use core::option::OptionTrait;
         store_actions(w, array![a_west]);
 
         // now add this action id to a path object
-        let d_id = gen_door_id(w); // owner
-        let td_id_p = gen_door_id(w); // text
+        // might be better as another hash from properties
+        let d_id = gen_door_id(w); // owner 
+
+        let path_desc = "path";
+        let td_id_p = str_hash(@path_desc); // text
         
         store_txt(w, td_id_p, d_id, "path");
 
@@ -92,6 +101,19 @@ use core::option::OptionTrait;
          };
 
          store_objects(w, array![p_west]);
+
+         // now store a room with all its shizzle
+
+        //  let r_pass = Object {
+        //     objectId: d_id, 
+        //     objType: zrk::ObjectType::Path, 
+        //     dirType: zrk::DirectionType::West, 
+        //     destId: zc::roomid::PLAIN, 
+        //     matType: zrk::MaterialType::Dirt,
+        //     objectActionIds: array![a_id],
+        //     txtDefId: td_id_p
+        //  }
+
     }
 
     fn make_txt(id: felt252) -> ByteArray {
@@ -100,6 +122,23 @@ use core::option::OptionTrait;
         } else {
             "nothing, empty space, you slowly dissolve to nothingness..."
         }
+    }
+
+    fn str_hash(txt: @ByteArray) -> felt252 {
+
+        let local = txt.clone();
+        let l = local.len();
+        let mut idx = 0;
+        let mut arr_felt: Array<felt252> = ArrayTrait::new();
+        
+        while idx < l {
+            idx += 1;
+            let f: felt252 = local.at(idx).unwrap().into();
+            arr_felt.append(f);
+        };
+
+        let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize(); 
+        hash
     }
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {

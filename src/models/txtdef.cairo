@@ -1,6 +1,6 @@
 use the_oruggin_trail::models::zrk_enums as zrk;
 
-#[derive(Drop, Serde)]
+#[derive(Drop, Serde, Clone)]
 #[dojo::model]
 struct Txtdef {
     #[key]
