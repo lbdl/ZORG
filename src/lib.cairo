@@ -12,6 +12,7 @@ mod constants {
 
 mod lib {
     mod insult_meat;
+    mod hash_utils;
 }
 
 mod models {

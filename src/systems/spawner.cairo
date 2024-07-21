@@ -7,7 +7,7 @@ trait ISpawner {
 #[dojo::contract]
 mod spawner {
     use core::byte_array::ByteArrayTrait;
-use core::array::ArrayTrait;
+    use core::array::ArrayTrait;
     use core::option::OptionTrait;
     use super::ISpawner;
 
@@ -19,9 +19,11 @@ use core::array::ArrayTrait;
     use the_oruggin_trail::constants::zrk_constants as zc;
     use the_oruggin_trail::constants::zrk_constants::roomid as rm;
 
-    use core::poseidon::PoseidonTrait;
-    use core::poseidon::poseidon_hash_span;
-    use core::hash::{HashStateTrait, HashStateExTrait};
+    use the_oruggin_trail::lib::hash_utils::hashutils as util;
+
+    // use core::poseidon::PoseidonTrait;
+    // use core::poseidon::poseidon_hash_span;
+    // use core::hash::{HashStateTrait, HashStateExTrait};
 
     // fn dojo_init(w: IWorldDispatcher) {
     //     set!(world, (SpawnCount { id: 666, a_c: 0, d_c: 0, o_c: 0 },))
@@ -64,7 +66,7 @@ use core::array::ArrayTrait;
         
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
-        let _txt_id = str_hash(@pass_desc);
+        let _txt_id = util::str_hash(@pass_desc);
 
         // set main description text in world store
         // for the place/area/room
@@ -86,7 +88,7 @@ use core::array::ArrayTrait;
         let d_id = gen_door_id(w); // owner 
 
         let path_desc = "path";
-        let td_id_p = str_hash(@path_desc); // text
+        let td_id_p = util::str_hash(@path_desc); // text
         
         store_txt(w, td_id_p, d_id, "path");
 
@@ -124,22 +126,22 @@ use core::array::ArrayTrait;
         }
     }
 
-    fn str_hash(txt: @ByteArray) -> felt252 {
+    // fn str_hash(txt: @ByteArray) -> felt252 {
 
-        let local = txt.clone();
-        let l = local.len();
-        let mut idx = 0;
-        let mut arr_felt: Array<felt252> = ArrayTrait::new();
+    //     let local = txt.clone();
+    //     let l = local.len();
+    //     let mut idx = 0;
+    //     let mut arr_felt: Array<felt252> = ArrayTrait::new();
         
-        while idx < l {
-            idx += 1;
-            let f: felt252 = local.at(idx).unwrap().into();
-            arr_felt.append(f);
-        };
+    //     while idx < l {
+    //         idx += 1;
+    //         let f: felt252 = local.at(idx).unwrap().into();
+    //         arr_felt.append(f);
+    //     };
 
-        let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize(); 
-        hash
-    }
+    //     let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize(); 
+    //     hash
+    // }
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
         let mut i = 0;
