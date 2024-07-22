@@ -21,12 +21,7 @@ use core::poseidon::PoseidonTrait;
     /// is returned and we then store the object with this
     /// i.e. h => h(obj.*; if obj.* != id) 
     fn obj_hash(obj: @Object) -> felt252 {
-        // convert enums to felts
         let local: Object = obj.clone();
-        // let o_t: felt252 = local.objType.into();
-        // let d_t: felt252 = local.dirType.into();
-        let m_t: felt252 = local.matType.into();
-
         let mut hash = PoseidonTrait::new()
                         .update(local.objType.into())
                         .update(local.dirType.into())
@@ -37,22 +32,27 @@ use core::poseidon::PoseidonTrait;
                         .finalize();
         hash
     }
-
+    
+    fn place_hash(plc: @Room) -> felt252 {
+        let local: Room = plc.clone();
+        666
+    }
+    
     fn action_hash(vrb: @Action) -> felt252 {
+        let local: Action = vrb.clone();
         666
     }
 
     fn ba_to_felt(in : @ByteArray) -> Array<felt252> {
         let local = in.clone();
         let l = local.len();
-        println!("in: {:?} len: {:?}", local, l);
+        // println!("in: {:?} len: {:?}", local, l);
         let mut idx = 0;
         let mut arr_felt: Array<felt252> = ArrayTrait::new();
         
         while idx < l {
-            // println!("{:?}, {:?}", idx, local);
             let f: felt252 = local.at(idx).unwrap().into();
-            println!("{:?} {:?}", idx, f);
+            // println!("{:?} {:?}", idx, f);
             arr_felt.append(f);
             idx += 1;
         };
@@ -60,20 +60,10 @@ use core::poseidon::PoseidonTrait;
     }
 
     fn str_hash(txt: @ByteArray) -> felt252 {
-
         let local = txt.clone();
         let l = local.len();
         let mut idx = 0;
         let mut arr_felt: Array<felt252> = ba_to_felt(@local);
-        
-        // while idx < l {
-        //     // println!("{:?}, {:?}, {:?}", idx, local, l);
-        //     let f: felt252 = local.at(idx).unwrap().into();
-        //     // println!("f: {:?}", f);
-        //     arr_felt.append(f);
-        //     idx += 1;
-        // };
-
         let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize(); 
         hash
     }

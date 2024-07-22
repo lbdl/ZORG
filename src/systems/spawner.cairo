@@ -66,8 +66,7 @@ mod spawner {
         
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
-        // let _txt_id = util::str_hash(@pass_desc);
-        let _txt_id = 'foo';
+        let _txt_id = util::str_hash(@pass_desc);
 
         // set main description text in world store
         // for the place/area/room
@@ -90,7 +89,6 @@ mod spawner {
 
         let path_desc: ByteArray = "path";
         let td_id_p = util::str_hash(@path_desc); // text
-        // let td_id_p = 'bar';
         
         store_txt(w, td_id_p, d_id, "path");
 
@@ -108,15 +106,7 @@ mod spawner {
 
          // now store a room with all its shizzle
 
-        //  let r_pass = Object {
-        //     objectId: d_id, 
-        //     objType: zrk::ObjectType::Path, 
-        //     dirType: zrk::DirectionType::West, 
-        //     destId: zc::roomid::PLAIN, 
-        //     matType: zrk::MaterialType::Dirt,
-        //     objectActionIds: array![a_id],
-        //     txtDefId: td_id_p
-        //  }
+        
 
     }
 

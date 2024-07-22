@@ -122,12 +122,15 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         let id_a = *acts.at(0);
         let vrb: Action = get!(world, id_a, (Action));
         assert_eq!(vrb.actionType, ActionType::Open, "got {:?}, expected {:?}", vrb.actionType, ActionType::Open);
+        // text tests
         let expected: ByteArray = "the path winds west, it is open";
         let actual = vrb.dBitTxt.clone();
         assert_eq!(actual, expected, "got {:?}, expected {:?}", vrb.dBitTxt, expected);
+        // flags
         assert_eq!(vrb.enabled, true, "got {:?}, expected {:?}", vrb.enabled, true);
         assert_eq!(vrb.revertable, false, "got {:?}, expected {:?}", vrb.revertable, false);
         assert_eq!(vrb.dBit, true, "got {:?}, expected {:?}", vrb.dBit, true);
+        // relations
         assert_eq!(vrb.affectsActionId, 0, "got {:?}, expected {:?}", vrb.affectsActionId, 0);
         assert_eq!(vrb.affectedByActionId, 0, "got {:?}, expected {:?}", vrb.affectedByActionId, 0);
     }
