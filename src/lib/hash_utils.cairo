@@ -45,14 +45,14 @@ use core::poseidon::PoseidonTrait;
     fn ba_to_felt(in : @ByteArray) -> Array<felt252> {
         let local = in.clone();
         let l = local.len();
-        println!("len: {:?}", l);
+        println!("in: {:?} len: {:?}", local, l);
         let mut idx = 0;
         let mut arr_felt: Array<felt252> = ArrayTrait::new();
         
         while idx < l {
-            println!("{:?}, {:?}", idx, local);
+            // println!("{:?}, {:?}", idx, local);
             let f: felt252 = local.at(idx).unwrap().into();
-            println!("f: {:?}", f);
+            println!("{:?} {:?}", idx, f);
             arr_felt.append(f);
             idx += 1;
         };
