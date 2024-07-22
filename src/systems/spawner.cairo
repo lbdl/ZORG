@@ -83,6 +83,9 @@ mod spawner {
         let path_desc: ByteArray = "path";
         let td_id_p = h_util::str_hash(@path_desc); // text
 
+        //! if you change this then regenerate the p_hash
+        //! for the MockObjectImpl by uncommenting the
+        //! println!() in the obj_hash function
         let mut p_west = Object{
             objectId: st::NONE, 
             objType: zrk::ObjectType::Path, 

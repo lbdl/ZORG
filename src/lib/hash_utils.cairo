@@ -31,6 +31,7 @@ use core::poseidon::PoseidonTrait;
                         .update(local.txtDefId)
                         .update(poseidon_hash_span(local.objectActionIds.span()))
                         .finalize();
+        // println!("{:?}", hash);
         hash
     }
     

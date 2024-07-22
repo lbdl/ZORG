@@ -327,6 +327,10 @@
     "name": "the_oruggin_trail::models::zrk_enums::ActionType",
     "variants": [
       {
+        "name": "None",
+        "type": "()"
+      },
+      {
         "name": "Move",
         "type": "()"
       },
@@ -364,10 +368,6 @@
       },
       {
         "name": "Open",
-        "type": "()"
-      },
-      {
-        "name": "None",
         "type": "()"
       }
     ]

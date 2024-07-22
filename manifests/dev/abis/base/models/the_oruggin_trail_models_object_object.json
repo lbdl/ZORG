@@ -327,6 +327,10 @@
     "name": "the_oruggin_trail::models::zrk_enums::ObjectType",
     "variants": [
       {
+        "name": "None",
+        "type": "()"
+      },
+      {
         "name": "Ball",
         "type": "()"
       },
@@ -353,10 +357,6 @@
       {
         "name": "Path",
         "type": "()"
-      },
-      {
-        "name": "None",
-        "type": "()"
       }
     ]
   },
@@ -364,6 +364,10 @@
     "type": "enum",
     "name": "the_oruggin_trail::models::zrk_enums::DirectionType",
     "variants": [
+      {
+        "name": "None",
+        "type": "()"
+      },
       {
         "name": "North",
         "type": "()"
@@ -395,10 +399,6 @@
       {
         "name": "Right",
         "type": "()"
-      },
-      {
-        "name": "None",
-        "type": "()"
       }
     ]
   },
@@ -406,6 +406,10 @@
     "type": "enum",
     "name": "the_oruggin_trail::models::zrk_enums::MaterialType",
     "variants": [
+      {
+        "name": "None",
+        "type": "()"
+      },
       {
         "name": "Wood",
         "type": "()"
@@ -440,10 +444,6 @@
       },
       {
         "name": "Mud",
-        "type": "()"
-      },
-      {
-        "name": "None",
         "type": "()"
       }
     ]

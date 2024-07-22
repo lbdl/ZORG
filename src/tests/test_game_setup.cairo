@@ -13,7 +13,7 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         models::{
             txtdef::{Txtdef, txtdef},
             action::{Action, action}, 
-            object::{Object, object},
+            object::{Object, object, id_default},
             spawncount::{Spawncount, spawncount},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}},
         lib::hash_utils as pi_hash
@@ -100,7 +100,9 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
         let sc  = get!(world, 666, (Spawncount));
-        let pass_id = make_object_hash();
+        
+        let pass_id: felt252 = id_default();
+        
         let pass: Object = get!(world, pass_id, (Object));
         
         //! assert on the properties
@@ -135,8 +137,5 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         assert_eq!(vrb.affectedByActionId, 0, "got {:?}, expected {:?}", vrb.affectedByActionId, 0);
     }
 
-    fn make_object_hash() -> felt252 {
-        1
-    }
 
 }
