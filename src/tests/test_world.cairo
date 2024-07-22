@@ -10,15 +10,13 @@ mod tests {
         systems::{
             actions::{actions, IActionsDispatcher, IActionsDispatcherTrait},
             outputter::{outputter, IOutputterDispatcher, IOutputterDispatcherTrait},
-            },
+        },
         models::{
-            position::{Position, Vec2, position}, 
-            moves::{Moves, Direction, moves},
-            zrk_enums::{MaterialType, ActionType},
-            output::{Output, output}
+            position::{Position, Vec2, position}, moves::{Moves, Direction, moves},
+            zrk_enums::{MaterialType, ActionType}, output::{Output, output}
         }
     };
-    
+
     #[test]
     #[available_gas(30000000)]
     fn test_types() {
@@ -32,13 +30,15 @@ mod tests {
         let player_id = 23;
         let mut models = array![output::TEST_CLASS_HASH];
         let world = spawn_test_world(models);
-        
+
         // deploy systems contract
         let contract_address = world
-            .deploy_contract('salt', outputter::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+            .deploy_contract(
+                'salt', outputter::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+            );
         let output_system = IOutputterDispatcher { contract_address };
         output_system.updateOutput("FOOBAR!");
-        
+
         let _out = get!(world, player_id, Output);
         let actual_out = _out.text_o_vision;
         let expected_out: ByteArray = "FOOBAR!";
@@ -74,7 +74,7 @@ mod tests {
         // casting right direction
         let right_dir_felt: felt252 = Direction::Right.into();
 
-                // check moves
+        // check moves
         assert(moves.remaining == 99, 'moves is wrong');
 
         // check last direction

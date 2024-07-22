@@ -66,7 +66,8 @@ mod spawner {
         
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
-        let _txt_id = util::str_hash(@pass_desc);
+        // let _txt_id = util::str_hash(@pass_desc);
+        let _txt_id = 'foo';
 
         // set main description text in world store
         // for the place/area/room
@@ -87,8 +88,9 @@ mod spawner {
         // might be better as another hash from properties
         let d_id = gen_door_id(w); // owner 
 
-        let path_desc = "path";
+        let path_desc: ByteArray = "path";
         let td_id_p = util::str_hash(@path_desc); // text
+        // let td_id_p = 'bar';
         
         store_txt(w, td_id_p, d_id, "path");
 

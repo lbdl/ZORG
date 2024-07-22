@@ -15,7 +15,9 @@ use starknet::class_hash::Felt252TryIntoClassHash;
             action::{Action, action}, 
             object::{Object, object},
             spawncount::{Spawncount, spawncount},
-            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}}
+            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}},
+        lib::hash_utils as pi_hash
+
     };
     
     #[test]
