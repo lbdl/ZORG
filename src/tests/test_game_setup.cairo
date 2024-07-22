@@ -13,7 +13,7 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         models::{
             txtdef::{Txtdef, txtdef},
             action::{Action, action}, 
-            object::{Object, object, id_default},
+            object::{Object, object, obj_default_mock as obj_phash},
             spawncount::{Spawncount, spawncount},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}},
         lib::hash_utils as pi_hash
@@ -101,7 +101,7 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         sut.setup();
         let sc  = get!(world, 666, (Spawncount));
         
-        let pass_id: felt252 = id_default();
+        let pass_id: felt252 = obj_phash();
         
         let pass: Object = get!(world, pass_id, (Object));
         

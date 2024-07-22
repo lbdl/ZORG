@@ -21,6 +21,6 @@ struct Object {
 /// Returns the p has of the contents of the 
 /// p_west Object in the Spawner::pass_gen function
 /// just used for tests
-fn id_default() -> felt252 {
+fn obj_default_mock() -> felt252 {
     2156175757326903072881610218701614273267931411071653919124783885539002074192
 }
