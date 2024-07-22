@@ -23,3 +23,7 @@ mod roomid {
    const  PLAIN: felt252 =  4; 
    const  BASEMENT: felt252 =  5; 
 }
+
+mod statusid {
+    const NONE: felt252 = 0;
+}

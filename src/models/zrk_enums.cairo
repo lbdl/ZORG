@@ -65,6 +65,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
 /// description strings and to determine base functionality
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum MaterialType {
+    None,
     Wood,
     Dirt,
     Stone,
@@ -74,7 +75,6 @@ enum MaterialType {
     Iron,
     Shit,
     Mud,
-    None,
 }
 
 /// MaterialType -> short_string or felt252
@@ -102,6 +102,7 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
 /// and ofc the direction of things in the world
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum DirectionType {
+    None,
     North,
     East,
     South,
@@ -110,7 +111,6 @@ enum DirectionType {
     Down,
     Left,
     Right,
-    None,
 }
 
 impl DT_to_Felt252 of Into<DirectionType, felt252> {
@@ -134,6 +134,7 @@ impl DT_to_Felt252 of Into<DirectionType, felt252> {
 /// behaviour handling operations
 #[derive(Serde, Drop, Copy, Destruct, Introspect, Debug, PartialEq)]
 enum ActionType {
+    None,
     Move,
     Look,
     Kick,
@@ -144,7 +145,6 @@ enum ActionType {
     Smash,
     Pray,
     Open,
-    None,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -168,12 +168,12 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
 /// Text Definition Types
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum TxtDefType {
+    None,
     DirObj,
     Dir,
     Place,
     Object,
     Action,
-    None,
 }
 
 impl TDT_to_Felt252 of Into<TxtDefType, felt252> {
@@ -191,6 +191,7 @@ impl TDT_to_Felt252 of Into<TxtDefType, felt252> {
 /// Object Types
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum ObjectType {
+    None,
     Ball,
     Window,
     Door,
@@ -198,12 +199,12 @@ enum ObjectType {
     Place,
     Troll,
     Path,
-    None,
 }
 
 impl OT_to_Felt252 of Into<ObjectType, felt252> {
     fn into(self: ObjectType) -> felt252 {
         match self {
+            ObjectType::None => 'none',
             ObjectType::Ball => 'ball',
             ObjectType::Window => 'window',
             ObjectType::Door => 'door',
@@ -211,7 +212,6 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Place => 'place',
             ObjectType::Troll => 'troll',
             ObjectType::Path => 'path',
-            ObjectType::None => 'none',
         }
     }
 }

@@ -17,9 +17,9 @@ mod spawner {
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
-    use the_oruggin_trail::constants::zrk_constants::roomid as rm;
+    use the_oruggin_trail::constants::zrk_constants::{roomid as rm, statusid as st};
 
-    use the_oruggin_trail::lib::hash_utils::hashutils as util;
+    use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
 
     // use core::poseidon::PoseidonTrait;
     // use core::poseidon::poseidon_hash_span;
@@ -55,18 +55,12 @@ mod spawner {
     }
 
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
-        // // KPATH -> W
-        // uint32 open_2_west = createAction(ActionType.Open, "the path is passable", true, true, false, 0, 0);
-        // uint32[MAX_OBJ] memory path_actions;
-        // path_actions[0] = open_2_west;
-
-        // uint32[MAX_OBJ] memory dirObjs;
-        // uint32[MAX_OBJ] memory objs;
+       
         let mut actions: Array<Action> = ArrayTrait::new();        
         
         let rmid = zc::roomid::PASS;
         let pass_desc: ByteArray = make_txt(rmid);
-        let _txt_id = util::str_hash(@pass_desc);
+        let _txt_id = h_util::str_hash(@pass_desc);
 
         // set main description text in world store
         // for the place/area/room
@@ -75,25 +69,22 @@ mod spawner {
         // make an open action for the path west
         // and store it on the world
         // probs should be a txt_def
-        let a_id = gen_action_id(w);
-        let a_west = Action{actionId: a_id, actionType: zrk::ActionType::Open, 
+        // TODO a_id should be a hash
+        let mut a_west = Action{actionId: st::NONE, actionType: zrk::ActionType::Open, 
             dBitTxt: "the path winds west, it is open", enabled: true, 
             revertable: false, dBit: true, 
             affectsActionId: 0, affectedByActionId: 0};
         
+        let a_id = h_util::action_hash(@a_west);
+        a_west.actionId = a_id;
         store_actions(w, array![a_west]);
 
         // now add this action id to a path object
-        // might be better as another hash from properties
-        let d_id = gen_door_id(w); // owner 
-
         let path_desc: ByteArray = "path";
-        let td_id_p = util::str_hash(@path_desc); // text
-        
-        store_txt(w, td_id_p, d_id, "path");
+        let td_id_p = h_util::str_hash(@path_desc); // text
 
-        let p_west = Object{
-            objectId: d_id, 
+        let mut p_west = Object{
+            objectId: st::NONE, 
             objType: zrk::ObjectType::Path, 
             dirType: zrk::DirectionType::West, 
             destId: zc::roomid::PLAIN, 
@@ -102,7 +93,10 @@ mod spawner {
             txtDefId: td_id_p 
          };
 
-         store_objects(w, array![p_west]);
+        let d_id = h_util::obj_hash(@p_west); // owner 
+        p_west.objectId = d_id;
+        store_txt(w, td_id_p, d_id, "path");
+        store_objects(w, array![p_west]);
 
          // now store a room with all its shizzle
 

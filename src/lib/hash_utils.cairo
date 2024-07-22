@@ -1,6 +1,7 @@
 mod hashutils {
     
-    use core::traits::Into;
+    use core::array::ArrayTrait;
+use core::traits::Into;
 use core::clone::Clone;
 use core::poseidon::PoseidonTrait;
     use core::poseidon::poseidon_hash_span;
@@ -35,7 +36,17 @@ use core::poseidon::PoseidonTrait;
     
     fn place_hash(plc: @Room) -> felt252 {
         let local: Room = plc.clone();
-        666
+        let shrt: Array<felt252> = ba_to_felt(@local.shortTxt);
+        let mut hash = PoseidonTrait::new()
+                        .update(local.roomType.into())
+                        .update(local.txtDefId)
+                        .update(poseidon_hash_span(shrt.span()))
+                        .update(poseidon_hash_span(local.objectIds.span()))
+                        .update(poseidon_hash_span(local.dirObjIds.span()))
+                        .update(poseidon_hash_span(local.players.span()))
+                        .finalize();
+
+        hash
     }
     
     fn action_hash(vrb: @Action) -> felt252 {
