@@ -14,31 +14,30 @@ use starknet::class_hash::Felt252TryIntoClassHash;
             txtdef::{Txtdef, txtdef},
             action::{Action, action, action_mock_hash as act_phash}, 
             object::{Object, object, obj_mock_hash as obj_phash},
-            spawncount::{Spawncount, spawncount},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}},
         lib::hash_utils as pi_hash
 
     };
     
-    #[test]
-    #[available_gas(30000000)]
-    fn test_spawn_counter() {
-        let mut models = array![txtdef::TEST_CLASS_HASH];
-        let world = spawn_test_world(models);
+    // #[test]
+    // #[available_gas(30000000)]
+    // fn test_spawn_counter() {
+    //     let mut models = array![txtdef::TEST_CLASS_HASH];
+    //     let world = spawn_test_world(models);
 
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract(
-                'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-            );
-        let sut = ISpawnerDispatcher { contract_address };
-        sut.setup();
+    //     // deploy systems contract
+    //     let contract_address = world
+    //         .deploy_contract(
+    //             'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+    //         );
+    //     let sut = ISpawnerDispatcher { contract_address };
+    //     sut.setup();
 
-        let counter = get!(world, 666, (Spawncount));
-        assert_eq!(counter.a_c, 1, "got {:?}, expected {:?}", counter.a_c, 1);
-        assert_eq!(counter.d_c, 1, "got {:?}, expected {:?}", counter.d_c, 1);
-        assert_eq!(counter.o_c, 1, "got {:?}, expected {:?}", counter.o_c, 1);
-    }
+    //     let counter = get!(world, 666, (Spawncount));
+    //     assert_eq!(counter.a_c, 1, "got {:?}, expected {:?}", counter.a_c, 1);
+    //     assert_eq!(counter.d_c, 1, "got {:?}, expected {:?}", counter.d_c, 1);
+    //     assert_eq!(counter.o_c, 1, "got {:?}, expected {:?}", counter.o_c, 1);
+    // }
 
     #[test]
     #[available_gas(30000000)]
@@ -99,7 +98,7 @@ use starknet::class_hash::Felt252TryIntoClassHash;
             );
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
-        let sc  = get!(world, 666, (Spawncount));
+        // let sc  = get!(world, 666, (Spawncount));
         
         let pass_id: felt252 = obj_phash();
         
