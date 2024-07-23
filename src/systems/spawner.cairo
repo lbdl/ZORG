@@ -79,7 +79,7 @@ mod spawner {
         let _txt_id = h_util::str_hash(@pass_desc);
         let desc_name: ByteArray = "walking eagle pass";
 
-        let place = Room{
+        let mut place = Room{
             roomId: st::NONE,
             roomType: zrk::RoomType::Mountains,
             txtDefId: _txt_id,
@@ -90,6 +90,7 @@ mod spawner {
         };
 
         let rmid = h_util::place_hash(@place);
+        place.roomId = rmid;
         // set main description text in world store
         // for the place/area/room
         store_txt(w, _txt_id, rmid, pass_desc);

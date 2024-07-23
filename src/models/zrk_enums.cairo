@@ -33,7 +33,7 @@ impl BT_to_Felt252 of Into<BiomeType, felt252> {
 /// used by the description libs to autogen
 /// description strings by composition rather
 /// than being hardcoded
-#[derive(Serde, Copy, Drop, Introspect)]
+#[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
 enum RoomType {
     None,
     WoodCabin,

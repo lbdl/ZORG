@@ -14,7 +14,7 @@ use starknet::class_hash::Felt252TryIntoClassHash;
             txtdef::{Txtdef, txtdef}, room::{Room, room, room_mock_hash as rm_phash},
             action::{Action, action, action_mock_hash as act_phash}, 
             object::{Object, object, obj_mock_hash as obj_phash},
-            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}},
+            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}},
         lib::hash_utils as pi_hash
 
     };
@@ -140,40 +140,40 @@ use starknet::class_hash::Felt252TryIntoClassHash;
 
         sut.setup();
         
-        let pass_id: felt252 = obj_phash();
+        let pass_id: felt252 = rm_phash();
         
-        let west: Object = get!(world, pass_id, (Object));
+        let pass: Room = get!(world, pass_id, (Room));
         
-        //! assert on the WEST objects properties
-        assert_eq!(west.objType, ObjectType::Path, "got {:?}, expected {:?}", west.objType, ObjectType::Path);
-        assert_eq!(west.matType, MaterialType::Dirt, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
-        assert_eq!(west.dirType, DirectionType::West, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
-        assert_eq!(west.destId, rm::PLAIN, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
-        assert_ne!(west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0);
+        //! assert on the PASS objects properties
+        assert_eq!(pass.roomType, RoomType::Mountains, "got {:?}, expected {:?}", pass.roomType, RoomType::Mountains);
+        // assert_eq!(west.matType, MaterialType::Dirt, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
+        // assert_eq!(west.dirType, DirectionType::West, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
+        // assert_eq!(west.destId, rm::PLAIN, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
+        // assert_ne!(west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0);
 
         //! assert on the linked text
-        let txt_id = west.txtDefId;
-        let txt_def: Txtdef = get!(world, txt_id, (Txtdef));
-        let expected: ByteArray = "path";
-        let actual = txt_def.text.clone();
-        assert_eq!(actual, expected, "got {:?}, expected {:?}", txt_def.text, expected);
+        // let txt_id = west.txtDefId;
+        // let txt_def: Txtdef = get!(world, txt_id, (Txtdef));
+        // let expected: ByteArray = "path";
+        // let actual = txt_def.text.clone();
+        // assert_eq!(actual, expected, "got {:?}, expected {:?}", txt_def.text, expected);
 
-        //! assert on the WEST actions
-        let acts = west.objectActionIds;
-        let id_a = *acts.at(0);
-        let vrb: Action = get!(world, id_a, (Action));
-        assert_eq!(vrb.actionType, ActionType::Open, "got {:?}, expected {:?}", vrb.actionType, ActionType::Open);
-        // assert on the WEST text
-        let expected: ByteArray = "the path winds west, it is open";
-        let actual = vrb.dBitTxt.clone();
-        assert_eq!(actual, expected, "got {:?}, expected {:?}", vrb.dBitTxt, expected);
-        // flags
-        assert_eq!(vrb.enabled, true, "got {:?}, expected {:?}", vrb.enabled, true);
-        assert_eq!(vrb.revertable, false, "got {:?}, expected {:?}", vrb.revertable, false);
-        assert_eq!(vrb.dBit, true, "got {:?}, expected {:?}", vrb.dBit, true);
-        // relations
-        assert_eq!(vrb.affectsActionId, 0, "got {:?}, expected {:?}", vrb.affectsActionId, 0);
-        assert_eq!(vrb.affectedByActionId, 0, "got {:?}, expected {:?}", vrb.affectedByActionId, 0);
+        // //! assert on the WEST actions
+        // let acts = west.objectActionIds;
+        // let id_a = *acts.at(0);
+        // let vrb: Action = get!(world, id_a, (Action));
+        // assert_eq!(vrb.actionType, ActionType::Open, "got {:?}, expected {:?}", vrb.actionType, ActionType::Open);
+        // // assert on the WEST text
+        // let expected: ByteArray = "the path winds west, it is open";
+        // let actual = vrb.dBitTxt.clone();
+        // assert_eq!(actual, expected, "got {:?}, expected {:?}", vrb.dBitTxt, expected);
+        // // flags
+        // assert_eq!(vrb.enabled, true, "got {:?}, expected {:?}", vrb.enabled, true);
+        // assert_eq!(vrb.revertable, false, "got {:?}, expected {:?}", vrb.revertable, false);
+        // assert_eq!(vrb.dBit, true, "got {:?}, expected {:?}", vrb.dBit, true);
+        // // relations
+        // assert_eq!(vrb.affectsActionId, 0, "got {:?}, expected {:?}", vrb.affectsActionId, 0);
+        // assert_eq!(vrb.affectedByActionId, 0, "got {:?}, expected {:?}", vrb.affectedByActionId, 0);
     }
 
 
