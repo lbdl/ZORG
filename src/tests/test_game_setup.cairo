@@ -115,6 +115,9 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         assert_eq!(west.destId, rm::PLAIN, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
         assert_ne!(west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0);
         //! assert the action has the expected ID
+        let expected = act_phash();
+        let actual: felt252 = west.objectActionIds.at(0).clone();
+        assert_eq!(actual, expected , "got {:?}, expected {:?}", west.objectActionIds.at(0), act_phash());
     }
 
 #[test]
