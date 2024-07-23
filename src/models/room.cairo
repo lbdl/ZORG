@@ -17,9 +17,9 @@ struct Room{
     players: Array<felt252>
 }
 
-fn room_mock_hash() -> felt252 {
-    //! if the room is setup differently in the setup code then the test hash
-    //! will need to reflect the new hash that will be output in test
-    679126177692160935767718057937299270179710925153250945316841215033062892639
-}
+// fn room_mock_hash() -> felt252 {
+//     //! if the room is setup differently in the setup code then the test hash
+//     //! will need to reflect the new hash that will be output in test
+//     679126177692160935767718057937299270179710925153250945316841215033062892639
+// }
 

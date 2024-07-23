@@ -42,12 +42,7 @@ mod hashutils {
         let local: Room = plc.clone();
         let shrt: Array<felt252> = ba_to_felt(@local.shortTxt);
         let mut hash = PoseidonTrait::new()
-            .update(local.roomType.into())
-            .update(local.txtDefId)
             .update(poseidon_hash_span(shrt.span()))
-            .update(poseidon_hash_span(local.objectIds.span()))
-            .update(poseidon_hash_span(local.dirObjIds.span()))
-            .update(poseidon_hash_span(local.players.span()))
             .finalize();
 
         if flags::DEBUG {
@@ -92,8 +87,6 @@ mod hashutils {
 
     fn str_hash(txt: @ByteArray) -> felt252 {
         let local = txt.clone();
-        let l = local.len();
-        let mut idx = 0;
         let mut arr_felt: Array<felt252> = ba_to_felt(@local);
         let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize();
         hash

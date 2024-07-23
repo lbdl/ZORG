@@ -31,7 +31,7 @@ mod spawner {
 
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         //pass
-        pass_gen(w, pl);
+        let p_id = pass_gen(w, pl);
     }
 
     fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
@@ -56,6 +56,7 @@ mod spawner {
         let path_desc: ByteArray = "path";
         let td_id_p = h_util::str_hash(@path_desc); // text
 
+        let dest_name: ByteArray = "bensons plain";
         //! if you change this then regenerate the p_hash
         //! for the MockObjectImpl by uncommenting the
         //! println!() in the obj_hash function
@@ -63,13 +64,13 @@ mod spawner {
             objectId: st::NONE, 
             objType: zrk::ObjectType::Path, 
             dirType: zrk::DirectionType::West, 
-            destId: zc::roomid::PLAIN, 
+            destId: h_util::str_hash(@dest_name), 
             matType: zrk::MaterialType::Dirt,
             objectActionIds: array![a_id],
             txtDefId: td_id_p 
          };
 
-        let d_id = h_util::obj_hash(@p_west); // owner 
+        let d_id = h_util::obj_hash(@p_west); 
         p_west.objectId = d_id;
         store_txt(w, td_id_p, d_id, "path");
         store_objects(w, array![p_west]);
@@ -77,20 +78,19 @@ mod spawner {
          // now store a room with all its shizzle
         let pass_desc: ByteArray = make_txt(rm::PASS);
         let _txt_id = h_util::str_hash(@pass_desc);
-        let desc_name: ByteArray = "walking eagle pass";
+        let place_name: ByteArray = "walking eagle pass";
+        let rmid = h_util::str_hash(@place_name);
 
         let mut place = Room{
-            roomId: st::NONE,
+            roomId: rmid,
             roomType: zrk::RoomType::Mountains,
             txtDefId: _txt_id,
-            shortTxt: desc_name,
+            shortTxt: place_name,
             objectIds: array![],
             dirObjIds: array![d_id],
             players: array![]
         };
 
-        let rmid = h_util::place_hash(@place);
-        place.roomId = rmid;
         // set main description text in world store
         // for the place/area/room
         store_txt(w, _txt_id, rmid, pass_desc);

@@ -1,7 +1,8 @@
 #[cfg(test)]
 mod tests {
+    use core::clone::Clone;
     use core::array::ArrayTrait;
-use starknet::class_hash::Felt252TryIntoClassHash;
+    use starknet::class_hash::Felt252TryIntoClassHash;
     // import world dispatcher
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
     // import test utils
@@ -11,14 +12,14 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         systems::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
         constants::zrk_constants::roomid as rm,
         models::{
-            txtdef::{Txtdef, txtdef}, room::{Room, room, room_mock_hash as rm_phash},
-            action::{Action, action, action_mock_hash as act_phash}, 
+            txtdef::{Txtdef, txtdef}, room::{Room, room},
+            action::{Action, action, action_mock_hash as act_phash},
             object::{Object, object, obj_mock_hash as obj_phash},
-            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}},
-        lib::hash_utils as pi_hash
-
+            zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
+        },
+        lib::hash_utils::hashutils as p_hash
     };
-    
+
     // #[test]
     // #[available_gas(30000000)]
     // fn test_spawn_counter() {
@@ -47,134 +48,176 @@ use starknet::class_hash::Felt252TryIntoClassHash;
 
         // deploy systems contract
         let contract_address = world
-            .deploy_contract(
-                'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-            );
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
-        
-        // TODO fix this to take a phash from the mock model
-        // let model = get!(world, rm::West, (Txtdef));
-        // let expected: ByteArray = "a high mountain west that winds along...";
-        // let actual = model.text;
-        // assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
+    // TODO fix this to take a phash from the mock model
+    // let model = get!(world, rm::West, (Txtdef));
+    // let expected: ByteArray = "a high mountain west that winds along...";
+    // let actual = model.text;
+    // assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
     }
 
     #[test]
     #[available_gas(30000000)]
     fn test_spawn_room() {
-        let mut models = array![
-            txtdef::TEST_CLASS_HASH,
-            action::TEST_CLASS_HASH
-            ];
+        let mut models = array![txtdef::TEST_CLASS_HASH, action::TEST_CLASS_HASH];
         let world = spawn_test_world(models);
 
         // deploy systems contract
         let contract_address = world
-            .deploy_contract(
-                'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-            );
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
-
-        // TODO fix this to take a phash from the mock model
-        // let model = get!(world, rm::west, (Txtdef));
-        // let expected: ByteArray = "a high mountain west that winds along...";
-        // let actual = model.text;
-        // assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
+    // TODO fix this to take a phash from the mock model
+    // let model = get!(world, rm::west, (Txtdef));
+    // let expected: ByteArray = "a high mountain west that winds along...";
+    // let actual = model.text;
+    // assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
     }
 
-#[test]
+    #[test]
     #[available_gas(30000000)]
     fn test_spawn_room_WEST_properties() {
-        let mut models = array![
-            // txtdef::TEST_CLASS_HASH,
-            // action::TEST_CLASS_HASH,
-            object::TEST_CLASS_HASH
-            // room::TEST_CLASS_HASH
-            ];
+        let mut models = array![// txtdef::TEST_CLASS_HASH,
+        // action::TEST_CLASS_HASH,
+        object::TEST_CLASS_HASH// room::TEST_CLASS_HASH
+        ];
         let world = spawn_test_world(models);
 
         // deploy systems contract
         let contract_address = world
-            .deploy_contract(
-                'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-            );
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
         let sut = ISpawnerDispatcher { contract_address };
 
         sut.setup();
-        
-        let pass_id: felt252 = obj_phash();
-        
+
+        let room_name: ByteArray = "walking eagle pass";
+        let pass_id: felt252 = p_hash::str_hash(@room_name);
+
         let west: Object = get!(world, pass_id, (Object));
-        
+
         //! assert on the WEST objects properties
-        assert_eq!(west.objType, ObjectType::Path, "got {:?}, expected {:?}", west.objType, ObjectType::Path);
-        assert_eq!(west.matType, MaterialType::Dirt, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
-        assert_eq!(west.dirType, DirectionType::West, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
+        assert_eq!(
+            west.objType,
+            ObjectType::Path,
+            "got {:?}, expected {:?}",
+            west.objType,
+            ObjectType::Path
+        );
+        assert_eq!(
+            west.matType,
+            MaterialType::Dirt,
+            "got {:?}, expected {:?}",
+            west.matType,
+            MaterialType::Dirt
+        );
+        assert_eq!(
+            west.dirType,
+            DirectionType::West,
+            "got {:?}, expected {:?}",
+            west.matType,
+            MaterialType::Dirt
+        );
         assert_eq!(west.destId, rm::PLAIN, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
-        assert_ne!(west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0);
+        assert_ne!(
+            west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0
+        );
         //! assert the action has the expected ID
         let expected = act_phash();
         let actual: felt252 = west.objectActionIds.at(0).clone();
-        assert_eq!(actual, expected , "got {:?}, expected {:?}", west.objectActionIds.at(0), act_phash());
+        assert_eq!(
+            actual, expected, "got {:?}, expected {:?}", west.objectActionIds.at(0), act_phash()
+        );
     }
 
-#[test]
+    #[test]
     #[available_gas(30000000)]
-    fn test_spawn_room_object_graph_properties() {
+    fn test_spawn_room_object_properties() {
         let mut models = array![
             txtdef::TEST_CLASS_HASH,
             action::TEST_CLASS_HASH,
             object::TEST_CLASS_HASH,
             room::TEST_CLASS_HASH
-            ];
+        ];
         let world = spawn_test_world(models);
 
         // deploy systems contract
         let contract_address = world
-            .deploy_contract(
-                'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-            );
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
         let sut = ISpawnerDispatcher { contract_address };
 
         sut.setup();
-        
-        let pass_id: felt252 = rm_phash();
-        
+
+        let room_name: ByteArray = "walking eagle pass";
+        let pass_id: felt252 = p_hash::str_hash(@room_name);
+
         let pass: Room = get!(world, pass_id, (Room));
-        
+
         //! assert on the PASS objects properties
-        assert_eq!(pass.roomType, RoomType::Mountains, "got {:?}, expected {:?}", pass.roomType, RoomType::Mountains);
-        // assert_eq!(west.matType, MaterialType::Dirt, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
-        // assert_eq!(west.dirType, DirectionType::West, "got {:?}, expected {:?}", west.matType, MaterialType::Dirt);
-        // assert_eq!(west.destId, rm::PLAIN, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
-        // assert_ne!(west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0);
+        //! the name/short description property
+        assert_eq!(
+            pass.roomType,
+            RoomType::Mountains,
+            "got {:?}, expected {:?}",
+            pass.roomType,
+            RoomType::Mountains
+        );
+        let expected_name: ByteArray = "walking eagle pass";
+        let actual = pass.shortTxt.clone();
+        assert_eq!(actual, expected_name, "got {:?}, expected {:?}", pass.shortTxt, expected_name);
 
-        //! assert on the linked text
-        // let txt_id = west.txtDefId;
-        // let txt_def: Txtdef = get!(world, txt_id, (Txtdef));
-        // let expected: ByteArray = "path";
-        // let actual = txt_def.text.clone();
-        // assert_eq!(actual, expected, "got {:?}, expected {:?}", txt_def.text, expected);
+        //! check the stored text values
+        let txtid = pass.txtDefId;
+        let txt = get!(world, txtid, (Txtdef));
+        let actual_desc = txt.text.clone();
+        let expected_desc: ByteArray = "a high mountain pass that winds along...";
+        assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
+        let actual_owner = txt.owner;
+        let expected_owner = pass_id.clone();
+        assert_eq!(
+            actual_owner, expected_owner, "got {:?}, expected {:?}", txt.owner, expected_owner
+        );
 
-        // //! assert on the WEST actions
-        // let acts = west.objectActionIds;
-        // let id_a = *acts.at(0);
-        // let vrb: Action = get!(world, id_a, (Action));
-        // assert_eq!(vrb.actionType, ActionType::Open, "got {:?}, expected {:?}", vrb.actionType, ActionType::Open);
-        // // assert on the WEST text
-        // let expected: ByteArray = "the path winds west, it is open";
-        // let actual = vrb.dBitTxt.clone();
-        // assert_eq!(actual, expected, "got {:?}, expected {:?}", vrb.dBitTxt, expected);
-        // // flags
-        // assert_eq!(vrb.enabled, true, "got {:?}, expected {:?}", vrb.enabled, true);
-        // assert_eq!(vrb.revertable, false, "got {:?}, expected {:?}", vrb.revertable, false);
-        // assert_eq!(vrb.dBit, true, "got {:?}, expected {:?}", vrb.dBit, true);
-        // // relations
-        // assert_eq!(vrb.affectsActionId, 0, "got {:?}, expected {:?}", vrb.affectsActionId, 0);
-        // assert_eq!(vrb.affectedByActionId, 0, "got {:?}, expected {:?}", vrb.affectedByActionId, 0);
+        //! check the objects and players
+        //! objects should be empty as should players
+        let objects: Array<felt252> = pass.objectIds.clone();
+        assert_eq!(objects.len(), 0, "got {:?}, expected {:?}", objects.len(), 0);
+        let players: Array<felt252> = pass.players.clone();
+        assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
     }
 
+    #[test]
+    #[available_gas(30000000)]
+    fn test_spawn_room_object_exit_properties() {
+        let mut models = array![
+            txtdef::TEST_CLASS_HASH,
+            action::TEST_CLASS_HASH,
+            object::TEST_CLASS_HASH,
+            room::TEST_CLASS_HASH
+        ];
+        let world = spawn_test_world(models);
 
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+        let sut = ISpawnerDispatcher { contract_address };
+
+        sut.setup();
+
+        let room_name: ByteArray = "walking eagle pass";
+        let pass_id: felt252 = p_hash::str_hash(@room_name);
+
+        let pass: Room = get!(world, pass_id, (Room));
+
+        //! exits should have one 
+        let exits: Array<felt252> = pass.dirObjIds.clone();
+        assert_ne!(exits.len(), 0, "got {:?}, expected {:?}", exits.len(), 0);
+        //! exit id's should match
+        let exitid = exits.at(0).clone();
+        let actual_exit: Object = get!(world, exitid, (Object));
+        let actual_id = actual_exit.objectId.clone();
+        let expected_id = exitid.clone();
+        assert_eq!(expected_id, actual_id, "got {:?}, expected {:?}", exitid, actual_id);
+    }
 }
