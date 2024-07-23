@@ -15,13 +15,24 @@ enum ErrCode {
 /// Room Codes
 /// 
 /// used for setup calls right now
+/// This should in fact be used by some codegen which
+/// would create these consts based on the map array and
+/// then later create the room object itself and as part of 
+/// that process create the phash of the rooms properties and
+/// set that back on the struct??
+/// 
+/// Or this is just a set of start positions 
 mod roomid {
-   const  NONE: felt252 = 0 ;                     // success, handly sometimes
-   const  PASS: felt252 =  1;                    // input len >16 || 0
-   const  FORGE: felt252 =  2;                    // input has no useable tokens
-   const  BARN: felt252 =  3;                   // thing not implemented      
-   const  PLAIN: felt252 =  4; 
+   const  NONE: felt252 = 0 ;
+   const  PASS: felt252 =  1;
+   const  FORGE: felt252 =  2;
+   const  BARN: felt252 =  3;
+   const  PLAIN: felt252 =  4;
    const  BASEMENT: felt252 =  5; 
+}
+
+mod flags {
+    const DEBUG: bool = true;
 }
 
 mod statusid {

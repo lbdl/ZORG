@@ -13,7 +13,7 @@ mod spawner {
 
     use the_oruggin_trail::models::{
         zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object},
-        spawncount::{Spawncount}
+        room::{Room}
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
@@ -21,33 +21,17 @@ mod spawner {
 
     use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
 
-    // use core::poseidon::PoseidonTrait;
-    // use core::poseidon::poseidon_hash_span;
-    // use core::hash::{HashStateTrait, HashStateExTrait};
-
-    // fn dojo_init(w: IWorldDispatcher) {
-    //     set!(world, (SpawnCount { id: 666, a_c: 0, d_c: 0, o_c: 0 },))
-    // }
-
+ 
     #[abi(embed_v0)]
     impl SpawnerImpl of ISpawner<ContractState> {
         fn setup(world: @IWorldDispatcher) {
-            init_counter(world);
             make_rooms(world, 23);
         }
-    }
-
-    fn init_counter(w: IWorldDispatcher) {
-        set!(
-            w,
-            ( Spawncount{ id: 666, a_c: 0, d_c: 0, o_c: 0, t_c: 0 } )
-        )
     }
 
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         //pass
         pass_gen(w, pl);
-    // barn_gen(w, pl);
     }
 
     fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
@@ -55,17 +39,6 @@ mod spawner {
     }
 
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
-       
-        let mut actions: Array<Action> = ArrayTrait::new();        
-        
-        let rmid = zc::roomid::PASS;
-        let pass_desc: ByteArray = make_txt(rmid);
-        let _txt_id = h_util::str_hash(@pass_desc);
-
-        // set main description text in world store
-        // for the place/area/room
-        store_txt(w, _txt_id, rmid, pass_desc);
-
         // make an open action for the path west
         // and store it on the world
         // probs should be a txt_def
@@ -102,9 +75,25 @@ mod spawner {
         store_objects(w, array![p_west]);
 
          // now store a room with all its shizzle
+        let pass_desc: ByteArray = make_txt(rm::PASS);
+        let _txt_id = h_util::str_hash(@pass_desc);
+        let desc_name: ByteArray = "walking eagle pass";
 
-        
+        let place = Room{
+            roomId: st::NONE,
+            roomType: zrk::RoomType::Mountains,
+            txtDefId: _txt_id,
+            shortTxt: desc_name,
+            objectIds: array![],
+            dirObjIds: array![d_id],
+            players: array![]
+        };
 
+        let rmid = h_util::place_hash(@place);
+        // set main description text in world store
+        // for the place/area/room
+        store_txt(w, _txt_id, rmid, pass_desc);
+        store_places(w, array![place]);
     }
 
     fn make_txt(id: felt252) -> ByteArray {
@@ -114,23 +103,6 @@ mod spawner {
             "nothing, empty space, you slowly dissolve to nothingness..."
         }
     }
-
-    // fn str_hash(txt: @ByteArray) -> felt252 {
-
-    //     let local = txt.clone();
-    //     let l = local.len();
-    //     let mut idx = 0;
-    //     let mut arr_felt: Array<felt252> = ArrayTrait::new();
-        
-    //     while idx < l {
-    //         idx += 1;
-    //         let f: felt252 = local.at(idx).unwrap().into();
-    //         arr_felt.append(f);
-    //     };
-
-    //     let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize(); 
-    //     hash
-    // }
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
         let mut i = 0;
@@ -150,6 +122,14 @@ mod spawner {
         }
     }
 
+    fn store_places(w: IWorldDispatcher, t: Array<Room>) {
+        let mut i = 0;
+        while i < t.len() {
+            let a: Room = t.at(i).clone();
+            set!(w, (a));
+            i += 1 + i;
+        }
+    }
     // fn store<T, +Clone<T>, +Drop<T>, +Serde<T> >(w: IWorldDispatcher, t: Array<T>) {
     //     let mut i = 0;
     //     while i < t.len() {
@@ -159,79 +139,8 @@ mod spawner {
     //     }
     // }
 
-
-    // fn store_direction(
-    //     dir: zrk::DirectionType,
-    //     id: felt252,
-    //     d_type: zrk::ObjectType,
-    //     mat: zrk::MaterialType,
-    //     txt: ByteArray,
-    //     actionIds: Array<felt252>
-    // ) {}
-
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
         set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
     }
-
-   /// Counters
-   /// 
-   /// Used to increment an id for a given action which is then used to 
-   /// access that from other systems. Needs to be set at init but this
-   /// should be some kind of automated post deploy type thing anyway 
-   /// 
-   /// We hav 3 functions and it should be a generic over a type like the
-   /// enums we have defined
-    fn gen_action_id(w: IWorldDispatcher) -> felt252 {
-        //! this should be genetic over a T like enum but
-        //! am unsure how to implement, probably by a trait 
-        //! that returns a comparable value rather than a variant ?
-        let sc: Spawncount = get!(w, 666, (Spawncount));
-        let mut ac = sc.a_c;
-        ac += 1;
-        set!(w, (
-            Spawncount{id: 666, a_c: ac, d_c: sc.d_c, o_c: sc.o_c, t_c: sc.t_c},
-        ));
-        ac
-    }
-    
-    fn gen_door_id(w: IWorldDispatcher) -> felt252 {
-        //! this should be genetic over a T like enum but
-        //! am unsure how to implement, probably by a trait 
-        //! that returns a comparable value rather than a variant ?
-        let sc: Spawncount = get!(w, 666, (Spawncount));
-        let mut dc = sc.d_c;
-        dc += 1;
-        set!(w, (
-            Spawncount{id: 666, a_c: sc.a_c, d_c: dc, o_c: sc.o_c, t_c: sc.t_c},
-        ));
-        dc
-    }
- 
-    fn gen_obj_id(w: IWorldDispatcher) -> felt252 {
-        //! this should be genetic over a T like enum but
-        //! am unsure how to implement, probably by a trait 
-        //! that returns a comparable value rather than a variant ?
-        let sc: Spawncount = get!(w, 666, (Spawncount));
-        let mut oc = sc.o_c;
-        oc += 1;
-        set!(w, (
-            Spawncount{id: 666, a_c: sc.a_c, d_c: sc.d_c, o_c: oc, t_c: sc.t_c},
-        ));
-        oc
-    }
-    
-    fn gen_txt_id(w: IWorldDispatcher) -> felt252 {
-        //! this should be genetic over a T like enum but
-        //! am unsure how to implement, probably by a trait 
-        //! that returns a comparable value rather than a variant ?
-        let sc: Spawncount = get!(w, 666, (Spawncount));
-        let mut tc = sc.t_c;
-        tc += 1;
-        set!(w, (
-            Spawncount{id: 666, a_c: sc.a_c, d_c: sc.d_c, o_c: sc.o_c, t_c: tc},
-        ));
-        tc
-    }
-
-
+   
 }

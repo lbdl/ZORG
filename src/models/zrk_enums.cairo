@@ -43,6 +43,7 @@ enum RoomType {
     Fort,
     Room,
     Plain,
+    Mountains,
 }
 
 impl RT_to_Felt252 of Into<RoomType, felt252> {
@@ -55,6 +56,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::Fort => 'fort',
             RoomType::Plain => 'plain',
             RoomType::Room => 'room',
+            RoomType::Mountains => 'mountains',
             RoomType::None => 'none',
         }
     }

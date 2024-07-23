@@ -13,3 +13,7 @@ struct Action {
     affectsActionId: felt252,
     affectedByActionId: felt252
 }
+
+fn action_mock_hash() -> felt252 {
+    666
+}

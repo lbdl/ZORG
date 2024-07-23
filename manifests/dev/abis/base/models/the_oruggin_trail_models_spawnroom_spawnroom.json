@@ -319,38 +319,26 @@
   },
   {
     "type": "impl",
-    "name": "spawncountImpl",
-    "interface_name": "the_oruggin_trail::models::spawncount::Ispawncount"
+    "name": "spawnroomImpl",
+    "interface_name": "the_oruggin_trail::models::spawnroom::Ispawnroom"
   },
   {
     "type": "struct",
-    "name": "the_oruggin_trail::models::spawncount::Spawncount",
+    "name": "the_oruggin_trail::models::spawnroom::Spawnroom",
     "members": [
       {
         "name": "id",
-        "type": "core::felt252"
+        "type": "core::integer::u32"
       },
       {
-        "name": "a_c",
-        "type": "core::felt252"
-      },
-      {
-        "name": "d_c",
-        "type": "core::felt252"
-      },
-      {
-        "name": "o_c",
-        "type": "core::felt252"
-      },
-      {
-        "name": "t_c",
-        "type": "core::felt252"
+        "name": "rooms",
+        "type": "core::array::Array::<core::felt252>"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "the_oruggin_trail::models::spawncount::Ispawncount",
+    "name": "the_oruggin_trail::models::spawnroom::Ispawnroom",
     "items": [
       {
         "type": "function",
@@ -358,7 +346,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "the_oruggin_trail::models::spawncount::Spawncount"
+            "type": "the_oruggin_trail::models::spawnroom::Spawnroom"
           }
         ],
         "outputs": [],
@@ -368,7 +356,7 @@
   },
   {
     "type": "event",
-    "name": "the_oruggin_trail::models::spawncount::spawncount::Event",
+    "name": "the_oruggin_trail::models::spawnroom::spawnroom::Event",
     "kind": "enum",
     "variants": []
   }

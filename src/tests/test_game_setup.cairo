@@ -12,8 +12,8 @@ use starknet::class_hash::Felt252TryIntoClassHash;
         constants::zrk_constants::roomid as room,
         models::{
             txtdef::{Txtdef, txtdef},
-            action::{Action, action}, 
-            object::{Object, object, obj_default_mock as obj_phash},
+            action::{Action, action, action_mock_hash as act_phash}, 
+            object::{Object, object, obj_mock_hash as obj_phash},
             spawncount::{Spawncount, spawncount},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType}},
         lib::hash_utils as pi_hash

@@ -24,7 +24,7 @@ mod models {
     mod txtdef;
     mod action;
     mod object;
-    mod spawncount;
+    mod spawnroom;
     mod room;
 }
 
