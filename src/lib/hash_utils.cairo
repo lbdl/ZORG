@@ -58,7 +58,20 @@ mod hashutils {
 
     fn action_hash(vrb: @Action) -> felt252 {
         let local: Action = vrb.clone();
-        666
+        let dbittxt: Array<felt252> = ba_to_felt(@local.dBitTxt);
+        let mut hash = PoseidonTrait::new()
+            .update(local.actionType.into())
+            .update(poseidon_hash_span(dbittxt.span()))
+            .update(local.enabled.into())
+            .update(local.revertable.into())
+            .update(local.dBit.into())
+            .update(local.affectsActionId)
+            .update(local.affectedByActionId)
+            .finalize();
+        if flags::DEBUG {
+            println!("vrb: {:?}, {:?}", local.actionType, hash);
+        }
+        hash
     }
 
     fn ba_to_felt(in: @ByteArray) -> Array<felt252> {

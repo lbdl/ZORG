@@ -18,6 +18,8 @@ struct Room{
 }
 
 fn room_mock_hash() -> felt252 {
-    666
+    //! if the room is setup differently in the setup code then the test hash
+    //! will need to reflect the new hash that will be output in test
+    2515781184759083272098127427728774319497557894349953067304964985848057918557
 }
 
