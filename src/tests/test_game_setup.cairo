@@ -93,7 +93,7 @@ mod tests {
         sut.setup();
 
         let room_name: ByteArray = "walking eagle pass";
-        let pass_id: felt252 = p_hash::str_hash(@room_name);
+        let pass_id: felt252 = obj_phash();
 
         let west: Object = get!(world, pass_id, (Object));
 
@@ -119,7 +119,9 @@ mod tests {
             west.matType,
             MaterialType::Dirt
         );
-        assert_eq!(west.destId, rm::PLAIN, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
+        let destination_name: ByteArray = "bensons plain";
+        let dst_id: felt252 = p_hash::str_hash(@destination_name);
+        assert_eq!(west.destId, dst_id, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
         assert_ne!(
             west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0
         );
