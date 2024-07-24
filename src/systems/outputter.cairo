@@ -19,6 +19,9 @@ mod outputter {
         }
 
         fn updateOutput(world: @IWorldDispatcher, txt: ByteArray) {
+            //! note the hardcoded 23 as the playerId we are just keeping
+            //! for the now but it should go away and be replaced with a 
+            //! "real" identifier. Not sure what that looks like right now 
             set!(
                 world,
                 (
