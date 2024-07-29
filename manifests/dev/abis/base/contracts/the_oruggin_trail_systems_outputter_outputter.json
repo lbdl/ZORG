@@ -85,7 +85,7 @@
         "name": "spawn",
         "inputs": [],
         "outputs": [],
-        "state_mutability": "view"
+        "state_mutability": "external"
       },
       {
         "type": "function",
@@ -97,7 +97,7 @@
           }
         ],
         "outputs": [],
-        "state_mutability": "view"
+        "state_mutability": "external"
       }
     ]
   },

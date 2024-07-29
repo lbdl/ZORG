@@ -1407,8 +1407,8 @@
     {
       "kind": "DojoContract",
       "address": "0x5351273085d5dfbf7ab213b6712cd0cd81b12eefcfa278b8f2791e9061af146",
-      "class_hash": "0x17d39ed4aa24ad055c75bebf11c0c1d3abe36ecf0ede717975d3a09cab06fdf",
-      "original_class_hash": "0x17d39ed4aa24ad055c75bebf11c0c1d3abe36ecf0ede717975d3a09cab06fdf",
+      "class_hash": "0x4f57973469e7bfa2d1e4d16475a061daf1a0e5ea071dbe87ec5e4844505f47f",
+      "original_class_hash": "0x4f57973469e7bfa2d1e4d16475a061daf1a0e5ea071dbe87ec5e4844505f47f",
       "base_class_hash": "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46",
       "abi": [
         {
@@ -1497,7 +1497,7 @@
               "name": "spawn",
               "inputs": [],
               "outputs": [],
-              "state_mutability": "view"
+              "state_mutability": "external"
             },
             {
               "type": "function",
@@ -1509,7 +1509,7 @@
                 }
               ],
               "outputs": [],
-              "state_mutability": "view"
+              "state_mutability": "external"
             }
           ]
         },

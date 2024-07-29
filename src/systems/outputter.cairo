@@ -2,8 +2,8 @@ use the_oruggin_trail::models::output::Output;
 
 #[dojo::interface]
 trait IOutputter {
-    fn spawn();
-    fn updateOutput(txt: ByteArray);
+    fn spawn(ref world: IWorldDispatcher);
+    fn updateOutput(ref world: IWorldDispatcher, txt: ByteArray);
 }
 
 #[dojo::contract]
@@ -14,11 +14,11 @@ mod outputter {
 
     #[abi(embed_v0)]
     impl OutputterImpl of IOutputter<ContractState> {
-        fn spawn(world: @IWorldDispatcher) {
+        fn spawn(ref world: IWorldDispatcher) {
 
         }
 
-        fn updateOutput(world: @IWorldDispatcher, txt: ByteArray) {
+        fn updateOutput(ref world: IWorldDispatcher, txt: ByteArray) {
             //! note the hardcoded 23 as the playerId we are just keeping
             //! for the now but it should go away and be replaced with a 
             //! "real" identifier. Not sure what that looks like right now 
@@ -30,6 +30,4 @@ mod outputter {
             ) 
         }
     }
-
-
 }

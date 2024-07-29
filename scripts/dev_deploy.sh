@@ -104,13 +104,14 @@ add_new_address() {
   fi
 }
 
-get_world_address() {
+deploy_local() {
   out=$(sozo migrate apply)
   local status=$?
 
   if [ $status -eq 0 ]; then
     addr=$(echo "$out" | grep "Successfully migrated World" | awk '{print $NF}')
     echo -n $addr
+    # echo -n $out
   else
     err_handler "$0" "$?"
   fi
@@ -140,8 +141,8 @@ run() {
     run_background_command "katana" "--disable-fee"
     wait_for_server 5050
   fi
-  echo "Getting world address"
-  ad=$(get_world_address)
+  echo "Running local deplyment..."
+  ad=$(deploy_local)
   echo "Found World Addr: $ad"
   uncomment_toml Scarb.toml
   echo "Amending Scarb.toml"
@@ -153,7 +154,19 @@ run() {
     wait_for_server 8080
   fi
   echo "build complete..."
+  echo "Setting auth..."
+  set_auth
   popd >/dev/null
+}
+
+set_auth() {
+  local rpc='http://localhost:5050'
+  local world=$(cat ./manifests/dev/manifest.json | jq -r '.world.address')
+  echo world: $world
+  sozo auth grant --world $world --wait writer \
+    Output,the_oruggin_trail::systems::outputter::outputter
+  #>/dev/null
+  echo "Default authorizations have been successfully set."
 }
 
 err_handler() {
