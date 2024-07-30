@@ -6,7 +6,7 @@
 /// of the system.
 #[dojo::interface]
 trait IListener {
-    fn listen(cmd: Array<ByteArray>);
+    fn listen(ref world: IWorldDispatcher, cmd: Array<ByteArray>);
 }
 
 /// Impl of the listener
@@ -39,7 +39,7 @@ mod meatpuppet {
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
-        fn listen(world: @IWorldDispatcher, cmd: Array<ByteArray>) {
+        fn listen(ref world: IWorldDispatcher, cmd: Array<ByteArray>) {
             //! we use this as an error flag to kick us into error
             //! catching routines later as we run the parses over
             //! the command string

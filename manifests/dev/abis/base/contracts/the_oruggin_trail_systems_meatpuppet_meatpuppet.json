@@ -90,7 +90,7 @@
           }
         ],
         "outputs": [],
-        "state_mutability": "view"
+        "state_mutability": "external"
       }
     ]
   },
