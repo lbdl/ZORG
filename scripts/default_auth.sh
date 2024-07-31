@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 pushd $(dirname "$0")/..
+echo "Running in $(pwd)"
 
 need_cmd() {
   if ! check_cmd "$1"; then
@@ -8,6 +9,7 @@ need_cmd() {
     exit 1
   fi
 }
+
 
 check_cmd() {
   command -v "$1" &>/dev/null

@@ -51,7 +51,7 @@ that should give you the dojo-plugin.
 
 now install dojo, ND you need the dojo-plugin installed by the above link for this to work.
 ```shell
-asdf install dojo 0.7.2
+asdf install dojo 0.7.3
 ```
 
 you also need `scarb`
@@ -69,7 +69,7 @@ at the root of the repo.
 
 you should see:
 ```shell
-dojo    0.7.2   some/path/...
+dojo    0.7.3   some/path/...
 scarb   2.5.4   some/path/...
 ```
 

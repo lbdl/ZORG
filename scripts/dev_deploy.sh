@@ -16,6 +16,17 @@ check_program() {
   fi
 }
 
+check_env() {
+    if [ -z "${!1}" ]; then
+        echo "Environment variable '$1' is not set."
+        return 1
+    else
+
+        echo "Environment variable '$1' is set to '${!1}'."
+        return 0
+    fi
+}
+
 run_command() {
   if check_program "$1"; then
     if [ "$#" -gt 2 ] || [ "$#" -eq 2 ]; then
@@ -157,6 +168,10 @@ run() {
   echo "Setting auth..."
   set_auth
   popd >/dev/null
+}
+
+copy_contract_manifests() {
+    
 }
 
 set_auth() {
