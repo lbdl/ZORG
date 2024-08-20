@@ -4,6 +4,7 @@ set -euo pipefail
 
 # Change the current working directory to the parent directory of the script
 pushd "$(dirname "$0")/.." >/dev/null
+echo "Running in $(PWD)"
 
 # Function to check if a program exists
 check_program() {
@@ -15,6 +16,7 @@ check_program() {
     return 0
   fi
 }
+
 
 check_env() {
     if [ -z "${!1}" ]; then
@@ -51,23 +53,11 @@ run_background_command() {
         "$cmd" "${params[@]}" >"$log_path" &
         #$1 ${@:2} >"$log_path" &
         pid=$!
-        echo "$pid" >>$pid_path
-        echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
+        # echo "$pid" >>$pid_path
+        echo "$1 backgrounded with pid:$pid"
+        echo "LOG: ${log_path}"
     fi
 }
-
-#run_background_command() {
-  #if check_program "$1"; then
-    #log_file="log_$1_$(date +%Y%m%d%H%M%S)_$$.log"
-    #pid_file="pid_$1_$(date +%Y%m%d%H%M%S)_$$.log"
-    #log_path="$PWD/local_log/$log_file"
-    #pid_path="$PWD/local_log/$pid_file"
-    #$1 ${@:2} >"$log_path" &
-    #pid=$!
-    #echo "$pid" >>$pid_path
-    #echo "$1 backgrounded with pid:$pid p_pth: $pid_path l_path: $log_path"
-  #fi
-#}
 
 wait_for_server() {
   local retries=5
@@ -149,7 +139,7 @@ run() {
   if ! pgrep -x "katana" >/dev/null; then
     echo "Starting katana"
     comment_toml Scarb.toml
-    run_background_command "katana" "--disable-fee"
+    run_background_command "katana" "--disable-fee" "--allowed-origins" "*"
     wait_for_server 5050
   fi
   echo "Running local deplyment..."
@@ -161,7 +151,7 @@ run() {
   echo "Testing for torii"
   if ! pgrep -x "torii"; then
     echo "Starting torii with world $ad"
-    run_background_command "torii" "--world" "$ad" "--allowed-origins" "*"
+    run_background_command "torii" "--world" "$ad" "-d" "local.db" "--allowed-origins" "*"
     wait_for_server 8080
   fi
   echo "build complete..."
@@ -171,7 +161,14 @@ run() {
 }
 
 copy_contract_manifests() {
-    
+    echo "PWD: $(pwd)"
+    target="target/dev"
+
+    if [ -d "$target" ] && [ -n "$(shopt -s nullglob dotglob; echo $target*)" ]; then
+        echo "Bingo. Found $(pwd)/target/dir"
+    else
+        echo "Directory is empty."
+    fi
 }
 
 set_auth() {
