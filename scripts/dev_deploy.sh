@@ -13,6 +13,7 @@ check_program() {
     return 1
   else
     echo "Found $1"
+    P_VAR=$1
     return 0
   fi
 }
@@ -54,6 +55,14 @@ run_background_command() {
         #$1 ${@:2} >"$log_path" &
         pid=$!
         # echo "$pid" >>$pid_path
+        echo "P_VAR = ${P_VAR}"
+        if [ "$P_VAR" == "katana" ]; then
+          KL_PATH="${log_path}"
+          echo "Setting KL_PATH: ${KL_PATH}"
+        elif [ "$P_VAR" == "torii" ]; then
+          TL_PATH="${log_path}"
+          echo "Setting TL_PATH: ${TL_PATH}"
+        fi
         echo "$1 backgrounded with pid:$pid"
         echo "LOG: ${log_path}"
     fi
@@ -158,6 +167,8 @@ run() {
   echo "Setting auth..."
   set_auth
   popd >/dev/null
+  echo "Tailing logs"
+  mprocs "tail -f ${KL_PATH}" "tail -f ${TL_PATH}"
 }
 
 copy_contract_manifests() {
