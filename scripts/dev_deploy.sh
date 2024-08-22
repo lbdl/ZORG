@@ -52,10 +52,7 @@ run_background_command() {
         shift
         local params=("$@")
         "$cmd" "${params[@]}" >"$log_path" &
-        #$1 ${@:2} >"$log_path" &
         pid=$!
-        # echo "$pid" >>$pid_path
-        echo "P_VAR = ${P_VAR}"
         if [ "$P_VAR" == "katana" ]; then
           KL_PATH="${log_path}"
           echo "Setting KL_PATH: ${KL_PATH}"
@@ -151,7 +148,7 @@ run() {
     run_background_command "katana" "--disable-fee" "--allowed-origins" "*"
     wait_for_server 5050
   fi
-  echo "Running local deplyment..."
+  echo "Running local deployment..."
   ad=$(deploy_local)
   echo "Found World Addr: $ad"
   uncomment_toml Scarb.toml
