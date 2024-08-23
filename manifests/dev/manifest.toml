@@ -35,8 +35,8 @@ name = "the_oruggin_trail::systems::actions::actions"
 [[contracts]]
 kind = "DojoContract"
 address = "0x48a75af79de26bd265c05d82043ba29b30cbf5e15963bd9ebfc641b1cecc824"
-class_hash = "0x5f173191d5c8135e90fbe61a5937af9c81337e6515dda88802967a6015883c3"
-original_class_hash = "0x5f173191d5c8135e90fbe61a5937af9c81337e6515dda88802967a6015883c3"
+class_hash = "0x7e1bd690aa39750c72a6f409615214faa56a4311dc522e31d4e9d36b52e32c9"
+original_class_hash = "0x7e1bd690aa39750c72a6f409615214faa56a4311dc522e31d4e9d36b52e32c9"
 base_class_hash = "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46"
 abi = "manifests/dev/abis/deployments/contracts/the_oruggin_trail_systems_meatpuppet_meatpuppet.json"
 reads = []
