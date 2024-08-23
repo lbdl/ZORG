@@ -1,36 +1,33 @@
-mod systems {
-    mod actions;
-    mod outputter;
-    mod meatpuppet;
-    mod tokeniser;
-    mod spawner;
+pub mod systems {
+    pub mod outputter;
+    pub mod meatpuppet;
+    pub mod tokeniser;
+    pub mod spawner;
 }
 
-mod constants {
-    mod zrk_constants;
+pub mod constants {
+    pub mod zrk_constants;
 }
 
-mod lib {
-    mod insult_meat;
-    mod hash_utils;
+pub mod lib {
+    pub mod insult_meat;
+    pub mod hash_utils;
 }
 
-mod models {
-    mod moves;
-    mod position;
-    mod zrk_enums;
-    mod output;
-    mod player;
-    mod txtdef;
-    mod action;
-    mod object;
-    mod spawnroom;
-    mod room;
+pub mod models {
+    pub mod zrk_enums;
+    pub mod output;
+    pub mod player;
+    pub mod txtdef;
+    pub mod action;
+    pub mod object;
+    pub mod spawnroom;
+    pub mod room;
 }
 
-mod tests {
-    mod test_world;
-    mod test_meatpuppet_hearing;
-    mod test_tokeniser;
-    mod test_game_setup;
+pub mod tests {
+    pub mod test_world;
+    pub mod test_meatpuppet_hearing;
+    pub mod test_tokeniser;
+    pub mod test_game_setup;
 }

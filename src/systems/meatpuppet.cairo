@@ -16,7 +16,7 @@ trait IListener {
 /// which can then be passed along to the next
 /// logical block/system
 #[dojo::contract]
-mod meatpuppet {
+pub mod meatpuppet {
     use super::{IListener};
     use starknet::{ContractAddress, ClassHash, get_caller_address};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};

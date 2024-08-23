@@ -3,9 +3,9 @@ use starknet::{ ContractAddress, ClassHash };
 #[derive(Copy, Drop, Serde)]
 #[dojo::event]
 #[dojo::model]
-struct ContractInitialized {
+pub struct ContractInitialized {
     #[key]
-    contract_type: felt32,
-    contract_address: ContractAddress,
-    contract_class: ClassHash,
+    pub contract_type: felt32,
+    pub contract_address: ContractAddress,
+    pub contract_class: ClassHash,
 }

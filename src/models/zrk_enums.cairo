@@ -2,7 +2,7 @@
 /// used later to generate text and seed ascii art
 /// type things
 #[derive(Serde, Copy, Drop, Introspect)]
-enum BiomeType {
+pub enum BiomeType {
     None,
     Forest,
     Tundra,
@@ -34,7 +34,7 @@ impl BT_to_Felt252 of Into<BiomeType, felt252> {
 /// description strings by composition rather
 /// than being hardcoded
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-enum RoomType {
+pub enum RoomType {
     None,
     WoodCabin,
     Store,
@@ -66,7 +66,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
 /// used later in the LOOK system and others to compose
 /// description strings and to determine base functionality
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-enum MaterialType {
+pub enum MaterialType {
     None,
     Wood,
     Dirt,
@@ -103,7 +103,7 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
 /// used by the direction syetm to determine movement
 /// and ofc the direction of things in the world
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-enum DirectionType {
+pub enum DirectionType {
     None,
     North,
     East,
@@ -135,7 +135,7 @@ impl DT_to_Felt252 of Into<DirectionType, felt252> {
 /// used later in the VRB/ACTION handling system and others to compose
 /// behaviour handling operations
 #[derive(Serde, Drop, Copy, Destruct, Introspect, Debug, PartialEq)]
-enum ActionType {
+pub enum ActionType {
     None,
     Move,
     Look,
@@ -169,7 +169,7 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
 
 /// Text Definition Types
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-enum TxtDefType {
+pub enum TxtDefType {
     None,
     DirObj,
     Dir,
@@ -192,7 +192,7 @@ impl TDT_to_Felt252 of Into<TxtDefType, felt252> {
 }
 /// Object Types
 #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-enum ObjectType {
+pub enum ObjectType {
     None,
     Ball,
     Window,

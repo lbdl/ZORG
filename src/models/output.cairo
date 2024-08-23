@@ -2,8 +2,8 @@
 
 #[derive(Drop, Serde)]
 #[dojo::model]
-struct Output {
+pub struct Output {
     #[key]
-    playerId: felt252,
-    text_o_vision: ByteArray,
+    pub playerId: felt252,
+    pub text_o_vision: ByteArray,
 }
