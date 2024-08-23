@@ -144,16 +144,16 @@ run() {
   echo "Testing for local katana"
   if ! pgrep -x "katana" >/dev/null; then
     echo "Starting katana"
-    comment_toml Scarb.toml
+    comment_toml dojo_dev.toml
     run_background_command "katana" "--disable-fee" "--allowed-origins" "*"
     wait_for_server 5050
   fi
   echo "Running local deployment..."
   ad=$(deploy_local)
   echo "Found World Addr: $ad"
-  uncomment_toml Scarb.toml
-  echo "Amending Scarb.toml"
-  add_new_address Scarb.toml "$ad"
+  uncomment_toml dojo_dev.toml
+  echo "Amending dojo_dev.toml"
+  add_new_address dojo_dev.toml "$ad"
   echo "Testing for torii"
   if ! pgrep -x "torii"; then
     echo "Starting torii with world $ad"
