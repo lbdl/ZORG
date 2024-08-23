@@ -53,7 +53,10 @@ mod meatpuppet {
             } else {
                 // grab the command stream array and extract a Garble type
                 match confessor::confess(l_cmd_cpy) {
-                    Result::Ok(r) => {},
+                    Result::Ok(r) => {
+                        let out: ByteArray = "Shoggoth obeys....";
+                        set!(world, Output { playerId: 23, text_o_vision: out })
+                    },
                     Result::Err(r) => {
                         isErr = r;
                     }
