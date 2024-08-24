@@ -5,7 +5,7 @@ trait ISpawner {
 
 
 #[dojo::contract]
-mod spawner {
+pub mod spawner {
     use core::byte_array::ByteArrayTrait;
     use core::array::ArrayTrait;
     use core::option::OptionTrait;

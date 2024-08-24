@@ -1,9 +1,9 @@
-mod tokeniser {
+pub mod tokeniser {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
 
-    fn str_to_AT(s: ByteArray) -> ActionType {
+    pub fn str_to_AT(s: ByteArray) -> ActionType {
         if s == "move"
             || s == "go"
             || s == "north"
@@ -22,7 +22,7 @@ mod tokeniser {
         }
     }
 
-    fn str_to_DT(s: ByteArray) -> DirectionType {
+    pub fn str_to_DT(s: ByteArray) -> DirectionType {
         if s == "north" || s == "n" {
             DirectionType::North
         } else if s == "south" || s == "s" {
@@ -40,7 +40,7 @@ mod tokeniser {
         }
     }
 
-    fn str_to_OT(s: ByteArray) -> ObjectType {
+    pub fn str_to_OT(s: ByteArray) -> ObjectType {
         if s == "ball" {
             ObjectType::Ball
         } else if s == "window" {
@@ -55,7 +55,7 @@ mod tokeniser {
     }
 }
 
-mod confessor {
+pub mod confessor {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
@@ -68,11 +68,11 @@ mod confessor {
     /// it can also be a MOVE, DIR (ie go north, or north) etc
     /// the later systems need to handle this specialisation
     #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-    struct Garble {
-        vrb: ActionType,
-        dir: DirectionType,
-        dobj: ObjectType,
-        iobj: ObjectType,
+    pub struct Garble {
+      pub vrb: ActionType,
+      pub dir: DirectionType,
+      pub dobj: ObjectType,
+      pub iobj: ObjectType,
     }
 
     /// The Confessor - mumble your shameful desires here and receive a message
@@ -81,7 +81,7 @@ mod confessor {
     /// and then lexes and runs semantic analysis on the lexed tokens
     /// to extract meaning and create a simple message type that can be
     /// passed around the system logic to make things happen in the world
-    fn confess(sin: Array<ByteArray>) -> Result<Garble, ec> {
+    pub fn confess(sin: Array<ByteArray>) -> Result<Garble, ec> {
         // get the first token from the command
         let snap = @sin;
         let i0 = snap.at(0);

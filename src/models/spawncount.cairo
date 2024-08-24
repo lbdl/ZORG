@@ -1,10 +1,10 @@
 #[derive(Copy, Drop, Serde)]
     #[dojo::model]
-    struct Spawncount {
+    pub struct Spawncount {
         #[key]
-        id: felt252,
-        a_c: felt252,
-        d_c: felt252,
-        o_c: felt252,
-        t_c: felt252,
+        pub id: felt252,
+        pub a_c: felt252,
+        pub d_c: felt252,
+        pub o_c: felt252,
+        pub t_c: felt252,
     }

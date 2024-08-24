@@ -6,15 +6,15 @@ use the_oruggin_trail::models::{zrk_enums as zrk};
 /// use this to dump them into the world screaming
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct Room{
+pub struct Room{
     #[key]
-    roomId: felt252,
-    roomType: zrk::RoomType,
-    txtDefId: felt252,
-    shortTxt: ByteArray,
-    objectIds: Array<felt252>,
-    dirObjIds: Array<felt252>,
-    players: Array<felt252>
+    pub roomId: felt252,
+    pub roomType: zrk::RoomType,
+    pub txtDefId: felt252,
+    pub shortTxt: ByteArray,
+    pub objectIds: Array<felt252>,
+    pub dirObjIds: Array<felt252>,
+    pub players: Array<felt252>
 }
 
 // fn room_mock_hash() -> felt252 {

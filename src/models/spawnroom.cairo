@@ -3,8 +3,8 @@
 /// point for a user
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct Spawnroom {
+pub struct Spawnroom {
     #[key]
-    id: u32, // always 666
-    rooms: Array<felt252>,
+    pub id: u32, // always 666
+    pub rooms: Array<felt252>,
 }

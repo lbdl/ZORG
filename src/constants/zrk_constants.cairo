@@ -1,7 +1,7 @@
 use the_oruggin_trail::models::zrk_enums::{ActionType};
 
 #[derive(Copy, Drop, PartialEq, Introspect, Debug)]
-enum ErrCode {
+pub enum ErrCode {
     BadLen,                      // input len >16 || 0
     BadFood,                     // input has no useable tokens
     BadImpl,                     // thing not implemented      
@@ -22,19 +22,19 @@ enum ErrCode {
 /// set that back on the struct??
 /// 
 /// Or this is just a set of start positions 
-mod roomid {
-   const  NONE: felt252 = 0 ;
-   const  PASS: felt252 =  1;
-   const  FORGE: felt252 =  2;
-   const  BARN: felt252 =  3;
-   const  PLAIN: felt252 =  4;
-   const  BASEMENT: felt252 =  5; 
+pub mod roomid {
+  pub const  NONE: felt252 = 0 ;
+  pub const  PASS: felt252 =  1;
+  pub const  FORGE: felt252 =  2;
+  pub const  BARN: felt252 =  3;
+  pub const  PLAIN: felt252 =  4;
+  pub const  BASEMENT: felt252 =  5; 
 }
 
-mod flags {
-    const DEBUG: bool = true;
+pub mod flags {
+    pub const DEBUG: bool = true;
 }
 
-mod statusid {
-    const NONE: felt252 = 0;
+pub mod statusid {
+    pub const NONE: felt252 = 0;
 }
