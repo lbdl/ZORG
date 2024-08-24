@@ -60,7 +60,7 @@ run_background_command() {
           TL_PATH="${log_path}"
           echo "Setting TL_PATH: ${TL_PATH}"
         fi
-        echo "$1 backgrounded with pid:$pid"
+        echo "$cmd backgrounded with pid:$pid"
         echo "LOG: ${log_path}"
     fi
 }
@@ -112,12 +112,14 @@ add_new_address() {
 }
 
 deploy_local() {
+  echo "foo"
   out=$(sozo migrate apply)
   local status=$?
+  echo "bar"
 
   if [ $status -eq 0 ]; then
     addr=$(echo "$out" | grep "Successfully migrated World" | awk '{print $NF}')
-    echo -n $addr
+    echo $addr
     # echo -n $out
   else
     err_handler "$0" "$?"
@@ -144,14 +146,14 @@ run() {
   echo "Testing for local katana"
   if ! pgrep -x "katana" >/dev/null; then
     echo "Starting katana"
-    comment_toml dojo_dev.toml
+    # comment_toml dojo_dev.toml
     run_background_command "katana" "--disable-fee" "--allowed-origins" "*"
     wait_for_server 5050
   fi
   echo "Running local deployment..."
   ad=$(deploy_local)
   echo "Found World Addr: $ad"
-  uncomment_toml dojo_dev.toml
+  # uncomment_toml dojo_dev.toml
   echo "Amending dojo_dev.toml"
   add_new_address dojo_dev.toml "$ad"
   echo "Testing for torii"
@@ -161,7 +163,7 @@ run() {
     wait_for_server 8080
   fi
   echo "build complete..."
-  echo "Setting auth..."
+  # echo "Setting auth..."
   set_auth
   popd >/dev/null
   echo "Tailing logs"
@@ -179,12 +181,22 @@ copy_contract_manifests() {
     fi
 }
 
+# we domnt need this anymore, now ca be done by an overlay
+# and anyway its a carpet bomb
 set_auth() {
   local rpc='http://localhost:5050'
-  local world=$(cat ./manifests/dev/manifest.json | jq -r '.world.address')
-  echo world: $world
-  sozo auth grant --world $world --wait writer \
-    Output,the_oruggin_trail::systems::outputter::outputter
+  local world=$(cat ./manifests/dev/deployment/manifest.json | jq -r '.world.address')
+  local contracts=$(cat ./manifests/dev/deployment/manifest.json | jq -r '.contracts[] | select(.kind == "DojoContract" ).tag')
+  local models=("model:the_oruggin_trail-Output")
+  local auth_models=""
+  for mod in ${models[@]}; do
+    auth_models+="$mod,$contracts "
+  done
+  
+  sozo auth grant --world "${world}" --wait writer "${auth_models}" 
+
+  # sozo auth grant --world $world --wait writer \
+  #   Output,the_oruggin_trail::systems::meatpuppet::meatpuppet
   #>/dev/null
   echo "Default authorizations have been successfully set."
 }
