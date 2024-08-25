@@ -52,27 +52,35 @@ pub mod meatpuppet {
                 isErr = ec::BadLen;
             } else {
                 // grab the command stream array and extract a Garble type
+                // for the game jam we want the fight command
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
                         let out: ByteArray = "Shoggoth obeys....";
-                        set!(world, Output { playerId: 23, text_o_vision: out })
+                        // we have a valid command so pass it into a handler routine
+                        // handleGarble(r);
+                        //set!(world, Output { playerId: 23, text_o_vision: out })
                     },
                     Result::Err(r) => {
                         isErr = r;
                     }
                 }
-            }
-
+            
+            // TODO: move out to specific set of routines
             if isErr != ec::None {
                 // exit routine
                 let speech = badmouth::opine_on_errors(isErr, l_cmd);
                 let bogus_id = 23;
                 // let speech = "foopy pants";
-                set!(world, Output { playerId: bogus_id, text_o_vision: speech,});
+                set!(world, Output { playerId: bogus_id, text_o_vision: speech});
             }
         }
     }
+    // handle for the action type of the garble object
+    // and dispatch to releveant systems/modules etc
+        fn handleGarble(gb: confessor::Garble) {
+            let out = "Shogoth is loveable also";
+            set!(world, Output { playerId: 23, text_o_vision: out })
+        }
 
-    // fn handleGarble() -> 
-
+    }
 }
