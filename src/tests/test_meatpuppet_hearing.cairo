@@ -101,9 +101,17 @@ mod tests {
                 'salt',
                  meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
             );
+
+        world.grant_writer(Model::<Output>::selector(), contract_address);
+
         let sut = IListenerDispatcher { contract_address };
         let input: Array<ByteArray> = array!["look", "around"];
-        assert(true == false, 'fix test');
+        sut.listen(input, pid);
+    
+        let expected: ByteArray = "Shoggoth stares into the void";
+        let output = get!(world, 23, Output);
+        let actual = output.text_o_vision;
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
     /// Handling for errors
     /// 
@@ -124,6 +132,9 @@ mod tests {
             .deploy_contract(
                 'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
             );
+
+        world.grant_writer(Model::<Output>::selector(), contract_address);
+
         let sut = IListenerDispatcher { contract_address };
 
         let failing_input: Array<ByteArray> = array![
@@ -143,7 +154,8 @@ mod tests {
             "13",
             "14",
             "15",
-            "16"
+            "16",
+            "17"
         ];
 
         sut.listen(failing_input, pid);
