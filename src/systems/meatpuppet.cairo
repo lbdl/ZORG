@@ -76,20 +76,51 @@ pub mod meatpuppet {
 
 
 mod interop_dispatcher {
+use dojo::world::{IWorldDispatcher};
 
+    use planetary_interface::interfaces::vulcan::{
+        VulcanInterface, VulcanInterfaceTrait,
+        IVulcanSaluteDispatcher, IVulcanSaluteDispatcherTrait,
+    };
+    
+    use planetary_interface::interfaces::pistols64::{
+        Pistols64Interface, Pistols64InterfaceTrait,
+        IPistols64ActionsDispatcher, IPistols64ActionsDispatcherTrait,
+    };
+
+    pub fn live_long(world: @IWorldDispatcher) -> felt252 {
+        println!("------------->live_long");
+        let vulcan: IVulcanSaluteDispatcher = VulcanInterfaceTrait::new().dispatcher();
+        println!("vulcan::live_long------------>");
+        (vulcan.live_long())
+    }    
+
+    pub fn kick_off(world: @IWorldDispatcher) -> u128 {
+        println!("------------->create_challenge");
+        let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
+        println!("pistols::create_challenge------------->");
+        (pistols.create_challenge('gandalf', 'elron', 'FIGHT'))
+    }
 }
 
 mod action_dispatcher {
+    use super::interop_dispatcher as interop;
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
 
     pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
-        println!("got----------> {:?}", msg.vrb);
-        let mut out: ByteArray = "Shogoth is loveable also";
+        println!("HNDL: ---> {:?}", msg.vrb);
+        let mut out: ByteArray = "Shogoth is loveable by default";
+        let mut i_out: u128 = 0;
+        // let mut i_out: felt252;
         match msg.vrb {
             ActionType::Look => { out = "Shoggoth stares into the void" },
-            ActionType::Fight => { out = "Shoggoth is quick to anger..." },
+            ActionType::Fight => { 
+                println!("STARTING A FIGHT LIKE A MAN");
+                // i_out = interop::live_long(@world) 
+                i_out = interop::kick_off(@world) 
+            },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }
         set!(world, Output { playerId: 23, text_o_vision: out });

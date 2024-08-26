@@ -15,8 +15,17 @@ version = "1.0.0-alpha.4"
 source = "git+https://github.com/dojoengine/dojo?rev=f15def33#f15def330c0d099e79351d11c197f63e8cc1ff36"
 
 [[package]]
+name = "planetary_interface"
+version = "0.1.0"
+source = "git+https://github.com/underware-gg/pistols-64?branch=main#0b22fd8deecd7601253a07ff33bb4b4a99d15f4b"
+dependencies = [
+ "dojo",
+]
+
+[[package]]
 name = "the_oruggin_trail"
 version = "1.0.0-alpha.7"
 dependencies = [
  "dojo",
+ "planetary_interface",
 ]
