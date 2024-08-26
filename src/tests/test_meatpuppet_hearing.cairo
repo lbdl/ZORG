@@ -3,6 +3,7 @@ mod tests {
     // use starknet::class_hash::Felt252TryIntoClassHash;
     // import world dispatcher
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+    use dojo::model::{Model, ResourceMetadata};
     // import test utils
     use dojo::utils::test::{deploy_contract, spawn_test_world};
     // use dojo::test_utils::{spawn_test_world, deploy_contract};
@@ -163,12 +164,14 @@ mod tests {
         let mut models = array![output::TEST_CLASS_HASH];
         let world = spawn_test_world(ns.span(), models.span());
 
-
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
                 'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
             );
+
+        world.grant_writer(Model::<Output>::selector(), contract_address);
+
         let sut = IListenerDispatcher { contract_address };
 
         let failing_input: Array<ByteArray> = array![
