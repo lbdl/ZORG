@@ -1,7 +1,7 @@
 /// The main Inerface for the system
-/// 
+///
 /// Exprected to take an array of str from an RPC call
-/// and to then lex and extract semantic information 
+/// and to then lex and extract semantic information
 /// pre passing this information on to the rest
 /// of the system.
 #[dojo::interface]
@@ -25,6 +25,7 @@ pub mod meatpuppet {
 
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
     use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
+    use super::err_dispatcher as err_dispatch;
 
     // #[storage]
     // struct Storage {
@@ -44,13 +45,15 @@ pub mod meatpuppet {
             //! we use this as an error flag to kick us into error
             //! catching routines later as we run the parses over
             //! the command string
-            let mut isErr: ec =  ec::None;
+            let mut isErr: ec = ec::None;
             let l_cmd = @cmd;
             let l_cmd_cpy = l_cmd.clone();
             if l_cmd.len() >= 16 {
-                // we have bad food make an error and pass along to 
+                // we have bad food make an error and pass along to
                 // the error outputter system
                 isErr = ec::BadLen;
+                let mut wrld = world;
+                err_dispatch::error_handle(ref wrld, isErr, p_id);
             } else {
                 // grab the command stream array and extract a Garble type
                 // for the game jam we want the fight command
@@ -62,40 +65,50 @@ pub mod meatpuppet {
                         ad::handleGarble(ref wrld, r);
                         //set!(world, Output { playerId: 23, text_o_vision: out })
                     },
-                    Result::Err(r) => {
-                        isErr = r;
+                    Result::Err(r) => { 
+                        let mut wrld = world;
+                        err_dispatch::error_handle(ref wrld, isErr, p_id);
+                        // isErr = r; 
                     }
                 }
-            
-            // TODO: move out to specific set of routines
-            if isErr != ec::None {
-                // exit routine
-                let speech = badmouth::opine_on_errors(isErr, l_cmd);
-                let bogus_id = 23;
-                // let speech = "foopy pants";
-                set!(world, Output { playerId: bogus_id, text_o_vision: speech});
+
+                // TODO: move out to specific set of routines
+                // if isErr != ec::None {
+                //     println!("Handle err --------> {:?}", isErr);
+                //     // exit routine
+                //     let speech = badmouth::opine_on_errors(isErr, l_cmd);
+                //     let bogus_id = 23;
+                //     // let speech = "foopy pants";
+                //     set!(world, Output { playerId: bogus_id, text_o_vision: speech });
+                // }
             }
         }
     }
-    // handle for the action type of the garble object
-    // and dispatch to releveant systems/modules etc
-        // fn handleGarble(gb: confessor::Garble) {
-        //     let out = "Shogoth is loveable also";
-        //     set!(world, Output { playerId: 23, text_o_vision: out })
-        // }
+}
 
+mod err_dispatcher {
+    use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
+    use dojo::world::{IWorldDispatcher};
+    use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
+    use the_oruggin_trail::models::{output::{Output}};
+
+    pub fn error_handle(ref world: IWorldDispatcher, err: ec, pid: felt252) {
+        let bogus_cmd: Array<ByteArray> = array![];
+        let speech = badmouth::opine_on_errors(err, @bogus_cmd);
+        set!(world, Output { playerId: 23, text_o_vision: speech });
     }
+
 }
 
 mod action_dispatcher {
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
-    
+
     pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
         let mut out: ByteArray = "Shogoth is loveable also";
         match msg.vrb {
-            ActionType::Look => { out = "Shoggoth sees all" },
+            ActionType::Look => { out = "Shoggoth stares into the void" },
             ActionType::Fight => { out = "Shoggoth is quick to anger..." },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }
