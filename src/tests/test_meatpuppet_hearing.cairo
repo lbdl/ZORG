@@ -1,10 +1,11 @@
 #[cfg(test)]
 mod tests {
-    use starknet::class_hash::Felt252TryIntoClassHash;
+    // use starknet::class_hash::Felt252TryIntoClassHash;
     // import world dispatcher
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
     // import test utils
-    use dojo::test_utils::{spawn_test_world, deploy_contract};
+    use dojo::utils::test::{deploy_contract, spawn_test_world};
+    // use dojo::test_utils::{spawn_test_world, deploy_contract};
     // import test utils
     use the_oruggin_trail::{
         systems::{meatpuppet::{meatpuppet, IListenerDispatcher, IListenerDispatcherTrait}},
@@ -86,19 +87,22 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_listener_LOOK() {
-        let caller = starknet::contract_address_const::<0x0>();
+        // let caller = starknet::contract_address_const::<0x0>();
 
         let mut models = array![output::TEST_CLASS_HASH];
-        let world = spawn_test_world(models);
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+        let world = spawn_test_world(ns.span(), models.span());
 
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
-                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt',
+                 meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
             );
         let sut = IListenerDispatcher { contract_address };
         let input: Array<ByteArray> = array!["look", "around"];
-
+        assert(true == false, 'fix test');
     }
     /// Handling for errors
     /// 
@@ -107,15 +111,17 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_listener_too_many_tokens() {
-        let caller = starknet::contract_address_const::<0x0>();
+        // let caller = starknet::contract_address_const::<0x0>();
 
         let mut models = array![output::TEST_CLASS_HASH];
-        let world = spawn_test_world(models);
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+        let world = spawn_test_world(ns.span(), models.span());
 
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
-                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
             );
         let sut = IListenerDispatcher { contract_address };
 
@@ -139,7 +145,7 @@ mod tests {
             "16"
         ];
 
-        sut.listen(failing_input);
+        sut.listen(failing_input, pid);
 
         let expected: ByteArray = "Whoa, slow down pilgrim. Enunciate... less noise... more signal";
         let output = get!(world, 23, Output);
@@ -150,15 +156,18 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_listener_BADF00D() {
-        let caller = starknet::contract_address_const::<0x0>();
-
+        // let caller = starknet::contract_address_const::<0x0>();
+        
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
         let mut models = array![output::TEST_CLASS_HASH];
-        let world = spawn_test_world(models);
+        let world = spawn_test_world(ns.span(), models.span());
+
 
         // deploy systems contract
         let contract_address = world
             .deploy_contract(
-                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
+                'salt', meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
             );
         let sut = IListenerDispatcher { contract_address };
 
@@ -167,7 +176,7 @@ mod tests {
             "bar"
         ];
 
-        sut.listen(failing_input);
+        sut.listen(failing_input, pid);
 
         // this SHOULD in fact be the expected Err::BadFood output BUT
         // currently str tokens that lex to T<ActionType>::None are returned

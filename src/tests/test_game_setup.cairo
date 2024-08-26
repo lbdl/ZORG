@@ -2,11 +2,10 @@
 mod tests {
     use core::clone::Clone;
     use core::array::ArrayTrait;
-    use starknet::class_hash::Felt252TryIntoClassHash;
     // import world dispatcher
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
     // import test utils
-    use dojo::test_utils::{spawn_test_world, deploy_contract};
+    use dojo::utils::test::{deploy_contract, spawn_test_world};
 
     use the_oruggin_trail::{
         systems::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
@@ -43,12 +42,16 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_spawn_text_defintion() {
+        
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+
         let mut models = array![txtdef::TEST_CLASS_HASH];
-        let world = spawn_test_world(models);
+        let world = spawn_test_world(ns.span(), models.span());
 
         // deploy systems contract
         let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
     // TODO fix this to take a phash from the mock model
@@ -61,12 +64,15 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_spawn_room() {
-        let mut models = array![txtdef::TEST_CLASS_HASH, action::TEST_CLASS_HASH];
-        let world = spawn_test_world(models);
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
 
+        let mut models = array![txtdef::TEST_CLASS_HASH, action::TEST_CLASS_HASH];
+        let world = spawn_test_world(ns.span(), models.span());
+        
         // deploy systems contract
         let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
         let sut = ISpawnerDispatcher { contract_address };
         sut.setup();
     // TODO fix this to take a phash from the mock model
@@ -79,15 +85,18 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_spawn_room_WEST_properties() {
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+
         let mut models = array![// txtdef::TEST_CLASS_HASH,
         // action::TEST_CLASS_HASH,
         object::TEST_CLASS_HASH// room::TEST_CLASS_HASH
         ];
-        let world = spawn_test_world(models);
+        let world = spawn_test_world(ns.span(), models.span());
 
         // deploy systems contract
         let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
         let sut = ISpawnerDispatcher { contract_address };
 
         sut.setup();
@@ -136,17 +145,19 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_spawn_room_object_properties() {
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+
         let mut models = array![
             txtdef::TEST_CLASS_HASH,
             action::TEST_CLASS_HASH,
             object::TEST_CLASS_HASH,
             room::TEST_CLASS_HASH
         ];
-        let world = spawn_test_world(models);
-
+        let world = spawn_test_world(ns.span(), models.span());
         // deploy systems contract
         let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
         let sut = ISpawnerDispatcher { contract_address };
 
         sut.setup();
@@ -192,17 +203,19 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_spawn_room_object_exit_properties() {
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+
         let mut models = array![
             txtdef::TEST_CLASS_HASH,
             action::TEST_CLASS_HASH,
             object::TEST_CLASS_HASH,
             room::TEST_CLASS_HASH
         ];
-        let world = spawn_test_world(models);
-
+        let world = spawn_test_world(ns.span(), models.span());
         // deploy systems contract
         let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span());
+            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
         let sut = ISpawnerDispatcher { contract_address };
 
         sut.setup();

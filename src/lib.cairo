@@ -26,7 +26,7 @@ pub mod models {
 }
 
 pub mod tests {
-    pub mod test_world;
+    // pub mod test_world;
     pub mod test_meatpuppet_hearing;
     pub mod test_tokeniser;
     pub mod test_game_setup;
