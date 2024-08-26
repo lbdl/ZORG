@@ -113,6 +113,35 @@ mod tests {
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
+    
+    #[test]
+    #[available_gas(30000000)]
+    fn test_listener_FIGHT() {
+        // let caller = starknet::contract_address_const::<0x0>();
+
+        let mut models = array![output::TEST_CLASS_HASH];
+        let ns = ["the_oruggin_trail"];
+        let pid = 23;
+        let world = spawn_test_world(ns.span(), models.span());
+
+        // deploy systems contract
+        let contract_address = world
+            .deploy_contract(
+                'salt',
+                 meatpuppet::TEST_CLASS_HASH.try_into().unwrap(),
+            );
+
+        world.grant_writer(Model::<Output>::selector(), contract_address);
+
+        let sut = IListenerDispatcher { contract_address };
+        let input: Array<ByteArray> = array!["fight", "the", "troll"];
+        sut.listen(input, pid);
+    
+        let expected: ByteArray = "Shoggoth is quick to anger...";
+        let output = get!(world, 23, Output);
+        let actual = output.text_o_vision;
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
+    }
     /// Handling for errors
     /// 
     /// We want to see the correct output string which is set on the 
