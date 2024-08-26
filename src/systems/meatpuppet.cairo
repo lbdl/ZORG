@@ -18,6 +18,7 @@ trait IListener {
 #[dojo::contract]
 pub mod meatpuppet {
     use super::{IListener};
+    use super::action_dispatcher as ad;
     use starknet::{ContractAddress, ClassHash, get_caller_address};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
     use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
@@ -56,8 +57,9 @@ pub mod meatpuppet {
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
                         let out: ByteArray = "Shoggoth obeys....";
+                        let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
-                        // handleGarble(r);
+                        ad::handleGarble(ref wrld, r);
                         //set!(world, Output { playerId: 23, text_o_vision: out })
                     },
                     Result::Err(r) => {
@@ -77,10 +79,26 @@ pub mod meatpuppet {
     }
     // handle for the action type of the garble object
     // and dispatch to releveant systems/modules etc
-        fn handleGarble(gb: confessor::Garble) {
-            let out = "Shogoth is loveable also";
-            set!(world, Output { playerId: 23, text_o_vision: out })
-        }
+        // fn handleGarble(gb: confessor::Garble) {
+        //     let out = "Shogoth is loveable also";
+        //     set!(world, Output { playerId: 23, text_o_vision: out })
+        // }
 
+    }
+}
+
+mod action_dispatcher {
+    use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
+    use dojo::world::{IWorldDispatcher};
+    use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
+    
+    pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
+        let mut out: ByteArray = "Shogoth is loveable also";
+        match msg.vrb {
+            ActionType::Look => { out = "Shoggoth sees all" },
+            ActionType::Fight => { out = "Shoggoth is quick to anger..." },
+            _ => { out = "Shoggoth understands the void and the formless action" },
+        }
+        set!(world, Output { playerId: 23, text_o_vision: out });
     }
 }
