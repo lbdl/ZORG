@@ -119,14 +119,17 @@ mod action_dispatcher {
             ActionType::Fight => { 
                 println!("STARTING A FIGHT LIKE A MAN");
                 // i_out = interop::live_long(@world) 
-                i_out = interop::kick_off(@world) 
+                i_out = interop::kick_off(@world); 
+                if ( i_out > 0 ) {
+                    println!("pistols:------->{:?}", i_out);
+                    out = "Returned from pistols";   
+                }
             },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }
         set!(world, Output { playerId: 23, text_o_vision: out });
     }
 }
-
 
 mod err_dispatcher {
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
