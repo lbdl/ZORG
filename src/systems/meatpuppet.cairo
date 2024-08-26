@@ -74,6 +74,11 @@ pub mod meatpuppet {
     }
 }
 
+
+mod interop_dispatcher {
+
+}
+
 mod action_dispatcher {
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
