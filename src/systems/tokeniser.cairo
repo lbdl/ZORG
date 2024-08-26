@@ -17,7 +17,10 @@ pub mod tokeniser {
             ActionType::Look
         } else if s == "kick" {
             ActionType::Kick
-        } else {
+        } else if s == "fight" || s == "duel" || s == "kill" || s == "attack" {
+            ActionType::Fight
+        } 
+        else {
             ActionType::None
         }
     }

@@ -63,28 +63,39 @@ pub mod meatpuppet {
                         let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
                         ad::handleGarble(ref wrld, r);
-                        //set!(world, Output { playerId: 23, text_o_vision: out })
                     },
                     Result::Err(r) => { 
                         let mut wrld = world;
                         err_dispatch::error_handle(ref wrld, isErr, p_id);
-                        // isErr = r; 
                     }
                 }
-
-                // TODO: move out to specific set of routines
-                // if isErr != ec::None {
-                //     println!("Handle err --------> {:?}", isErr);
-                //     // exit routine
-                //     let speech = badmouth::opine_on_errors(isErr, l_cmd);
-                //     let bogus_id = 23;
-                //     // let speech = "foopy pants";
-                //     set!(world, Output { playerId: bogus_id, text_o_vision: speech });
-                // }
             }
         }
     }
 }
+
+
+mod interop_dispatcher {
+
+}
+
+mod action_dispatcher {
+    use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
+    use dojo::world::{IWorldDispatcher};
+    use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
+
+    pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
+        println!("got----------> {:?}", msg.vrb);
+        let mut out: ByteArray = "Shogoth is loveable also";
+        match msg.vrb {
+            ActionType::Look => { out = "Shoggoth stares into the void" },
+            ActionType::Fight => { out = "Shoggoth is quick to anger..." },
+            _ => { out = "Shoggoth understands the void and the formless action" },
+        }
+        set!(world, Output { playerId: 23, text_o_vision: out });
+    }
+}
+
 
 mod err_dispatcher {
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
@@ -98,20 +109,4 @@ mod err_dispatcher {
         set!(world, Output { playerId: 23, text_o_vision: speech });
     }
 
-}
-
-mod action_dispatcher {
-    use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
-    use dojo::world::{IWorldDispatcher};
-    use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
-
-    pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
-        let mut out: ByteArray = "Shogoth is loveable also";
-        match msg.vrb {
-            ActionType::Look => { out = "Shoggoth stares into the void" },
-            ActionType::Fight => { out = "Shoggoth is quick to anger..." },
-            _ => { out = "Shoggoth understands the void and the formless action" },
-        }
-        set!(world, Output { playerId: 23, text_o_vision: out });
-    }
 }
