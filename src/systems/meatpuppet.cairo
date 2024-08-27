@@ -98,9 +98,8 @@ use dojo::world::{IWorldDispatcher};
     }    
 
     pub fn kick_off(world: @IWorldDispatcher) -> u128 {
-        println!("------------->create_challenge");
         let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
-        println!("pistols::create_challenge------------->");
+        println!("pistols::created_challenge------------->");
         (pistols.create_challenge('gandalf', 'elron', 'FIGHT'))
     }
 }
@@ -119,12 +118,13 @@ mod action_dispatcher {
         match msg.vrb {
             ActionType::Look => { out = "Shoggoth stares into the void" },
             ActionType::Fight => { 
-                println!("STARTING A FIGHT LIKE A MAN");
+                println!("starting a FIGHT. like a MAN");
                 // i_out = interop::live_long(@world) 
                 i_out = interop::kick_off(@world); 
                 if ( i_out > 0 ) {
                     println!("pistols:------->{:?}", i_out);
-                    out = "Returned from pistols";   
+                    let new_out = format!("Returned {:?}", i_out);
+                    out = new_out;
                 }
             },
             _ => { out = "Shoggoth understands the void and the formless action" },
