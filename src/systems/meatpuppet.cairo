@@ -27,17 +27,19 @@ pub mod meatpuppet {
     use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
     use super::err_dispatcher as err_dispatch;
 
-    // #[storage]
-    // struct Storage {
-    //     tokeniser_adr: ContractAddress,
-    //     tokeniser_cls: ClassHash,
-    // }
+    use planetary_interface::interfaces::planetary::{
+        PlanetaryInterface, PlanetaryInterfaceTrait,
+        IPlanetaryActionsDispatcherTrait,
+    };
 
-    // fn dojo_init(
-    //     world: @IWorldDispatcher, tokeniser_address: ContractAddress, tokeniser_class: ClassHash,
-    // ) {// TODO: add a model to store the systems we want to call
-    // // then set the values from here
-    // }
+    use planetary_interface::interfaces::tot::{
+        ToTInterface, ToTInterfaceTrait,
+    };
+
+    fn dojo_init(ref world: IWorldDispatcher) {
+        let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
+        planetary.dispatcher().register(ToTInterfaceTrait::NAMESPACE, world.contract_address);
+    } 
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
