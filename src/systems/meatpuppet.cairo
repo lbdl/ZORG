@@ -7,6 +7,10 @@
 #[dojo::interface]
 trait IListener {
     fn listen(ref world: IWorldDispatcher, cmd: Array<ByteArray>, p_id: felt252);
+    
+    // for interop with other worlds but doesnt have to be, could just be listen
+    // but it sounds cooler
+    fn command_shoggoth(ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>) -> ByteArray;
 }
 
 /// Impl of the listener
@@ -26,6 +30,8 @@ pub mod meatpuppet {
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
     use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
     use super::err_dispatcher as err_dispatch;
+
+    use the_oruggin_trail::lib::store::{Store, StoreTrait};
 
     use planetary_interface::interfaces::planetary::{
         PlanetaryInterface, PlanetaryInterfaceTrait,
@@ -72,6 +78,14 @@ pub mod meatpuppet {
                     }
                 }
             }
+        }
+
+        fn command_shoggoth(ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>) -> ByteArray {
+            // call into the main listen 
+            self.listen(wish, victim);
+            let shog_says: ByteArray = "Relax, soon all will be mine. Breathe deep. Fear comes...";
+            shog_says
+            // get the generated output
         }
     }
 }

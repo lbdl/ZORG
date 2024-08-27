@@ -84,6 +84,4 @@ mod test_rig {
         })
     }
 
-
-
 }

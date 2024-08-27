@@ -12,6 +12,7 @@ pub mod constants {
 pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
+    pub mod store;
 }
 
 pub mod models {
