@@ -13,6 +13,8 @@ pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
     pub mod store;
+    pub mod interop_dispatch;
+    pub mod err_handler;
 }
 
 pub mod models {
