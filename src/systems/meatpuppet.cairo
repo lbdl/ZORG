@@ -84,6 +84,9 @@ pub mod meatpuppet {
             // call into the main listen 
             self.listen(wish, victim);
             let shog_says: ByteArray = "Relax, soon all will be mine. Breathe deep. Fear comes...";
+            let shog_cpy = shog_says.clone();
+            set!(world, Output { playerId: 23, text_o_vision: shog_cpy });
+            println!("{:?}", shog_says);
             shog_says
             // get the generated output
         }
