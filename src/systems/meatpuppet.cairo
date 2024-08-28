@@ -7,10 +7,12 @@
 #[dojo::interface]
 trait IListener {
     fn listen(ref world: IWorldDispatcher, cmd: Array<ByteArray>, p_id: felt252);
-    
+
     // for interop with other worlds but doesnt have to be, could just be listen
     // but it sounds cooler
-    fn command_shoggoth(ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>) -> ByteArray;
+    fn command_shoggoth(
+        ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>
+    ) -> ByteArray;
 }
 
 /// Impl of the listener
@@ -29,23 +31,21 @@ pub mod meatpuppet {
 
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
     use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
-    use super::err_dispatcher as err_dispatch;
+    use the_oruggin_trail::lib::err_handler::err_dispatcher as err_dispatch;
+    // use super::err_dispatcher as err_dispatch;
 
     use the_oruggin_trail::lib::store::{Store, StoreTrait};
 
     use planetary_interface::interfaces::planetary::{
-        PlanetaryInterface, PlanetaryInterfaceTrait,
-        IPlanetaryActionsDispatcherTrait,
+        PlanetaryInterface, PlanetaryInterfaceTrait, IPlanetaryActionsDispatcherTrait,
     };
 
-    use planetary_interface::interfaces::tot::{
-        ToTInterface, ToTInterfaceTrait,
-    };
+    use planetary_interface::interfaces::tot::{ToTInterface, ToTInterfaceTrait,};
 
     fn dojo_init(ref world: IWorldDispatcher) {
         let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
         planetary.dispatcher().register(ToTInterfaceTrait::NAMESPACE, world.contract_address);
-    } 
+    }
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
@@ -72,7 +72,7 @@ pub mod meatpuppet {
                         // we have a valid command so pass it into a handler routine
                         ad::handleGarble(ref wrld, r);
                     },
-                    Result::Err(r) => { 
+                    Result::Err(r) => {
                         let mut wrld = world;
                         err_dispatch::error_handle(ref wrld, isErr, p_id);
                     }
@@ -80,8 +80,10 @@ pub mod meatpuppet {
             }
         }
 
-        fn command_shoggoth(ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>) -> ByteArray {
-            // call into the main listen 
+        fn command_shoggoth(
+            ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>
+        ) -> ByteArray {
+            // call into the main listen
             // the output is generated in the listen handler
             // which dispatches to the next handler etc
             // in other words hit main game loop
@@ -89,45 +91,14 @@ pub mod meatpuppet {
             let cmd_output: Output = get!(world, 23, Output);
             let shogoth_sees = cmd_output.text_o_vision;
             println!("{:?}", shogoth_sees);
-            
-            // we should now send this bak to the external caller
-            let shog_says: ByteArray = "Relax, soon all will be mine. Breathe deep. Fear comes...";
-            println!("{:?}", shog_says);
-            shog_says
+
+            shogoth_sees
         }
     }
 }
 
-
-mod interop_dispatcher {
-use dojo::world::{IWorldDispatcher};
-
-    use planetary_interface::interfaces::vulcan::{
-        VulcanInterface, VulcanInterfaceTrait,
-        IVulcanSaluteDispatcher, IVulcanSaluteDispatcherTrait,
-    };
-    
-    use planetary_interface::interfaces::pistols64::{
-        Pistols64Interface, Pistols64InterfaceTrait,
-        IPistols64ActionsDispatcher, IPistols64ActionsDispatcherTrait,
-    };
-
-    pub fn live_long(world: @IWorldDispatcher) -> felt252 {
-        println!("------------->live_long");
-        let vulcan: IVulcanSaluteDispatcher = VulcanInterfaceTrait::new().dispatcher();
-        println!("vulcan::live_long------------>");
-        (vulcan.live_long())
-    }    
-
-    pub fn kick_off(world: @IWorldDispatcher) -> u128 {
-        let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
-        println!("pistols::created_challenge------------->");
-        (pistols.create_challenge('gandalf', 'elron', 'FIGHT'))
-    }
-}
-
 mod action_dispatcher {
-    use super::interop_dispatcher as interop;
+    use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
@@ -139,19 +110,18 @@ mod action_dispatcher {
         // let mut i_out: felt252;
         match msg.vrb {
             ActionType::Look => { out = "Shoggoth stares into the void" },
-            ActionType::Fight => { 
+            ActionType::Fight => {
                 println!("starting a FIGHT. like a MAN");
-                // i_out = interop::live_long(@world) 
-                i_out = interop::kick_off(@world); 
-                if ( i_out > 0 ) {
+                i_out = interop::kick_off(@world);
+                if (i_out > 0) {
                     println!("pistols:------->{:?}", i_out);
-                    let new_out = format!("Returned {:?}", i_out);
+                    let new_out = format!("p64: commands you join this duel {:?}", i_out);
                     out = new_out;
                 }
             },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }
-        set!(world, Output { playerId: 23, text_o_vision: out });
+        set!(world, Output { playerId: 23, text_o_vision: out })
     }
 }
 
@@ -164,7 +134,7 @@ mod err_dispatcher {
     pub fn error_handle(ref world: IWorldDispatcher, err: ec, pid: felt252) {
         let bogus_cmd: Array<ByteArray> = array![];
         let speech = badmouth::opine_on_errors(err, @bogus_cmd);
-        set!(world, Output { playerId: 23, text_o_vision: speech });
+        set!(world, Output { playerId: 23, text_o_vision: speech })
     }
-
 }
+
