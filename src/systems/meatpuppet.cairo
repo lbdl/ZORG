@@ -82,13 +82,18 @@ pub mod meatpuppet {
 
         fn command_shoggoth(ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>) -> ByteArray {
             // call into the main listen 
+            // the output is generated in the listen handler
+            // which dispatches to the next handler etc
+            // in other words hit main game loop
             self.listen(wish, victim);
+            let cmd_output: Output = get!(world, 23, Output);
+            let shogoth_sees = cmd_output.text_o_vision;
+            println!("{:?}", shogoth_sees);
+            
+            // we should now send this bak to the external caller
             let shog_says: ByteArray = "Relax, soon all will be mine. Breathe deep. Fear comes...";
-            let shog_cpy = shog_says.clone();
-            set!(world, Output { playerId: 23, text_o_vision: shog_cpy });
             println!("{:?}", shog_says);
             shog_says
-            // get the generated output
         }
     }
 }
