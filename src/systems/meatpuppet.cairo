@@ -106,21 +106,18 @@ mod action_dispatcher {
     pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
         println!("HNDL: ---> {:?}", msg.vrb);
         let mut out: ByteArray = "Shogoth is loveable by default";
-        let mut i_out: u128 = 0;
-        // let mut i_out: felt252;
+        let mut i_out: ByteArray = "";
         match msg.vrb {
             ActionType::Look => { out = "Shoggoth stares into the void" },
             ActionType::Fight => {
                 println!("starting a FIGHT. like a MAN");
                 i_out = interop::kick_off(@world);
-                if (i_out > 0) {
-                    println!("pistols:------->{:?}", i_out);
-                    let new_out = format!("p64: commands you join this duel {:?}", i_out);
-                    out = new_out;
-                }
+                out = i_out; 
             },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }
+        // we probably need to hand off to another routine here to interpolate
+        // some results and create a string for now though
         set!(world, Output { playerId: 23, text_o_vision: out })
     }
 }
