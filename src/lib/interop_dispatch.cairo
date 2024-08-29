@@ -10,7 +10,7 @@ use dojo::world::{IWorldDispatcher};
         Pistols64Interface, Pistols64InterfaceTrait, IPistols64ActionsDispatcher,
         IPistols64ActionsDispatcherTrait, ChallengeResults,
     };
-    
+
     pub fn kick_off(world: @IWorldDispatcher) -> ByteArray {
         let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
 
@@ -26,6 +26,17 @@ use dojo::world::{IWorldDispatcher};
         let outcome = get_outcome(pistols, ps_id);
 
         format!("WINNER IS: {:?}", outcome.winner)
+    }
+
+    fn parse_result(result: ChallengeResults) -> Array<(ByteArray, ByteArray)> {
+        array![
+            ("duel_id: ", format!("{}", result.duel_id)),
+            ("duelist_a: ", format!("{}", result.duelist_name_a)),
+            ("duelist_b: ", format!("{}", result.duelist_name_b)),
+            ("message: ", format!("{}", result.message)),
+            ("is_finished: ", format!("{}", result.is_finished)),
+            ("winner: ", format!("{}", result.winner))
+        ]
     }
 
     fn get_output_string(msg: ChallengeResults) -> Array<ByteArray> {
