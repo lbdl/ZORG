@@ -61,7 +61,7 @@ pub mod meatpuppet {
                 // the error outputter system
                 isErr = ec::BadLen;
                 let mut wrld = world;
-                err_dispatch::error_handle(ref wrld, isErr, p_id);
+                err_dispatch::error_handle(ref wrld, p_id, isErr);
             } else {
                 // grab the command stream array and extract a Garble type
                 // for the game jam we want the fight command
@@ -70,11 +70,11 @@ pub mod meatpuppet {
                         let out: ByteArray = "Shoggoth obeys....";
                         let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
-                        ad::handleGarble(ref wrld, r);
+                        ad::handleGarble(ref wrld, p_id, r);
                     },
                     Result::Err(r) => {
                         let mut wrld = world;
-                        err_dispatch::error_handle(ref wrld, isErr, p_id);
+                        err_dispatch::error_handle(ref wrld, p_id, isErr);
                     }
                 }
             }
@@ -103,7 +103,7 @@ mod action_dispatcher {
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
 
-    pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
+    pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
         println!("HNDL: ---> {:?}", msg.vrb);
         let mut out: ByteArray = "Shogoth is loveable by default";
         let mut i_out: ByteArray = "";
@@ -118,7 +118,7 @@ mod action_dispatcher {
         }
         // we probably need to hand off to another routine here to interpolate
         // some results and create a string for now though
-        set!(world, Output { playerId: 23, text_o_vision: out })
+        set!(world, Output { playerId: pid, text_o_vision: out })
     }
 }
 
@@ -131,6 +131,7 @@ mod err_dispatcher {
     pub fn error_handle(ref world: IWorldDispatcher, err: ec, pid: felt252) {
         let bogus_cmd: Array<ByteArray> = array![];
         let speech = badmouth::opine_on_errors(err, @bogus_cmd);
+
         set!(world, Output { playerId: 23, text_o_vision: speech })
     }
 }
