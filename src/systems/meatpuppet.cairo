@@ -87,11 +87,11 @@ pub mod meatpuppet {
             // the output is generated in the listen handler
             // which dispatches to the next handler etc
             // in other words hit main game loop
+            println!("foolish desires: {:?}", wish);
             self.listen(wish, victim);
             let cmd_output: Output = get!(world, 23, Output);
             let shogoth_sees = cmd_output.text_o_vision;
             println!("{:?}", shogoth_sees);
-
             shogoth_sees
         }
     }
