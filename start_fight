@@ -1,28 +1,22 @@
 #!/usr/bin/env sh
 
-# pushd "$(dirname "$0")/src" >/dev/null
-
-# Check if at least one argument is provided
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <world_file_path> [string1] [string2] ..."
-    exit 1
-fi
-
-# Get the world file path from the first argument
-world_file="$1"
-shift  # Remove the first argument from the list
+world_file="Scarb.toml"
 
 # Check if the world file exists
 if [ ! -f "$world_file" ]; then
-    echo "Error: World file not found at $world_file"
+    echo "Error: $world_file not found."
     exit 1
 fi
 
 # Array to store the encoded strings
 declare -a encoded_strings
+declare -a commands
+commands+=("fight" "self")
+playerid=23
 
 # Iterate through all remaining arguments
-for arg in "$@"; do
+for arg in "${commands[@]}"; do
+    echo $arg
     # Trim leading and trailing whitespace
     trimmed_arg=$(echo "$arg" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
     
@@ -36,19 +30,24 @@ done
 # Combine all encoded ByteArrays into a single array
 calldata="$(IFS=,; echo "${encoded_strings[*]}")"
 
+
 # Construct the final command
 # Count the number of items in the encoded_strings array
 item_count=${#encoded_strings[@]}
 
 # Prepend the count to the calldata
-calldata="$item_count,$(IFS=,; echo "${encoded_strings[*]}")"
+calldata="$playerid,$item_count,$(IFS=,; echo "${encoded_strings[*]}")"
 
 # Update the calldata with the count prepended
 calldata="$calldata"
-command="sozo execute --manifest-path $world_file pistol64-actions live_fast_die_jung --calldata $calldata"
+command="sozo execute --manifest-path $world_file the_oruggin_trail-meatpuppet command_shoggoth --calldata $calldata"
 
 # Output the command (for verification)
 echo "Executing command: $command"
 
-# Execute the command
-eval "$command"
+# Execute the command and capture the output
+output=$(eval "$command")
+
+# Display the raw output
+echo "Raw output:"
+echo "$output"
