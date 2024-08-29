@@ -40,7 +40,7 @@ calldata="$playerid,$item_count,$(IFS=,; echo "${encoded_strings[*]}")"
 
 # Update the calldata with the count prepended
 calldata="$calldata"
-command="sozo execute --manifest-path $world_file the_oruggin_trail-meatpuppet command_shoggoth --calldata $calldata"
+command="sozo execute --manifest-path $world_file the_oruggin_trail-meatpuppet command_shoggoth --calldata $calldata --wait --receipt" 
 
 # Output the command (for verification)
 echo "Executing command: $command"
