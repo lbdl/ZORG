@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../planetary"
+		},
+		{
+			"path": "../teampain_client"
 		}
 	],
 	"settings": {}

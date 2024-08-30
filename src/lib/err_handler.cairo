@@ -7,6 +7,6 @@ pub mod err_dispatcher {
     pub fn error_handle(ref world: IWorldDispatcher, pid: felt252, err: ec) {
         let bogus_cmd: Array<ByteArray> = array![];
         let speech = badmouth::opine_on_errors(err, @bogus_cmd);
-        set!(world, Output { playerId: 23, text_o_vision: speech })
+        set!(world, Output { playerId: 23, text_o_vision: array![speech] })
     }
 }

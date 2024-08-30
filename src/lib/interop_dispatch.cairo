@@ -11,21 +11,22 @@ use dojo::world::{IWorldDispatcher};
         IPistols64ActionsDispatcherTrait, ChallengeResults,
     };
 
-    pub fn kick_off(world: @IWorldDispatcher) -> ByteArray {
+    pub fn kick_off(world: @IWorldDispatcher) -> Array<ByteArray> {
         let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
 
         let p1 = 'Gandalf';
         let p2 = 'Elron';
 
-        println!("Gman: {:?}", p1);
+        // println!("Gman: {:?}", p1);
 
         let ps_id = get_session(pistols);        
 
         make_moves(pistols, ps_id);
 
         let outcome = get_outcome(pistols, ps_id);
+        let parsed = parse_result(outcome);
 
-        format!("WINNER IS: {:?}", outcome.winner)
+        array!["WINNER IS: ", format!("{}", outcome.winner)]
     }
 
     fn parse_result(result: ChallengeResults) -> Array<(ByteArray, ByteArray)> {
