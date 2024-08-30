@@ -16,6 +16,7 @@ move = "./scripts/move.sh"
 
 [dependencies]
 dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.7" }
+planetary_interface = { path = "/Users/tims/DATA/BB/dojo/planetary/dojo/planetary_interface" }
 
 [[target.dojo]]
 

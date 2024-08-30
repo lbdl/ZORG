@@ -12,6 +12,9 @@ pub mod constants {
 pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
+    pub mod store;
+    pub mod interop_dispatch;
+    pub mod err_handler;
 }
 
 pub mod models {
@@ -30,4 +33,5 @@ pub mod tests {
     pub mod test_meatpuppet_hearing;
     pub mod test_tokeniser;
     pub mod test_game_setup;
+    pub mod test_rig;
 }

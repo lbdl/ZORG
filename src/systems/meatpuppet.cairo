@@ -7,6 +7,12 @@
 #[dojo::interface]
 trait IListener {
     fn listen(ref world: IWorldDispatcher, cmd: Array<ByteArray>, p_id: felt252);
+
+    // for interop with other worlds but doesnt have to be, could just be listen
+    // but it sounds cooler
+    fn command_shoggoth(
+        ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>
+    ) -> Array<ByteArray>;
 }
 
 /// Impl of the listener
@@ -25,19 +31,21 @@ pub mod meatpuppet {
 
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
     use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
-    use super::err_dispatcher as err_dispatch;
+    use the_oruggin_trail::lib::err_handler::err_dispatcher as err_dispatch;
+    // use super::err_dispatcher as err_dispatch;
 
-    // #[storage]
-    // struct Storage {
-    //     tokeniser_adr: ContractAddress,
-    //     tokeniser_cls: ClassHash,
-    // }
+    use the_oruggin_trail::lib::store::{Store, StoreTrait};
 
-    // fn dojo_init(
-    //     world: @IWorldDispatcher, tokeniser_address: ContractAddress, tokeniser_class: ClassHash,
-    // ) {// TODO: add a model to store the systems we want to call
-    // // then set the values from here
-    // }
+    use planetary_interface::interfaces::planetary::{
+        PlanetaryInterface, PlanetaryInterfaceTrait, IPlanetaryActionsDispatcherTrait,
+    };
+
+    use planetary_interface::interfaces::tot::{ToTInterface, ToTInterfaceTrait,};
+
+    fn dojo_init(ref world: IWorldDispatcher) {
+        let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
+        planetary.dispatcher().register(ToTInterfaceTrait::NAMESPACE, world.contract_address);
+    }
 
     #[abi(embed_v0)]
     impl ListenImpl of IListener<ContractState> {
@@ -53,49 +61,66 @@ pub mod meatpuppet {
                 // the error outputter system
                 isErr = ec::BadLen;
                 let mut wrld = world;
-                err_dispatch::error_handle(ref wrld, isErr, p_id);
+                err_dispatch::error_handle(ref wrld, p_id, isErr);
             } else {
                 // grab the command stream array and extract a Garble type
                 // for the game jam we want the fight command
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
-                        let out: ByteArray = "Shoggoth obeys....";
+                        let out: Array<ByteArray> = array!["Shoggoth obeys...."];
                         let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
-                        ad::handleGarble(ref wrld, r);
+                        ad::handleGarble(ref wrld, p_id, r);
                     },
-                    Result::Err(r) => { 
+                    Result::Err(r) => {
                         let mut wrld = world;
-                        err_dispatch::error_handle(ref wrld, isErr, p_id);
+                        err_dispatch::error_handle(ref wrld, p_id, isErr);
                     }
                 }
             }
         }
+
+        fn command_shoggoth(
+            ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>
+        ) -> Array<ByteArray> {
+            // call into the main listen
+            // the output is generated in the listen handler
+            // which dispatches to the next handler etc
+            // in other words hit main game loop
+            println!("foolish desires: {:?}", wish);
+            self.listen(wish, victim);
+            let cmd_output: Output = get!(world, 23, Output);
+            let shogoth_sees = cmd_output.text_o_vision;
+            println!("{:?}", shogoth_sees);
+            shogoth_sees
+        }
     }
 }
 
-
-mod interop_dispatcher {
-
-}
-
 mod action_dispatcher {
+    use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
 
-    pub fn handleGarble(ref world: IWorldDispatcher, msg: Garble) {
-        println!("got----------> {:?}", msg.vrb);
-        let mut out: ByteArray = "Shogoth is loveable also";
+    pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
+        println!("HNDL: ---> {:?}", msg.vrb);
+        let mut out: Array<ByteArray> = array!["Shogoth is loveable by default"];
+        let mut i_out: Array<ByteArray> = array![];
         match msg.vrb {
-            ActionType::Look => { out = "Shoggoth stares into the void" },
-            ActionType::Fight => { out = "Shoggoth is quick to anger..." },
-            _ => { out = "Shoggoth understands the void and the formless action" },
+            ActionType::Look => { out = array!["Shoggoth stares into the void"] },
+            ActionType::Fight => {
+                println!("starting a FIGHT. like a MAN");
+                i_out = interop::kick_off(@world);
+                out = i_out; 
+            },
+            _ => { out = array!["Shoggoth understands the void and the formless action"] },
         }
-        set!(world, Output { playerId: 23, text_o_vision: out });
+        // we probably need to hand off to another routine here to interpolate
+        // some results and create a string for now though
+        set!(world, Output { playerId: pid, text_o_vision: out })
     }
 }
-
 
 mod err_dispatcher {
     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
@@ -106,7 +131,8 @@ mod err_dispatcher {
     pub fn error_handle(ref world: IWorldDispatcher, err: ec, pid: felt252) {
         let bogus_cmd: Array<ByteArray> = array![];
         let speech = badmouth::opine_on_errors(err, @bogus_cmd);
-        set!(world, Output { playerId: 23, text_o_vision: speech });
-    }
 
+        set!(world, Output { playerId: 23, text_o_vision: array![speech] })
+    }
 }
+
