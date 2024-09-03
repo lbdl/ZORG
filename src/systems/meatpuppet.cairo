@@ -36,15 +36,15 @@ pub mod meatpuppet {
 
     use the_oruggin_trail::lib::store::{Store, StoreTrait};
 
-    use planetary_interface::interfaces::planetary::{
-        PlanetaryInterface, PlanetaryInterfaceTrait, IPlanetaryActionsDispatcherTrait,
-    };
+    // use planetary_interface::interfaces::planetary::{
+    //     PlanetaryInterface, PlanetaryInterfaceTrait, IPlanetaryActionsDispatcherTrait,
+    // };
 
-    use planetary_interface::interfaces::tot::{ToTInterface, ToTInterfaceTrait,};
+    // use planetary_interface::interfaces::tot::{ToTInterface, ToTInterfaceTrait,};
 
     fn dojo_init(ref world: IWorldDispatcher) {
-        let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
-        planetary.dispatcher().register(ToTInterfaceTrait::NAMESPACE, world.contract_address);
+        // let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
+        // planetary.dispatcher().register(ToTInterfaceTrait::NAMESPACE, world.contract_address);
     }
 
     #[abi(embed_v0)]
@@ -108,11 +108,13 @@ mod action_dispatcher {
         let mut out: Array<ByteArray> = array!["Shogoth is loveable by default"];
         let mut i_out: Array<ByteArray> = array![];
         match msg.vrb {
-            ActionType::Look => { out = array!["Shoggoth stares into the void"] },
+            ActionType::Look => { 
+                let output: ByteArray = "Shoggoth stares into the void";
+                out = array![output, "foobt barby fooby"]},
             ActionType::Fight => {
                 println!("starting a FIGHT. like a MAN");
-                i_out = interop::kick_off(@world);
-                out = i_out; 
+                // i_out = interop::kick_off(@world);
+                // out = i_out; 
             },
             _ => { out = array!["Shoggoth understands the void and the formless action"] },
         }

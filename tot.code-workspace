@@ -4,10 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../planetary"
+			"path": "../teampain_client"
 		},
 		{
-			"path": "../teampain_client"
+			"path": "../shoggoths-planetary-deli"
 		}
 	],
 	"settings": {}
