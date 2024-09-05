@@ -29,7 +29,7 @@ mod outputter {
             set!(
                 world,
                 (
-                    Output{playerId: 23, text_o_vision: array![txt]}
+                    Output{playerId: 23, text_o_vision: txt}
                 )
             ) 
         }
