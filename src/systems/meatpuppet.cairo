@@ -1,3 +1,10 @@
+// /*
+//  * Created on Thu Sep 05 2024
+//  *
+//  * Copyright (c) 2024 Archetypal Tech
+//  * MeaCulpa (mc) 2024 lbdl | itrainspiders
+//  */
+
 /// The main Inerface for the system
 ///
 /// Exprected to take an array of str from an RPC call
@@ -12,7 +19,7 @@ trait IListener {
     // but it sounds cooler
     fn command_shoggoth(
         ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>
-    ) -> Array<ByteArray>;
+    ) -> ByteArray;
 }
 
 /// Impl of the listener
@@ -67,7 +74,7 @@ pub mod meatpuppet {
                 // for the game jam we want the fight command
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
-                        let out: Array<ByteArray> = array!["Shoggoth obeys...."];
+                        let out: ByteArray = "Shoggoth obeys....";
                         let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
                         ad::handleGarble(ref wrld, p_id, r);
@@ -82,7 +89,7 @@ pub mod meatpuppet {
 
         fn command_shoggoth(
             ref world: IWorldDispatcher, victim: felt252, wish: Array<ByteArray>
-        ) -> Array<ByteArray> {
+        ) -> ByteArray {
             // call into the main listen
             // the output is generated in the listen handler
             // which dispatches to the next handler etc
@@ -105,18 +112,18 @@ mod action_dispatcher {
 
     pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
         println!("HNDL: ---> {:?}", msg.vrb);
-        let mut out: Array<ByteArray> = array!["Shogoth is loveable by default"];
-        let mut i_out: Array<ByteArray> = array![];
+        let mut out: ByteArray = "Shoggoth is loveable by default";
         match msg.vrb {
             ActionType::Look => { 
                 let output: ByteArray = "Shoggoth stares into the void";
-                out = array![output, "foobt barby fooby"]},
+                out = output;
+            },
             ActionType::Fight => {
                 println!("starting a FIGHT. like a MAN");
                 // i_out = interop::kick_off(@world);
                 // out = i_out; 
             },
-            _ => { out = array!["Shoggoth understands the void and the formless action"] },
+            _ => { out = "Shoggoth understands the void and the formless action" },
         }
         // we probably need to hand off to another routine here to interpolate
         // some results and create a string for now though
@@ -134,7 +141,7 @@ mod err_dispatcher {
         let bogus_cmd: Array<ByteArray> = array![];
         let speech = badmouth::opine_on_errors(err, @bogus_cmd);
 
-        set!(world, Output { playerId: 23, text_o_vision: array![speech] })
+        set!(world, Output { playerId: 23, text_o_vision: speech })
     }
 }
 
