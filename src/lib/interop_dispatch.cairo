@@ -14,8 +14,8 @@ use dojo::world::{IWorldDispatcher};
     pub fn kick_off(world: @IWorldDispatcher) -> Array<ByteArray> {
         let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
 
-        let p1 = 'Gandalf';
-        let p2 = 'Elron';
+        let p1 = 'ZORG';
+        let p2 = 'Shoggoth';
 
         // println!("Gman: {:?}", p1);
 

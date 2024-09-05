@@ -1,5 +1,14 @@
-// use the_oruggin_trail::models::output::Output;
+//*
+//* Created on Thu Sep 05 2024
+//*
+//* Copyright (c) 2024 Archetypal Tech
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+ //*
 
+ /// @title The Oruggin Trail
+ /// @author lbdl | itrainspiders
+ /// @notice The outputter is responsible for the final "view" into the room that the 
+ /// player will conceptually "see" or rather read. 
 #[dojo::interface]
 trait IOutputter {
     fn spawn(ref world: IWorldDispatcher);

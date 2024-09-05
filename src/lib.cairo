@@ -15,6 +15,7 @@ pub mod lib {
     pub mod store;
     pub mod interop_dispatch;
     pub mod err_handler;
+    pub mod verb_eater;
 }
 
 pub mod models {
