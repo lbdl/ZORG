@@ -2,20 +2,29 @@
 mod test_rig {
     use starknet::{ContractAddress, testing, get_caller_address};
     use core::traits::Into;
-    // use array::ArrayTrait;
-    // use debug::PrintTrait;
 
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
     use dojo::utils::test::{spawn_test_world, deploy_contract};
 
     use the_oruggin_trail::models::{
-        output::{output, Output}
+        output::{output, Output},
+        action::{action, Action},
+        room::{room, Room},
+        object::{object, Object},
+        player::{player, Player},
+        txtdef::{txtdef, Txtdef}
     };
 
     use the_oruggin_trail::systems::meatpuppet::{ 
         meatpuppet, 
         IListenerDispatcher, 
         IListenerDispatcherTrait 
+    };
+
+    use the_oruggin_trail::systems::spawner::{ 
+        spawner, 
+        ISpawnerDispatcher, 
+        ISpawnerDispatcherTrait 
     };
     
     use the_oruggin_trail::lib::store::{Store, StoreTrait}; 
@@ -34,7 +43,8 @@ mod test_rig {
     #[derive(Copy, Drop)]
     struct Systems {
         world: IWorldDispatcher,
-        actions: IListenerDispatcher,
+        listener: IListenerDispatcher,
+        spawner: ISpawnerDispatcher,
         store: Store,
     }
 
@@ -44,10 +54,15 @@ mod test_rig {
         (contract_address)
     }
 
-    fn setup_world(flags: u8) -> Systems {
+    fn setup_world() -> Systems {
 
         let mut models = array![
             output::TEST_CLASS_HASH,
+            action::TEST_CLASS_HASH,
+            room::TEST_CLASS_HASH,
+            object::TEST_CLASS_HASH,
+            player::TEST_CLASS_HASH,
+            txtdef::TEST_CLASS_HASH,
         ];
 
         // deploy world, models, systems etc
@@ -61,7 +76,7 @@ mod test_rig {
         // world.contract_address.print();
 
         // deploy systems and set OWNER on the systems we want so we can write through
-        let tot_systems = IListenerDispatcher{ contract_address:
+        let tot_listen = IListenerDispatcher{ contract_address:
             {
                 let address = deploy_system(world, 'meatpuppet', meatpuppet::TEST_CLASS_HASH);
                 world.grant_owner(dojo::utils::bytearray_hash(@ns), address);
@@ -69,6 +84,13 @@ mod test_rig {
             }
         };
 
+        let tot_spawner = ISpawnerDispatcher{ contract_address:
+            {
+                let address = deploy_system(world, 'spawner', spawner::TEST_CLASS_HASH);
+                world.grant_owner(dojo::utils::bytearray_hash(@ns), address);
+                (address)
+            }
+        };
         
         impersonate(OWNER());
 
@@ -76,7 +98,8 @@ mod test_rig {
 
         (Systems{
             world,
-            actions:tot_systems,
+            listener:tot_listen,
+            spawner:tot_spawner,
             store,
         })
     }
