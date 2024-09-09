@@ -107,8 +107,7 @@ mod tests {
         let sut = IListenerDispatcher { contract_address };
         let input: Array<ByteArray> = array!["look", "around"];
         sut.listen(input, pid);
-    
-        let expected: ByteArray = "Shoggoth stares into the void";
+        let expected: ByteArray = "You see Elvis... \nhe speaks... \napparantly garbage";
         let output = get!(world, 23, Output);
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
@@ -117,8 +116,9 @@ mod tests {
     #[test]
     #[available_gas(30000000)]
     fn test_listener_FIGHT() {
-        // let caller = starknet::contract_address_const::<0x0>();
-
+        /// this is a stub as we have 
+        /// taken out the interop for now
+        /// TODO: add interop back in
         let mut models = array![output::TEST_CLASS_HASH];
         let ns = ["the_oruggin_trail"];
         let pid = 23;
