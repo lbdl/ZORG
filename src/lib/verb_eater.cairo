@@ -9,6 +9,7 @@ pub mod verb_dispatcher {
         let mut out: ByteArray = "Shoggoth is loveable by default";
         match msg.vrb {
             ActionType::Look => { 
+                // Pass payer id into look handle
                 let output: ByteArray = "Shoggoth stares into the void<\n>the void is staring back<\n>shoggoth is a good boy";
                 out = output;
             },

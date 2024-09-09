@@ -1,10 +1,17 @@
 //! Handle LOOK type actions
-mod look {
+pub mod look {
     use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
-    use the_oruggin_trail::lib::confessor::{ Garble };
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+    use dojo::world::{IWorldDispatcher};
+    use the_oruggin_trail::models::{player::Player};
 
-    fn at(thing: Garble) -> ByteArray {
-        
+    pub fn at(ref world: IWorldDispatcher, thing: Garble, pid: felt252) -> ByteArray {
+        //get the player object
+        // we are always player 23 right now
+        let player: Player = get!(world, 23, (Player) );
+        let location: felt252 = player.location;
+        let mut output: ByteArray = "You see Elvis... <\n>, he speaks... <\n> apparantly garbage";
+        output
     }
 
 }

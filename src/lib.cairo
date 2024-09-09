@@ -16,6 +16,7 @@ pub mod lib {
     pub mod interop_dispatch;
     pub mod err_handler;
     pub mod verb_eater;
+    pub mod look;
 }
 
 pub mod models {
