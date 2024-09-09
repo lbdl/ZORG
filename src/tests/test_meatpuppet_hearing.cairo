@@ -137,7 +137,7 @@ mod tests {
         let input: Array<ByteArray> = array!["fight", "the", "troll"];
         sut.listen(input, pid);
     
-        let expected: ByteArray = "Shoggoth is quick to anger...";
+        let expected: ByteArray = "Shoggoth is a good boy, he will fight you";
         let output = get!(world, 23, Output);
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);

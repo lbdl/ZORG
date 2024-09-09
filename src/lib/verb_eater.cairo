@@ -18,7 +18,9 @@ pub mod verb_dispatcher {
             ActionType::Fight => {
                 println!("starting a FIGHT. like a MAN");
                 // i_out = interop::kick_off(@world);
+                let stub: ByteArray = "Shoggoth is a good boy, he will fight you";
                 // out = i_out; 
+                out = stub;
             },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }
