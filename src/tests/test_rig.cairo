@@ -2,8 +2,8 @@
 mod test_rig {
     use starknet::{ContractAddress, testing, get_caller_address};
     use core::traits::Into;
-    use array::ArrayTrait;
-    use debug::PrintTrait;
+    // use array::ArrayTrait;
+    // use debug::PrintTrait;
 
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
     use dojo::utils::test::{spawn_test_world, deploy_contract};
@@ -34,7 +34,7 @@ mod test_rig {
     #[derive(Copy, Drop)]
     struct Systems {
         world: IWorldDispatcher,
-        actions: IActionsDispatcher,
+        actions: IListenerDispatcher,
         store: Store,
     }
 
@@ -52,26 +52,23 @@ mod test_rig {
 
         // deploy world, models, systems etc
         let namespace: ByteArray = "the_oruggin_trail";
+        let ns: ByteArray = namespace.clone();
         let namespaces = [namespace];
         let world: IWorldDispatcher = spawn_test_world(namespaces.span(),  models.span());
-        
+
         // allow us OWNER over stuff 
-        world.grant_owner(dojo::utils::bytearray_hash(@namespace), OWNER());
+        world.grant_owner(dojo::utils::bytearray_hash(@ns), OWNER());
         // world.contract_address.print();
 
         // deploy systems and set OWNER on the systems we want so we can write through
         let tot_systems = IListenerDispatcher{ contract_address:
             {
                 let address = deploy_system(world, 'meatpuppet', meatpuppet::TEST_CLASS_HASH);
-                world.grant_owner(dojo::utils::bytearray_hash(@namespace), address);
+                world.grant_owner(dojo::utils::bytearray_hash(@ns), address);
                 (address)
             }
         };
 
-        // we might want to write an init here
-        // if (pistols64.contract_address.is_non_zero()) {
-        //     pistols64.init();
-        // }
         
         impersonate(OWNER());
 
