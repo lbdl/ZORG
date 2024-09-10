@@ -14,8 +14,8 @@ use dojo::world::{IWorldDispatcher};
     pub fn kick_off(world: @IWorldDispatcher) -> Array<ByteArray> {
         let pistols: IPistols64ActionsDispatcher = Pistols64InterfaceTrait::new().dispatcher();
 
-        let p1 = 'ZORG';
-        let p2 = 'Shoggoth';
+        // let p1 = 'ZORG';
+        // let p2 = 'Shoggoth';
 
         // println!("Gman: {:?}", p1);
 
@@ -24,7 +24,7 @@ use dojo::world::{IWorldDispatcher};
         make_moves(pistols, ps_id);
 
         let outcome = get_outcome(pistols, ps_id);
-        let parsed = parse_result(outcome);
+        // let parsed = parse_result(outcome);
 
         array!["WINNER IS: ", format!("{}", outcome.winner)]
     }

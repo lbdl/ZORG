@@ -74,7 +74,7 @@ pub mod meatpuppet {
                 // for the game jam we want the fight command
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
-                        let out: ByteArray = "Shoggoth obeys....";
+                        // let out: ByteArray = "Shoggoth obeys....";
                         let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
                         ad::handleGarble(ref wrld, p_id, r);

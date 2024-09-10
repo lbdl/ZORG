@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod test_rig {
+pub mod test_rig {
     use starknet::{ContractAddress, testing, get_caller_address};
     use core::traits::Into;
 
@@ -29,9 +29,9 @@ mod test_rig {
     
     use the_oruggin_trail::lib::store::{Store, StoreTrait}; 
 
-    fn ZERO() -> ContractAddress { starknet::contract_address_const::<0x0>() }
-    fn OWNER() -> ContractAddress { starknet::contract_address_const::<0x1>() }
-    fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
+    pub fn ZERO() -> ContractAddress { starknet::contract_address_const::<0x0>() }
+    pub fn OWNER() -> ContractAddress { starknet::contract_address_const::<0x1>() }
+    pub fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
  
     // set_contract_address : to define the address of the calling contract,
     // set_account_contract_address : to define the address of the account used for the current transaction.
@@ -41,20 +41,20 @@ mod test_rig {
     }
 
     #[derive(Copy, Drop)]
-    struct Systems {
-        world: IWorldDispatcher,
-        listener: IListenerDispatcher,
-        spawner: ISpawnerDispatcher,
-        store: Store,
+    pub struct Systems {
+        pub world: IWorldDispatcher,
+        pub listener: IListenerDispatcher,
+        pub spawner: ISpawnerDispatcher,
+        pub store: Store,
     }
 
     #[inline(always)]
-    fn deploy_system(world: IWorldDispatcher, salt: felt252, class_hash: felt252) -> ContractAddress {
+    pub fn deploy_system(world: IWorldDispatcher, salt: felt252, class_hash: felt252) -> ContractAddress {
         let contract_address = world.deploy_contract(salt, class_hash.try_into().unwrap());
         (contract_address)
     }
 
-    fn setup_world() -> Systems {
+    pub fn setup_world() -> Systems {
 
         let mut models = array![
             output::TEST_CLASS_HASH,

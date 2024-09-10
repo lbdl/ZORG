@@ -19,92 +19,22 @@ mod tests {
         lib::hash_utils::hashutils as p_hash
     };
 
-    // #[test]
-    // #[available_gas(30000000)]
-    // fn test_spawn_counter() {
-    //     let mut models = array![txtdef::TEST_CLASS_HASH];
-    //     let world = spawn_test_world(models);
-
-    //     // deploy systems contract
-    //     let contract_address = world
-    //         .deploy_contract(
-    //             'salt', spawner::TEST_CLASS_HASH.try_into().unwrap(), array![].span()
-    //         );
-    //     let sut = ISpawnerDispatcher { contract_address };
-    //     sut.setup();
-
-    //     let counter = get!(world, 666, (Spawncount));
-    //     assert_eq!(counter.a_c, 1, "got {:?}, expected {:?}", counter.a_c, 1);
-    //     assert_eq!(counter.d_c, 1, "got {:?}, expected {:?}", counter.d_c, 1);
-    //     assert_eq!(counter.o_c, 1, "got {:?}, expected {:?}", counter.o_c, 1);
-    // }
+    use the_oruggin_trail::tests::test_rig::{
+        test_rig,
+        test_rig::{Systems, ZERO, OWNER, OTHER}
+    };
 
     #[test]
-    #[available_gas(30000000)]
-    fn test_spawn_text_defintion() {
-        
-        let ns = ["the_oruggin_trail"];
-        let pid = 23;
-
-        let mut models = array![txtdef::TEST_CLASS_HASH];
-        let world = spawn_test_world(ns.span(), models.span());
-
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
-        let sut = ISpawnerDispatcher { contract_address };
-        sut.setup();
-    // TODO fix this to take a phash from the mock model
-    // let model = get!(world, rm::West, (Txtdef));
-    // let expected: ByteArray = "a high mountain west that winds along...";
-    // let actual = model.text;
-    // assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
-    }
-
-    #[test]
-    #[available_gas(30000000)]
-    fn test_spawn_room() {
-        let ns = ["the_oruggin_trail"];
-        let pid = 23;
-
-        let mut models = array![txtdef::TEST_CLASS_HASH, action::TEST_CLASS_HASH];
-        let world = spawn_test_world(ns.span(), models.span());
-        
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
-        let sut = ISpawnerDispatcher { contract_address };
-        sut.setup();
-    // TODO fix this to take a phash from the mock model
-    // let model = get!(world, rm::west, (Txtdef));
-    // let expected: ByteArray = "a high mountain west that winds along...";
-    // let actual = model.text;
-    // assert_eq!(actual, expected, "got {:?}, expected {:?}", actual, expected);
-    }
-
-    #[test]
-    #[available_gas(30000000)]
+    #[available_gas(40000000)]
     fn test_spawn_room_WEST_properties() {
-        let ns = ["the_oruggin_trail"];
-        let pid = 23;
-
-        let mut models = array![// txtdef::TEST_CLASS_HASH,
-        // action::TEST_CLASS_HASH,
-        object::TEST_CLASS_HASH// room::TEST_CLASS_HASH
-        ];
-        let world = spawn_test_world(ns.span(), models.span());
-
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
-        let sut = ISpawnerDispatcher { contract_address };
-
+        let sys: Systems = test_rig::setup_world();
+        let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
         let room_name: ByteArray = "walking eagle pass";
         let pass_id: felt252 = obj_phash();
 
-        let west: Object = get!(world, pass_id, (Object));
+        let west: Object = get!(sys.world, pass_id, (Object));
 
         //! assert on the WEST objects properties
         assert_eq!(
@@ -125,9 +55,10 @@ mod tests {
             west.dirType,
             DirectionType::West,
             "got {:?}, expected {:?}",
-            west.matType,
-            MaterialType::Dirt
+            west.dirType,
+            DirectionType::West
         );
+
         let destination_name: ByteArray = "bensons plain";
         let dst_id: felt252 = p_hash::str_hash(@destination_name);
         assert_eq!(west.destId, dst_id, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
@@ -143,29 +74,17 @@ mod tests {
     }
 
     #[test]
-    #[available_gas(30000000)]
+    #[available_gas(50000000)]
     fn test_spawn_room_object_properties() {
-        let ns = ["the_oruggin_trail"];
-        let pid = 23;
-
-        let mut models = array![
-            txtdef::TEST_CLASS_HASH,
-            action::TEST_CLASS_HASH,
-            object::TEST_CLASS_HASH,
-            room::TEST_CLASS_HASH
-        ];
-        let world = spawn_test_world(ns.span(), models.span());
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
-        let sut = ISpawnerDispatcher { contract_address };
-
+    
+        let sys: Systems = test_rig::setup_world();
+        let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
         let room_name: ByteArray = "walking eagle pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(world, pass_id, (Room));
+        let pass: Room = get!(sys.world, pass_id, (Room));
 
         //! assert on the PASS objects properties
         //! the name/short description property
@@ -182,7 +101,7 @@ mod tests {
 
         //! check the stored text values
         let txtid = pass.txtDefId;
-        let txt = get!(world, txtid, (Txtdef));
+        let txt = get!(sys.world, txtid, (Txtdef));
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = "a high mountain pass that winds along...";
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
@@ -201,36 +120,25 @@ mod tests {
     }
 
     #[test]
-    #[available_gas(30000000)]
+    #[available_gas(40000000)]
     fn test_spawn_room_object_exit_properties() {
-        let ns = ["the_oruggin_trail"];
-        let pid = 23;
 
-        let mut models = array![
-            txtdef::TEST_CLASS_HASH,
-            action::TEST_CLASS_HASH,
-            object::TEST_CLASS_HASH,
-            room::TEST_CLASS_HASH
-        ];
-        let world = spawn_test_world(ns.span(), models.span());
-        // deploy systems contract
-        let contract_address = world
-            .deploy_contract('salt', spawner::TEST_CLASS_HASH.try_into().unwrap(),);
-        let sut = ISpawnerDispatcher { contract_address };
-
+        let sys: Systems = test_rig::setup_world();
+        let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
+
 
         let room_name: ByteArray = "walking eagle pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(world, pass_id, (Room));
+        let pass: Room = get!(sys.world, pass_id, (Room));
 
         //! exits should have one 
         let exits: Array<felt252> = pass.dirObjIds.clone();
         assert_ne!(exits.len(), 0, "got {:?}, expected {:?}", exits.len(), 0);
         //! exit id's should match
         let exitid = exits.at(0).clone();
-        let actual_exit: Object = get!(world, exitid, (Object));
+        let actual_exit: Object = get!(sys.world, exitid, (Object));
         let actual_id = actual_exit.objectId.clone();
         let expected_id = exitid.clone();
         assert_eq!(expected_id, actual_id, "got {:?}, expected {:?}", exitid, actual_id);

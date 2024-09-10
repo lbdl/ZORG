@@ -1,6 +1,6 @@
 #[dojo::interface]
-trait ISpawner {
-    fn setup();
+trait ISpawner<T> {
+    fn setup(ref world: IWorldDispatcher);
 }
 
 
@@ -24,7 +24,7 @@ pub mod spawner {
  
     #[abi(embed_v0)]
     impl SpawnerImpl of ISpawner<ContractState> {
-        fn setup(world: @IWorldDispatcher) {
+        fn setup(ref world: IWorldDispatcher) {
             make_rooms(world, 23);
         }
     }

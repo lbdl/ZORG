@@ -3,6 +3,9 @@ pub mod tokeniser {
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
 
+    /// Convert a string to an ActionType
+    /// this really should use hashes, i.e felt type
+    /// for ALL the types
     pub fn str_to_AT(s: ByteArray) -> ActionType {
         if s == "move"
             || s == "go"
@@ -108,7 +111,7 @@ pub mod confessor {
     /// 
     /// non movement and non looking verbs, i.e the general case 
     fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, ec> {
-        let mut do: ObjectType = ObjectType::None;
+        // let mut do: ObjectType = ObjectType::None;
         // let mut io: ObjectType = ObjectType::None;
 
         let s = cmd.at(cmd.len() - 1);
