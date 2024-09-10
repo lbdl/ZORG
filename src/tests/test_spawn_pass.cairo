@@ -127,11 +127,14 @@ mod tests {
         let txtid = pass.txtDefId;
         let txt = get!(sys.world, txtid, (Txtdef));
         let actual_desc = txt.text.clone();
-        let expected_desc: ByteArray = "it winds through the mountains, the path is treacherous\n
-                         toilet papered trees cover the steep \nvalley sides below you.\n
-                         On closer inspection the TP might \nbe the remains of a cricket team\n
-                         or perhaps a lost and very dead KKK picnic group.\n
-                         It's brass monkeys.";
+        let expected_desc: ByteArray = 
+                "it winds through the mountains, the path is treacherous\n
+                toilet papered trees cover the steep \n
+                valley sides below you.\n
+                On closer inspection the TP might \n
+                be the remains of a cricket team\n
+                or perhaps a lost and very dead KKK picnic group.\n
+                It's brass monkeys.";
 
         // assert description should be as expected
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
@@ -160,9 +163,19 @@ mod tests {
     }
 
     #[test]
-    #[available_gas(40000000)]
-    fn test_spawn_pass_exit_west_properties () {
-
+    #[available_gas(50000000)]
+    fn test_spawn_pass_exit_properties () {
+        // room should have:
+        // 1 exit
+        // exit should have:
+        // 1 action
+        // action should be:
+        // open
+        // revertable
+        // dBit
+        // enabled
+        // affectsActionId 0
+        // affectedByActionId 0
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
@@ -175,13 +188,30 @@ mod tests {
 
         // room should have one exit 
         let exits: Array<felt252> = pass.dirObjIds.clone();
-        assert_ne!(exits.len(), 0, "got {:?}, expected {:?}", exits.len(), 0);
+        assert_eq!(exits.len(), 1, "got {:?}, expected {:?}", exits.len(), 1);
         
-        // exit id's should match
-        let exitid = exits.at(0).clone();
-        let actual_exit: Object = get!(sys.world, exitid, (Object));
-        let actual_id = actual_exit.objectId.clone();
-        let expected_id = exitid.clone();
-        assert_eq!(expected_id, actual_id, "got {:?}, expected {:?}", exitid, actual_id);
+        // exit should have:
+        // 1 action
+        let exit_id = exits.at(0).clone();
+        let exit: Object = get!(sys.world, exit_id, (Object));
+        let actions: Array<felt252> = exit.objectActionIds.clone();
+        assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
+
+        let action_id = actions.at(0).clone();
+        let action: Action = get!(sys.world, action_id, (Action));
+
+        // action should be:
+        // open
+        assert_eq!(action.actionType, ActionType::Open, "got {:?}, expected {:?}", action.actionType, ActionType::Open);
+        // !revertable
+        assert_eq!(action.revertable, false, "got {:?}, expected {:?}", action.revertable, false);
+        // dBit
+        assert_eq!(action.dBit, true, "got {:?}, expected {:?}", action.dBit, true);
+        // enabled
+        assert_eq!(action.enabled, true, "got {:?}, expected {:?}", action.enabled, true);
+        // affectsActionId 0
+        assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
+        // affectedByActionId 0
+        assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
     }
 }
