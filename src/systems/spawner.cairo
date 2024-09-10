@@ -60,7 +60,7 @@ pub mod spawner {
         //! for the MockObjectImpl by uncommenting the
         //! println!() in the obj_hash function
         let mut p_west = Object{
-            objectId: st::NONE, 
+            objectId: st::SETME, 
             objType: zrk::ObjectType::Path, 
             dirType: zrk::DirectionType::West, 
             destId: h_util::str_hash(@dest_name), 
@@ -98,7 +98,11 @@ pub mod spawner {
 
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
-            "a high mountain pass that winds along..."
+            "it winds through the mountains, the path is treacherous\n
+                         toilet papered trees cover the steep \nvalley sides below you.\n
+                         On closer inspection the TP might \nbe the remains of a cricket team\n
+                         or perhaps a lost and very dead KKK picnic group.\n
+                         It's brass monkeys."
         } else {
             "nothing, empty space, you slowly dissolve to nothingness..."
         }

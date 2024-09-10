@@ -35,6 +35,10 @@ pub mod flags {
     pub const DEBUG: bool = true;
 }
 
+/// Status Codes
+/// really  this is used to set an "unset" value
+/// i.e set me later kinda thing
 pub mod statusid {
     pub const NONE: felt252 = 0;
+    pub const SETME: felt252 = 0;
 }

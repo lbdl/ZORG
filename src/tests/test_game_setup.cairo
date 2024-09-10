@@ -33,7 +33,6 @@ mod tests {
 
         let room_name: ByteArray = "walking eagle pass";
         let pass_id: felt252 = obj_phash();
-
         let west: Object = get!(sys.world, pass_id, (Object));
 
         //! assert on the WEST objects properties
@@ -103,7 +102,11 @@ mod tests {
         let txtid = pass.txtDefId;
         let txt = get!(sys.world, txtid, (Txtdef));
         let actual_desc = txt.text.clone();
-        let expected_desc: ByteArray = "a high mountain pass that winds along...";
+        let expected_desc: ByteArray = "it winds through the mountains, the path is treacherous\n
+                         toilet papered trees cover the steep \nvalley sides below you.\n
+                         On closer inspection the TP might \nbe the remains of a cricket team\n
+                         or perhaps a lost and very dead KKK picnic group.\n
+                         It's brass monkeys.";
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
         let actual_owner = txt.owner;
         let expected_owner = pass_id.clone();
