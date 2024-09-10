@@ -26,19 +26,11 @@ mod tests {
 
     #[test]
     #[available_gas(40000000)]
-    fn test_spawn_pass_WEST_properties() {
-        // west
+    fn test_spawn_pass_EXIT_WEST_OBJECT_properties() {
+        // WEST
         // material is dirt
         // dir is west
         // dest is bensons plain
-        // object actions should be present
-        // action should be enabled
-        // action should be open
-        // action should be !revertable
-        // action should be dBit
-        // action should be affectedByActionId 0
-        // action should be affectsActionId 0
-        // action txt should be "the path winds west, it is open"
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
@@ -73,9 +65,7 @@ mod tests {
         let destination_name: ByteArray = "bensons plain";
         let dst_id: felt252 = p_hash::str_hash(@destination_name);
         assert_eq!(west.destId, dst_id, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
-        assert_ne!(
-            west.objectActionIds.len(), 0, "got {:?}, expected {:?}", west.objectActionIds.len(), 0
-        );
+        
         //! assert the action has the expected ID
         let expected = act_phash();
         let actual: felt252 = west.objectActionIds.at(0).clone();
@@ -105,8 +95,11 @@ mod tests {
 
     #[test]
     #[available_gas(50000000)]
-    fn test_spawn_pass_object_properties() {
-    
+    fn test_spawn_pass_room_properties() {
+        // room should contain 0 objects
+        // room should contain 0 players
+        // room should have 1 exit
+        // room should have 1 textdef
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
@@ -116,8 +109,8 @@ mod tests {
 
         let pass: Room = get!(sys.world, pass_id, (Room));
 
-        //! assert on the PASS objects properties
-        //! the name/short description property
+        // assert on the PASS objects properties
+        // the name/short description property
         assert_eq!(
             pass.roomType,
             RoomType::Mountains,
@@ -125,6 +118,7 @@ mod tests {
             pass.roomType,
             RoomType::Mountains
         );
+
         let expected_name: ByteArray = "walking eagle pass";
         let actual = pass.shortTxt.clone();
         assert_eq!(actual, expected_name, "got {:?}, expected {:?}", pass.shortTxt, expected_name);
@@ -138,28 +132,36 @@ mod tests {
                          On closer inspection the TP might \nbe the remains of a cricket team\n
                          or perhaps a lost and very dead KKK picnic group.\n
                          It's brass monkeys.";
+
+        // assert description should be as expected
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
         
         let actual_owner = txt.owner;
         let expected_owner = pass_id.clone();
+
         // owner should be the pass id
         assert_eq!(
             actual_owner, expected_owner, "got {:?}, expected {:?}", txt.owner, expected_owner
         );
 
         // check the objects and players
-        // objects should be empty
+        // object ids should be empty
         let objects: Array<felt252> = pass.objectIds.clone();
         assert_eq!(objects.len(), 0, "got {:?}, expected {:?}", objects.len(), 0);
 
-        // players should be empty
+        // player ids should be empty
         let players: Array<felt252> = pass.players.clone();
         assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
+
+        // check the rooms exits
+        // there should be one
+        let exits: Array<felt252> = pass.dirObjIds.clone();
+        assert_eq!(exits.len(), 1, "got {:?}, expected {:?}", exits.len(), 1);
     }
 
     #[test]
     #[available_gas(40000000)]
-    fn test_spawn_pass_object_exit_properties() {
+    fn test_spawn_pass_exit_west_properties () {
 
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
@@ -171,10 +173,11 @@ mod tests {
 
         let pass: Room = get!(sys.world, pass_id, (Room));
 
-        //! exits should have one 
+        // room should have one exit 
         let exits: Array<felt252> = pass.dirObjIds.clone();
         assert_ne!(exits.len(), 0, "got {:?}, expected {:?}", exits.len(), 0);
-        //! exit id's should match
+        
+        // exit id's should match
         let exitid = exits.at(0).clone();
         let actual_exit: Object = get!(sys.world, exitid, (Object));
         let actual_id = actual_exit.objectId.clone();
