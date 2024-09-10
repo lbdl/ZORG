@@ -27,6 +27,18 @@ mod tests {
     #[test]
     #[available_gas(40000000)]
     fn test_spawn_pass_WEST_properties() {
+        // west
+        // material is dirt
+        // dir is west
+        // dest is bensons plain
+        // object actions should be present
+        // action should be enabled
+        // action should be open
+        // action should be !revertable
+        // action should be dBit
+        // action should be affectedByActionId 0
+        // action should be affectsActionId 0
+        // action txt should be "the path winds west, it is open"
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
@@ -70,6 +82,25 @@ mod tests {
         assert_eq!(
             actual, expected, "got {:?}, expected {:?}", west.objectActionIds.at(0), act_phash()
         );
+        // assert the action's properties 
+        let expected_action: Action = get!(sys.world, actual, (Action));
+        let expected_txt: ByteArray = "the path winds west, it is open";
+        let actual_txt = expected_action.dBitTxt.clone();
+
+        // action txt should be "the path winds west, it is open"e correct
+        assert_eq!(actual_txt, expected_txt, "got {:?}, expected {:?}", actual_txt, expected_txt);
+        // action should be enabled
+        assert_eq!(expected_action.enabled, true, "got {:?}, expected {:?}", expected_action.enabled, true);
+        // action should be open
+        assert_eq!(expected_action.actionType, ActionType::Open, "got {:?}, expected {:?}", expected_action.actionType, ActionType::Open);
+        // action should be !revertable
+        assert_eq!(expected_action.revertable, false, "got {:?}, expected {:?}", expected_action.revertable, false);
+        // action should be dBit
+        assert_eq!(expected_action.dBit, true, "got {:?}, expected {:?}", expected_action.dBit, true);
+        // action should be affectedByActionId 0
+        assert_eq!(expected_action.affectedByActionId, 0, "got {:?}, expected {:?}", expected_action.affectedByActionId, 0);
+        // action should be affectsActionId 0
+        assert_eq!(expected_action.affectsActionId, 0, "got {:?}, expected {:?}", expected_action.affectsActionId, 0);
     }
 
     #[test]
@@ -108,16 +139,20 @@ mod tests {
                          or perhaps a lost and very dead KKK picnic group.\n
                          It's brass monkeys.";
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
+        
         let actual_owner = txt.owner;
         let expected_owner = pass_id.clone();
+        // owner should be the pass id
         assert_eq!(
             actual_owner, expected_owner, "got {:?}, expected {:?}", txt.owner, expected_owner
         );
 
-        //! check the objects and players
-        //! objects should be empty as should players
+        // check the objects and players
+        // objects should be empty
         let objects: Array<felt252> = pass.objectIds.clone();
         assert_eq!(objects.len(), 0, "got {:?}, expected {:?}", objects.len(), 0);
+
+        // players should be empty
         let players: Array<felt252> = pass.players.clone();
         assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
     }
