@@ -26,7 +26,7 @@ mod tests {
 
     #[test]
     #[available_gas(40000000)]
-    fn test_spawn_room_WEST_properties() {
+    fn test_spawn_pass_WEST_properties() {
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
@@ -75,7 +75,7 @@ mod tests {
 
     #[test]
     #[available_gas(50000000)]
-    fn test_spawn_room_object_properties() {
+    fn test_spawn_pass_object_properties() {
     
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
@@ -121,7 +121,7 @@ mod tests {
 
     #[test]
     #[available_gas(40000000)]
-    fn test_spawn_room_object_exit_properties() {
+    fn test_spawn_pass_object_exit_properties() {
 
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;

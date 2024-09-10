@@ -1,5 +1,5 @@
 pub mod verb_dispatcher {
-    use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
+    // use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::lib::look::look;

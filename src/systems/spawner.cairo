@@ -31,18 +31,17 @@ pub mod spawner {
 
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         //pass
-        let p_id = pass_gen(w, pl);
+        let _ = pass_gen(w, pl);
     }
 
     fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
-        let pass_desc: ByteArray = "a high mountain pass that winds along...";
+        // let pass_desc: ByteArray = "a high mountain pass that winds along...";
     }
 
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
         // make an open action for the path west
         // and store it on the world
         // probs should be a txt_def
-        // TODO a_id should be a hash
         let mut a_west = Action{actionId: st::NONE, actionType: zrk::ActionType::Open, 
             dBitTxt: "the path winds west, it is open", enabled: true, 
             revertable: false, dBit: true, 
