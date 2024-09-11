@@ -26,11 +26,15 @@ mod tests {
 
 
     #[test]
-    #[available_gas(50000000)]
+    #[available_gas(600000000)]
     fn test_spawn_plain_room_properties() {
-        // room should contain 0 objects
+        // room should contain 1 objects
+        // object should be a ball
+        // ball should have 1 action
+        // ball action should be kick
+        // ball action should have dBitTxt  
         // room should contain 0 players
-        // room should have 1 exit
+        // room should have 2 exit
         // room should have 1 textdef
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
@@ -41,8 +45,8 @@ mod tests {
 
         let plain: Room = get!(sys.world, plain_id, (Room));
 
-        // assert on the PASS objects properties
-        // the name/short description property
+        // assert on the plain properties
+        // type
         assert_eq!(
             plain.roomType,
             RoomType::Plain,
@@ -50,25 +54,17 @@ mod tests {
             plain.roomType,
             RoomType::Plain
         );
-
+        // name
         let expected_name: ByteArray = "bensons plain";
         let actual = plain.shortTxt.clone();
         assert_eq!(actual, expected_name, "got {:?}, expected {:?}", plain.shortTxt, expected_name);
 
-        //! check the stored text values
+        // description
         let txtid = plain.txtDefId;
         let txt = get!(sys.world, txtid, (Txtdef));
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = 
-                "it winds through the mountains, the path is treacherous\n
-                toilet papered trees cover the steep \n
-                valley sides below you.\n
-                On closer inspection the TP might \n
-                be the remains of a cricket team\n
-                or perhaps a lost and very dead KKK picnic group.\n
-                It's brass monkeys.";
-
-        // assert description should be as expected
+                "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n";
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
         
         let actual_owner = txt.owner;
@@ -84,9 +80,43 @@ mod tests {
         let objects: Array<felt252> = plain.objectIds.clone();
         assert_eq!(objects.len(), 1, "got {:?}, expected {:?}", objects.len(), 1);
 
+        // objects should be
+        // a ball
+        // kickable
+        // *****
+        // description
+        let ball: Object = get!(sys.world, objects.at(0).clone(), (Object));
+        let actual_desc_id = ball.txtDefId;
+        let actual_desc: Txtdef = get!(sys.world, actual_desc_id, (Txtdef));
+        let actual_text = actual_desc.text.clone();
+        let expected_desc: ByteArray = 
+                "a knock off UEFA football\nits a bit battered and bruised\nnot exactly a sphere\nbut you can kick it";
+        assert_eq!(actual_text, expected_desc, "got {:?}, expected {:?}", actual_text, expected_desc);
+
+        // ball action
+        let actions: Array<felt252> = ball.objectActionIds.clone();
+        assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
+        let action_id = actions.at(0).clone();
+        let action: Action = get!(sys.world, action_id, (Action));
+        assert_eq!(action.actionType, ActionType::Kick, "got {:?}, expected {:?}", action.actionType, ActionType::Kick);
+        // action.dBit should be true
+        assert_eq!(action.dBit, true, "got {:?}, expected {:?}", action.dBit, true);
+        // action.enabled should be true
+        assert_eq!(action.enabled, true, "got {:?}, expected {:?}", action.enabled, true);
+        // action.revertable should be false
+        assert_eq!(action.revertable, false, "got {:?}, expected {:?}", action.revertable, false);
+        // action.affectsActionId should be 0
+        assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
+        // action.affectedByActionId should be 0    
+        assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
+        // action.dBitTxt should be "the ball bounces feebly and rolls into some dog shit. fun."
+        let expected_dbit_txt: ByteArray = "the ball bounces feebly and rolls into some dog shit. fun.";
+        let actual_dbit_txt = action.dBitTxt.clone();
+        assert_eq!(actual_dbit_txt, expected_dbit_txt, "got {:?}, expected {:?}", actual_dbit_txt, expected_dbit_txt);
+
         // player ids should be empty
         let players: Array<felt252> = plain.players.clone();
-        assert_eq!(players.len(), 1, "got {:?}, expected {:?}", players.len(), 1);
+        assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
 
         // check the rooms exits
         // there should be 2 exits
@@ -95,8 +125,8 @@ mod tests {
     }
 
     #[test]
-    #[available_gas(50000000)]
-    fn test_spawn_pass_exit_properties () {
+    #[available_gas(600000000)]
+    fn test_spawn_plain_exit_properties () {
         // room should have:
         // 1 exit
         // exit should have:
@@ -113,19 +143,34 @@ mod tests {
         sut.setup();
 
 
-        let room_name: ByteArray = "walking eagle pass";
-        let pass_id: felt252 = p_hash::str_hash(@room_name);
+        let room_name: ByteArray = "bensons plain";
+        let plain_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(sys.world, pass_id, (Room));
+        let plain: Room = get!(sys.world, plain_id, (Room));
 
-        // room should have one exit 
-        let exits: Array<felt252> = pass.dirObjIds.clone();
-        assert_eq!(exits.len(), 1, "got {:?}, expected {:?}", exits.len(), 1);
+        // room should have 2 exits 
+        let exits: Array<felt252> = plain.dirObjIds.clone();
+        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
         // exit should have:
-        // 1 action
         let exit_id = exits.at(0).clone();
         let exit: Object = get!(sys.world, exit_id, (Object));
+        
+        // assert that
+        // exit is a door
+        assert_eq!(exit.objType, ObjectType::Door, "got {:?}, expected {:?}", exit.objType, ObjectType::Door);
+        // exit destination should be:
+        // eli's barn
+        let dest_name = "eli's barn";
+        let dest_id = p_hash::str_hash(@dest_name);
+        assert_eq!(exit.destId, dest_id, "got {:?}, expected {:?}", exit.destId, dest_id);
+        // exit direction should be:
+        // South
+        assert_eq!(exit.dirType, DirectionType::North, "got {:?}, expected {:?}", exit.dirType, DirectionType::North);
+        // exit material should be:
+        // Dirt
+        assert_eq!(exit.matType, MaterialType::Dirt, "got {:?}, expected {:?}", exit.matType, MaterialType::Dirt);
+        // 1 action
         let actions: Array<felt252> = exit.objectActionIds.clone();
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 

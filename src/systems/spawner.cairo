@@ -32,6 +32,8 @@ pub mod spawner {
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         //pass
         let _ = pass_gen(w, pl);
+        let _ = plain_gen(w, pl);
+        // let _ = barn_gen(w, pl);
     }
 
     fn plain_gen(w: IWorldDispatcher, playerid: felt252) {
@@ -102,6 +104,37 @@ pub mod spawner {
         // their components we can store the paths themselves
         store_objects(w, array![p_east, p_north]);
 
+        // now the football
+        
+        //kick action for the ball
+        let mut a_kick = Action{actionId: st::NONE, actionType: zrk::ActionType::Kick, 
+            dBitTxt: "the ball bounces feebly and rolls into some dog shit. fun.", enabled: true, 
+            revertable: false, dBit: true, 
+            affectsActionId: 0, affectedByActionId: 0};
+        
+        let ak_id = h_util::action_hash(@a_kick);
+        a_kick.actionId = ak_id;
+        store_actions(w, array![a_kick]);
+
+        let mut football = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Ball, 
+            dirType: zrk::DirectionType::None, 
+            destId: st::NONE,
+            matType: zrk::MaterialType::Leather,
+            objectActionIds: array![ak_id],
+            txtDefId: st::SETME 
+         };
+
+        let ball_id = h_util::obj_hash(@football); 
+        football.objectId = ball_id;
+        let ball_desc: ByteArray = "a knock off UEFA football\nits a bit battered and bruised\nnot exactly a sphere\nbut you can kick it";
+        let td_id_b = h_util::str_hash(@ball_desc); // text id
+        football.txtDefId = td_id_b;
+
+        store_txt(w, td_id_b, ball_id, ball_desc);
+        store_objects(w, array![football]);
+
           // now store a room with all its shizzle
         let plain_desc: ByteArray = make_txt(rm::PLAIN);
         let _txt_id = h_util::str_hash(@plain_desc);
@@ -113,7 +146,7 @@ pub mod spawner {
             roomType: zrk::RoomType::Plain,
             txtDefId: _txt_id,
             shortTxt: place_name,
-            objectIds: array![],
+            objectIds: array![ball_id],
             dirObjIds: array![de_id, dn_id],
             players: array![]
         };
@@ -189,21 +222,11 @@ pub mod spawner {
 
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
-            "it winds through the mountains, the path is treacherous\n
-                         toilet papered trees cover the steep \nvalley sides below you.\n
-                         On closer inspection the TP might \nbe the remains of a cricket team\n
-                         or perhaps a lost and very dead KKK picnic group.\n
-                         It's brass monkeys."
+            "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
         } else if id == rm::PLAIN {
-            "the plain reaches seemingly endlessly to the sky in all directions\n
-             and the sky itself is grimy and cold seeming.\n
-            pyramidal rough shapes dot the horizin and land which\n
-            upon closer examination are made from bufalo skulls.\n
-            The air tastes of grease and bensons.\n
-            happy happy happy\n
-            "
+            "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
         } else {
-            "nothing, empty space, you slowly dissolve to nothingness..."
+            "nothing,\nempty space,\nyou slowly dissolve to nothingness..."
         }
     }
 

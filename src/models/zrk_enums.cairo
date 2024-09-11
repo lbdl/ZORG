@@ -77,6 +77,7 @@ pub enum MaterialType {
     Iron,
     Shit,
     Mud,
+    Leather,
 }
 
 /// MaterialType -> short_string or felt252
@@ -94,6 +95,7 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
             MaterialType::Iron => 'iron',
             MaterialType::Shit => 'shit',
             MaterialType::Mud => 'mud',
+            MaterialType::Leather => 'leather',
             _ => 'none',
         }
     }

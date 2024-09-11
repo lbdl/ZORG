@@ -35,6 +35,7 @@ pub mod tests {
     // pub mod test_world;
     pub mod test_meatpuppet_hearing;
     pub mod test_tokeniser;
-    pub mod test_game_setup;
+    pub mod test_spawn_plain;
+    pub mod test_spawn_pass;
     pub mod test_rig;
 }
