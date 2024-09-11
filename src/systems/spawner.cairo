@@ -34,6 +34,97 @@ pub mod spawner {
         let _ = pass_gen(w, pl);
     }
 
+    fn plain_gen(w: IWorldDispatcher, playerid: felt252) {
+        // make an open action for the path east
+        // and store it on the world
+        // ACTION open east
+        let mut a_east = Action{actionId: st::NONE, actionType: zrk::ActionType::Open, 
+            dBitTxt: "the path winds east, it is open", enabled: true, 
+            revertable: false, dBit: true, 
+            affectsActionId: 0, affectedByActionId: 0};
+        
+        let ae_id = h_util::action_hash(@a_east);
+        a_east.actionId = ae_id;
+
+        // ACTION open north
+        let mut a_north = Action{
+            actionId: st::NONE, 
+            actionType: zrk::ActionType::Open, 
+            dBitTxt: "the path heads north, it leads to a barn", enabled: true, 
+            revertable: false, dBit: true, 
+            affectsActionId: 0, affectedByActionId: 0};
+        
+        let an_id = h_util::action_hash(@a_north);
+        a_north.actionId = an_id;
+        store_actions(w, array![a_east, a_north]);
+
+        // now add the east open to door to the mountains
+        // door/path are used interchangeably in the code
+        let path_desc: ByteArray = "a path east leads upwards toward the mountains";
+        let td_id_p = h_util::str_hash(@path_desc); // text id
+
+        let east_dest_name: ByteArray = "walking eagle pass";
+        let mut p_east = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Path, 
+            dirType: zrk::DirectionType::East, 
+            destId: h_util::str_hash(@east_dest_name), 
+            matType: zrk::MaterialType::Dirt,
+            objectActionIds: array![ae_id],
+            txtDefId: td_id_p 
+         };
+
+        let de_id = h_util::obj_hash(@p_east); 
+        p_east.objectId = de_id;
+        store_txt(w, td_id_p, de_id, path_desc);
+        
+        // now add the north open to door to the barn
+        // door/path are used interchangeably in the code
+        let north_path_desc: ByteArray = "a path north leads toward a large wooden barn";
+        let td_id_pn = h_util::str_hash(@north_path_desc); // text id
+
+        let north_dest_name: ByteArray = "eli's barn";
+        let mut p_north = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Path, 
+            dirType: zrk::DirectionType::North, 
+            destId: h_util::str_hash(@north_dest_name), 
+            matType: zrk::MaterialType::Dirt,
+            objectActionIds: array![an_id],
+            txtDefId: td_id_pn 
+         };
+
+        let dn_id = h_util::obj_hash(@p_north); 
+        p_north.objectId = dn_id;
+        store_txt(w, td_id_pn, dn_id, north_path_desc);
+
+        // now we have assembled 2 path objects and stored
+        // their components we can store the paths themselves
+        store_objects(w, array![p_east, p_north]);
+
+          // now store a room with all its shizzle
+        let plain_desc: ByteArray = make_txt(rm::PLAIN);
+        let _txt_id = h_util::str_hash(@plain_desc);
+        let place_name: ByteArray = "bensons plain";
+        let rmid = h_util::str_hash(@place_name);
+
+        let mut place = Room{
+            roomId: rmid,
+            roomType: zrk::RoomType::Plain,
+            txtDefId: _txt_id,
+            shortTxt: place_name,
+            objectIds: array![],
+            dirObjIds: array![de_id, dn_id],
+            players: array![]
+        };
+
+        // set main description text in world store
+        // for the place/area/room
+        store_txt(w, _txt_id, rmid, plain_desc);
+        store_places(w, array![place]);
+
+    }
+
     fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
         // let pass_desc: ByteArray = "a high mountain pass that winds along...";
     }
@@ -103,6 +194,14 @@ pub mod spawner {
                          On closer inspection the TP might \nbe the remains of a cricket team\n
                          or perhaps a lost and very dead KKK picnic group.\n
                          It's brass monkeys."
+        } else if id == rm::PLAIN {
+            "the plain reaches seemingly endlessly to the sky in all directions\n
+             and the sky itself is grimy and cold seeming.\n
+            pyramidal rough shapes dot the horizin and land which\n
+            upon closer examination are made from bufalo skulls.\n
+            The air tastes of grease and bensons.\n
+            happy happy happy\n
+            "
         } else {
             "nothing, empty space, you slowly dissolve to nothingness..."
         }
