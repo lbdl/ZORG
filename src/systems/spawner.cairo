@@ -60,7 +60,7 @@ pub mod spawner {
         a_north.actionId = an_id;
         store_actions(w, array![a_east, a_north]);
 
-        // now add the east open to door to the mountains
+        // now add the east open to the mountains
         // door/path are used interchangeably in the code
         let path_desc: ByteArray = "a path east leads upwards toward the mountains";
         let td_id_p = h_util::str_hash(@path_desc); // text id

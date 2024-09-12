@@ -152,26 +152,80 @@ mod tests {
         let exits: Array<felt252> = plain.dirObjIds.clone();
         assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
-        // exit should have:
-        let exit_id = exits.at(0).clone();
-        let exit: Object = get!(sys.world, exit_id, (Object));
+        // exit EAST
+        let exit_e_id = exits.at(0).clone();
+        let exit_e: Object = get!(sys.world, exit_e_id, (Object));
         
         // assert that
-        // exit is a door
-        assert_eq!(exit.objType, ObjectType::Door, "got {:?}, expected {:?}", exit.objType, ObjectType::Door);
-        // exit destination should be:
-        // eli's barn
-        let dest_name = "eli's barn";
-        let dest_id = p_hash::str_hash(@dest_name);
-        assert_eq!(exit.destId, dest_id, "got {:?}, expected {:?}", exit.destId, dest_id);
+        // exit EAST is a path
+        assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_e.objType, ObjectType::Path);
+        // exit EAST destination should be:
+        // walking eagle pass
+        // ids match
+        let dest_e_name = "walking eagle pass";
+        let dest_e_id = p_hash::str_hash(@dest_e_name);
+        assert_eq!(exit_e.destId, dest_e_id, "got {:?}, expected {:?}", exit_e.destId, dest_e_id);
+        // description matches
+        let txt_id = exit_e.txtDefId;
+        let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
+        let _desc = txt.text.clone();
+        let _desc_expected = "a path east leads upwards toward the mountains";
+        assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
+        // exit EAST should be a path
+        assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_e.objType, ObjectType::Path);
         // exit direction should be:
-        // South
-        assert_eq!(exit.dirType, DirectionType::North, "got {:?}, expected {:?}", exit.dirType, DirectionType::North);
+        // East
+        assert_eq!(exit_e.dirType, DirectionType::East, "got {:?}, expected {:?}", exit_e.dirType, DirectionType::East);
         // exit material should be:
         // Dirt
-        assert_eq!(exit.matType, MaterialType::Dirt, "got {:?}, expected {:?}", exit.matType, MaterialType::Dirt);
+        assert_eq!(exit_e.matType, MaterialType::Dirt, "got {:?}, expected {:?}", exit_e.matType, MaterialType::Dirt);
+        // action
+        let actions: Array<felt252> = exit_e.objectActionIds.clone();
+        assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
+
+       let action_id = actions.at(0).clone();
+       let action: Action = get!(sys.world, action_id, (Action));
+
+        // action should be:
+        // open
+       assert_eq!(action.actionType, ActionType::Open, "got {:?}, expected {:?}", action.actionType, ActionType::Open);
+       // !revertable
+       assert_eq!(action.revertable, false, "got {:?}, expected {:?}", action.revertable, false);
+       // dBit
+       assert_eq!(action.dBit, true, "got {:?}, expected {:?}", action.dBit, true);
+       // enabled
+       assert_eq!(action.enabled, true, "got {:?}, expected {:?}", action.enabled, true);
+       // affectsActionId 0
+       assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
+       // affectedByActionId 0
+       assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
+
+        // exit NORTH
+        let exit_n_id = exits.at(1).clone();
+        let exit_n: Object = get!(sys.world, exit_n_id, (Object));
+        
+        // exit NORTH destination should be:
+        // eli's barn
+        // ids match
+        let dest_name = "eli's barn";
+        let dest_id = p_hash::str_hash(@dest_name);
+        assert_eq!(exit_n.destId, dest_id, "got {:?}, expected {:?}", exit_n.destId, dest_id);
+        // description matches
+        let txt_id = exit_n.txtDefId;
+        let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
+        let _desc = txt.text.clone();
+        let _desc_expected = "a path north leads toward a large wooden barn";
+        assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
+        // exit NORTH should be a path
+        assert_eq!(exit_n.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_n.objType, ObjectType::Path);
+        // exit direction should be:
+        // North
+        assert_eq!(exit_n.dirType, DirectionType::North, "got {:?}, expected {:?}", exit_n.dirType, DirectionType::North);
+        // exit material should be:
+        // Dirt
+        assert_eq!(exit_n.matType, MaterialType::Dirt, "got {:?}, expected {:?}", exit_n.matType, MaterialType::Dirt);
         // 1 action
-        let actions: Array<felt252> = exit.objectActionIds.clone();
+        let actions: Array<felt252> = exit_n.objectActionIds.clone();
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
         let action_id = actions.at(0).clone();
