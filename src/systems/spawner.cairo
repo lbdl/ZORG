@@ -33,9 +33,13 @@ pub mod spawner {
         //pass
         let _ = pass_gen(w, pl);
         let _ = plain_gen(w, pl);
-        // let _ = barn_gen(w, pl);
+        let _ = barn_gen(w, pl);
     }
 
+    /// Bensons Plain
+    /// open path east
+    /// open path north
+    /// 1 object: a football
     fn plain_gen(w: IWorldDispatcher, playerid: felt252) {
         // make an open action for the path east
         // and store it on the world
@@ -157,9 +161,125 @@ pub mod spawner {
         store_places(w, array![place]);
 
     }
-
+    /// Elis Barn
+    /// open door south
+    /// closed window west
+    /// mo objects 
     fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
-        // let pass_desc: ByteArray = "a high mountain pass that winds along...";
+        // WINDOW WEST actions
+        // ACTION open west
+        // its disabled and closed and non revertable
+        // so it needs to be enabled by the action chain
+        let mut a_west_open = Action{
+            actionId: st::SETME, 
+            actionType: zrk::ActionType::Open, 
+            dBitTxt: "the window, now broken, falls open",
+            enabled: false, 
+            dBit: false, 
+            revertable: false,
+            affectsActionId: st::NONE, affectedByActionId: st::SETME
+        };
+
+        // ACTION smash west
+        let mut a_west_smash = Action{
+            actionId: st::SETME, 
+            actionType: zrk::ActionType::Break, 
+            dBitTxt: "the window, smashes, glass flies everywhere, very very satisfying", 
+            enabled: true, 
+            dBit: false, 
+            revertable: false, 
+            affectsActionId: st::SETME, affectedByActionId: st::NONE
+        };
+    
+        let a_open_id = h_util::action_hash(@a_west_open);
+        let a_smash_id = h_util::action_hash(@a_west_smash);
+        
+        a_west_smash.actionId = a_smash_id;
+        a_west_smash.affectsActionId = a_open_id;
+        a_west_open.actionId = a_open_id;
+        a_west_open.affectedByActionId = a_smash_id;
+
+        // store the actions on the world
+        store_actions(w, array![a_west_open, a_west_smash]);
+
+        // DOOR SOUTH actions
+        // ACTION open south
+        let mut a_south_open = Action{
+            actionId: st::SETME, 
+            actionType: zrk::ActionType::Open, 
+            dBitTxt: "the door, closes with a creak",
+            enabled: true, 
+            dBit: true, 
+            revertable: false,
+            affectsActionId: st::NONE, affectedByActionId: st::NONE
+        };
+        let a_open_south_id = h_util::action_hash(@a_south_open);
+        a_south_open.actionId = a_open_south_id;
+
+        // store the actions on the world
+        store_actions(w, array![a_south_open]);
+
+        // Now the exits
+        // SOUTH DOOR
+        let mut d_south = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Door, 
+            dirType: zrk::DirectionType::South, 
+            destId: st::NONE,
+            matType: zrk::MaterialType::Wood,
+            objectActionIds: array![a_open_south_id],
+            txtDefId: st::SETME 
+         };
+         let dest_name_south: ByteArray = "bensons plain";
+         let dest_south_id = h_util::str_hash(@dest_name_south);
+         d_south.destId = dest_south_id;
+         let d_south_id = h_util::obj_hash(@d_south);
+         d_south.objectId = d_south_id;
+         let south_desc: ByteArray = "an old wooden barn door, leads south";
+         let td_id_south = h_util::str_hash(@south_desc);
+         d_south.txtDefId = td_id_south;
+         store_txt(w, td_id_south, d_south_id, south_desc);
+
+         // WEST WINDOW
+         let mut d_west = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Window, 
+            dirType: zrk::DirectionType::West, 
+            destId: st::NONE,
+            matType: zrk::MaterialType::Glass,
+            objectActionIds: array![a_open_id, a_smash_id],
+            txtDefId: st::SETME 
+         };
+         let dest_name_west: ByteArray = "eli's forge";
+         let dest_west_id = h_util::str_hash(@dest_name_west);
+         d_west.destId = dest_west_id;
+         let d_west_id = h_util::obj_hash(@d_west);
+         d_west.objectId = d_west_id;
+         let west_desc: ByteArray = "a dusty window, at chest height";
+         let td_id_west = h_util::str_hash(@west_desc);
+         d_west.txtDefId = td_id_west;
+         store_txt(w, td_id_west, d_west_id, west_desc);
+
+         // now store the objects
+         store_objects(w, array![d_south, d_west]);
+
+         // ROOM
+         let barn_desc: ByteArray = make_txt(rm::BARN);
+         let _txt_id = h_util::str_hash(@barn_desc);
+         let place_name: ByteArray = "eli's barn";
+         let rmid = h_util::str_hash(@place_name);
+         store_txt(w, _txt_id, rmid, barn_desc);
+
+         let barn = Room{
+            roomId: rmid,
+            roomType: zrk::RoomType::Barn,
+            txtDefId: _txt_id,
+            shortTxt: place_name,
+            objectIds: array![],
+            dirObjIds: array![d_south_id, d_west_id],
+            players: array![]
+        };
+        store_places(w, array![barn]);
     }
 
     fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
@@ -220,11 +340,14 @@ pub mod spawner {
         store_places(w, array![place]);
     }
 
+    // nb the Language server really can't cope with multi line string so make sure its just a long long line
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
             "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
         } else if id == rm::PLAIN {
             "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
+        } else if id == rm::BARN {
+            "the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
         } else {
             "nothing,\nempty space,\nyou slowly dissolve to nothingness..."
         }

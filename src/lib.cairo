@@ -37,5 +37,6 @@ pub mod tests {
     pub mod test_tokeniser;
     pub mod test_spawn_plain;
     pub mod test_spawn_pass;
+    pub mod test_spawn_barn;
     pub mod test_rig;
 }

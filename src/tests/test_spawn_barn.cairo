@@ -28,11 +28,7 @@ mod tests {
     #[test]
     #[available_gas(600000000)]
     fn test_spawn_barn_room_properties() {
-        // room should contain 1 objects
-        // object should be a ball
-        // ball should have 1 action
-        // ball action should be kick
-        // ball action should have dBitTxt  
+        // room should contain 0 objects
         // room should contain 0 players
         // room should have 2 exit
         // room should have 1 textdef
@@ -64,7 +60,7 @@ mod tests {
         let txt = get!(sys.world, txtid, (Txtdef));
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = 
-                "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n";
+                "the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks";
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
         
         let actual_owner = txt.owner;
@@ -76,45 +72,11 @@ mod tests {
         );
 
         // check the objects and players
-        // object ids should contain 1 item
+        // object ids should contain 0 item
         let objects: Array<felt252> = barn.objectIds.clone();
-        assert_eq!(objects.len(), 1, "got {:?}, expected {:?}", objects.len(), 1);
+        assert_eq!(objects.len(), 0, "got {:?}, expected {:?}", objects.len(), 0);
 
-        // objects should be
-        // a ball
-        // kickable
-        // *****
-        // description
-        let ball: Object = get!(sys.world, objects.at(0).clone(), (Object));
-        let actual_desc_id = ball.txtDefId;
-        let actual_desc: Txtdef = get!(sys.world, actual_desc_id, (Txtdef));
-        let actual_text = actual_desc.text.clone();
-        let expected_desc: ByteArray = 
-                "a knock off UEFA football\nits a bit battered and bruised\nnot exactly a sphere\nbut you can kick it";
-        assert_eq!(actual_text, expected_desc, "got {:?}, expected {:?}", actual_text, expected_desc);
-
-        // ball action
-        let actions: Array<felt252> = ball.objectActionIds.clone();
-        assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
-        let action_id = actions.at(0).clone();
-        let action: Action = get!(sys.world, action_id, (Action));
-        assert_eq!(action.actionType, ActionType::Kick, "got {:?}, expected {:?}", action.actionType, ActionType::Kick);
-        // action.dBit should be true
-        assert_eq!(action.dBit, true, "got {:?}, expected {:?}", action.dBit, true);
-        // action.enabled should be true
-        assert_eq!(action.enabled, true, "got {:?}, expected {:?}", action.enabled, true);
-        // action.revertable should be false
-        assert_eq!(action.revertable, false, "got {:?}, expected {:?}", action.revertable, false);
-        // action.affectsActionId should be 0
-        assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
-        // action.affectedByActionId should be 0    
-        assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
-        // action.dBitTxt should be "the ball bounces feebly and rolls into some dog shit. fun."
-        let expected_dbit_txt: ByteArray = "the ball bounces feebly and rolls into some dog shit. fun.";
-        let actual_dbit_txt = action.dBitTxt.clone();
-        assert_eq!(actual_dbit_txt, expected_dbit_txt, "got {:?}, expected {:?}", actual_dbit_txt, expected_dbit_txt);
-
-        // player ids should be empty
+                // player ids should be empty
         let players: Array<felt252> = barn.players.clone();
         assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
 

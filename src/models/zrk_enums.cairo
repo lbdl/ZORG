@@ -44,6 +44,7 @@ pub enum RoomType {
     Room,
     Plain,
     Mountains,
+    Barn,
 }
 
 impl RT_to_Felt252 of Into<RoomType, felt252> {
@@ -57,6 +58,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::Plain => 'plain',
             RoomType::Room => 'room',
             RoomType::Mountains => 'mountains',
+            RoomType::Barn => 'barn',
             RoomType::None => 'none',
         }
     }
