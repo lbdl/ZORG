@@ -176,4 +176,12 @@ mod tests {
         let actual: Result<Garble, E> = confessor::confess(_in); 
         assert_eq!(actual, expected, "Expected {:?} got {:?}", expected, actual);
     }
+
+    #[test]
+    fn test_sem_vrb_response_mapping() {
+        let kick = ActionType::Kick;
+        let expected_response: ActionType = ActionType::Break;
+        let actual_response: ActionType = confessor::vrb_to_response(kick);
+        assert_eq!(actual_response, expected_response, "Expected {:?} got {:?}", expected_response, actual_response);
+    }
 }

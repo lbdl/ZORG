@@ -103,6 +103,23 @@ pub mod confessor {
         }
     }
 
+    /// map a verb to a response
+    /// 
+    /// objects that respond to vrbs get a corresponding action
+    /// type. i.e. a kick will map to a break action
+    /// so if want a breakable window then we add a break action
+    /// to the object and then if a direct object, say a ball has
+    /// a kick action then the engine will look for its response mapping
+    /// a break action or indeed whatever is set below and if the indirect
+    /// object has a break action then we break the window etc.
+    pub fn vrb_to_response(vrb: ActionType) -> ActionType {
+        if vrb == ActionType::Kick {
+            ActionType::Break
+        } else {
+            ActionType::None
+        }
+    }
+
     fn bullshit() -> Result<Garble, ec> {
           Result::Err(ec::BadFood)
     }

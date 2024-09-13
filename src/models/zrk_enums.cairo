@@ -149,6 +149,7 @@ pub enum ActionType {
     Smash,
     Pray,
     Open,
+    Break,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -164,6 +165,7 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Smash => 'smash',
             ActionType::Pray => 'pray',
             ActionType::Open => 'open',
+            ActionType::Break => 'break',
             ActionType::None => 'none',
         }
     }
