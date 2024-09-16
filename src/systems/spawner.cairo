@@ -379,14 +379,6 @@ pub mod spawner {
             i += 1 + i;
         }
     }
-    // fn store<T, +Clone<T>, +Drop<T>, +Serde<T> >(w: IWorldDispatcher, t: Array<T>) {
-    //     let mut i = 0;
-    //     while i < t.len() {
-    //         let a = t.at(i).clone();
-    //         set!(w, (a));
-    //         i += 1 + i;
-    //     }
-    // }
 
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
         set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));

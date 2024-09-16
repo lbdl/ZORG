@@ -115,59 +115,78 @@ mod tests {
         assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
         // exit EAST
-        let exit_w_id = exits.at(0).clone();
+        let exit_w_id = exits.at(1).clone();
         let exit_w: Object = get!(sys.world, exit_w_id, (Object));
         
         // assert that
-        // exit EAST is a path
+        // exit EAST is a WINDOW
         assert_eq!(exit_w.objType, ObjectType::Window, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Window);
         // exit EAST destination should be:
-        // walking eagle pass
+        // eli's forge
         // ids match
-        let dest_w_name = "the old forge";
+        let dest_w_name = "eli's forge";
         let dest_w_id = p_hash::str_hash(@dest_w_name);
         assert_eq!(exit_w.destId, dest_w_id, "got {:?}, expected {:?}", exit_w.destId, dest_w_id);
         // description matches
         let txt_id = exit_w.txtDefId;
         let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
         let _desc = txt.text.clone();
-        let _desc_expected = "a path east leads upwards toward the mountains";
+        let _desc_expected = "a dusty window, at chest height";
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
-        // exit WEST should be a path
+        // exit WEST should be a window
         assert_eq!(exit_w.objType, ObjectType::Window, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Window);
         // exit direction should be:
         // West
         assert_eq!(exit_w.dirType, DirectionType::West, "got {:?}, expected {:?}", exit_w.dirType, DirectionType::West);
         // exit material should be:
-        // Dirt
+        // Glass
         assert_eq!(exit_w.matType, MaterialType::Glass, "got {:?}, expected {:?}", exit_w.matType, MaterialType::Glass);
         // action
         // 2 actions
         let actions: Array<felt252> = exit_w.objectActionIds.clone();
         assert_eq!(actions.len(), 2, "got {:?}, expected {:?}", actions.len(), 1);
 
-       let action_id = actions.at(0).clone();
-       let action: Action = get!(sys.world, action_id, (Action));
+       let open_action_id = actions.at(0).clone();
+       let open_action: Action = get!(sys.world, open_action_id, (Action));
 
-        // action should be:
+        // action 1 should be:
         // open
-       assert_eq!(action.actionType, ActionType::Open, "got {:?}, expected {:?}", action.actionType, ActionType::Open);
+       assert_eq!(open_action.actionType, ActionType::Open, "got {:?}, expected {:?}", open_action.actionType, ActionType::Open);
        // !revertable
-       assert_eq!(action.revertable, false, "got {:?}, expected {:?}", action.revertable, false);
+       assert_eq!(open_action.revertable, false, "got {:?}, expected {:?}", open_action.revertable, false);
        // dBit
-       assert_eq!(action.dBit, true, "got {:?}, expected {:?}", action.dBit, true);
+       assert_eq!(open_action.dBit, false, "got {:?}, expected {:?}", open_action.dBit, false);
        // enabled
-       assert_eq!(action.enabled, true, "got {:?}, expected {:?}", action.enabled, true);
-       // affectsActionId 0
-       assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
-       // affectedByActionId 0
-       assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
+       assert_eq!(open_action.enabled, false, "got {:?}, expected {:?}", open_action.enabled, false);
+       // affectsActionId 
+       assert_eq!(open_action.affectsActionId, 0, "got {:?}, expected {:?}", open_action.affectsActionId, 0);
 
-        // exit SOUTH
-        let exit_s_id = exits.at(1).clone();
+       // actions chain
+       // action 2
+       let break_action_id = actions.at(1).clone();
+       let break_action: Action = get!(sys.world, break_action_id, (Action));
+       // action is smashable
+       assert_eq!(break_action.actionType, ActionType::Break, "got {:?}, expected {:?}", break_action.actionType, ActionType::Break);
+       
+       // action is not revertable
+       assert_eq!(break_action.revertable, false, "got {:?}, expected {:?}", break_action.revertable, false);
+       // action is not dBit
+       assert_eq!(break_action.dBit, false, "got {:?}, expected {:?}", break_action.dBit, false);
+       // action is enabled
+       assert_eq!(break_action.enabled, true, "got {:?}, expected {:?}", break_action.enabled, true);
+       // smash affects open
+       assert_eq!(break_action.affectsActionId, open_action.actionId, "got {:?}, expected {:?}", break_action.affectsActionId, open_action.actionId);
+       // break action is not affected by anything
+       assert_eq!(break_action.affectedByActionId, 0, "got {:?}, expected {:?}", break_action.affectedByActionId, 0);
+       
+       // SOUTH
+        let exit_s_id = exits.at(0).clone();
         let exit_s: Object = get!(sys.world, exit_s_id, (Object));
-        
-        // exit SOUTH destination should be:
+        // exit direction should be:
+        // South
+        assert_eq!(exit_s.dirType, DirectionType::South, "got {:?}, expected {:?}", exit_s.dirType, DirectionType::South);
+
+        // SOUTH destination should be:
         // benson' plain
         // ids match
         let dest_name = "bensons plain";
@@ -177,20 +196,18 @@ mod tests {
         let txt_id = exit_s.txtDefId;
         let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
         let _desc = txt.text.clone();
-        let _desc_expected = "a path north leads toward a large wooden barn";
+        let _desc_expected = "an old wooden barn door, leads south";
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
         // exit SOUTH should be a path
-        assert_eq!(exit_s.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_s.objType, ObjectType::Path);
-        // exit direction should be:
-        // South
-        assert_eq!(exit_s.dirType, DirectionType::South, "got {:?}, expected {:?}", exit_s.dirType, DirectionType::South);
+        assert_eq!(exit_s.objType, ObjectType::Door, "got {:?}, expected {:?}", exit_s.objType, ObjectType::Door);
         // exit material should be:
         // Dirt
-        assert_eq!(exit_s.matType, MaterialType::Dirt, "got {:?}, expected {:?}", exit_s.matType, MaterialType::Dirt);
+        assert_eq!(exit_s.matType, MaterialType::Wood, "got {:?}, expected {:?}", exit_s.matType, MaterialType::Wood);
         // 1 action
         let actions: Array<felt252> = exit_s.objectActionIds.clone();
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
+        // SOUTH ACTIONS
         let action_id = actions.at(0).clone();
         let action: Action = get!(sys.world, action_id, (Action));
 
@@ -203,7 +220,7 @@ mod tests {
         assert_eq!(action.dBit, true, "got {:?}, expected {:?}", action.dBit, true);
         // enabled
         assert_eq!(action.enabled, true, "got {:?}, expected {:?}", action.enabled, true);
-        // affectsActionId 0
+        // actions chain is correct
         assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
         // affectedByActionId 0
         assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
