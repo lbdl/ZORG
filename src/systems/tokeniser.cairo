@@ -115,6 +115,8 @@ pub mod confessor {
     pub fn vrb_to_response(vrb: ActionType) -> ActionType {
         if vrb == ActionType::Kick {
             ActionType::Break
+        } else if vrb == ActionType::Light {
+            ActionType::Burn
         } else {
             ActionType::None
         }

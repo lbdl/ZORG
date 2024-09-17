@@ -35,7 +35,7 @@ mod tests {
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
-        let room_name: ByteArray = "walking eagle pass";
+        // let room_name: ByteArray = "walking eagle pass";
         let pass_id: felt252 = obj_phash();
         let west: Object = get!(sys.world, pass_id, (Object));
 

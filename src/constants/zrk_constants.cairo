@@ -32,7 +32,7 @@ pub mod roomid {
 }
 
 pub mod flags {
-    pub const DEBUG: bool = true;
+    pub const DEBUG: bool = false;
 }
 
 /// Status Codes

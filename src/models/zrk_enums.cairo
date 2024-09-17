@@ -45,6 +45,7 @@ pub enum RoomType {
     Plain,
     Mountains,
     Barn,
+    Forge,
 }
 
 impl RT_to_Felt252 of Into<RoomType, felt252> {
@@ -59,6 +60,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::Room => 'room',
             RoomType::Mountains => 'mountains',
             RoomType::Barn => 'barn',
+            RoomType::Forge => 'forge',
             RoomType::None => 'none',
         }
     }
@@ -80,6 +82,7 @@ pub enum MaterialType {
     Shit,
     Mud,
     Leather,
+    Metal,
 }
 
 /// MaterialType -> short_string or felt252
@@ -98,6 +101,7 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
             MaterialType::Shit => 'shit',
             MaterialType::Mud => 'mud',
             MaterialType::Leather => 'leather',
+            MaterialType::Metal => 'metal',
             _ => 'none',
         }
     }
@@ -152,6 +156,8 @@ pub enum ActionType {
     Pray,
     Open,
     Break,
+    Burn,
+    Light,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -168,6 +174,8 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Pray => 'pray',
             ActionType::Open => 'open',
             ActionType::Break => 'break',
+            ActionType::Burn => 'burn',
+            ActionType::Light => 'light',
             ActionType::None => 'none',
         }
     }
@@ -207,6 +215,10 @@ pub enum ObjectType {
     Place,
     Troll,
     Path,
+    Chest,
+    Match,
+    Petrol,
+    Can,
 }
 
 impl OT_to_Felt252 of Into<ObjectType, felt252> {
@@ -220,6 +232,10 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Place => 'place',
             ObjectType::Troll => 'troll',
             ObjectType::Path => 'path',
+            ObjectType::Chest => 'chest',
+            ObjectType::Match => 'match',
+            ObjectType::Petrol => 'petrol',
+            ObjectType::Can => 'can',
         }
     }
 }
