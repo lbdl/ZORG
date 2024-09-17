@@ -1,18 +1,20 @@
 #[dojo::interface]
 trait ISpawner<T> {
     fn setup(ref world: IWorldDispatcher);
+    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
 }
 
 
 #[dojo::contract]
 pub mod spawner {
+    use starknet::{ContractAddress, testing, get_caller_address};
     use core::byte_array::ByteArrayTrait;
     use core::array::ArrayTrait;
     use core::option::OptionTrait;
     use super::ISpawner;
 
     use the_oruggin_trail::models::{
-        zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object}, room::{Room}
+        zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object}, room::{Room}, player::{Player}
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
@@ -26,7 +28,18 @@ pub mod spawner {
         fn setup(ref world: IWorldDispatcher) {
             make_rooms(world, 23);
         }
+
+        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+            let player = Player{
+                player_id: pid,
+                player_adr: OTHER(),
+                location: start_room,
+            };
+            set!(world,(player));
+        }
     }
+
+    fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
 
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         //pass

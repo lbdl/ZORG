@@ -32,6 +32,7 @@ pub mod models {
 
 pub mod tests {
     pub mod test_meatpuppet_hearing;
+    pub mod test_meatpuppet_look;
     pub mod test_tokeniser;
     pub mod test_spawn_plain;
     pub mod test_spawn_pass;
