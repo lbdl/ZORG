@@ -2,7 +2,7 @@ pub mod verb_dispatcher {
     // use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
-    use the_oruggin_trail::lib::look::look;
+    use the_oruggin_trail::lib::look::lookat;
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
 
     pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
@@ -12,7 +12,7 @@ pub mod verb_dispatcher {
             ActionType::Look => { 
                 // Pass payer id into look handle
                 // let output: ByteArray = "Shoggoth stares into the void<\n>the void is staring back<\n>shoggoth is a good boy";
-                let output: ByteArray = look::at(ref world, msg, pid);
+                let output: ByteArray = lookat::stuff(ref world, msg, pid);
                 out = output;
             },
             ActionType::Fight => {

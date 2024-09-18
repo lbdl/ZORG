@@ -15,7 +15,7 @@ mod tests {
     };
 
     use the_oruggin_trail::{
-        constants::zrk_constants::roomid as rm,
+        constants::zrk_constants::{roomid as rm, roomid_to_str as rts},
         models::{
             txtdef::{Txtdef, txtdef}, room::{Room, room},
             action::{Action, action},
@@ -39,16 +39,22 @@ mod tests {
     /// description string composed from the Object graph
     #[test]
     #[available_gas(200000000)]
-    fn test_listener_LOOK() {
+    fn test_look_around() {
         // let caller = starknet::contract_address_const::<0x0>();
         let sys: Systems = test_rig::setup_world();
         let spawn: ISpawnerDispatcher = sys.spawner;
         let pid: felt252 = 23;
         spawn.setup();
 
-        let rm_name: ByteArray = "walking eagle pass";
+        let rm_name: ByteArray = rts(rm::PASS);
         let rm_id = h_util::str_hash(@rm_name);
         spawn.spawn_player(pid, rm_id);
+
+        let rm = get!(sys.world, rm_id, (Room));
+        let expected_txt: ByteArray = "walking eagle pass";
+        assert_eq!(rm.shortTxt.clone(), expected_txt.clone(), "Expected {:?} got {:?}", rm.shortTxt, expected_txt);
+
+        
 
         let mp: IListenerDispatcher = sys.listener;
 
@@ -58,6 +64,12 @@ mod tests {
         let output = get!(sys.world, 23, (Output));
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
+    }
+
+    ///test that meatpuppet can call spawner
+    #[test]
+    fn test_spawner_from_mp() {
+
     }
     
 }
