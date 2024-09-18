@@ -13,9 +13,10 @@ pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
     pub mod store;
-    pub mod interop_dispatch;
+    // pub mod interop_dispatch;
     pub mod err_handler;
     pub mod verb_eater;
+    pub mod look;
 }
 
 pub mod models {
@@ -30,9 +31,12 @@ pub mod models {
 }
 
 pub mod tests {
-    // pub mod test_world;
     pub mod test_meatpuppet_hearing;
+    pub mod test_meatpuppet_look;
     pub mod test_tokeniser;
-    pub mod test_game_setup;
+    pub mod test_spawn_plain;
+    pub mod test_spawn_pass;
+    pub mod test_spawn_barn;
+    pub mod test_spawn_forge;
     pub mod test_rig;
 }

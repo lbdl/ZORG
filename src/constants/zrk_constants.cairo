@@ -31,10 +31,33 @@ pub mod roomid {
   pub const  BASEMENT: felt252 =  5; 
 }
 
-pub mod flags {
-    pub const DEBUG: bool = true;
+// Add this new function after the roomid mod
+pub fn roomid_to_str(room_id: felt252) -> ByteArray {
+    if room_id == roomid::NONE {
+        "none"
+    } else if room_id == roomid::PASS {
+        "walking eagle pass"
+    } else if room_id == roomid::FORGE {
+        "eli's forge"
+    } else if room_id == roomid::BARN {
+        "eli's barn"
+    } else if room_id == roomid::PLAIN {
+        "bensons plain"
+    } else if room_id == roomid::BASEMENT {
+        "gimp's basement"
+    } else {
+        "unknown"
+    }
 }
 
+pub mod flags {
+    pub const DEBUG: bool = false;
+}
+
+/// Status Codes
+/// really  this is used to set an "unset" value
+/// i.e set me later kinda thing
 pub mod statusid {
     pub const NONE: felt252 = 0;
+    pub const SETME: felt252 = 0;
 }

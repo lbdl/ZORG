@@ -1,7 +1,7 @@
 /// Biome types
 /// used later to generate text and seed ascii art
 /// type things
-#[derive(Serde, Copy, Drop, Introspect)]
+#[derive(Serde, Copy, Drop, Introspect, PartialEq)]
 pub enum BiomeType {
     None,
     Forest,
@@ -11,6 +11,8 @@ pub enum BiomeType {
     Temporate,
     Faery,
     Demon,
+    Mountains,
+    Prarie,
 }
 
 impl BT_to_Felt252 of Into<BiomeType, felt252> {
@@ -24,7 +26,35 @@ impl BT_to_Felt252 of Into<BiomeType, felt252> {
             BiomeType::Faery => 'faery',
             BiomeType::Demon => 'demon',
             BiomeType::None => 'none',
+            BiomeType::Mountains => 'mountains',
+            BiomeType::Prarie => 'prarie',
         }
+    }
+}
+
+pub fn biome_type_to_str(biome_type: BiomeType) -> ByteArray {
+    if biome_type == BiomeType::None {
+        "none"
+    } else if biome_type == BiomeType::Forest {
+        "forest"
+    } else if biome_type == BiomeType::Tundra {
+        "tundra"
+    } else if biome_type == BiomeType::Arctic {
+        "arctic"
+    } else if biome_type == BiomeType::Desert {
+        "desert"
+    } else if biome_type == BiomeType::Temporate {
+        "temporate"
+    } else if biome_type == BiomeType::Faery {
+        "faery"
+    } else if biome_type == BiomeType::Demon {
+        "demon"
+    } else if biome_type == BiomeType::Mountains {
+        "mountains"
+    } else if biome_type == BiomeType::Prarie {
+        "prarie"
+    } else {
+        "unknown" // This case handles any potential future additions to BiomeType
     }
 }
 
@@ -44,6 +74,9 @@ pub enum RoomType {
     Room,
     Plain,
     Mountains,
+    Barn,
+    Forge,
+    Pass,
 }
 
 impl RT_to_Felt252 of Into<RoomType, felt252> {
@@ -57,10 +90,42 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::Plain => 'plain',
             RoomType::Room => 'room',
             RoomType::Mountains => 'mountains',
+            RoomType::Barn => 'barn',
+            RoomType::Forge => 'forge',
+            RoomType::Pass => 'pass',
             RoomType::None => 'none',
         }
     }
 }
+
+pub fn room_type_to_str(room_type: RoomType) -> ByteArray {
+    if room_type == RoomType::None {
+        "none"
+    } else if room_type == RoomType::WoodCabin {
+        "wood cabin"
+    } else if room_type == RoomType::Store {
+        "store"
+    } else if room_type == RoomType::Cavern {
+        "cavern"
+    } else if room_type == RoomType::StoneCabin {
+        "stone cabin"
+    } else if room_type == RoomType::Fort {
+        "fort"
+    } else if room_type == RoomType::Room {
+        "room"
+    } else if room_type == RoomType::Mountains {
+        "mountains"
+    } else if room_type == RoomType::Barn {
+        "barn"
+    } else if room_type == RoomType::Forge {
+        "forge"
+    } else if room_type == RoomType::Pass {
+        "pass"
+    } else {
+        "unknown" // This case handles any potential future additions to RoomType
+    }
+}
+
 
 /// Material Type
 /// used later in the LOOK system and others to compose
@@ -77,6 +142,8 @@ pub enum MaterialType {
     Iron,
     Shit,
     Mud,
+    Leather,
+    Metal,
 }
 
 /// MaterialType -> short_string or felt252
@@ -94,6 +161,8 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
             MaterialType::Iron => 'iron',
             MaterialType::Shit => 'shit',
             MaterialType::Mud => 'mud',
+            MaterialType::Leather => 'leather',
+            MaterialType::Metal => 'metal',
             _ => 'none',
         }
     }
@@ -147,6 +216,9 @@ pub enum ActionType {
     Smash,
     Pray,
     Open,
+    Break,
+    Burn,
+    Light,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -162,6 +234,9 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Smash => 'smash',
             ActionType::Pray => 'pray',
             ActionType::Open => 'open',
+            ActionType::Break => 'break',
+            ActionType::Burn => 'burn',
+            ActionType::Light => 'light',
             ActionType::None => 'none',
         }
     }
@@ -201,6 +276,10 @@ pub enum ObjectType {
     Place,
     Troll,
     Path,
+    Chest,
+    Match,
+    Petrol,
+    Can,
 }
 
 impl OT_to_Felt252 of Into<ObjectType, felt252> {
@@ -214,6 +293,10 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Place => 'place',
             ObjectType::Troll => 'troll',
             ObjectType::Path => 'path',
+            ObjectType::Chest => 'chest',
+            ObjectType::Match => 'match',
+            ObjectType::Petrol => 'petrol',
+            ObjectType::Can => 'can',
         }
     }
 }

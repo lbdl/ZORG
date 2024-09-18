@@ -1,7 +1,7 @@
 [package]
 name = "the_oruggin_trail"
 cairo-version = "=2.7.0"
-version = "1.0.0-alpha.7"
+version = "1.0.0-alpha.9"
 # Use the prelude with the less imports as possible
 # from corelib.
 edition = "2024_07"
@@ -15,8 +15,9 @@ spawn = "./scripts/spawn.sh"
 move = "./scripts/move.sh"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.7" }
-planetary_interface = { path = "/Users/tims/DATA/BB/dojo/planetary/dojo/planetary_interface" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.9" }
+# not used right now but initialised in dojo_init when used for deli interop
+# planetary_interface = { path = "/Users/tims/DATA/BB/dojo/planetary/dojo/planetary_interface" }
 
 [[target.dojo]]
 

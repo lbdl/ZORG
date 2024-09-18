@@ -38,9 +38,9 @@ pub impl StoreImpl of StoreTrait {
     #[inline(always)]
     fn set_output(self: Store, pid: felt252, msg: ByteArray) {
         let output: Output = Output{ playerId: pid, text_o_vision: msg };
-        // set!(self.world, (output));
+        set!(self.world, (output));
         // output.set(world); // ERROR
-        dojo::model::Model::<Output>::set(@output, self.world);
+        // dojo::model::Model::<Output>::set(@output, self.world);
     }
 
 
