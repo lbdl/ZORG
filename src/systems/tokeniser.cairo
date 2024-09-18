@@ -1,9 +1,12 @@
-mod tokeniser {
+pub mod tokeniser {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
 
-    fn str_to_AT(s: ByteArray) -> ActionType {
+    /// Convert a string to an ActionType
+    /// this really should use hashes, i.e felt type
+    /// for ALL the types
+    pub fn str_to_AT(s: ByteArray) -> ActionType {
         if s == "move"
             || s == "go"
             || s == "north"
@@ -17,12 +20,15 @@ mod tokeniser {
             ActionType::Look
         } else if s == "kick" {
             ActionType::Kick
-        } else {
+        } else if s == "fight" || s == "duel" || s == "kill" || s == "attack" {
+            ActionType::Fight
+        } 
+        else {
             ActionType::None
         }
     }
 
-    fn str_to_DT(s: ByteArray) -> DirectionType {
+    pub fn str_to_DT(s: ByteArray) -> DirectionType {
         if s == "north" || s == "n" {
             DirectionType::North
         } else if s == "south" || s == "s" {
@@ -40,7 +46,7 @@ mod tokeniser {
         }
     }
 
-    fn str_to_OT(s: ByteArray) -> ObjectType {
+    pub fn str_to_OT(s: ByteArray) -> ObjectType {
         if s == "ball" {
             ObjectType::Ball
         } else if s == "window" {
@@ -55,7 +61,7 @@ mod tokeniser {
     }
 }
 
-mod confessor {
+pub mod confessor {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
     };
@@ -68,11 +74,11 @@ mod confessor {
     /// it can also be a MOVE, DIR (ie go north, or north) etc
     /// the later systems need to handle this specialisation
     #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
-    struct Garble {
-        vrb: ActionType,
-        dir: DirectionType,
-        dobj: ObjectType,
-        iobj: ObjectType,
+    pub struct Garble {
+      pub vrb: ActionType,
+      pub dir: DirectionType,
+      pub dobj: ObjectType,
+      pub iobj: ObjectType,
     }
 
     /// The Confessor - mumble your shameful desires here and receive a message
@@ -81,7 +87,7 @@ mod confessor {
     /// and then lexes and runs semantic analysis on the lexed tokens
     /// to extract meaning and create a simple message type that can be
     /// passed around the system logic to make things happen in the world
-    fn confess(sin: Array<ByteArray>) -> Result<Garble, ec> {
+    pub fn confess(sin: Array<ByteArray>) -> Result<Garble, ec> {
         // get the first token from the command
         let snap = @sin;
         let i0 = snap.at(0);
@@ -97,6 +103,25 @@ mod confessor {
         }
     }
 
+    /// map a verb to a response
+    /// 
+    /// objects that respond to vrbs get a corresponding action
+    /// type. i.e. a kick will map to a break action
+    /// so if want a breakable window then we add a break action
+    /// to the object and then if a direct object, say a ball has
+    /// a kick action then the engine will look for its response mapping
+    /// a break action or indeed whatever is set below and if the indirect
+    /// object has a break action then we break the window etc.
+    pub fn vrb_to_response(vrb: ActionType) -> ActionType {
+        if vrb == ActionType::Kick {
+            ActionType::Break
+        } else if vrb == ActionType::Light {
+            ActionType::Burn
+        } else {
+            ActionType::None
+        }
+    }
+
     fn bullshit() -> Result<Garble, ec> {
           Result::Err(ec::BadFood)
     }
@@ -105,7 +130,7 @@ mod confessor {
     /// 
     /// non movement and non looking verbs, i.e the general case 
     fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, ec> {
-        let mut do: ObjectType = ObjectType::None;
+        // let mut do: ObjectType = ObjectType::None;
         // let mut io: ObjectType = ObjectType::None;
 
         let s = cmd.at(cmd.len() - 1);

@@ -7,20 +7,21 @@ use the_oruggin_trail::models::{zrk_enums as zrk};
 /// maybe a flag in the setup functions that add the reverse mapping?
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
-struct Object {
+pub struct Object {
     #[key]
-    objectId: felt252,
-    objType: zrk::ObjectType,
-    dirType: zrk::DirectionType,
-    destId: felt252,
-    matType: zrk::MaterialType,
-    objectActionIds: Array<felt252>,
-    txtDefId: felt252
+    pub objectId: felt252,
+    pub objType: zrk::ObjectType,
+    pub dirType: zrk::DirectionType,
+    pub destId: felt252,
+    pub matType: zrk::MaterialType,
+    pub objectActionIds: Array<felt252>,
+    pub txtDefId: felt252
 }
 
 /// Returns the p has of the contents of the 
 /// p_west Object in the Spawner::pass_gen function
 /// just used for tests
-fn obj_mock_hash() -> felt252 {
+pub fn obj_mock_hash() -> felt252 {
     2890677428083589291721203693367688373625972625165016977404295659692755897800
 }
+

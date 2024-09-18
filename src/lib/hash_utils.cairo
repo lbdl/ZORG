@@ -1,4 +1,4 @@
-mod hashutils {
+pub mod hashutils {
     use core::array::ArrayTrait;
     use core::traits::Into;
     use core::clone::Clone;
@@ -22,7 +22,7 @@ mod hashutils {
     /// We hash all the values othert than objectId as this
     /// is returned and we then store the object with this
     /// i.e. h => h(obj.*; if obj.* != id) 
-    fn obj_hash(obj: @Object) -> felt252 {
+   pub fn obj_hash(obj: @Object) -> felt252 {
         let local: Object = obj.clone();
         let mut hash = PoseidonTrait::new()
             .update(local.objType.into())
@@ -38,7 +38,7 @@ mod hashutils {
         hash
     }
 
-    fn place_hash(plc: @Room) -> felt252 {
+    pub fn place_hash(plc: @Room) -> felt252 {
         let local: Room = plc.clone();
         let shrt: Array<felt252> = ba_to_felt(@local.shortTxt);
         let mut hash = PoseidonTrait::new()
@@ -51,7 +51,7 @@ mod hashutils {
         hash
     }
 
-    fn action_hash(vrb: @Action) -> felt252 {
+    pub fn action_hash(vrb: @Action) -> felt252 {
         let local: Action = vrb.clone();
         let dbittxt: Array<felt252> = ba_to_felt(@local.dBitTxt);
         let mut hash = PoseidonTrait::new()
@@ -69,23 +69,21 @@ mod hashutils {
         hash
     }
 
-    fn ba_to_felt(in: @ByteArray) -> Array<felt252> {
+    pub fn ba_to_felt(in: @ByteArray) -> Array<felt252> {
         let local = in.clone();
         let l = local.len();
-        // println!("in: {:?} len: {:?}", local, l);
         let mut idx = 0;
         let mut arr_felt: Array<felt252> = ArrayTrait::new();
 
         while idx < l {
             let f: felt252 = local.at(idx).unwrap().into();
-            // println!("{:?} {:?}", idx, f);
             arr_felt.append(f);
             idx += 1;
         };
         arr_felt
     }
 
-    fn str_hash(txt: @ByteArray) -> felt252 {
+    pub fn str_hash(txt: @ByteArray) -> felt252 {
         let local = txt.clone();
         let mut arr_felt: Array<felt252> = ba_to_felt(@local);
         let hash = PoseidonTrait::new().update(poseidon_hash_span(arr_felt.span())).finalize();

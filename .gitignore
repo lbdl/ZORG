@@ -2,3 +2,5 @@ target
 vscode
 .vscode
 local.db
+manifests
+*.code-workspace

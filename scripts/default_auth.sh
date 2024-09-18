@@ -19,7 +19,7 @@ need_cmd jq
 
 export RPC_URL="http://localhost:5050"
 
-export WORLD_ADDRESS=$(cat ./manifests/dev/manifest.json | jq -r '.world.address')
+export WORLD_ADDRESS=$(cat ./manifests/dev/deployment/manifest.json | jq -r '.world.address')
 
 echo "---------------------------------------------------------------------------"
 echo world : $WORLD_ADDRESS
@@ -27,7 +27,7 @@ echo "--------------------------------------------------------------------------
 
 # enable system -> models authorizations
 sozo auth grant --world $WORLD_ADDRESS --wait writer \
-  Output,the_oruggin_trail::systems::outputter::outputter
+  model:the_origgin_trail-Output,the_oruggin_trail-meatpuppet
   #>/dev/null
 
 echo "Default authorizations have been successfully set."

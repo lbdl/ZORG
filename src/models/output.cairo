@@ -1,9 +1,16 @@
+// /*
+//  * Created on Thu Sep 05 2024
+//  *
+//  * Copyright (c) 2024 Archetypal Tech
+//  * MeaCulpa (mc) 2024 lbdl | itrainspiders
+//  */
+
 // use starknet::ContractAddress;
 
 #[derive(Drop, Serde)]
 #[dojo::model]
-struct Output {
+pub struct Output {
     #[key]
-    playerId: felt252,
-    text_o_vision: ByteArray,
+    pub playerId: felt252,
+    pub text_o_vision: ByteArray,
 }

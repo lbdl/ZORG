@@ -1,7 +1,7 @@
 use the_oruggin_trail::models::zrk_enums::{ActionType};
 
 #[derive(Copy, Drop, PartialEq, Introspect, Debug)]
-enum ErrCode {
+pub enum ErrCode {
     BadLen,                      // input len >16 || 0
     BadFood,                     // input has no useable tokens
     BadImpl,                     // thing not implemented      
@@ -22,19 +22,42 @@ enum ErrCode {
 /// set that back on the struct??
 /// 
 /// Or this is just a set of start positions 
-mod roomid {
-   const  NONE: felt252 = 0 ;
-   const  PASS: felt252 =  1;
-   const  FORGE: felt252 =  2;
-   const  BARN: felt252 =  3;
-   const  PLAIN: felt252 =  4;
-   const  BASEMENT: felt252 =  5; 
+pub mod roomid {
+  pub const  NONE: felt252 = 0 ;
+  pub const  PASS: felt252 =  1;
+  pub const  FORGE: felt252 =  2;
+  pub const  BARN: felt252 =  3;
+  pub const  PLAIN: felt252 =  4;
+  pub const  BASEMENT: felt252 =  5; 
 }
 
-mod flags {
-    const DEBUG: bool = true;
+// Add this new function after the roomid mod
+pub fn roomid_to_str(room_id: felt252) -> ByteArray {
+    if room_id == roomid::NONE {
+        "none"
+    } else if room_id == roomid::PASS {
+        "walking eagle pass"
+    } else if room_id == roomid::FORGE {
+        "eli's forge"
+    } else if room_id == roomid::BARN {
+        "eli's barn"
+    } else if room_id == roomid::PLAIN {
+        "bensons plain"
+    } else if room_id == roomid::BASEMENT {
+        "gimp's basement"
+    } else {
+        "unknown"
+    }
 }
 
-mod statusid {
-    const NONE: felt252 = 0;
+pub mod flags {
+    pub const DEBUG: bool = false;
+}
+
+/// Status Codes
+/// really  this is used to set an "unset" value
+/// i.e set me later kinda thing
+pub mod statusid {
+    pub const NONE: felt252 = 0;
+    pub const SETME: felt252 = 0;
 }
