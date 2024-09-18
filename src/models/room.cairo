@@ -14,6 +14,7 @@ pub struct Room{
     #[key]
     pub roomId: felt252, // this should not be a hash and just increment in spawning/adding
     pub roomType: zrk::RoomType,
+    pub biomeType: zrk::BiomeType,
     pub txtDefId: felt252,
     pub shortTxt: ByteArray,
     pub objectIds: Array<felt252>,

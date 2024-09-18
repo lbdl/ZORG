@@ -1,7 +1,7 @@
 /// Biome types
 /// used later to generate text and seed ascii art
 /// type things
-#[derive(Serde, Copy, Drop, Introspect)]
+#[derive(Serde, Copy, Drop, Introspect, PartialEq)]
 pub enum BiomeType {
     None,
     Forest,
@@ -11,6 +11,8 @@ pub enum BiomeType {
     Temporate,
     Faery,
     Demon,
+    Mountains,
+    Prarie,
 }
 
 impl BT_to_Felt252 of Into<BiomeType, felt252> {
@@ -24,7 +26,35 @@ impl BT_to_Felt252 of Into<BiomeType, felt252> {
             BiomeType::Faery => 'faery',
             BiomeType::Demon => 'demon',
             BiomeType::None => 'none',
+            BiomeType::Mountains => 'mountains',
+            BiomeType::Prarie => 'prarie',
         }
+    }
+}
+
+pub fn biome_type_to_str(biome_type: BiomeType) -> ByteArray {
+    if biome_type == BiomeType::None {
+        "none"
+    } else if biome_type == BiomeType::Forest {
+        "forest"
+    } else if biome_type == BiomeType::Tundra {
+        "tundra"
+    } else if biome_type == BiomeType::Arctic {
+        "arctic"
+    } else if biome_type == BiomeType::Desert {
+        "desert"
+    } else if biome_type == BiomeType::Temporate {
+        "temporate"
+    } else if biome_type == BiomeType::Faery {
+        "faery"
+    } else if biome_type == BiomeType::Demon {
+        "demon"
+    } else if biome_type == BiomeType::Mountains {
+        "mountains"
+    } else if biome_type == BiomeType::Prarie {
+        "prarie"
+    } else {
+        "unknown" // This case handles any potential future additions to BiomeType
     }
 }
 
@@ -67,6 +97,35 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
         }
     }
 }
+
+pub fn room_type_to_str(room_type: RoomType) -> ByteArray {
+    if room_type == RoomType::None {
+        "none"
+    } else if room_type == RoomType::WoodCabin {
+        "wood cabin"
+    } else if room_type == RoomType::Store {
+        "store"
+    } else if room_type == RoomType::Cavern {
+        "cavern"
+    } else if room_type == RoomType::StoneCabin {
+        "stone cabin"
+    } else if room_type == RoomType::Fort {
+        "fort"
+    } else if room_type == RoomType::Room {
+        "room"
+    } else if room_type == RoomType::Mountains {
+        "mountains"
+    } else if room_type == RoomType::Barn {
+        "barn"
+    } else if room_type == RoomType::Forge {
+        "forge"
+    } else if room_type == RoomType::Pass {
+        "pass"
+    } else {
+        "unknown" // This case handles any potential future additions to RoomType
+    }
+}
+
 
 /// Material Type
 /// used later in the LOOK system and others to compose

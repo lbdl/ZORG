@@ -60,10 +60,23 @@ mod tests {
 
         let input: Array<ByteArray> = array!["look", "around"];
         mp.listen(input, pid);
-        let expected: ByteArray = "You see Elvis... \nhe speaks... \napparantly garbage";
+        let expected: ByteArray = "walking eagle pass\nYou are standing on a pass in the mountains";
         let output = get!(sys.world, 23, (Output));
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
+    }
+    /// Generate the short description of the room
+    /// 
+    /// this is composed of the room type and biome and name/shortTxt
+    /// it gives a general description text without parsing the objects etc into the text
+    #[test]
+    #[available_gas(200000000)]
+    fn test_look_short() {
+        let sys: Systems = test_rig::setup_world();
+        let spawn: ISpawnerDispatcher = sys.spawner;
+        let pid: felt252 = 23;
+        spawn.setup();
+        
     }
 
     ///test that meatpuppet can call spawner

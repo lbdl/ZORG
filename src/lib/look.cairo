@@ -3,7 +3,7 @@ pub mod lookat {
     use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
     use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
     use dojo::world::{IWorldDispatcher};
-    use the_oruggin_trail::models::{player::Player, room::Room, zrk_enums::RoomType};
+    use the_oruggin_trail::models::{player::Player, room::Room, zrk_enums::{RoomType, room_type_to_str, BiomeType, biome_type_to_str}};
 
     /// look at stuff
     /// 
@@ -14,7 +14,7 @@ pub mod lookat {
         // we are always player 23 right now
         let player: Player = get!(world, pid, (Player) );
         let location: felt252 = player.location;
-        let mut output: ByteArray = describe_room(world, location);
+        let mut output: ByteArray = describe_room_short(world, location);
         output
     }
 
@@ -40,19 +40,35 @@ pub mod lookat {
     /// format as follows:
     /// 
     /// "walking eagle pass" : name - shortTxt
-    /// "You are standing on a mountain pass" : baseTxt + descriptiveTxt
+    /// "You are standing on/in a pass in/on the prarie" : baseTxt + conn + roomType + conn + biomeType
     /// "the valley sides ...": txtDefId
     /// "you can see a path to the west ..." : exits - dirObjects
     /// "there is a manky otter pelt on the floor": objects
-    fn describe_room(world: IWorldDispatcher, location: felt252) -> ByteArray {
+    pub fn describe_room_short(world: IWorldDispatcher, location: felt252) -> ByteArray {
         let room: Room = get!(world, location, (Room));
-        let mut base_txt: ByteArray = "You are standing ";
-        let mut descriptive_txt: ByteArray = "on ";
-        if room.roomType == RoomType::Plain || room.roomType == RoomType::Mountains {
-            descriptive_txt = "on ";
+        let mut base_txt: ByteArray = "You are standing";
+        let mut connective_txt_type: ByteArray = "";
+        let mut connective_txt_biome: ByteArray = "";
+        if room.roomType == RoomType::Plain || room.roomType == RoomType::Pass {
+            connective_txt_type = "on a";
         } else {
-            descriptive_txt = "in ";
+            connective_txt_type = "in a";
         }
-        format!("{}\n{} {}", room.shortTxt.clone(), base_txt.clone(), descriptive_txt)
+
+        if room.biomeType == BiomeType::Prarie || room.biomeType == BiomeType::Tundra {
+            connective_txt_biome = "on the";
+        } else {
+            connective_txt_biome = "in the";
+        }
+
+        format!(
+            "{}\n{} {} {} {} {}", 
+            room.shortTxt.clone(), 
+            base_txt.clone(), 
+            connective_txt_type, 
+            room_type_to_str(room.roomType),
+            connective_txt_biome,
+            biome_type_to_str(room.biomeType)
+        )
     }
 }
