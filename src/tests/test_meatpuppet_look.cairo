@@ -21,6 +21,7 @@ mod tests {
             action::{Action, action},
             object::{Object, object},
             output::{Output, output},
+            player::{Player, player},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
         },
         lib::hash_utils::hashutils as p_hash
@@ -81,8 +82,18 @@ mod tests {
 
     ///test that meatpuppet can call spawner
     #[test]
-    fn test_spawner_from_mp() {
-
+    fn test_mp_spawns_player() {
+        let sys: Systems = test_rig::setup_world();
+        let mp: IListenerDispatcher = sys.listener;
+        let pid: felt252 = 23;
+        let input: Array<ByteArray> = array!["look", "around"];
+        mp.listen(input, pid);
+        let player = get!(sys.world, pid, (Player));
+        let rm_name: ByteArray = "walking eagle pass";
+        let expected_room_id = p_hash::str_hash(@rm_name);
+        assert_eq!(expected_room_id, player.location,  "Expected {:?} got {:?}", expected_room_id, player.location);
+        let room = get!(sys.world, expected_room_id, (Room));
+        assert_eq!(room.roomType, RoomType::Pass);
     }
     
 }
