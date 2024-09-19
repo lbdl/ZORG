@@ -1,22 +1,28 @@
 use starknet::{ContractAddress, ClassHash};
 use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait, Resource};
 use the_oruggin_trail::utils::misc::{ZERO};
+use the_oruggin_trail::systems::spawner::{ISpawnerDispatcher, ISpawnerDispatcherTrait};
 
-pub fn get_world_contract_address(world: IWorldDispatcher, selector: felt252) -> ContractAddress {
-    if let Resource::Contract((_, contract_address)) = world.resource(selector) {
-        (contract_address)
-    } else {
-        (ZERO())
-    }
+
+pub mod SELECTORS {
+   pub const SPAWNER: felt252 = selector_from_tag!("the_oruggin_trail-spawner");
 }
 
-pub fn get_resource_type(world: IWorldDispatcher, selector: felt252) -> felt252 {
-    match world.resource(selector) {
-        Resource::Model => 'Model',
-        Resource::Contract => 'Contract',
-        Resource::Namespace => 'Namespace',
-        Resource::World => 'World',
-        Resource::Unregistered => 'Unregistered',
-        _ => 'NONE'
+#[generate_trait]
+impl WorldSystemsTraitImpl of WorldSystemsTrait {
+    fn contract_address(self: IWorldDispatcher, selector: felt252) -> ContractAddress {
+        if let Resource::Contract((_, contract_address)) = self.resource(selector) {
+            (contract_address)
+        } else {
+            (ZERO())
+        }
+    }
+
+    fn spawner_address(self: IWorldDispatcher) -> ContractAddress {
+        (self.contract_address(SELECTORS::SPAWNER))
+    }
+
+    fn spawner_dispatcher(self: IWorldDispatcher) -> ISpawnerDispatcher {
+        (ISpawnerDispatcher{ contract_address: self.contract_address(SELECTORS::SPAWNER) })
     }
 }

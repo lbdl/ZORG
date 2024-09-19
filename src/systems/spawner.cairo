@@ -1,5 +1,5 @@
 #[dojo::interface]
-trait ISpawner<T> {
+trait ISpawner {
     fn setup(ref world: IWorldDispatcher);
     fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
 }
@@ -527,31 +527,23 @@ pub mod spawner {
     }
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
-        let mut i = 0;
-        while i < t.len() {
-            let a: Object = t.at(i).clone();
-            set!(w, (a));
-            i += 1 + i;
+        for element in t {
+            set!(w, (element));
         }
     }
 
     fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
-        let mut i = 0;
-        while i < t.len() {
-            let a: Action = t.at(i).clone();
-            set!(w, (a));
-            i += 1 + i;
+        for element in t {
+            set!(w, (element));
         }
     }
 
     fn store_places(w: IWorldDispatcher, t: Array<Room>) {
-        let mut i = 0;
-        while i < t.len() {
-            let a: Room = t.at(i).clone();
-            set!(w, (a));
-            i += 1 + i;
+        for element in t {
+            set!(w, (element));
         }
     }
+   
 
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
         set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
