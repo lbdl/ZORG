@@ -30,6 +30,11 @@ pub mod models {
     pub mod room;
 }
 
+pub mod utils {
+    pub mod misc;
+    pub mod systems;
+}
+
 pub mod tests {
     pub mod test_meatpuppet_hearing;
     pub mod test_meatpuppet_look;
