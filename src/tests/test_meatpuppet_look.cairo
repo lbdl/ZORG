@@ -72,12 +72,16 @@ mod tests {
     /// it gives a general description text without parsing the objects etc into the text
     #[test]
     #[available_gas(200000000)]
-    fn test_look_short() {
+    fn test_player_spawns_in_pass() {
         let sys: Systems = test_rig::setup_world();
-        let spawn: ISpawnerDispatcher = sys.spawner;
+        let mp: IListenerDispatcher = sys.listener;
         let pid: felt252 = 23;
-        spawn.setup();
-        
+        let input: Array<ByteArray> = array!["look", "around"];
+        mp.listen(input, pid);
+        let expected: ByteArray = "walking eagle pass\nYou are standing on a pass in the mountains";
+        let output = get!(sys.world, 23, (Output));
+        let actual = output.text_o_vision;
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
 
     ///test that meatpuppet can call spawner

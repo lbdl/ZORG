@@ -46,6 +46,8 @@ pub mod meatpuppet {
 
     use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
 
+    use super::pull_strings as move;
+
     // use planetary_interface::interfaces::planetary::{
     //     PlanetaryInterface, PlanetaryInterfaceTrait, IPlanetaryActionsDispatcherTrait,
     // }
@@ -76,12 +78,13 @@ pub mod meatpuppet {
             // remove me soon
             // really!
             let spawner: ISpawnerDispatcher = world.spawner_dispatcher();
-            let player: Player = get!(world, p_id, (Player));
+            let mut player: Player = get!(world, p_id, (Player));
             if player.location == 0 {
                spawner.setup();
                let spawn_rm_name: ByteArray = "walking eagle pass";
                let spawn_id = h_util::str_hash(@spawn_rm_name);
                spawner.spawn_player(p_id, spawn_id);
+               move::enter_room(world, ref player, spawn_id);
             }
 
             let mut isErr: ec = ec::None;
@@ -130,17 +133,22 @@ pub mod meatpuppet {
     }
 }
 
-// mod err_dispatcher {
-//     use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
-//     use dojo::world::{IWorldDispatcher};
-//     use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
-//     use the_oruggin_trail::models::{output::{Output}};
+pub mod pull_strings {
+    use dojo::world::{IWorldDispatcher};
+    use the_oruggin_trail::models::{output::{Output}, player::{Player}, zrk_enums::{ActionType, ObjectType}};
+    use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
+    use the_oruggin_trail::lib::err_handler::err_dispatcher as err_dispatch;
 
-//     pub fn error_handle(ref world: IWorldDispatcher, err: ec, pid: felt252) {
-//         let bogus_cmd: Array<ByteArray> = array![];
-//         let speech = badmouth::opine_on_errors(err, @bogus_cmd);
+    use the_oruggin_trail::lib::look::lookat;
+    use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
 
-//         set!(world, Output { playerId: 23, text_o_vision: speech })
-//     }
-// }
+    pub fn enter_room(world: IWorldDispatcher, ref player: Player, rm_id: felt252) {
+        player.location = rm_id;
+        set!(world, (player));
+
+        let out = lookat::describe_room_short(world, rm_id);
+        set!(world, Output { playerId: player.player_id, text_o_vision: out })
+    }
+
+}
 
