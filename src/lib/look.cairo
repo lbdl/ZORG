@@ -31,8 +31,25 @@ pub mod lookat {
     }
 
     fn collate_objects(world: IWorldDispatcher, location: felt252) -> ByteArray {
-        let mut output: ByteArray = "You see Elvis... \n, he speaks... \n apparantly garbage";
-        output
+        let room: Room = get!(world, location, (Room));
+        let objects: Array<felt252> = room.objectIds.clone();
+        let mut idx: u32 = 0;
+        let mut out: ByteArray = "";
+        let base:ByteArray = "you can see a";
+        while idx < objects.len() {
+            let _id: felt252 = objects.at(idx).clone();
+            let obj: Object = get!(world, _id, (Object));
+            let _txt: Txtdef = get!(world, obj.txtDefId.clone(), (Txtdef));
+            let mut desc: ByteArray = 
+                format!("{} {}, {}", 
+                base.clone(),
+                object_type_to_str(obj.objType),
+                _txt.text.clone(),
+            );
+            out.append(@desc);
+            idx += 1;
+        };
+        out
     }
 
     fn collate_exits(world: IWorldDispatcher, location: felt252) -> ByteArray {
@@ -116,12 +133,14 @@ pub mod lookat {
         let connective_txt: ByteArray = "the";
         let place_type: ByteArray = room_type_to_str(room.roomType);
         let exit_txt: ByteArray = collate_exits(world, location);
+        let obj_txt: ByteArray = collate_objects(world, location);
         format!(
-            "{} {} {}\n{}", 
+            "{} {} {}\n{}\n{}", 
             connective_txt.clone(), 
             place_type, 
             txt,
-            exit_txt
+            exit_txt,
+            obj_txt
         )
     }
 

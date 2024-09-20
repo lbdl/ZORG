@@ -113,6 +113,8 @@ pub fn room_type_to_str(room_type: RoomType) -> ByteArray {
         "fort"
     } else if room_type == RoomType::Room {
         "room"
+    } else if room_type == RoomType::Plain {
+        "plain"
     } else if room_type == RoomType::Mountains {
         "mountains"
     } else if room_type == RoomType::Barn {

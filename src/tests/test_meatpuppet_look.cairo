@@ -38,9 +38,12 @@ mod tests {
     /// We want to see that the correct string hand been generated for
     /// cmds of the LOOK type. i.e. `LOOK AROUND` | `LOOK` wil generate a
     /// description string composed from the Object graph
+    /// 
+    /// this test also relies on the defaut (and shite) spawn mechanism
+    /// that jst dumps a player into "walking eagle pass"
     #[test]
     #[available_gas(200000000)]
-    fn test_look_around() {
+    fn test_look_around_pass() {
         // let caller = starknet::contract_address_const::<0x0>();
         let sys: Systems = test_rig::setup_world();
         let pid: felt252 = 23;
@@ -58,6 +61,38 @@ mod tests {
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
+
+    /// Handling for Look
+    /// 
+    /// We want to see that the correct string hand been generated for
+    /// cmds of the LOOK type. i.e. `LOOK AROUND` | `LOOK` will generate a
+    /// description string composed from the Object graph, i.e all the exits and
+    /// all the objecs as well as the actual attached room text
+    #[test]
+    #[available_gas(200000000)]
+    fn test_look_around_plain() {
+        let sys: Systems = test_rig::setup_world();
+        let pid: felt252 = 23;
+
+        let rm_name: ByteArray = rts(rm::PLAIN);
+        let rm_id = h_util::str_hash(@rm_name);
+        // spawn the player on bensons plain which has a ball
+        let sp: ISpawnerDispatcher = sys.spawner;
+        sp.setup();
+        sp.spawn_player(pid, rm_id);
+
+        let mp: IListenerDispatcher = sys.listener;
+
+        let input: Array<ByteArray> = array!["look", "around", "the", "room"];
+        mp.listen(input, pid);
+
+        let expected: ByteArray = "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizon and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n\nthere is a dirt path to the east\nthere is a dirt path to the north\n\nyou can see a ball, a knock off UEFA football\nit's a bit battered and bruised and not exactly a sphere\nbut you can kick it";
+        let output = get!(sys.world, 23, (Output));
+        let actual = output.text_o_vision;
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
+    }
+
+ 
     /// Generate the short description of the room
     /// 
     /// this is composed of the room type and biome and name/shortTxt

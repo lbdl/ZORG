@@ -162,7 +162,7 @@ pub mod spawner {
         let ball_id = h_util::obj_hash(@football);
         football.objectId = ball_id;
         let ball_desc: ByteArray =
-            "a knock off UEFA football\nits a bit battered and bruised\nnot exactly a sphere\nbut you can kick it";
+            "a knock off UEFA football\nit's a bit battered and bruised and not exactly a sphere\nbut you can kick it";
         let td_id_b = h_util::str_hash(@ball_desc); // text id
         football.txtDefId = td_id_b;
 
@@ -516,7 +516,7 @@ pub mod spawner {
         if id == rm::PASS {
             "winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
         } else if id == rm::PLAIN {
-            "reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
+            "reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizon and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
         } else if id == rm::BARN {
             "is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
         } else if id == rm::FORGE {
