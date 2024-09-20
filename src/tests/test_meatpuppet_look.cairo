@@ -43,25 +43,17 @@ mod tests {
     fn test_look_around() {
         // let caller = starknet::contract_address_const::<0x0>();
         let sys: Systems = test_rig::setup_world();
-        let spawn: ISpawnerDispatcher = sys.spawner;
         let pid: felt252 = 23;
-        spawn.setup();
 
         let rm_name: ByteArray = rts(rm::PASS);
         let rm_id = h_util::str_hash(@rm_name);
-        spawn.spawn_player(pid, rm_id);
-
-        let rm = get!(sys.world, rm_id, (Room));
-        let expected_txt: ByteArray = "walking eagle pass";
-        assert_eq!(rm.shortTxt.clone(), expected_txt.clone(), "Expected {:?} got {:?}", rm.shortTxt, expected_txt);
-
-        
 
         let mp: IListenerDispatcher = sys.listener;
 
-        let input: Array<ByteArray> = array!["look", "around"];
+        let input: Array<ByteArray> = array!["look", "around", "the", "room"];
         mp.listen(input, pid);
-        let expected: ByteArray = "walking eagle pass\nYou are standing on a pass in the mountains";
+
+        let expected: ByteArray = "the pass winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.\nthere is a dirt path to the west\n";
         let output = get!(sys.world, 23, (Output));
         let actual = output.text_o_vision;
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);

@@ -18,10 +18,6 @@ pub impl WorldSystemsTraitImpl of WorldSystemsTrait {
         }
     }
 
-    // fn spawner_address(self: IWorldDispatcher) -> ContractAddress {
-    //     (self.contract_address(SELECTORS::SPAWNER))
-    // }
-
     fn spawner_dispatcher(self: IWorldDispatcher) -> ISpawnerDispatcher {
         (ISpawnerDispatcher{ contract_address: self.contract_address(SELECTORS::SPAWNER) })
     }

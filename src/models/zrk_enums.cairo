@@ -168,6 +168,36 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
     }
 }
 
+pub fn material_type_to_str(material_type: MaterialType) -> ByteArray {
+    if material_type == MaterialType::None {
+        "none"
+    } else if material_type == MaterialType::Wood {
+        "wood"
+    } else if material_type == MaterialType::Dirt {
+        "dirt"
+    } else if material_type == MaterialType::Stone {
+        "stone"
+    } else if material_type == MaterialType::Flesh {
+        "flesh"
+    } else if material_type == MaterialType::Glass {
+        "glass"
+    } else if material_type == MaterialType::IKEA {
+        "IKEA"
+    } else if material_type == MaterialType::Iron {
+        "iron"
+    } else if material_type == MaterialType::Shit {
+        "shit"
+    } else if material_type == MaterialType::Mud {
+        "mud"
+    } else if material_type == MaterialType::Leather {
+        "leather"
+    } else if material_type == MaterialType::Metal {
+        "metal"
+    } else {
+        "unknown" // This case handles any potential future additions to MaterialType
+    }
+}
+
 /// Direction Type
 /// used by the direction syetm to determine movement
 /// and ofc the direction of things in the world
@@ -197,6 +227,30 @@ impl DT_to_Felt252 of Into<DirectionType, felt252> {
             DirectionType::Right => 'right',
             DirectionType::None => 'none',
         }
+    }
+}
+
+pub fn direction_type_to_str(direction_type: DirectionType) -> ByteArray {
+    if direction_type == DirectionType::None {
+        "none"
+    } else if direction_type == DirectionType::North {
+        "north"
+    } else if direction_type == DirectionType::East {
+        "east"
+    } else if direction_type == DirectionType::South {
+        "south"
+    } else if direction_type == DirectionType::West {
+        "west"
+    } else if direction_type == DirectionType::Up {
+        "up"
+    } else if direction_type == DirectionType::Down {
+        "down"
+    } else if direction_type == DirectionType::Left {
+        "left"
+    } else if direction_type == DirectionType::Right {
+        "right"
+    } else {
+        "unknown" // This case handles any potential future additions to DirectionType
     }
 }
 
@@ -298,5 +352,35 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Petrol => 'petrol',
             ObjectType::Can => 'can',
         }
+    }
+}
+
+pub fn object_type_to_str(object_type: ObjectType) -> ByteArray {
+    if object_type == ObjectType::None {
+        "none"
+    } else if object_type == ObjectType::Ball {
+        "ball"
+    } else if object_type == ObjectType::Window {
+        "window"
+    } else if object_type == ObjectType::Door {
+        "door"
+    } else if object_type == ObjectType::Stairs {
+        "stairs"
+    } else if object_type == ObjectType::Place {
+        "place"
+    } else if object_type == ObjectType::Troll {
+        "troll"
+    } else if object_type == ObjectType::Path {
+        "path"
+    } else if object_type == ObjectType::Chest {
+        "chest"
+    } else if object_type == ObjectType::Match {
+        "match"
+    } else if object_type == ObjectType::Petrol {
+        "petrol"
+    } else if object_type == ObjectType::Can {
+        "can"
+    } else {
+        "unknown" // This case handles any potential future additions to ObjectType
     }
 }

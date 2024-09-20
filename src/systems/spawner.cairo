@@ -514,13 +514,13 @@ pub mod spawner {
     // long line
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
-            "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
+            "winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
         } else if id == rm::PLAIN {
-            "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
+            "reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
         } else if id == rm::BARN {
-            "the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
+            "is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
         } else if id == rm::FORGE {
-            "the forge has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that it is smashed light ceeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot"
+            "has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that it is smashed light ceeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot"
         } else {
             "nothing,\nempty space,\nyou slowly dissolve to nothingness..."
         }
