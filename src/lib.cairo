@@ -13,10 +13,10 @@ pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
     pub mod store;
-    // pub mod interop_dispatch;
     pub mod err_handler;
     pub mod verb_eater;
     pub mod look;
+    pub mod system;
 }
 
 pub mod models {
@@ -28,6 +28,11 @@ pub mod models {
     pub mod object;
     pub mod spawnroom;
     pub mod room;
+}
+
+pub mod utils {
+    pub mod misc;
+    // pub mod system;
 }
 
 pub mod tests {

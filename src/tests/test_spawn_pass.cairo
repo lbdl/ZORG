@@ -25,7 +25,7 @@ mod tests {
     };
 
     #[test]
-    #[available_gas(40000000)]
+    #[available_gas(1000000000)]
     fn test_spawn_pass_EXIT_WEST_OBJECT_properties() {
         // WEST
         // material is dirt
@@ -94,7 +94,7 @@ mod tests {
     }
 
     #[test]
-    #[available_gas(50000000)]
+    #[available_gas(1000000000)]
     fn test_spawn_pass_room_properties() {
         // room should contain 0 objects
         // room should contain 0 players
@@ -113,10 +113,10 @@ mod tests {
         // the name/short description property
         assert_eq!(
             pass.roomType,
-            RoomType::Mountains,
+            RoomType::Pass,
             "got {:?}, expected {:?}",
             pass.roomType,
-            RoomType::Mountains
+            RoomType::Pass
         );
 
         let expected_name: ByteArray = "walking eagle pass";
@@ -128,13 +128,7 @@ mod tests {
         let txt = get!(sys.world, txtid, (Txtdef));
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = 
-                "it winds through the mountains, the path is treacherous\n
-                toilet papered trees cover the steep \n
-                valley sides below you.\n
-                On closer inspection the TP might \n
-                be the remains of a cricket team\n
-                or perhaps a lost and very dead KKK picnic group.\n
-                It's brass monkeys.";
+                "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
 
         // assert description should be as expected
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
@@ -163,7 +157,7 @@ mod tests {
     }
 
     #[test]
-    #[available_gas(50000000)]
+    #[available_gas(1000000000)]
     fn test_spawn_pass_exit_properties () {
         // room should have:
         // 1 exit

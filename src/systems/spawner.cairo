@@ -1,5 +1,5 @@
 #[dojo::interface]
-trait ISpawner<T> {
+trait ISpawner {
     fn setup(ref world: IWorldDispatcher);
     fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
 }
@@ -162,7 +162,7 @@ pub mod spawner {
         let ball_id = h_util::obj_hash(@football);
         football.objectId = ball_id;
         let ball_desc: ByteArray =
-            "a knock off UEFA football\nits a bit battered and bruised\nnot exactly a sphere\nbut you can kick it";
+            "a knock off UEFA football\nit's a bit battered and bruised and not exactly a sphere\nbut you can kick it";
         let td_id_b = h_util::str_hash(@ball_desc); // text id
         football.txtDefId = td_id_b;
 
@@ -514,44 +514,36 @@ pub mod spawner {
     // long line
     fn make_txt(id: felt252) -> ByteArray {
         if id == rm::PASS {
-            "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
+            "winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys."
         } else if id == rm::PLAIN {
-            "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
+            "reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizon and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy\n"
         } else if id == rm::BARN {
-            "the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
+            "is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
         } else if id == rm::FORGE {
-            "the forge has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that it is smashed light ceeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot"
+            "has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that it is smashed light ceeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot"
         } else {
             "nothing,\nempty space,\nyou slowly dissolve to nothingness..."
         }
     }
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
-        let mut i = 0;
-        while i < t.len() {
-            let a: Object = t.at(i).clone();
-            set!(w, (a));
-            i += 1 + i;
+        for element in t {
+            set!(w, (element));
         }
     }
 
     fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
-        let mut i = 0;
-        while i < t.len() {
-            let a: Action = t.at(i).clone();
-            set!(w, (a));
-            i += 1 + i;
+        for element in t {
+            set!(w, (element));
         }
     }
 
     fn store_places(w: IWorldDispatcher, t: Array<Room>) {
-        let mut i = 0;
-        while i < t.len() {
-            let a: Room = t.at(i).clone();
-            set!(w, (a));
-            i += 1 + i;
+        for element in t {
+            set!(w, (element));
         }
     }
+   
 
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
         set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
