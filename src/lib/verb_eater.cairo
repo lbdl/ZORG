@@ -25,7 +25,6 @@ pub mod verb_dispatcher {
                 out = stub;
             },
             ActionType::Move => {
-                println!("moving....");
                 let nxt_rm_id = mv::get_next_room(world, pid, msg);
                 if nxt_rm_id == st::NONE {
                     out = "no. you cannot go that way.\n\"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing"
