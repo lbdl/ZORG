@@ -17,6 +17,7 @@ pub mod lib {
     pub mod verb_eater;
     pub mod look;
     pub mod move;
+    pub mod act;
     pub mod system;
 }
 
@@ -40,6 +41,7 @@ pub mod tests {
     pub mod test_meatpuppet_hearing;
     pub mod test_meatpuppet_look;
     pub mod test_meatpuppet_move;
+    pub mod test_meatpuppet_act;
     pub mod test_tokeniser;
     pub mod test_spawn_plain;
     pub mod test_spawn_pass;

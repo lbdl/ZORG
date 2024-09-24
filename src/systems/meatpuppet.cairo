@@ -69,9 +69,6 @@ pub mod meatpuppet {
     /// this needs a means of interogating the world to see
     /// if the player exists already and if not then we should
     /// spawn the player in the some defualt start location
-    /// for now we fake this by calling the spawner's spawn_player
-    /// routine from the test setup routines but somehow we should
-    /// connect or signal this perhaps via some events sent to torii
     impl ListenImpl of IListener<ContractState> {
         fn listen(ref world: IWorldDispatcher, cmd: Array<ByteArray>, p_id: felt252) {
             //! we use this as an error flag to kick us into error
