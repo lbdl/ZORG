@@ -46,7 +46,11 @@ pub mod meatpuppet {
 
     use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
 
-    use super::pull_strings as move;
+    use the_oruggin_trail::lib::look::lookat;
+
+    //use super::pull_strings as move;
+    
+    use the_oruggin_trail::lib::move::relocate as move;
 
     // use planetary_interface::interfaces::planetary::{
     //     PlanetaryInterface, PlanetaryInterfaceTrait, IPlanetaryActionsDispatcherTrait,
@@ -84,7 +88,8 @@ pub mod meatpuppet {
                let spawn_rm_name: ByteArray = "walking eagle pass";
                let spawn_id = h_util::str_hash(@spawn_rm_name);
                spawner.spawn_player(p_id, spawn_id);
-               move::enter_room(world, ref player, spawn_id);
+               let out: ByteArray = lookat::describe_room_short(world, spawn_id);
+               set!(world, Output {playerId: player.player_id, text_o_vision: out})
             }
 
             let mut isErr: ec = ec::None;
@@ -140,7 +145,7 @@ pub mod pull_strings {
     use the_oruggin_trail::lib::err_handler::err_dispatcher as err_dispatch;
 
     use the_oruggin_trail::lib::look::lookat;
-    use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
+    // use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
 
     pub fn enter_room(world: IWorldDispatcher, ref player: Player, rm_id: felt252) {
         player.location = rm_id;

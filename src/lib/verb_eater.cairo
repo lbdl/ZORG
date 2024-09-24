@@ -3,7 +3,9 @@ pub mod verb_dispatcher {
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     use dojo::world::{IWorldDispatcher};
     use the_oruggin_trail::lib::look::lookat;
+    use the_oruggin_trail::lib::move::relocate as mv;
     use the_oruggin_trail::models::{output::{Output}, zrk_enums::{ActionType, ObjectType}};
+    use the_oruggin_trail::constants::zrk_constants::{statusid as st};
 
     pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
         println!("HNDL: ---> {:?}", msg.vrb);
@@ -21,6 +23,16 @@ pub mod verb_dispatcher {
                 let stub: ByteArray = "Shoggoth is a good boy, he will fight you";
                 // out = i_out; 
                 out = stub;
+            },
+            ActionType::Move => {
+                println!("moving....");
+                let nxt_rm_id = mv::get_next_room(world, pid, msg);
+                if nxt_rm_id == st::NONE {
+                    out = "no. you cannot go that way. \"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing"
+                } else {
+                    mv::enter_room(world, pid, nxt_rm_id);
+                    out = lookat::describe_room_short(world, nxt_rm_id);
+                }
             },
             _ => { out = "Shoggoth understands the void and the formless action" },
         }

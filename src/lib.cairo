@@ -16,6 +16,7 @@ pub mod lib {
     pub mod err_handler;
     pub mod verb_eater;
     pub mod look;
+    pub mod move;
     pub mod system;
 }
 
@@ -38,6 +39,7 @@ pub mod utils {
 pub mod tests {
     pub mod test_meatpuppet_hearing;
     pub mod test_meatpuppet_look;
+    pub mod test_meatpuppet_move;
     pub mod test_tokeniser;
     pub mod test_spawn_plain;
     pub mod test_spawn_pass;
