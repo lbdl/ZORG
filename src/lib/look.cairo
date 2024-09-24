@@ -21,6 +21,8 @@ pub mod lookat {
     /// 
     /// should take the garble and then decide to exmine a thing or look around.
     /// the general case is assumed to be for a room
+    /// currently we just do the full description this should seperate into examination
+    /// for objects etc.
     pub fn stuff(ref world: IWorldDispatcher, thing: Garble, pid: felt252) -> ByteArray {
         //get the player object
         // we are always player 23 right now
