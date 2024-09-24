@@ -28,7 +28,7 @@ pub mod verb_dispatcher {
                 println!("moving....");
                 let nxt_rm_id = mv::get_next_room(world, pid, msg);
                 if nxt_rm_id == st::NONE {
-                    out = "no. you cannot go that way. \"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing"
+                    out = "no. you cannot go that way.\n\"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing"
                 } else {
                     mv::enter_room(world, pid, nxt_rm_id);
                     out = lookat::describe_room_short(world, nxt_rm_id);

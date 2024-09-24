@@ -97,7 +97,7 @@ mod tests {
         let input: Array<ByteArray> = array!["go", "east"];
         mp.listen(input, pid);
 
-        let expected_desc: ByteArray = "no. you cannot go that way. \"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing";
+        let expected_desc: ByteArray = "no. you cannot go that way.\n\"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing";
 
         let output = get!(sys.world, 23, (Output));
         let actual = output.text_o_vision;
@@ -106,6 +106,35 @@ mod tests {
         let pl: Player = get!(sys.world, 23, (Player));
         let curr_rm_id = pl.location.clone();
         assert_eq!(expected_rm_id, curr_rm_id, "Expected {:?} got {:?}", expected_rm_id, curr_rm_id );
+    }
+    
+    /// moving west from barn to forge
+    /// 
+    /// should fail because the window is !enabled
+    #[test]
+    #[available_gas(200000000)]
+    fn test_move_west_from_barn() {
+        // let caller = starknet::contract_address_const::<0x0>();
+        let sys: Systems = test_rig::setup_world();
+        let pid: felt252 = 23;
+
+        let rm_name: ByteArray = rts(rm::BARN);
+        let rm_id = h_util::str_hash(@rm_name);
+
+        let sp: ISpawnerDispatcher = sys.spawner;
+        sp.setup();
+        sp.spawn_player(23, rm_id);
+
+        let mp: IListenerDispatcher = sys.listener;
+
+        let input: Array<ByteArray> = array!["go", "west"];
+        mp.listen(input, pid);
+
+        let expected_desc: ByteArray = "no. you cannot go that way.\n\"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing";
+
+        let output = get!(sys.world, 23, (Output));
+        let actual = output.text_o_vision;
+        assert_eq!(expected_desc, actual, "Expected {:?} got {:?}", expected_desc, actual);
     }
     
 }
