@@ -277,7 +277,8 @@ pub enum ActionType {
     Light,
     Spawn,
     Take,
-    Help
+    Help,
+    Pour
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -299,6 +300,7 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Spawn => 'spawn',
             ActionType::Take => 'take',
             ActionType::Help => 'help',
+            ActionType::Pour => 'pour',
             ActionType::None => 'none'
         }
     }
@@ -339,7 +341,8 @@ pub enum ObjectType {
     Troll,
     Path,
     Chest,
-    Match,
+    Box,
+    Matches,
     Petrol,
     Can,
 }
@@ -356,7 +359,8 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Troll => 'troll',
             ObjectType::Path => 'path',
             ObjectType::Chest => 'chest',
-            ObjectType::Match => 'match',
+            ObjectType::Box => 'box',
+            ObjectType::Matches => 'matches',
             ObjectType::Petrol => 'petrol',
             ObjectType::Can => 'can',
         }
@@ -382,8 +386,8 @@ pub fn object_type_to_str(object_type: ObjectType) -> ByteArray {
         "path"
     } else if object_type == ObjectType::Chest {
         "chest"
-    } else if object_type == ObjectType::Match {
-        "match"
+    } else if object_type == ObjectType::Matches {
+        "matches"
     } else if object_type == ObjectType::Petrol {
         "petrol"
     } else if object_type == ObjectType::Can {

@@ -401,7 +401,7 @@ pub mod spawner {
 
         let mut petrol_can = Object {
             objectId: st::SETME,
-            objType: zrk::ObjectType::Can,
+            objType: zrk::ObjectType::Petrol,
             dirType: zrk::DirectionType::None,
             destId: st::NONE,
             matType: zrk::MaterialType::Metal,
@@ -411,7 +411,7 @@ pub mod spawner {
 
         let mut match_box = Object {
             objectId: st::SETME,
-            objType: zrk::ObjectType::Chest,
+            objType: zrk::ObjectType::Matches,
             dirType: zrk::DirectionType::None,
             destId: st::NONE,
             matType: zrk::MaterialType::Wood,
@@ -530,7 +530,7 @@ pub mod spawner {
         } else if id == rm::BARN {
             "is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks"
         } else if id == rm::FORGE {
-            "has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that it is smashed light ceeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot"
+            "has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that the window is smashed light creeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot"
         } else {
             "nothing,\nempty space,\nyou slowly dissolve to nothingness..."
         }

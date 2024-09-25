@@ -54,6 +54,10 @@ pub mod tokeniser {
     pub fn str_to_OT(s: ByteArray) -> ObjectType {
         if s == "ball" {
             ObjectType::Ball
+        } else if s == "matches" || s == "matchbox" {
+            ObjectType::Matches
+        } else if s == "petrol" || s == "can" {
+            ObjectType::Petrol
         } else if s == "window" {
             ObjectType::Window
         } else if s == "door" {

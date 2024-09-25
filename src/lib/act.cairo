@@ -7,6 +7,7 @@ pub mod pullstrings {
         room::Room, 
         zrk_enums::{
             RoomType, room_type_to_str, 
+            ActionType,  
             BiomeType, biome_type_to_str, 
             MaterialType, material_type_to_str, 
             ObjectType, object_type_to_str, 
@@ -32,12 +33,74 @@ pub mod pullstrings {
             let inv_items: Array<felt252> = inv.items.clone();
             let inv_out: ByteArray = handle_default(world, inv_items.span(), msg);
             out = inv_out;
+        } else {
+            // this is a hack for the demo
+            let act_out: ByteArray = handle_action(world, exit_tree.span(), msg);
+            out = act_out;
         }
         out
     }
 
     fn pick_up(world: IWorldDispatcher, pid: felt252, msg: Garble) {
-        
+
+    }
+
+    /// handle general actions
+    /// 
+    /// right now this is a hack and we only care about kicking the ball
+    /// through a window
+    fn handle_action(world: IWorldDispatcher, objs: Span<felt252>, msg: Garble) -> ByteArray {
+        println!("objs: {:?}", objs.len());
+        let mut out: ByteArray = "well that didnt go quite as planned. literally nothing happens. pfft";
+        let map: ActionType = confessor::vrb_to_response(msg.vrb.clone());
+
+        let mut foundObj: Object = Object{
+            objectId: 0, 
+            objType: ObjectType::None, 
+            dirType: DirectionType::None, 
+            destId: 0, 
+            matType: MaterialType::None, 
+            objectActionIds: array![], 
+            txtDefId: 0 
+        };  
+
+        println!("looking for {:?}", map);
+
+        for ele in objs {
+            println!("iter");
+            let obj: Object = get!(world, ele.clone(), (Object));
+            println!("obj: {}", ele);
+            if obj.objType == ObjectType::Window {
+                foundObj = obj;
+                println!("got the window");
+                break;
+            }
+        };
+
+        if foundObj.objType == ObjectType::Window {
+            println!("window------->");
+            let act_ids: Array<felt252> = foundObj.objectActionIds.clone();
+            for a_id in act_ids {
+                let mut act: Action = get!(world, a_id.clone(), (Action));
+                if act.actionType == ActionType::Break {
+                    println!("break--->");
+                    if act.enabled {
+                        act.enabled = false;
+                        let desc: ByteArray = "the window smashes, pieces of glass fly everywhere\nthe window falls open";
+                        out = desc;
+                        set!(world, (act.clone()));
+                    } else {
+                        let desc: ByteArray = "the ball bounces off the broken frame and then, predictably rolls into dog shit";
+                    } 
+                }else if act.actionType == ActionType::Open {
+                    println!("open------>");
+                    act.enabled = true;
+                    set!(world, (act.clone()));
+                }
+            };
+            
+        } 
+        out
     }
 
     /// handle default actions

@@ -48,21 +48,24 @@ pub mod verb_dispatcher {
                 }
             },
             ActionType::Take => {
-                println!("take------->");
+                println!("take------->{:?}", msg);
                 let mut desc: ByteArray = "";
                 if msg.dobj == ObjectType::None {
-                    let item_desc: ByteArray = object_type_to_str(msg.dobj);
+                    // let item_desc: ByteArray = object_type_to_str(msg.dobj);
                     desc = "hmmm, there isnt one of those here to take. are you mad fam?";
                 } else {
                     let mut rm: Room = get!(world, player.location.clone(), (Room));
                     let mut obj_ids: Array<felt252> = rm.objectIds.clone();
                     let mut new_obj_ids: Array<felt252> = array![];
                     let mut inv: Inventory = get!(world, player.inventory.clone(), (Inventory));
-                    let mut found: bool = false;
+                    // let mut found: bool = false;
+                    println!("objs {:?}", obj_ids.len());
                     for ele in obj_ids {
                         let obj: Object = get!(world, ele, (Object));
+                        println!("{:?}", obj.objType);
                         if obj.objType == msg.dobj {
-                            found = true;
+                            // found = true;
+                            println!("found thing");
                             inv.items.append(obj.objectId);
                             let item_desc: ByteArray = object_type_to_str(obj.objType);
                             desc =

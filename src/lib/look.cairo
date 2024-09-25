@@ -28,6 +28,7 @@ pub mod lookat {
         output
     }
 
+    // needs to add the state of the objects into consideration
     fn collate_objects(world: IWorldDispatcher, location: felt252) -> ByteArray {
         let room: Room = get!(world, location, (Room));
         let objects: Array<felt252> = room.objectIds.clone();
@@ -39,7 +40,7 @@ pub mod lookat {
             let obj: Object = get!(world, _id, (Object));
             let _txt: Txtdef = get!(world, obj.txtDefId.clone(), (Txtdef));
             let mut desc: ByteArray = format!(
-                "{} {}, {}", base.clone(), object_type_to_str(obj.objType), _txt.text.clone(),
+                "{} {}, {}\n", base.clone(), object_type_to_str(obj.objType), _txt.text.clone(),
             );
             out.append(@desc);
             idx += 1;
