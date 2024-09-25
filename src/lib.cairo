@@ -30,6 +30,7 @@ pub mod models {
     pub mod object;
     pub mod spawnroom;
     pub mod room;
+    pub mod inventory;
 }
 
 pub mod utils {

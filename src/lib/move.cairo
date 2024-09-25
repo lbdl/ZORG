@@ -18,6 +18,7 @@ pub mod relocate {
     /// this should really live in the meatpuppet also it should
     /// probably return a string
     pub fn enter_room(world: IWorldDispatcher, pid: felt252, rm_id: felt252) {
+        let pid = 23;
         let mut player: Player = get!(world, pid, (Player));
         player.location = rm_id;
         set!(world, (player));

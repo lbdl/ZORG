@@ -75,20 +75,7 @@ pub mod meatpuppet {
             //! catching routines later as we run the parses over
             //! the command string
             
-            // super rubbish spawner
-            // remove me soon
-            // really!
-            let spawner: ISpawnerDispatcher = world.spawner_dispatcher();
-            let mut player: Player = get!(world, p_id, (Player));
-            if player.location == 0 {
-               spawner.setup();
-               let spawn_rm_name: ByteArray = "walking eagle pass";
-               let spawn_id = h_util::str_hash(@spawn_rm_name);
-               spawner.spawn_player(p_id, spawn_id);
-               let out: ByteArray = lookat::describe_room_short(world, spawn_id);
-               set!(world, Output {playerId: player.player_id, text_o_vision: out})
-            }
-
+            set!(world, (Output{playerId: 23, text_o_vision: ""}));
             let mut isErr: ec = ec::None;
             let l_cmd = @cmd;
             let l_cmd_cpy = l_cmd.clone();
@@ -103,7 +90,6 @@ pub mod meatpuppet {
                 // for the game jam we want the fight command
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
-                        // let out: ByteArray = "Shoggoth obeys....";
                         let mut wrld = world;
                         // we have a valid command so pass it into a handler routine
                         ad::handleGarble(ref wrld, p_id, r);

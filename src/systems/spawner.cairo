@@ -14,7 +14,13 @@ pub mod spawner {
     use super::ISpawner;
 
     use the_oruggin_trail::models::{
-        zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object}, room::{Room}, player::{Player}
+        zrk_enums as zrk, 
+        txtdef::{Txtdef}, 
+        action::{Action}, 
+        object::{Object}, 
+        room::{Room}, 
+        player::{Player},
+        inventory::{Inventory}
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
@@ -34,8 +40,12 @@ pub mod spawner {
                 player_id: pid,
                 player_adr: OTHER(),
                 location: start_room,
+                inventory: pid
             };
-            set!(world,(player));
+
+            let inv = Inventory {owner_id: pid, items: array![]};
+            set!(world, (inv));
+            set!(world, (player));
         }
     }
 

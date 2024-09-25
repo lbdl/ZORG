@@ -275,6 +275,9 @@ pub enum ActionType {
     Break,
     Burn,
     Light,
+    Spawn,
+    Take,
+    Help
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -293,7 +296,10 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Break => 'break',
             ActionType::Burn => 'burn',
             ActionType::Light => 'light',
-            ActionType::None => 'none',
+            ActionType::Spawn => 'spawn',
+            ActionType::Take => 'take',
+            ActionType::Help => 'help',
+            ActionType::None => 'none'
         }
     }
 }

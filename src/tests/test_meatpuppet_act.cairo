@@ -17,9 +17,10 @@ mod tests {
         models::{
             txtdef::{Txtdef, txtdef}, room::{Room, room},
             action::{Action, action},
-            object::{Object, object},
+            object::{Object, object, ball_mock_hash},
             output::{Output, output},
             player::{Player, player},
+            inventory::{Inventory, inventory},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
         },
         lib::hash_utils::hashutils as p_hash
@@ -47,13 +48,22 @@ mod tests {
         let sp: ISpawnerDispatcher = sys.spawner;
         sp.setup();
         sp.spawn_player(23, rm_id);
+        
+        let mut pl: Player = get!(sys.world, 23, (Player));
+        pl.inventory = 23;
+        let ball_id = ball_mock_hash();
+        let items = array![ball_id];
+
+        let mut inv: Inventory = Inventory{owner_id: 23, items: items};
+        set!(sys.world, (pl));
+        set!(sys.world, (inv));
 
         let mp: IListenerDispatcher = sys.listener;
 
         let input: Array<ByteArray> = array!["kick", "ball"];
         mp.listen(input, pid);
 
-        let expected_desc: ByteArray = "bensons plain\nYou are standing on a plain on the prarie";
+        let expected_desc: ByteArray = "the ball bounces feebly and rolls into some dog shit. fun.";
 
         let output = get!(sys.world, 23, (Output));
         let actual = output.text_o_vision;

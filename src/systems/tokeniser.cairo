@@ -22,8 +22,13 @@ pub mod tokeniser {
             ActionType::Kick
         } else if s == "fight" || s == "duel" || s == "kill" || s == "attack" {
             ActionType::Fight
-        } 
-        else {
+        } else if s == "spawn" {
+            ActionType::Spawn
+        }  else if s == "take" || s == "get" {
+            ActionType::Take
+        } else if s == "help" {
+            ActionType::Help
+        } else {
             ActionType::None
         }
     }
@@ -132,6 +137,7 @@ pub mod confessor {
     fn parse_action(cmd: @Array<ByteArray>, at: ActionType) -> Result<Garble, ec> {
         // let mut do: ObjectType = ObjectType::None;
         // let mut io: ObjectType = ObjectType::None;
+        println!("-------> parse action {:?}", at);
 
         let s = cmd.at(cmd.len() - 1);
         let sn = s.clone();
@@ -140,7 +146,12 @@ pub mod confessor {
         let lng_frm = cmd.len() > 3;
 
         if do == ObjectType::None && cmd.len() < 2 {
-            Result::Err(ec::NulCmdO(at))
+            if at == ActionType::Spawn || at == ActionType::Help {
+               Result::Ok( Garble{ vrb: at, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None} ) 
+            } else {
+                println!("parse Err-------->");
+                Result::Err(ec::NulCmdO(at))
+            }
         } else if do != ObjectType::None && !lng_frm {
             Result::Ok(
                 Garble { vrb: at, dir: DirectionType::None, dobj: do, iobj: ObjectType::None, }
