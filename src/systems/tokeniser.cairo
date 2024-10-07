@@ -28,6 +28,10 @@ pub mod tokeniser {
             ActionType::Take
         } else if s == "help" {
             ActionType::Help
+        } else if s == "follow" { // Added
+            ActionType::Follow
+        } else if s == "jump" {   // Added
+            ActionType::Jump
         } else {
             ActionType::None
         }
