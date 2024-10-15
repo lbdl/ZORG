@@ -58,17 +58,19 @@
 #[dojo::interface]
 trait ISpawner<T> {
     fn setup(ref world: IWorldDispatcher);
+    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
 }
 
 #[dojo::contract]
 pub mod spawner {
+    use starknet::{ContractAddress, testing, get_caller_address};
     use core::byte_array::ByteArrayTrait;
     use core::array::ArrayTrait;
     use core::option::OptionTrait;
     use super::ISpawner;
 
     use the_oruggin_trail::models::{
-        zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object}, room::{Room}
+        zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object}, room::{Room}, player::{Player}
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
@@ -82,7 +84,22 @@ pub mod spawner {
         fn setup(ref world: IWorldDispatcher) {
             make_rooms(world, 23);
         }
+
+        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+            let player = Player{
+                player_id: pid,
+                player_adr: OTHER(),
+                location: start_room,
+            };
+            set!(world,(player));
+        }
+
     }
+
+   
+
+    fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
+
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
         for o in t {
@@ -205,6 +222,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: {{ self::roomType(r=room.roomType) | trim }},
+            biomeType: zrk::BiomeType::None, // TODO
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![{%- for id in room.objectIds -%}object_id_{{id}},{%- endfor -%}],
