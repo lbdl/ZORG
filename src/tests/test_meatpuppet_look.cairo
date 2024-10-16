@@ -92,7 +92,28 @@ mod tests {
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
 
- 
+    #[test]
+    #[available_gas(200000000)]
+    fn test_look_around_barn() {
+        let sys: Systems = test_rig::setup_world();
+        let pid: felt252 = 23;
+
+        let rm_name: ByteArray = rts(rm::BARN);
+        let rm_id = h_util::str_hash(@rm_name);
+        let sp: ISpawnerDispatcher = sys.spawner;
+        sp.setup();
+        sp.spawn_player(pid, rm_id);
+
+        let mp: IListenerDispatcher = sys.listener;
+
+        let input: Array<ByteArray> = array!["look", "around", "the", "room"];
+        mp.listen(input, pid);
+
+        let expected: ByteArray = "the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks\nthere is a wood door to the south\nthere is a glass window to the west\n\n";
+        let output = get!(sys.world, 23, (Output));
+        let actual = output.text_o_vision;
+        assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
+    }
     /// Generate the short description of the room
     /// 
     /// this is composed of the room type and biome and name/shortTxt
@@ -111,7 +132,10 @@ mod tests {
         assert_eq!(expected, actual, "Expected {:?} got {:?}", expected, actual);
     }
 
-    ///test that meatpuppet can call spawner
+    /// test that meatpuppet can call spawner
+    /// 
+    /// this calls into the rudementary spawner and creates a player
+    /// and the world and then spawn the player in the pass
     #[test]
     fn test_mp_spawns_player() {
         let sys: Systems = test_rig::setup_world();

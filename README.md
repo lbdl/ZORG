@@ -1,13 +1,14 @@
 # TheOrugginTrail
-A Dojo (and also MUD, World Engine) based Zork-like experiment in fully onchain text adventures, onchain games framework interoperability, and the engines that drive them.
+A Dojo based Zork inspired composable fully onchain text adventure engine, and a bonus game. wahay!
+
 What lies ahead, is anyone's guess...
 
 ![ad_2_final](https://github.com/ArchetypalTech/TheOrugginTrail/assets/983878/b90bcc55-2ba1-4564-94e1-d08184c1e49c)
 
 
-This project is a test-case for taking a zork-like text adventure engine and reimagining it in onchain gaming engines and frameworks like MUD, Dojo, and World Engine, from there we intend to experiment with interoperability and thus composition between the engines and chains.
+This project is a Zork inspired text adventure engine re-imagined onchain. It proposes and creates mechanisms for interoperabilty and composability within its and other "worlds" in an autonomous sense.
 
-We are porting / reinterpreting the MIT Zork design and architecture for text adventure engines onchain, this model eventually became the base for Infocom games and such favoured classics as Commodore64's The Hitchikers Guide To The Galaxy, one of the most ambitious and complex text adventures ever made. To get a primer and learn more about the engine and explore it's history and and the engineering principles under the hood please read these resources:
+The MIT Zork design and architecture for text adventure engines eventually became the base for Infocom games and such favoured classics as Commodore64's The Hitchikers Guide To The Galaxy, one of the most ambitious and complex text adventures ever made. To get a primer and learn more about the engine and explore it's history and and the engineering principles under the hood please read these resources:
 
 https://mud.co.uk/richard/zork.htm
 
@@ -19,17 +20,30 @@ https://medium.com/swlh/zork-the-great-inner-workings-b68012952bdc
 
 This repository contains the contract code for the world. As such it contains no frontend (bite us monorepos).
 
-The front end is sveltekit with a bit of tailwind and can be found [in the TeamPain client](https://github.com/ArchetypalTech/TeamPainClient).
+Broadly the system consists of a reasonably capable  NLP parser and then further systems to handle the semantic actions derived from the parser.
+The parser is largly a combination of the `src/systems/tokeniser.cairo` and `src/models/zrk_enums.cairo`. It lexes input then derives a command type (a `Garble`) which is then passed into dispatcher `/src/lib/verb_eater.cairo` which in turn passes the `garble` to it's respective handlers. 
+
+This is largely done by considering commands as (very broadly) three types, `Movement`, `Looking`and other `stuff`. Some other `stuff` requires some specialisation in handling hence the separation of concerns.
+
+Parsing wise the parser (which we call the `confessor`) considers commands to be of the form `DO ACTION, [to] NOUN-DIRECT, [at] NOUN-INDIRECT` like `throw the rock at the source of annoyance`.
+ 
+This is a good example in that we can see that the `Garble` should then be `DO ACTION := 'throw', NOUN-DIRECT := 'the rock', NOUN-INDIRECT := 'the source of annoyance'`.
+
+Lexing wise we can ignore `the` and `at the` and get `Garble{'throw', 'rock', 'source of annoyance'}` so we have some complexity with compound nouns like `source of annoyance` and `rusty key` but we can pretty much cheat in most cases using string length.
+
+Anyway the parser currently does not currently parse for compounds, it will shortly 
+
+Moar docs will follow. Watch This Space!
+
+The front end is `sveltekit` with a bit of tailwind and can be found in the TeamPain [client](https://github.com/ArchetypalTech/TeamPainClient).
 
 ### Regarding composability and inter world discovery
 
 There is a collaboration underway between Archetypal and Underware to enable composability between the Pistols64 and The O'ruggin Trail projects and other projects in the space. See the [shoggoths-planetary-deli](https://github.com/archetypaltech/shoggoths-planetary-deli) repo for more information. :eyes:
 
+### Local development
 
-WARNING: attempting a crossing to the frontiers of crypto country ultimately always results in horrible death... physical, moral, ego, or otherwise.
-
-### 
-it's a cairo/starknet/rust project
+it's a `cairo/starknet/rust` project
 
 it uses the Dojo Framework so you'll need a working install of that tooling.
 
@@ -102,4 +116,4 @@ sozo execute --manifest-path ./tot-dojo/Scarb.toml the_oruggin_trail-meatpuppet 
 
 
 :warning: if you are running in the root then you will need the `--manifest-path`
-now prepare to die from __fun__!
+now prepare to die from __fun__ (again)!

@@ -9,6 +9,7 @@ pub struct Player {
     #[key]
     pub player_id: felt252,
     pub player_adr: ContractAddress,
-    pub location: felt252
+    pub location: felt252,
+    pub inventory: felt252
 }
 

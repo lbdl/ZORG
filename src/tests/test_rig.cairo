@@ -12,7 +12,8 @@ pub mod test_rig {
         room::{room, Room},
         object::{object, Object},
         player::{player, Player},
-        txtdef::{txtdef, Txtdef}
+        txtdef::{txtdef, Txtdef},
+        inventory::{inventory, Inventory}
     };
 
     use the_oruggin_trail::systems::meatpuppet::{ 
@@ -63,6 +64,7 @@ pub mod test_rig {
             object::TEST_CLASS_HASH,
             player::TEST_CLASS_HASH,
             txtdef::TEST_CLASS_HASH,
+            inventory::TEST_CLASS_HASH,
         ];
 
         // deploy world, models, systems etc

@@ -275,6 +275,12 @@ pub enum ActionType {
     Break,
     Burn,
     Light,
+    Spawn,
+    Take,
+    Help,
+    Pour,
+    Follow, // Added
+    Jump,   // Added
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -293,7 +299,13 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Break => 'break',
             ActionType::Burn => 'burn',
             ActionType::Light => 'light',
-            ActionType::None => 'none',
+            ActionType::Spawn => 'spawn',
+            ActionType::Take => 'take',
+            ActionType::Help => 'help',
+            ActionType::Pour => 'pour',
+            ActionType::Follow => 'follow', // Added
+            ActionType::Jump => 'jump',     // Added
+            ActionType::None => 'none'
         }
     }
 }
@@ -333,7 +345,8 @@ pub enum ObjectType {
     Troll,
     Path,
     Chest,
-    Match,
+    Box,
+    Matches,
     Petrol,
     Can,
 }
@@ -350,7 +363,8 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Troll => 'troll',
             ObjectType::Path => 'path',
             ObjectType::Chest => 'chest',
-            ObjectType::Match => 'match',
+            ObjectType::Box => 'box',
+            ObjectType::Matches => 'matches',
             ObjectType::Petrol => 'petrol',
             ObjectType::Can => 'can',
         }
@@ -376,13 +390,160 @@ pub fn object_type_to_str(object_type: ObjectType) -> ByteArray {
         "path"
     } else if object_type == ObjectType::Chest {
         "chest"
-    } else if object_type == ObjectType::Match {
-        "match"
+    } else if object_type == ObjectType::Matches {
+        "matches"
     } else if object_type == ObjectType::Petrol {
         "petrol"
     } else if object_type == ObjectType::Can {
         "can"
     } else {
         "unknown" // This case handles any potential future additions to ObjectType
+    }
+}
+
+/// Composite Verb Types
+/// Represents multi-word verb phrases in English, grouped by particle
+#[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
+pub enum CompositeVerbType {
+    None,
+    Partial,
+    // "Up" group
+    PickUp,
+    WakeUp,
+    MakeUp,
+    GiveUp,
+    ComeUp,
+    StandUp,
+    // "Down" group
+    PutDown,
+    // "On" group
+    TurnOn,
+    GoOn,
+    PutOn,
+    HoldOn,
+    // "Off" group
+    TurnOff,
+    TakeOff,
+    CutOff,
+    ShowOff,
+    // "Out" group
+    CheckOut,
+    GetOut,
+    FindOut,
+    HangOut,
+    // "Over" group
+    TakeOver,
+    GetOver,
+    PullOver,
+    // "Away" group
+    RunAway,
+    GiveAway,
+    // "For" group
+    LookFor,
+    // "Up" with preposition
+    ComeUpWith,
+    // "Into" group
+    RunInto,
+    // "Across" group
+    ComeAcross,
+    // "Back" group
+    ComeBack,
+    // "Along" group
+    GetAlong,
+    // "Apart" group
+    FallApart,
+    // "Fire" group
+    SetFire,
+    // "Rid" group
+    GetRid,
+    // "Blow" group
+    BlowUp,
+    // "Bring" group
+    BringUp,
+}
+
+impl CVT_to_Felt252 of Into<CompositeVerbType, felt252> {
+    fn into(self: CompositeVerbType) -> felt252 {
+        match self {
+            CompositeVerbType::None => 'none',
+            CompositeVerbType::Partial => 'partial',
+            CompositeVerbType::PickUp => 'pick up',
+            CompositeVerbType::WakeUp => 'wake up',
+            CompositeVerbType::MakeUp => 'make up',
+            CompositeVerbType::GiveUp => 'give up',
+            CompositeVerbType::ComeUp => 'come up',
+            CompositeVerbType::StandUp => 'stand up',
+            CompositeVerbType::PutDown => 'put down',
+            CompositeVerbType::TurnOn => 'turn on',
+            CompositeVerbType::GoOn => 'go on',
+            CompositeVerbType::PutOn => 'put on',
+            CompositeVerbType::HoldOn => 'hold on',
+            CompositeVerbType::TurnOff => 'turn off',
+            CompositeVerbType::TakeOff => 'take off',
+            CompositeVerbType::CutOff => 'cut off',
+            CompositeVerbType::ShowOff => 'show off',
+            CompositeVerbType::CheckOut => 'check out',
+            CompositeVerbType::GetOut => 'get out',
+            CompositeVerbType::FindOut => 'find out',
+            CompositeVerbType::HangOut => 'hang out',
+            CompositeVerbType::TakeOver => 'take over',
+            CompositeVerbType::GetOver => 'get over',
+            CompositeVerbType::PullOver => 'pull over',
+            CompositeVerbType::RunAway => 'run away',
+            CompositeVerbType::GiveAway => 'give away',
+            CompositeVerbType::LookFor => 'look for',
+            CompositeVerbType::ComeUpWith => 'come up with',
+            CompositeVerbType::RunInto => 'run into',
+            CompositeVerbType::ComeAcross => 'come across',
+            CompositeVerbType::ComeBack => 'come back',
+            CompositeVerbType::GetAlong => 'get along',
+            CompositeVerbType::FallApart => 'fall apart',
+            CompositeVerbType::SetFire => 'set fire',
+            CompositeVerbType::GetRid => 'get rid',
+            CompositeVerbType::BlowUp => 'blow up',
+            CompositeVerbType::BringUp => 'bring up',
+        }
+    }
+}
+
+pub fn composite_verb_type_to_str(composite_verb_type: CompositeVerbType) -> ByteArray {
+    match composite_verb_type {
+        CompositeVerbType::None => "none",
+        CompositeVerbType::Partial => "partial",
+        CompositeVerbType::PickUp => "pick up",
+        CompositeVerbType::WakeUp => "wake up",
+        CompositeVerbType::MakeUp => "make up",
+        CompositeVerbType::GiveUp => "give up",
+        CompositeVerbType::ComeUp => "come up",
+        CompositeVerbType::StandUp => "stand up",
+        CompositeVerbType::PutDown => "put down",
+        CompositeVerbType::TurnOn => "turn on",
+        CompositeVerbType::GoOn => "go on",
+        CompositeVerbType::PutOn => "put on",
+        CompositeVerbType::HoldOn => "hold on",
+        CompositeVerbType::TurnOff => "turn off",
+        CompositeVerbType::TakeOff => "take off",
+        CompositeVerbType::CutOff => "cut off",
+        CompositeVerbType::ShowOff => "show off",
+        CompositeVerbType::CheckOut => "check out",
+        CompositeVerbType::GetOut => "get out",
+        CompositeVerbType::FindOut => "find out",
+        CompositeVerbType::HangOut => "hang out",
+        CompositeVerbType::TakeOver => "take over",
+        CompositeVerbType::GetOver => "get over",
+        CompositeVerbType::PullOver => "pull over",
+        CompositeVerbType::RunAway => "run away",
+        CompositeVerbType::GiveAway => "give away",
+        CompositeVerbType::LookFor => "look for",
+        CompositeVerbType::ComeUpWith => "come up with",
+        CompositeVerbType::RunInto => "run into",
+        CompositeVerbType::ComeAcross => "come across",
+        CompositeVerbType::ComeBack => "come back",
+        CompositeVerbType::GetAlong => "get along",
+        CompositeVerbType::FallApart => "fall apart",
+        CompositeVerbType::SetFire => "set fire",
+        CompositeVerbType::GetRid => "get rid",
+        CompositeVerbType::BlowUp => "blow up",
+        CompositeVerbType::BringUp => "bring up",
     }
 }
