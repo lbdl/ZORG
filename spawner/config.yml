@@ -106,7 +106,7 @@ levels:
             type: path
             material: dirt
             objDescription: a path north leads toward a large wooden barn
-            direction: "N"
+            direction: N
             destination: elis-barn.md
             actions:
               - actionID: 13058015828559547750
