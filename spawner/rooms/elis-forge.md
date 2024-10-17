@@ -7,39 +7,28 @@ the floor is dirt and trampled dried horse shit scattered with straw and broken 
 the smell is not unpleasent and reminds you faintly of petrol and old socks
 
 ```yaml
-roomType: "barn"
+roomType: "forge"
 ```
-
-## an old wooden barn door, leads south
-
-```yaml
-direction: South
-type: "door"
-material: "wood"
-```
-
-### actions:
-
-#### [the door, closes with a creak](bensons-plain.md)
 
 ## a dusty window, at chest height
 
 ```yaml
-direction: West
+direction: East
 type: "window"
 material: "glass"
 ```
 
 ### actions
 
-#### [the window, now broken, falls open](elis-forge.md)
+#### [the window, closes with a creak](elis-barn.md)
 
-
+```yaml
+enabled: true
+```
 
 #### the window, smashes, glass flies everywhere, very very satisfying
 
 ```yaml
 type: "break"
-affectsAction:
-  actionID: TODO?
+enabled: false
 ```

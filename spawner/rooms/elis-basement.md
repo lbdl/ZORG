@@ -34,7 +34,9 @@ material: "glass"
 
 #### [the window, now broken, falls open](elis-forge.md)
 
-
+```yaml
+enabled: false
+```
 
 #### the window, smashes, glass flies everywhere, very very satisfying
 
