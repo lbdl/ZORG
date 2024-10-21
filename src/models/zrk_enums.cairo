@@ -279,8 +279,10 @@ pub enum ActionType {
     Take,
     Help,
     Pour,
-    Follow, // Added
-    Jump,   // Added
+    Follow,
+    Jump,
+    Block,
+    Soak,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -303,8 +305,10 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Take => 'take',
             ActionType::Help => 'help',
             ActionType::Pour => 'pour',
-            ActionType::Follow => 'follow', // Added
-            ActionType::Jump => 'jump',     // Added
+            ActionType::Follow => 'follow',
+            ActionType::Jump => 'jump',
+            ActionType::Block => 'block',
+            ActionType::Soak => 'soak',
             ActionType::None => 'none'
         }
     }

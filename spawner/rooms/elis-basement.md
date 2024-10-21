@@ -1,33 +1,36 @@
-# Eli's Barn
+# Eli's Basement
 
-the barn is old and smells of old hay and oddly dissolution
+the basement is a converted root cellar, with a small stool bolted to the floor
 
-the floor is dirt and trampled dried horse shit scattered with straw and broken bottles
+it is not a comforting room and reminds you of far to many movies that you probably never should have watched
 
-the smell is not unpleasent and reminds you faintly of petrol and old socks
+the light is just enough that you don't have too see too much.
+
+it smells damp and somehow of bad faith.
+
 
 ```yaml
-roomType: "barn"
+roomType: "basement"
 ```
 
-## an old wooden barn door, leads south
+## a slightly charcoaled wooden trap door, leads upwards
 
 ```yaml
-direction: South
-type: "door"
+direction: Up
+type: "trapdoor"
 material: "wood"
 ```
 
 ### actions:
 
-#### [the door, closes with a creak](bensons-plain.md)
+#### [the trap door, closes with a bang](elis-barn.md)
 
-## a dusty window, at chest height
+## a trap door, leading upwards
 
 ```yaml
-direction: West
-type: "window"
-material: "glass"
+direction: Up
+type: "trapdoor"
+material: "wood"
 ```
 
 ### actions

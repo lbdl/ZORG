@@ -28,10 +28,14 @@ pub mod tokeniser {
             ActionType::Take
         } else if s == "help" {
             ActionType::Help
-        } else if s == "follow" { // Added
+        } else if s == "follow" {
             ActionType::Follow
-        } else if s == "jump" {   // Added
+        } else if s == "jump" {
             ActionType::Jump
+        } else if s == "block" {
+            ActionType::Block
+        } else if s == "soak" {
+            ActionType::Soak
         } else {
             ActionType::None
         }
@@ -86,7 +90,7 @@ pub mod confessor {
     /// it mainly is VRB, THING, THING (ie kick ball at troll)
     /// it can also be a MOVE, DIR (ie go north, or north) etc
     /// the later systems need to handle this specialisation
-    #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
+    #[derive(Serde, Copy, Drop, Debug, PartialEq)]
     pub struct Garble {
       pub vrb: ActionType,
       pub dir: DirectionType,
@@ -154,7 +158,7 @@ pub mod confessor {
         let lng_frm = cmd.len() > 3;
 
         if do == ObjectType::None && cmd.len() < 2 {
-            if at == ActionType::Spawn || at == ActionType::Help {
+            if at == ActionType::Spawn || at == ActionType::Help || at == ActionType::Block || at == ActionType::Soak {
                Result::Ok( Garble{ vrb: at, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None} ) 
             } else {
                 println!("parse Err-------->");
