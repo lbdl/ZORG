@@ -74,6 +74,8 @@ pub mod tokeniser {
             ObjectType::Door
         } else if s == "troll" {
             ObjectType::Troll
+        } else if s == "dynamite" {
+            ObjectType::Dynamite
         } else {
             ObjectType::None
         }
@@ -164,7 +166,7 @@ pub mod confessor {
         let lng_frm = cmd.len() > 3;
 
         if do == ObjectType::None && cmd.len() < 2 {
-            if at == ActionType::Spawn || at == ActionType::Help || at == ActionType::Block || at == ActionType::Soak {
+            if at == ActionType::Spawn || at == ActionType::Help {
                Result::Ok( Garble{ vrb: at, dir: DirectionType::None, dobj: ObjectType::None, iobj: ObjectType::None} ) 
             } else {
                 println!("parse Err-------->");

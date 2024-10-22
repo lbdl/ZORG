@@ -27,7 +27,10 @@ material: "wood"
 
 ## a stick of slightly sweaty dynamite almost like a caricature ot itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?
 
-### actions:
+```yaml
+type: "dynamite"
+material: "tnt"
+```
 
 #### the dynamite detonates, you are lucky, the blast wave passes through you, you shit your pants involuntarily, you are spared the clean up by dint of now being largely composed of meaty paste. 
 

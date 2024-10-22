@@ -30,7 +30,7 @@ material: "dirt"
 
 #### [the path winds west, it is open](bensons-plain.md)
 
-## blocked path
+## path leads east
 
 ```yaml
 direction: East
@@ -48,10 +48,6 @@ enabled: false
 dBit: false
 revertable: false
 ```
-
-## a huge boulder sits acress the path to the east
-
-### actions:
 
 #### the boulder shatters into dust and shrapnel, pieces fly, deer run startled, cows drop dead, crows and squirrels drop out of the sky. satisfying essentially.
 

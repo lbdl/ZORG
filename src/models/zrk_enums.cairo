@@ -146,6 +146,8 @@ pub enum MaterialType {
     Mud,
     Leather,
     Metal,
+    TNT,
+    Hay,
 }
 
 /// MaterialType -> short_string or felt252
@@ -165,6 +167,8 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
             MaterialType::Mud => 'mud',
             MaterialType::Leather => 'leather',
             MaterialType::Metal => 'metal',
+            MaterialType::TNT => 'TNT',
+            MaterialType::Hay => 'hay',
             _ => 'none',
         }
     }
@@ -195,6 +199,10 @@ pub fn material_type_to_str(material_type: MaterialType) -> ByteArray {
         "leather"
     } else if material_type == MaterialType::Metal {
         "metal"
+    } else if material_type == MaterialType::TNT {
+        "TNT"
+    } else if material_type == MaterialType::Hay {
+        "hay"
     } else {
         "unknown" // This case handles any potential future additions to MaterialType
     }
@@ -363,6 +371,7 @@ pub enum ObjectType {
     Can,
     Dynamite,
     Boulder,
+    Bale,
 }
 
 impl OT_to_Felt252 of Into<ObjectType, felt252> {
@@ -383,6 +392,7 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Can => 'can',
             ObjectType::Dynamite => 'dynamite',
             ObjectType::Boulder => 'boulder',
+            ObjectType::Bale => 'bale',
         }
     }
 }

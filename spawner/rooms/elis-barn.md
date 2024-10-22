@@ -74,6 +74,11 @@ revertable: true
 
 ## a large dry bale of hay
 
+```yaml
+type: "Bale"
+material: "hay"
+```
+
 ### actions
 
 #### the hay bursts into blue, yellow and orange flames with a speed and a heat so intense that you jump back loosing some eyebrows and gaining a small bit of wee
