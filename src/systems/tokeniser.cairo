@@ -36,6 +36,8 @@ pub mod tokeniser {
             ActionType::Block
         } else if s == "soak" {
             ActionType::Soak
+        } else if s == "close" {
+            ActionType::Close
         } else {
             ActionType::None
         }
@@ -90,7 +92,7 @@ pub mod confessor {
     /// it mainly is VRB, THING, THING (ie kick ball at troll)
     /// it can also be a MOVE, DIR (ie go north, or north) etc
     /// the later systems need to handle this specialisation
-    #[derive(Serde, Copy, Drop, Debug, PartialEq)]
+    #[derive(Serde, Copy, Drop, Introspect, Debug, PartialEq)]
     pub struct Garble {
       pub vrb: ActionType,
       pub dir: DirectionType,
@@ -134,6 +136,10 @@ pub mod confessor {
             ActionType::Break
         } else if vrb == ActionType::Light {
             ActionType::Burn
+        } else if vrb == ActionType::Empty || vrb == ActionType::Pour {
+            ActionType::Soak
+        } else if vrb == ActionType::Explode {
+            ActionType::Disintegrate
         } else {
             ActionType::None
         }

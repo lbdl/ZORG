@@ -4,7 +4,7 @@ the basement is a converted root cellar, with a small stool bolted to the floor
 
 it is not a comforting room and reminds you of far to many movies that you probably never should have watched
 
-the light is just enough that you don't have too see too much.
+the light is just enough that you don't have to see too much.
 
 it smells damp and somehow of bad faith.
 
@@ -25,26 +25,24 @@ material: "wood"
 
 #### [the trap door, closes with a bang](elis-barn.md)
 
-## a trap door, leading upwards
+## a stick of slightly sweaty dynamite almost like a caricature ot itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?
+
+### actions:
+
+#### the dynamite detonates, you are lucky, the blast wave passes through you, you shit your pants involuntarily, you are spared the clean up by dint of now being largely composed of meaty paste. 
 
 ```yaml
-direction: Up
-type: "trapdoor"
-material: "wood"
-```
-
-### actions
-
-#### [the window, now broken, falls open](elis-forge.md)
-
-```yaml
+type: "explode"
 enabled: false
 ```
 
-#### the window, smashes, glass flies everywhere, very very satisfying
+#### the fuse comes into menacing life, sparkling like a demented god, the air fills with the smell of gunpowder, its not at all unpleasant
 
+<!-- needs a timer like 3 actions pre it explodes so we need a specialised routine
+    we might in fact handle this kind of thing but adding IV's and respective
+    flags that we can check in main()
+ -->
 ```yaml
-type: "break"
-affectsAction:
-  actionID: TODO?
+type: "light"
+enabled: true
 ```

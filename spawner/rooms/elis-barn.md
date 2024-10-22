@@ -77,15 +77,19 @@ revertable: true
 ### actions
 
 #### the hay bursts into blue, yellow and orange flames with a speed and a heat so intense that you jump back loosing some eyebrows and gaining a small bit of wee
-
+<!-- enabled via the soak action -->
 ```yaml
 type: "burn"
 enabled: false
+dBit: false
+revertable: false
 ```
 
 #### the hay soaks up the volatile liquid with gusto, the air smells potent
-
+<!-- this needs connecting to the burn action in the generated config -->
 ```yaml
 type: "soak"
-enabled: false
+enabled: true
+dBit: false
+revertable: false
 ```

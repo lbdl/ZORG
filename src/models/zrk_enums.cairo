@@ -283,6 +283,10 @@ pub enum ActionType {
     Jump,
     Block,
     Soak,
+    Empty,
+    Explode,
+    Disintegrate,
+    Close,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -308,7 +312,11 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Follow => 'follow',
             ActionType::Jump => 'jump',
             ActionType::Block => 'block',
+            ActionType::Explode => 'explode',
+            ActionType::Disintegrate => 'disintegrate',
+            ActionType::Close => 'close',
             ActionType::Soak => 'soak',
+            ActionType::Empty => 'empty',
             ActionType::None => 'none'
         }
     }
@@ -353,6 +361,8 @@ pub enum ObjectType {
     Matches,
     Petrol,
     Can,
+    Dynamite,
+    Boulder,
 }
 
 impl OT_to_Felt252 of Into<ObjectType, felt252> {
@@ -371,6 +381,8 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Matches => 'matches',
             ObjectType::Petrol => 'petrol',
             ObjectType::Can => 'can',
+            ObjectType::Dynamite => 'dynamite',
+            ObjectType::Boulder => 'boulder',
         }
     }
 }
@@ -400,6 +412,10 @@ pub fn object_type_to_str(object_type: ObjectType) -> ByteArray {
         "petrol"
     } else if object_type == ObjectType::Can {
         "can"
+    } else if object_type == ObjectType::Dynamite {
+        "dynamite"
+    } else if object_type == ObjectType::Boulder {
+        "boulder"
     } else {
         "unknown" // This case handles any potential future additions to ObjectType
     }
@@ -418,8 +434,10 @@ pub enum CompositeVerbType {
     GiveUp,
     ComeUp,
     StandUp,
+    ClimbUp,
     // "Down" group
     PutDown,
+    ClimbDown,
     // "On" group
     TurnOn,
     GoOn,
@@ -435,6 +453,8 @@ pub enum CompositeVerbType {
     GetOut,
     FindOut,
     HangOut,
+    PourOut,
+    EmptyOut,
     // "Over" group
     TakeOver,
     GetOver,
@@ -490,6 +510,8 @@ impl CVT_to_Felt252 of Into<CompositeVerbType, felt252> {
             CompositeVerbType::GetOut => 'get out',
             CompositeVerbType::FindOut => 'find out',
             CompositeVerbType::HangOut => 'hang out',
+            CompositeVerbType::PourOut => 'pour out',
+            CompositeVerbType::EmptyOut => 'empty out',
             CompositeVerbType::TakeOver => 'take over',
             CompositeVerbType::GetOver => 'get over',
             CompositeVerbType::PullOver => 'pull over',
@@ -506,6 +528,8 @@ impl CVT_to_Felt252 of Into<CompositeVerbType, felt252> {
             CompositeVerbType::GetRid => 'get rid',
             CompositeVerbType::BlowUp => 'blow up',
             CompositeVerbType::BringUp => 'bring up',
+            CompositeVerbType::ClimbUp => 'climb up',
+            CompositeVerbType::ClimbDown => 'climb down',
         }
     }
 }
@@ -533,6 +557,8 @@ pub fn composite_verb_type_to_str(composite_verb_type: CompositeVerbType) -> Byt
         CompositeVerbType::GetOut => "get out",
         CompositeVerbType::FindOut => "find out",
         CompositeVerbType::HangOut => "hang out",
+        CompositeVerbType::PourOut => "pour out",
+        CompositeVerbType::EmptyOut => "empty out",
         CompositeVerbType::TakeOver => "take over",
         CompositeVerbType::GetOver => "get over",
         CompositeVerbType::PullOver => "pull over",
@@ -549,5 +575,7 @@ pub fn composite_verb_type_to_str(composite_verb_type: CompositeVerbType) -> Byt
         CompositeVerbType::GetRid => "get rid",
         CompositeVerbType::BlowUp => "blow up",
         CompositeVerbType::BringUp => "bring up",
+        CompositeVerbType::ClimbUp => "climb up",
+        CompositeVerbType::ClimbDown => "climb down",
     }
 }
