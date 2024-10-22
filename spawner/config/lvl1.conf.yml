@@ -5,9 +5,9 @@ levels:
     roomName: Eli's Basement
     roomDescription: |-
       the basement is a converted root cellar, with a small stool bolted to the floor
-      it is not a comforting room and reminds you of far to many movies that you probably never should have watched
+      it is not a comforting room and reminds you of far too many movies that you probably never should have watched.
       the light is just enough that you don't have to see too much.
-      it smells damp and somehow of bad faith.
+      it smells of damp and somehow bad faith.
     roomType: basement
     objects:
     - objID: 4405246086034713577
@@ -27,7 +27,10 @@ levels:
     - objID: 15610790850353037754
       type: dynamite
       material: tnt
-      objDescription: a stick of slightly sweaty dynamite almost like a caricature ot itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?
+      objDescription: |-
+        a stick of slightly sweaty dynamite almost like a caricature of itself.
+        It's fused, certainly unstable and capable of turning things (including you)into a fine meaty mist 
+        still holding exciteable explosives couldn't hurt right?
       direction: null
       destination: null
       actions:
@@ -35,16 +38,21 @@ levels:
         type: explode
         enabled: false
         revertable: false
-        dBitText: the dynamite detonates, you are lucky, the blast wave passes through you, you shit your pants involuntarily, you are spared the clean up by dint of now being largely composed of meaty paste.
-        dBit: true
+        dBitText: |-
+          the dynamite detonates and luckily the blast wave passes through you. 
+          you shit your pants involuntarily. 
+          you are spared the clean up by dint of now being largely composed of meaty paste.
+        dBit: false
         affectsAction: null
       - actionID: 6636732390253036532
         type: light
         enabled: true
         revertable: false
-        dBitText: the fuse comes into menacing life, sparkling like a demented god, the air fills with the smell of gunpowder, its not at all unpleasant
-        dBit: true
-        affectsAction: null
+        dBitText: |-
+          the fuse comes into menacing life, sparkling like a demented god, 
+          the air fills with the smell of gunpowder. this is not at all unpleasant
+        dBit: false
+        affectsAction: 12578911564611469734
     objectIds:
     - 15610790850353037754
     dirObjIds:
@@ -78,7 +86,7 @@ levels:
       type: path
       material: dirt
       objDescription: a path north leads toward a large wooden barn
-      direction: 'N'
+      direction: N
       destination: elis-barn.md
       actions:
       - actionID: 13058015828559547750
@@ -212,10 +220,10 @@ levels:
       actions:
       - actionID: 9807140808976004456
         type: open
-        enabled: true
+        enabled: false
         revertable: false
         dBitText: the path winds east, through piles of fresh rubble and charred pine cones
-        dBit: true
+        dBit: false
         affectsAction: null
       - actionID: 14334806480543773131
         type: disintegrate
@@ -223,7 +231,7 @@ levels:
         revertable: false
         dBitText: the boulder shatters into dust and shrapnel, pieces fly, deer run startled, cows drop dead, crows and squirrels drop out of the sky. satisfying essentially.
         dBit: false
-        affectsAction: null
+        affectsAction: 9807140808976004456
     objectIds: []
     dirObjIds:
     - 745772409139972109
