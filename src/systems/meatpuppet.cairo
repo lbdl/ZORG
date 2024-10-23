@@ -5,7 +5,7 @@
 //  * MeaCulpa (mc) 2024 lbdl | itrainspiders
 //  */
 
-/// The main Inerface for the system
+/// The main Interface for the system
 ///
 /// Exprected to take an array of str from an RPC call
 /// and to then lex and extract semantic information

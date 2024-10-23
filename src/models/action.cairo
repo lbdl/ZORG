@@ -1,5 +1,10 @@
 use the_oruggin_trail::models::{zrk_enums as zrk};
 
+// TODO: add a default txt for when the this doesnt affect
+// a direct object interaction. we mainly just use the dBit now
+// but that has no sense of time/continuity some object, probably objects
+// should have a default action attached. Something that is ALWAYS
+// enabled in effect.
 #[derive(Clone, Drop, Serde)]
 #[dojo::model]
 pub struct Action {

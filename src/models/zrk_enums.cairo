@@ -77,6 +77,7 @@ pub enum RoomType {
     Barn,
     Forge,
     Pass,
+    Alley,
 }
 
 impl RT_to_Felt252 of Into<RoomType, felt252> {
@@ -93,6 +94,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::Barn => 'barn',
             RoomType::Forge => 'forge',
             RoomType::Pass => 'pass',
+            RoomType::Alley => 'alley',
             RoomType::None => 'none',
         }
     }
@@ -123,6 +125,8 @@ pub fn room_type_to_str(room_type: RoomType) -> ByteArray {
         "forge"
     } else if room_type == RoomType::Pass {
         "pass"
+    } else if room_type == RoomType::Alley {
+        "alley"
     } else {
         "unknown" // This case handles any potential future additions to RoomType
     }

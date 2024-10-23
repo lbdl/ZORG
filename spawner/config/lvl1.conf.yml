@@ -42,6 +42,7 @@ levels:
           the dynamite detonates and luckily the blast wave passes through you. 
           you shit your pants involuntarily. 
           you are spared the clean up by dint of now being largely composed of meaty paste.
+          death. pffft
         dBit: false
         affectsAction: null
       - actionID: 6636732390253036532
@@ -236,13 +237,18 @@ levels:
     dirObjIds:
     - 745772409139972109
     - 7479341928096534711
-  - roomID: 2103159215482208020
-    roomName: ''
-    roomDescription: ''
-    roomType: ''
-    objects: []
-    objectIds: []
-    dirObjIds: []
+    - roomID: 2103159215482208020
+        roomName: The Alley Off Main Street
+        roomDescription: |-
+          the alley composed of stinking mud sits between main street and the praries, seems that
+          the town uses uses it as dump, for both discarded humans and well, literal shit.
+          all in all not somewhere wants to linger unless dead, or drunk and in that case probably
+          best to be dead drunk.
+          oddly it reminds you of home. this isnt a good thing.
+        roomType: alley
+        objects: []
+        objectIds: []
+        dirObjIds: []
   - roomID: 11107137240536497418
     roomName: Eli's Barn
     roomDescription: |-
