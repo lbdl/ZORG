@@ -14,6 +14,16 @@ oddly it reminds you of home. this isnt a good thing.
 roomType: "alley"
 ```
 
+## path
+
+```yaml
+direction: North
+type: "path"
+material: "shit"
+```
+### actions:
+
+#### [the path winds west](walking-eagle-pass.md)
 
 
 
