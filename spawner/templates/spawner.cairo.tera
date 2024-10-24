@@ -1,58 +1,169 @@
 {%- macro direction(dir) -%}
-  {%- if dir -%}
-    {%- if dir == "E" -%}
-    zrk::DirectionType::East
-    {%- elif dir == "S" -%}
-    zrk::DirectionType::South
-    {%- elif dir == "W" -%}
-    zrk::DirectionType::West
-    {%- elif dir == "N" -%}
-    zrk::DirectionType::North
-    {%- else -%}UNKNOWN DIRECTION
-    {%- endif -%}
+  {%- if dir == "E" -%}
+  zrk::DirectionType::East
+  {%- elif dir == "S" -%}
+  zrk::DirectionType::South
+  {%- elif dir == "W" -%}
+  zrk::DirectionType::West
+  {%- elif dir == "N" -%}
+  zrk::DirectionType::North
+  {%- elif dir == "U" -%}
+  zrk::DirectionType::Up
+  {%- elif dir == "D" -%}
+  zrk::DirectionType::Down
   {%- else -%}
   zrk::DirectionType::None
   {%- endif -%}
 {%- endmacro direction -%}
 {%- macro objectType(t) -%}
-  {%- if t == "path" -%}
+  {%- if t == "Path" -%}
   zrk::ObjectType::Path
-  {%- elif t == "window" -%}
+  {%- elif t == "Window" -%}
   zrk::ObjectType::Window
-  {%- elif t == "ball" -%}
+  {%- elif t == "Ball" -%}
   zrk::ObjectType::Ball
-  {%- elif t == "door" -%}
+  {%- elif t == "Door" -%}
   zrk::ObjectType::Door
-  {%- else -%}UNKNOWN OBJECT TYPE{%- endif -%}
+  {%- elif t == "Stairs" -%}
+  zrk::ObjectType::Stairs
+  {%- elif t == "Place" -%}
+  zrk::ObjectType::Place
+  {%- elif t == "Troll" -%}
+  zrk::ObjectType::Troll
+  {%- elif t == "Chest" -%}
+  zrk::ObjectType::Chest
+  {%- elif t == "Box" -%}
+  zrk::ObjectType::Box
+  {%- elif t == "Matches" -%}
+  zrk::ObjectType::Matches
+  {%- elif t == "Can" -%}
+  zrk::ObjectType::Can
+  {%- elif t == "Dynamite" -%}
+  zrk::ObjectType::Dynamite
+  {%- elif t == "Boulder" -%}
+  zrk::ObjectType::Boulder
+  {%- elif t == "Bale" -%}
+  zrk::ObjectType::Bale
+  {%- elif t == "Petrol" -%}
+  zrk::ObjectType::Petrol
+  {%- else -%}
+  zrk::ObjectType::None
+{%- endif -%}
 {%- endmacro objectType -%}
 {%- macro actionType(t) -%}
-  {%- if t == "open" -%}
-  zrk::ActionType::Open
-  {%- elif t == "kick" -%}
+  {%- if t == "Move" -%}
+  zrk::ActionType::Move
+  {%- elif t == "Look" -%}
+  zrk::ActionType::Look
+  {%- elif t == "Kick" -%}
   zrk::ActionType::Kick
-  {%- elif t == "break" -%}
+  {%- elif t == "Hit" -%}
+  zrk::ActionType::Hit
+  {%- elif t == "Drink" -%}
+  zrk::ActionType::Drink
+  {%- elif t == "Fight" -%}
+  zrk::ActionType::Fight
+  {%- elif t == "Sleep" -%}
+  zrk::ActionType::Sleep
+  {%- elif t == "Smash" -%}
+  zrk::ActionType::Smash
+  {%- elif t == "Pray" -%}
+  zrk::ActionType::Pray
+  {%- elif t == "Open" -%}
+  zrk::ActionType::Open
+  {%- elif t == "Break" -%}
   zrk::ActionType::Break
-  {%- else -%}UNKNOWN ACTION TYPE{%- endif -%}
+  {%- elif t == "Burn" -%}
+  zrk::ActionType::Burn
+  {%- elif t == "Light" -%}
+  zrk::ActionType::Light
+  {%- elif t == "Spawn" -%}
+  zrk::ActionType::Spawn
+  {%- elif t == "Take" -%}
+  zrk::ActionType::Take
+  {%- elif t == "Help" -%}
+  zrk::ActionType::Help
+  {%- elif t == "Pour" -%}
+  zrk::ActionType::Pour
+  {%- elif t == "Follow" -%}
+  zrk::ActionType::Follow
+  {%- elif t == "Jump" -%}
+  zrk::ActionType::Jump
+  {%- elif t == "Block" -%}
+  zrk::ActionType::Block
+  {%- elif t == "Soak" -%}
+  zrk::ActionType::Soak
+  {%- elif t == "Empty" -%}
+  zrk::ActionType::Empty
+  {%- elif t == "Explode" -%}
+  zrk::ActionType::Explode
+  {%- elif t == "Disintegrate" -%}
+  zrk::ActionType::Disintegrate
+  {%- elif t == "Close" -%}
+  zrk::ActionType::Close
+  {%- else -%}
+  zrk::ActionType::None
+  {%- endif -%}
 {%- endmacro actionType -%}
 {%- macro materialType(m) -%}
-  {%- if m == "dirt" -%}
-  zrk::MaterialType::Dirt
-  {%- elif m == "glass" -%}
-  zrk::MaterialType::Glass
-  {%- elif m == "leather" -%}
-  zrk::MaterialType::Leather
-  {%- elif m == "wood" -%}
+  {%- if m == "Wood" -%}
   zrk::MaterialType::Wood
-  {%- else -%}UNKNOWN MATERIAL TYPE{%- endif -%}
+  {%- elif m == "Dirt" -%}
+  zrk::MaterialType::Dirt
+  {%- elif m == "Stone" -%}
+  zrk::MaterialType::Stone
+  {%- elif m == "Flesh" -%}
+  zrk::MaterialType::Flesh
+  {%- elif m == "Glass" -%}
+  zrk::MaterialType::Glass
+  {%- elif m == "IKEA" -%}
+  zrk::MaterialType::IKEA
+  {%- elif m == "Iron" -%}
+  zrk::MaterialType::Iron
+  {%- elif m == "Shit" -%}
+  zrk::MaterialType::Shit
+  {%- elif m == "Mud" -%}
+  zrk::MaterialType::Mud
+  {%- elif m == "Leather" -%}
+  zrk::MaterialType::Leather
+  {%- elif m == "Metal" -%}
+  zrk::MaterialType::Metal
+  {%- elif m == "TNT" -%}
+  zrk::MaterialType::TNT
+  {%- elif m == "Hay" -%}
+  zrk::MaterialType::Hay
+  {%- else -%}
+  zrk::MaterialType::None
+  {%- endif -%}
 {%- endmacro materialType -%}
 {%- macro roomType(r) -%}
-  {%- if r == "plain" -%}
+  {%- if r == "WoodCabin" -%}
+  zrk::RoomType::WoodCabin
+  {%- elif r == "Store" -%}
+  zrk::RoomType::Store
+  {%- elif r == "Cavern" -%}
+  zrk::RoomType::Cavern
+  {%- elif r == "StoneCabin" -%}
+  zrk::RoomType::StoneCabin
+  {%- elif r == "Fort" -%}
+  zrk::RoomType::Fort
+  {%- elif r == "Room" -%}
+  zrk::RoomType::Room
+  {%- elif r == "Plain" -%}
   zrk::RoomType::Plain
-  {%- elif r == "mountains" -%}
+  {%- elif r == "Mountains" -%}
   zrk::RoomType::Mountains
-  {%- elif r == "barn" -%}
+  {%- elif r == "Barn" -%}
   zrk::RoomType::Barn
-  {%- else -%}UNKNOWN ROOM TYPE{%- endif -%}
+  {%- elif r == "Forge" -%}
+  zrk::RoomType::Forge
+  {%- elif r == "Pass" -%}
+  zrk::RoomType::Pass
+  {%- elif r == "Alley" -%}
+  zrk::RoomType::Alley
+  {%- else -%}
+  zrk::RoomType::None
+  {%- endif -%}
 {%- endmacro roomType -%}
 
 #[dojo::interface]
@@ -70,14 +181,18 @@ pub mod spawner {
     use super::ISpawner;
 
     use the_oruggin_trail::models::{
-        zrk_enums as zrk, txtdef::{Txtdef}, action::{Action}, object::{Object}, room::{Room}, player::{Player}
+        zrk_enums as zrk, 
+        txtdef::{Txtdef}, 
+        action::{Action}, 
+        object::{Object}, 
+        room::{Room}, 
+        player::{Player},
+        inventory::{Inventory}
     };
 
     use the_oruggin_trail::constants::zrk_constants as zc;
     use the_oruggin_trail::constants::zrk_constants::{roomid as rm, statusid as st};
-
     use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
-
 
     #[abi(embed_v0)]
     impl SpawnerImpl of ISpawner<ContractState> {
@@ -90,16 +205,16 @@ pub mod spawner {
                 player_id: pid,
                 player_adr: OTHER(),
                 location: start_room,
+                inventory: pid
             };
-            set!(world,(player));
-        }
 
+            let inv = Inventory {owner_id: pid, items: array![]};
+            set!(world, (inv));
+            set!(world, (player));
+        }
     }
 
-   
-
     fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
-
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
         for o in t {
@@ -201,8 +316,10 @@ pub mod spawner {
         {%- if object.actions -%}
         {%- for action in object.actions -%}
         {%- if action.affectsAction -%}
-        action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction.actionID }};
-        action_{{object.objID}}_{{ action.affectsAction.actionID }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }};
+        {# action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction.actionID }}; #}
+        action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction }};
+        {# action_{{object.objID}}_{{ action.affectsAction.actionID }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }}; #}
+        action_{{object.objID}}_{{ action.affectsAction }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }};
         {%- endif -%}
         {% endfor -%}
         {%- endif -%}
@@ -222,7 +339,6 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: {{ self::roomType(r=room.roomType) | trim }},
-            biomeType: zrk::BiomeType::None, // TODO
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![{%- for id in room.objectIds -%}object_id_{{id}},{%- endfor -%}],
