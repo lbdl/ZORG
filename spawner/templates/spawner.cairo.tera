@@ -292,7 +292,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_{{object.objID}}_{{action.actionID}} = h_util::action_hash(@action_{{object.objID}}_{{action.actionID}} );
         action_{{object.objID}}_{{action.actionID}}.actionId = action_id_{{object.objID}}_{{action.actionID}};
         
@@ -339,9 +339,7 @@ pub mod spawner {
         {%- if object.actions -%}
         {%- for action in object.actions -%}
         {%- if action.affectsAction -%}
-        {# action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction.actionID }}; #}
         action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction }};
-        {# action_{{object.objID}}_{{ action.affectsAction.actionID }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }}; #}
         action_{{object.objID}}_{{ action.affectsAction }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }};
         {%- endif -%}
         {% endfor -%}
