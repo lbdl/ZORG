@@ -182,6 +182,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::None,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_15610790850353037754,],
@@ -308,6 +309,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Plain,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_17189994194645879202,],
@@ -446,6 +448,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Forge,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_3265630872681576966,object_id_5316783824151223577,],
@@ -552,6 +555,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Mountains,
+            biomeType: zrk::BiomeType::Mountains,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![],
@@ -611,6 +615,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Alley,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![],
@@ -797,6 +802,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Barn,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_17975420477260050648,],
