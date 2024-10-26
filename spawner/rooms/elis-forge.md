@@ -7,15 +7,16 @@ from this side. Now that the window is smashed light creeps in from the barn and
 the hearth is cold and the place smells of petrol and soot
 
 ```yaml
-roomType: "forge"
+roomType: "Forge"
+biomeType: "Prarie"
 ```
 
 ## a dusty window, at chest height
 
 ```yaml
 direction: East
-type: "window"
-material: "glass"
+type: "Window"
+material: "Glass"
 ```
 
 ### actions
@@ -29,7 +30,7 @@ enabled: true
 #### the window, smashes, glass flies everywhere, very very satisfying
 
 ```yaml
-type: "break"
+type: "Break"
 enabled: false
 ```
 
@@ -38,8 +39,8 @@ enabled: false
 trade marked Cthonian Petroleum Corp n.23
 
 ```yaml
-type: "petrol"
-material: metal
+type: "Petrol"
+material: "Metal"
 ```
 
 ### actions
@@ -47,7 +48,7 @@ material: metal
 #### the petrol bursts into flames
 
 ```yaml
-type: "burn"
+type: "Burn"
 ```
 
 ## a wooden match box
@@ -55,8 +56,8 @@ type: "burn"
 trade marked Shoggoth's Joy
 
 ```yaml
-type: "matches"
-material: wooden
+type: "Matches"
+material: "Wood"
 ```
 
 ### actions
@@ -64,5 +65,5 @@ material: wooden
 #### the match, burns with a blue flame
 
 ```yaml
-type: burn
+type: "Burn"
 ```

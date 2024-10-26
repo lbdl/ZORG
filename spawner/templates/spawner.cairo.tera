@@ -165,6 +165,29 @@
   zrk::RoomType::None
   {%- endif -%}
 {%- endmacro roomType -%}
+{%- macro biomeType(b) -%}
+  {%- if b == "Forest" -%}
+  zrk::BiomeType::Forest
+  {%- elif b == "Tundra" -%}
+  zrk::BiomeType::Tundra
+  {%- elif b == "Arctic" -%}
+  zrk::BiomeType::Arctic
+  {%- elif b == "Desert" -%}
+  zrk::BiomeType::Desert
+  {%- elif b == "Temporate" -%}
+  zrk::BiomeType::Temporate
+  {%- elif b == "Faery" -%}
+  zrk::BiomeType::Faery
+  {%- elif b == "Demon" -%}
+  zrk::BiomeType::Demon
+  {%- elif b == "Mountains" -%}
+  zrk::BiomeType::Mountains
+  {%- elif b == "Prarie" -%}
+  zrk::BiomeType::Prarie
+  {%- else -%}
+  zrk::BiomeType::None
+  {%- endif -%}
+{%- endmacro biomeType -%}
 
 #[dojo::interface]
 trait ISpawner<T> {
@@ -269,7 +292,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_{{object.objID}}_{{action.actionID}} = h_util::action_hash(@action_{{object.objID}}_{{action.actionID}} );
         action_{{object.objID}}_{{action.actionID}}.actionId = action_id_{{object.objID}}_{{action.actionID}};
         
@@ -316,9 +339,7 @@ pub mod spawner {
         {%- if object.actions -%}
         {%- for action in object.actions -%}
         {%- if action.affectsAction -%}
-        {# action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction.actionID }}; #}
         action_{{object.objID}}_{{action.actionID}}.affectsActionId = action_id_{{object.objID}}_{{ action.affectsAction }};
-        {# action_{{object.objID}}_{{ action.affectsAction.actionID }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }}; #}
         action_{{object.objID}}_{{ action.affectsAction }}.affectedByActionId = action_id_{{object.objID}}_{{ action.actionID }};
         {%- endif -%}
         {% endfor -%}
@@ -339,6 +360,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: {{ self::roomType(r=room.roomType) | trim }},
+            biomeType: {{ self::biomeType(b=room.biomeType) | trim }},
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![{%- for id in room.objectIds -%}object_id_{{id}},{%- endfor -%}],

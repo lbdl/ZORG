@@ -7,15 +7,16 @@ the floor is dirt and trampled dried horse shit scattered with straw and broken 
 the smell is not unpleasent and reminds you faintly of petrol and old socks
 
 ```yaml
-roomType: "barn"
+roomType: "Barn"
+biomeType: "Prarie"
 ```
 
 ## an old wooden barn door, leads south
 
 ```yaml
 direction: South
-type: "door"
-material: "wood"
+type: "Door"
+material: "Wood"
 ```
 
 ### actions:
@@ -26,8 +27,8 @@ material: "wood"
 
 ```yaml
 direction: West
-type: "window"
-material: "glass"
+type: "Window"
+material: "Glass"
 ```
 
 ### actions
@@ -37,7 +38,7 @@ material: "glass"
 #### [the window, now broken, falls open](elis-forge.md)
 
 ```yaml
-type: "open"
+type: "Open"
 enabled: false
 dBit: false
 revertable: false
@@ -48,7 +49,7 @@ revertable: false
 #### the window, smashes, glass flies everywhere, very very satisfying
 
 ```yaml
-type: "break"
+type: "Break"
 affectsAction:
   actionID: TODO?
 ```
@@ -57,8 +58,8 @@ affectsAction:
 
 ```yaml
 direction: Down
-type: "trapdoor"
-material: "wood"
+type: "Trapdoor"
+material: "Wood"
 ```
 
 ### actions
@@ -66,7 +67,7 @@ material: "wood"
 #### [the trap door, opens with a bang releasing a small puff of something troubling](elis-basement.md)
 
 ```yaml
-type: "open"
+type: "Open"
 enabled: false
 dBit: false
 revertable: true
@@ -76,7 +77,7 @@ revertable: true
 
 ```yaml
 type: "Bale"
-material: "hay"
+material: "Hay"
 ```
 
 ### actions
@@ -84,7 +85,7 @@ material: "hay"
 #### the hay bursts into blue, yellow and orange flames with a speed and a heat so intense that you jump back loosing some eyebrows and gaining a small bit of wee
 <!-- enabled via the soak action -->
 ```yaml
-type: "burn"
+type: "Burn"
 enabled: false
 dBit: false
 revertable: false
@@ -93,7 +94,7 @@ revertable: false
 #### the hay soaks up the volatile liquid with gusto, the air smells potent
 <!-- this needs connecting to the burn action in the generated config -->
 ```yaml
-type: "soak"
+type: "Soak"
 enabled: true
 dBit: false
 revertable: false

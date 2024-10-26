@@ -10,15 +10,16 @@ it smells damp and somehow of bad faith.
 
 
 ```yaml
-roomType: "basement"
+roomType: "Basement"
+biomeType: "Prarie"
 ```
 
 ## a slightly charcoaled wooden trap door, leads upwards
 
 ```yaml
 direction: Up
-type: "trapdoor"
-material: "wood"
+type: "Trapdoor"
+material: "Wood"
 ```
 
 ### actions:
@@ -28,14 +29,14 @@ material: "wood"
 ## a stick of slightly sweaty dynamite almost like a caricature ot itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?
 
 ```yaml
-type: "dynamite"
-material: "tnt"
+type: "Dynamite"
+material: "TNT"
 ```
 
 #### the dynamite detonates, you are lucky, the blast wave passes through you, you shit your pants involuntarily, you are spared the clean up by dint of now being largely composed of meaty paste. 
 
 ```yaml
-type: "explode"
+type: "Explode"
 enabled: false
 ```
 
@@ -46,6 +47,7 @@ enabled: false
     flags that we can check in main()
  -->
 ```yaml
-type: "light"
+type: "Light"
 enabled: true
 ```
+

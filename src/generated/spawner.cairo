@@ -100,7 +100,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_4405246086034713577_16332049259031098349 = h_util::action_hash(@action_4405246086034713577_16332049259031098349 );
         action_4405246086034713577_16332049259031098349.actionId = action_id_4405246086034713577_16332049259031098349;
         
@@ -133,7 +133,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_15610790850353037754_12578911564611469734 = h_util::action_hash(@action_15610790850353037754_12578911564611469734 );
         action_15610790850353037754_12578911564611469734.actionId = action_id_15610790850353037754_12578911564611469734;
         
@@ -146,7 +146,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_15610790850353037754_6636732390253036532 = h_util::action_hash(@action_15610790850353037754_6636732390253036532 );
         action_15610790850353037754_6636732390253036532.actionId = action_id_15610790850353037754_6636732390253036532;
         
@@ -170,7 +170,8 @@ pub mod spawner {
 
         
         store_actions(w, array![action_4405246086034713577_16332049259031098349,]);
-        store_actions(w, array![action_15610790850353037754_12578911564611469734,action_15610790850353037754_6636732390253036532,]);
+        action_15610790850353037754_6636732390253036532.affectsActionId = action_id_15610790850353037754_12578911564611469734;
+        action_15610790850353037754_12578911564611469734.affectedByActionId = action_id_15610790850353037754_6636732390253036532;store_actions(w, array![action_15610790850353037754_12578911564611469734,action_15610790850353037754_6636732390253036532,]);
         store_objects(w, array![object_4405246086034713577]);store_objects(w, array![object_15610790850353037754]);// store_objects(w, array![object_4405246086034713577,object_15610790850353037754,]);
         
         // now store a room with all its shizzle
@@ -182,6 +183,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::None,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_15610790850353037754,],
@@ -205,7 +207,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_4142895348942435842_16668157595971844890 = h_util::action_hash(@action_4142895348942435842_16668157595971844890 );
         action_4142895348942435842_16668157595971844890.actionId = action_id_4142895348942435842_16668157595971844890;
         
@@ -238,7 +240,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_2294365566944327029_13058015828559547750 = h_util::action_hash(@action_2294365566944327029_13058015828559547750 );
         action_2294365566944327029_13058015828559547750.actionId = action_id_2294365566944327029_13058015828559547750;
         
@@ -271,7 +273,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_17189994194645879202_15552978697807030543 = h_util::action_hash(@action_17189994194645879202_15552978697807030543 );
         action_17189994194645879202_15552978697807030543.actionId = action_id_17189994194645879202_15552978697807030543;
         
@@ -308,6 +310,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Plain,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_17189994194645879202,],
@@ -331,7 +334,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_2655229238403616021_17136525110814971091 = h_util::action_hash(@action_2655229238403616021_17136525110814971091 );
         action_2655229238403616021_17136525110814971091.actionId = action_id_2655229238403616021_17136525110814971091;
         
@@ -344,7 +347,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_2655229238403616021_11591880505556989562 = h_util::action_hash(@action_2655229238403616021_11591880505556989562 );
         action_2655229238403616021_11591880505556989562.actionId = action_id_2655229238403616021_11591880505556989562;
         
@@ -377,7 +380,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_3265630872681576966_6466932570877652873 = h_util::action_hash(@action_3265630872681576966_6466932570877652873 );
         action_3265630872681576966_6466932570877652873.actionId = action_id_3265630872681576966_6466932570877652873;
         
@@ -409,7 +412,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_5316783824151223577_10056273856291699603 = h_util::action_hash(@action_5316783824151223577_10056273856291699603 );
         action_5316783824151223577_10056273856291699603.actionId = action_id_5316783824151223577_10056273856291699603;
         
@@ -446,6 +449,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Forge,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_3265630872681576966,object_id_5316783824151223577,],
@@ -469,7 +473,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_745772409139972109_14833044636746871315 = h_util::action_hash(@action_745772409139972109_14833044636746871315 );
         action_745772409139972109_14833044636746871315.actionId = action_id_745772409139972109_14833044636746871315;
         
@@ -497,12 +501,12 @@ pub mod spawner {
         let mut action_7479341928096534711_9807140808976004456 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the path winds east, through piles of fresh rubble and charred pine cones", enabled: true, 
+            dBitTxt: "the path winds east, through piles of fresh rubble and charred pine cones", enabled: false, 
             revertable: false, dBit: true, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_7479341928096534711_9807140808976004456 = h_util::action_hash(@action_7479341928096534711_9807140808976004456 );
         action_7479341928096534711_9807140808976004456.actionId = action_id_7479341928096534711_9807140808976004456;
         
@@ -515,7 +519,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_7479341928096534711_14334806480543773131 = h_util::action_hash(@action_7479341928096534711_14334806480543773131 );
         action_7479341928096534711_14334806480543773131.actionId = action_id_7479341928096534711_14334806480543773131;
         
@@ -540,7 +544,8 @@ pub mod spawner {
 
         
         store_actions(w, array![action_745772409139972109_14833044636746871315,]);
-        store_actions(w, array![action_7479341928096534711_9807140808976004456,action_7479341928096534711_14334806480543773131,]);
+        action_7479341928096534711_14334806480543773131.affectsActionId = action_id_7479341928096534711_9807140808976004456;
+        action_7479341928096534711_9807140808976004456.affectedByActionId = action_id_7479341928096534711_14334806480543773131;store_actions(w, array![action_7479341928096534711_9807140808976004456,action_7479341928096534711_14334806480543773131,]);
         store_objects(w, array![object_745772409139972109]);store_objects(w, array![object_7479341928096534711]);// store_objects(w, array![object_745772409139972109,object_7479341928096534711,]);
         
         // now store a room with all its shizzle
@@ -552,6 +557,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Mountains,
+            biomeType: zrk::BiomeType::Mountains,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![],
@@ -575,7 +581,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_16637690103936120658_17581850991508748471 = h_util::action_hash(@action_16637690103936120658_17581850991508748471 );
         action_16637690103936120658_17581850991508748471.actionId = action_id_16637690103936120658_17581850991508748471;
         
@@ -611,6 +617,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Alley,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![],
@@ -634,7 +641,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_10414226638441273874_4328927602301159032 = h_util::action_hash(@action_10414226638441273874_4328927602301159032 );
         action_10414226638441273874_4328927602301159032.actionId = action_id_10414226638441273874_4328927602301159032;
         
@@ -662,12 +669,12 @@ pub mod spawner {
         let mut action_4916953867006087388_14604306511083742153 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the window, now broken, falls open", enabled: true, 
-            revertable: false, dBit: true, 
+            dBitTxt: "the window, now broken, falls open", enabled: false, 
+            revertable: false, dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_4916953867006087388_14604306511083742153 = h_util::action_hash(@action_4916953867006087388_14604306511083742153 );
         action_4916953867006087388_14604306511083742153.actionId = action_id_4916953867006087388_14604306511083742153;
         
@@ -676,11 +683,11 @@ pub mod spawner {
             actionId: st::NONE, 
             actionType: zrk::ActionType::Break,  
             dBitTxt: "the window, smashes, glass flies everywhere, very very satisfying", enabled: true, 
-            revertable: false, dBit: true, 
+            revertable: false, dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_4916953867006087388_3629301349604561982 = h_util::action_hash(@action_4916953867006087388_3629301349604561982 );
         action_4916953867006087388_3629301349604561982.actionId = action_id_4916953867006087388_3629301349604561982;
         
@@ -708,12 +715,13 @@ pub mod spawner {
         let mut action_2400306486137228273_7672293217203074089 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the trap door, opens with a bang releasing a small puff of something troubling", enabled: true, 
+            dBitTxt: "the trap door, opens with a bang releasing a small puff of something troubling", 
+            enabled: false, 
             revertable: false, dBit: true, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_2400306486137228273_7672293217203074089 = h_util::action_hash(@action_2400306486137228273_7672293217203074089 );
         action_2400306486137228273_7672293217203074089.actionId = action_id_2400306486137228273_7672293217203074089;
         
@@ -746,7 +754,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_17975420477260050648_4600616935932793690 = h_util::action_hash(@action_17975420477260050648_4600616935932793690 );
         action_17975420477260050648_4600616935932793690.actionId = action_id_17975420477260050648_4600616935932793690;
         
@@ -759,7 +767,7 @@ pub mod spawner {
             affectsActionId: 0,
             affectedByActionId: 0
         };
-        
+
         let action_id_17975420477260050648_6511208778142832924 = h_util::action_hash(@action_17975420477260050648_6511208778142832924 );
         action_17975420477260050648_6511208778142832924.actionId = action_id_17975420477260050648_6511208778142832924;
         
@@ -782,10 +790,16 @@ pub mod spawner {
         store_txt(w, td_id_b, object_id_17975420477260050648, object_desc);
 
         
+        // the ordering of the store is wrong
         store_actions(w, array![action_10414226638441273874_4328927602301159032,]);
+        action_4916953867006087388_3629301349604561982.affectsActionId = action_id_4916953867006087388_14604306511083742153;
+        action_4916953867006087388_14604306511083742153.affectedByActionId = action_id_4916953867006087388_3629301349604561982;
         store_actions(w, array![action_4916953867006087388_14604306511083742153,action_4916953867006087388_3629301349604561982,]);
-        store_actions(w, array![action_2400306486137228273_7672293217203074089,]);
-        store_actions(w, array![action_17975420477260050648_4600616935932793690,action_17975420477260050648_6511208778142832924,]);
+        store_actions(w, array![action_2400306486137228273_7672293217203074089]);
+        action_17975420477260050648_4600616935932793690.affectsActionId = action_id_2400306486137228273_7672293217203074089;
+        action_2400306486137228273_7672293217203074089.affectedByActionId = action_id_17975420477260050648_4600616935932793690;
+        action_17975420477260050648_6511208778142832924.affectsActionId = action_id_17975420477260050648_4600616935932793690;
+        action_17975420477260050648_4600616935932793690.affectedByActionId = action_id_17975420477260050648_6511208778142832924;store_actions(w, array![action_17975420477260050648_4600616935932793690,action_17975420477260050648_6511208778142832924,]);
         store_objects(w, array![object_10414226638441273874]);store_objects(w, array![object_4916953867006087388]);store_objects(w, array![object_2400306486137228273]);store_objects(w, array![object_17975420477260050648]);// store_objects(w, array![object_10414226638441273874,object_4916953867006087388,object_2400306486137228273,object_17975420477260050648,]);
         
         // now store a room with all its shizzle
@@ -797,6 +811,7 @@ pub mod spawner {
         let mut place = Room{
             roomId: rmid,
             roomType: zrk::RoomType::Barn,
+            biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_17975420477260050648,],

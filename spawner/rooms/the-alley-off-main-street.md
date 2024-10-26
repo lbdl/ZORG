@@ -11,15 +11,16 @@ best to be dead drunk.
 oddly it reminds you of home. this isnt a good thing.
 
 ```yaml
-roomType: "alley"
+roomType: "Alley"
+biomeType: "Prarie"
 ```
 
 ## path
 
 ```yaml
 direction: North
-type: "path"
-material: "shit"
+type: "Path"
+material: "Shit"
 ```
 ### actions:
 
