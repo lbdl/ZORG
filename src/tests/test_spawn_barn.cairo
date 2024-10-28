@@ -133,7 +133,7 @@ mod tests {
         let txt_id = exit_w.txtDefId;
         let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
         let _desc = txt.text.clone();
-        let _desc_expected = "a dusty window, at chest height";
+        let _desc_expected = "a dusty window set at chest height in the west wall";
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
         // exit WEST should be a window
         assert_eq!(exit_w.objType, ObjectType::Window, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Window);
@@ -191,7 +191,7 @@ mod tests {
         // SOUTH destination should be:
         // benson' plain
         // ids match
-        let dest_name = "bensons plain";
+        let dest_name = "Bensons Plain";
         let dest_id = p_hash::str_hash(@dest_name);
         assert_eq!(exit_s.destId, dest_id, "got {:?}, expected {:?}", exit_s.destId, dest_id);
         // description matches
@@ -226,5 +226,21 @@ mod tests {
         assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
         // affectedByActionId 0
         assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
+
+
+        // DOWN
+        let exit_d_id = exits.at(2).clone();
+        let exit_d: Object = get!(sys.world, exit_d_id, (Object));
+        // exit direction should be:
+        // Down
+        assert_eq!(exit_d.dirType, DirectionType::Down, "got {:?}, expected {:?}", exit_s.dirType, DirectionType::Down);
+
+        // DOWN destination should be:
+        // benson' plain
+        // ids match
+        let dest_name = "Eli's Basement";
+        let dest_id = p_hash::str_hash(@dest_name);
+        assert_eq!(exit_d.destId, dest_id, "got {:?}, expected {:?}", exit_d.destId, dest_id);
+
     }
 }
