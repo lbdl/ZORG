@@ -8,7 +8,7 @@ mod tests {
     use dojo::utils::test::{deploy_contract, spawn_test_world};
 
     use the_oruggin_trail::{
-        systems::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
+        generated::spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait},
         constants::zrk_constants::roomid as rm,
         models::{
             txtdef::{Txtdef, txtdef}, room::{Room, room},
@@ -36,7 +36,7 @@ mod tests {
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
-        let room_name: ByteArray = "eli's barn";
+        let room_name: ByteArray = "Eli's Barn";
         let barn_id: felt252 = p_hash::str_hash(@room_name);
 
         let barn: Room = get!(sys.world, barn_id, (Room));
@@ -51,7 +51,7 @@ mod tests {
             RoomType::Barn
         );
         // name
-        let expected_name: ByteArray = "eli's barn";
+        let expected_name: ByteArray = "Eli's Barn";
         let actual = barn.shortTxt.clone();
         assert_eq!(actual, expected_name, "got {:?}, expected {:?}", barn.shortTxt, expected_name);
 
@@ -72,18 +72,18 @@ mod tests {
         );
 
         // check the objects and players
-        // object ids should contain 0 item
+        // object ids should contain 1 item
         let objects: Array<felt252> = barn.objectIds.clone();
-        assert_eq!(objects.len(), 0, "got {:?}, expected {:?}", objects.len(), 0);
+        assert_eq!(objects.len(), 1, "got {:?}, expected {:?}", objects.len(), 0);
 
-                // player ids should be empty
+        // player ids should be empty
         let players: Array<felt252> = barn.players.clone();
         assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
 
         // check the rooms exits
-        // there should be 2 exits
+        // there should be 3 exits
         let exits: Array<felt252> = barn.dirObjIds.clone();
-        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
+        assert_eq!(exits.len(), 3, "got {:?}, expected {:?}", exits.len(), 2);
     }
 
     #[test]
@@ -105,16 +105,18 @@ mod tests {
         sut.setup();
 
 
-        let room_name: ByteArray = "eli's barn";
+        let room_name: ByteArray = "Eli's Barn";
         let barn_id: felt252 = p_hash::str_hash(@room_name);
 
         let barn: Room = get!(sys.world, barn_id, (Room));
 
-        // room should have 2 exits 
+        // room should have 3 exits 
         let exits: Array<felt252> = barn.dirObjIds.clone();
-        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
+        assert_eq!(exits.len(), 3, "got {:?}, expected {:?}", exits.len(), 3);
         
         // exit EAST
+        // NB this is a kludge, we should be able to get the exit in a more
+        // elegant way
         let exit_w_id = exits.at(1).clone();
         let exit_w: Object = get!(sys.world, exit_w_id, (Object));
         
@@ -124,7 +126,7 @@ mod tests {
         // exit EAST destination should be:
         // eli's forge
         // ids match
-        let dest_w_name = "eli's forge";
+        let dest_w_name = "Eli's Forge";
         let dest_w_id = p_hash::str_hash(@dest_w_name);
         assert_eq!(exit_w.destId, dest_w_id, "got {:?}, expected {:?}", exit_w.destId, dest_w_id);
         // description matches

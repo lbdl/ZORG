@@ -22,12 +22,18 @@ pub mod test_rig {
         IListenerDispatcherTrait 
     };
 
-    use the_oruggin_trail::systems::spawner::{ 
+    // use the_oruggin_trail::systems::spawner::{ 
+    //     spawner, 
+    //     ISpawnerDispatcher, 
+    //     ISpawnerDispatcherTrait 
+    // };
+
+    use the_oruggin_trail::generated::spawner::{ 
         spawner, 
         ISpawnerDispatcher, 
         ISpawnerDispatcherTrait 
     };
-    
+
     use the_oruggin_trail::lib::store::{Store, StoreTrait}; 
 
     pub fn ZERO() -> ContractAddress { starknet::contract_address_const::<0x0>() }
@@ -75,6 +81,7 @@ pub mod test_rig {
 
         // allow us OWNER over stuff 
         world.grant_owner(dojo::utils::bytearray_hash(@ns), OWNER());
+
         // world.contract_address.print();
 
         // deploy systems and set OWNER on the systems we want so we can write through
