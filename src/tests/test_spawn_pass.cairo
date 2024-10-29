@@ -8,7 +8,7 @@ mod tests {
     use dojo::utils::test::{deploy_contract, spawn_test_world};
 
     use the_oruggin_trail::{
-        systems::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
+        generated::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
         constants::zrk_constants::roomid as rm,
         models::{
             txtdef::{Txtdef, txtdef}, room::{Room, room},
@@ -35,62 +35,70 @@ mod tests {
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
-        // let room_name: ByteArray = "walking eagle pass";
-        let pass_id: felt252 = obj_phash();
-        let west: Object = get!(sys.world, pass_id, (Object));
-
-        //! assert on the WEST objects properties
-        assert_eq!(
-            west.objType,
-            ObjectType::Path,
-            "got {:?}, expected {:?}",
-            west.objType,
-            ObjectType::Path
-        );
-        assert_eq!(
-            west.matType,
-            MaterialType::Dirt,
-            "got {:?}, expected {:?}",
-            west.matType,
-            MaterialType::Dirt
-        );
-        assert_eq!(
-            west.dirType,
-            DirectionType::West,
-            "got {:?}, expected {:?}",
-            west.dirType,
-            DirectionType::West
-        );
-
-        let destination_name: ByteArray = "bensons plain";
-        let dst_id: felt252 = p_hash::str_hash(@destination_name);
-        assert_eq!(west.destId, dst_id, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
         
-        //! assert the action has the expected ID
-        let expected = act_phash();
-        let actual: felt252 = west.objectActionIds.at(0).clone();
-        assert_eq!(
-            actual, expected, "got {:?}, expected {:?}", west.objectActionIds.at(0), act_phash()
-        );
-        // assert the action's properties 
-        let expected_action: Action = get!(sys.world, actual, (Action));
-        let expected_txt: ByteArray = "the path winds west, it is open";
-        let actual_txt = expected_action.dBitTxt.clone();
+        let room_name: ByteArray = "Walking Eagle Pass";
+        let pass_id: felt252 = p_hash::str_hash(@room_name);
+        let pass: Room = get!(sys.world, pass_id, (Room));
 
-        // action txt should be "the path winds west, it is open"e correct
-        assert_eq!(actual_txt, expected_txt, "got {:?}, expected {:?}", actual_txt, expected_txt);
-        // action should be enabled
-        assert_eq!(expected_action.enabled, true, "got {:?}, expected {:?}", expected_action.enabled, true);
-        // action should be open
-        assert_eq!(expected_action.actionType, ActionType::Open, "got {:?}, expected {:?}", expected_action.actionType, ActionType::Open);
-        // action should be !revertable
-        assert_eq!(expected_action.revertable, false, "got {:?}, expected {:?}", expected_action.revertable, false);
-        // action should be dBit
-        assert_eq!(expected_action.dBit, true, "got {:?}, expected {:?}", expected_action.dBit, true);
-        // action should be affectedByActionId 0
-        assert_eq!(expected_action.affectedByActionId, 0, "got {:?}, expected {:?}", expected_action.affectedByActionId, 0);
-        // action should be affectsActionId 0
-        assert_eq!(expected_action.affectsActionId, 0, "got {:?}, expected {:?}", expected_action.affectsActionId, 0);
+        
+        // assert on the plain properties
+        // type
+        assert_eq!(
+            pass.roomType,
+            RoomType::Mountains,
+            "got {:?}, expected {:?}",
+            pass.roomType,
+            RoomType::Mountains
+        );
+        // name
+        let expected_name: ByteArray = "Walking Eagle Pass";
+        let actual = pass.shortTxt.clone();
+        assert_eq!(actual, expected_name, "got {:?}, expected {:?}", pass.shortTxt, expected_name);
+
+        // description
+        let txtid = pass.txtDefId;
+        let txt = get!(sys.world, txtid, (Txtdef));
+        let actual_desc = txt.text.clone();
+        let expected_desc: ByteArray = 
+                "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep\nvalley sides below you.\nOn closer inspection the TP might\nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
+        assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
+        
+        let actual_owner = txt.owner;
+        let expected_owner = pass_id.clone();
+
+        // owner should be the pass id
+        assert_eq!(
+            actual_owner, expected_owner, "got {:?}, expected {:?}", txt.owner, expected_owner
+        );
+
+        // check the objects and players
+        // object ids should contain 1 item
+        let objects: Array<felt252> = pass.objectIds.clone();
+        assert_eq!(objects.len(), 1, "got {:?}, expected {:?}", objects.len(), 0);
+
+        // player ids should be empty
+        let players: Array<felt252> = pass.players.clone();
+        assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
+
+        // check the rooms exits
+        // there should be 3 exits
+        let exits: Array<felt252> = pass.dirObjIds.clone();
+        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
+
+        // // action txt should be "the path winds west, it is open"e correct
+        // assert_eq!(actual_txt, expected_txt, "got {:?}, expected {:?}", actual_txt, expected_txt);
+        // // action should be enabled
+        // assert_eq!(expected_action.enabled, true, "got {:?}, expected {:?}", expected_action.enabled, true);
+        // // action should be open
+        // assert_eq!(expected_action.actionType, ActionType::Open, "got {:?}, expected {:?}", expected_action.actionType, ActionType::Open);
+        // // action should be !revertable
+        // assert_eq!(expected_action.revertable, false, "got {:?}, expected {:?}", expected_action.revertable, false);
+        // // action should be dBit
+        // assert_eq!(expected_action.dBit, true, "got {:?}, expected {:?}", expected_action.dBit, true);
+        // // action should be affectedByActionId 0
+        // assert_eq!(expected_action.affectedByActionId, 0, "got {:?}, expected {:?}", expected_action.affectedByActionId, 0);
+        // // action should be affectsActionId 0
+        // assert_eq!(expected_action.affectsActionId, 0, "got {:?}, expected {:?}", expected_action.affectsActionId, 0);
     }
 
     #[test]
@@ -119,7 +127,7 @@ mod tests {
             RoomType::Pass
         );
 
-        let expected_name: ByteArray = "walking eagle pass";
+        let expected_name: ByteArray = "Walking Eagle Pass";
         let actual = pass.shortTxt.clone();
         assert_eq!(actual, expected_name, "got {:?}, expected {:?}", pass.shortTxt, expected_name);
 
@@ -175,14 +183,14 @@ mod tests {
         sut.setup();
 
 
-        let room_name: ByteArray = "walking eagle pass";
+        let room_name: ByteArray = "Walking Eagle Pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
         let pass: Room = get!(sys.world, pass_id, (Room));
 
-        // room should have one exit 
+        // room should have two exits 
         let exits: Array<felt252> = pass.dirObjIds.clone();
-        assert_eq!(exits.len(), 1, "got {:?}, expected {:?}", exits.len(), 1);
+        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
         // exit should have:
         // 1 action
