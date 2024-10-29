@@ -241,6 +241,46 @@ mod tests {
         let dest_name = "Eli's Basement";
         let dest_id = p_hash::str_hash(@dest_name);
         assert_eq!(exit_d.destId, dest_id, "got {:?}, expected {:?}", exit_d.destId, dest_id);
+        // description matches
+        let txt_id = exit_d.txtDefId;
+        let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
+        let _desc = txt.text.clone();
+        let _desc_expected = "a wooden trap door, is set in the floor leading downwards";
+        assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
+        
+        // DOWN ACTIONS
+        let actions: Array<felt252> = exit_d.objectActionIds.clone();
+        assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
+        let action_id = actions.at(0).clone();
+        let action_d: Action = get!(sys.world, action_id, (Action));
+
+        // action should be:
+        // open
+        assert_eq!(action_d.actionType, ActionType::Open, "got {:?}, expected {:?}", action_d.actionType, ActionType::Open);
+        // revertable
+        assert_eq!(action_d.revertable, true, "got {:?}, expected {:?}", action_d.revertable, true);
+        // !dBit
+        assert_eq!(action_d.dBit, false, "got {:?}, expected {:?}", action_d.dBit, false);
+        // !enabled
+        assert_eq!(action_d.enabled, false, "got {:?}, expected {:?}", action_d.enabled, false);
+        // actions chain is correct
+        assert_eq!(action_d.affectsActionId, 0, "got {:?}, expected {:?}", action_d.affectsActionId, 0);
+        // affectedByActionId burn on the hay bale
+        assert_eq!(action_d.affectedByActionId, 1563879268193041819558919326443056939467944909908174932852604425697481554773, "got {:?}, expected {:?}", action_d.affectedByActionId, 1563879268193041819558919326443056939467944909908174932852604425697481554773);
+
+        // the basement trap door should be affected by the "burn" on the hay bale
+        let action_b: Action = get!(sys.world, 1563879268193041819558919326443056939467944909908174932852604425697481554773, (Action));
+        // action should be:
+        // burn
+        assert_eq!(action_b.actionType, ActionType::Burn, "got {:?}, expected {:?}", action_b.actionType, ActionType::Burn);
+        // !revertable
+        assert_eq!(action_b.revertable, false, "got {:?}, expected {:?}", action_b.revertable, false);
+        // !dBit
+        assert_eq!(action_b.dBit, false, "got {:?}, expected {:?}", action_b.dBit, false);
+        // !enabled
+        assert_eq!(action_b.enabled, false, "got {:?}, expected {:?}", action_b.enabled, false);
+        // affectsActionId open on the trapdoor
+        assert_eq!(action_b.affectsActionId, action_d.actionId, "got {:?}, expected {:?}", action_b.affectsActionId, action_d.actionId);
     }
 }

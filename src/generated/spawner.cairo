@@ -717,7 +717,8 @@ pub mod spawner {
             actionType: zrk::ActionType::Open,  
             dBitTxt: "the trap door, opens with a bang releasing a small puff of something troubling", 
             enabled: false, 
-            revertable: false, dBit: true, 
+            revertable: true, 
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -789,8 +790,6 @@ pub mod spawner {
 
         store_txt(w, td_id_b, object_id_17975420477260050648, object_desc);
 
-        
-        // the ordering of the store is wrong
         store_actions(w, array![action_10414226638441273874_4328927602301159032,]);
         action_4916953867006087388_3629301349604561982.affectsActionId = action_id_4916953867006087388_14604306511083742153;
         action_4916953867006087388_14604306511083742153.affectedByActionId = action_id_4916953867006087388_3629301349604561982;
