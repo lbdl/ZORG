@@ -170,8 +170,7 @@ pub mod spawner {
 
         
         store_actions(w, array![action_4405246086034713577_16332049259031098349,]);
-        action_15610790850353037754_6636732390253036532.affectsActionId = action_id_15610790850353037754_12578911564611469734;
-        action_15610790850353037754_12578911564611469734.affectedByActionId = action_id_15610790850353037754_6636732390253036532;store_actions(w, array![action_15610790850353037754_12578911564611469734,action_15610790850353037754_6636732390253036532,]);
+        store_actions(w, array![action_15610790850353037754_12578911564611469734,action_15610790850353037754_6636732390253036532,]);
         store_objects(w, array![object_4405246086034713577]);store_objects(w, array![object_15610790850353037754]);// store_objects(w, array![object_4405246086034713577,object_15610790850353037754,]);
         
         // now store a room with all its shizzle
@@ -211,7 +210,7 @@ pub mod spawner {
         let action_id_4142895348942435842_16668157595971844890 = h_util::action_hash(@action_4142895348942435842_16668157595971844890 );
         action_4142895348942435842_16668157595971844890.actionId = action_id_4142895348942435842_16668157595971844890;
         
-        let destination = "walking-eagle-pass.md";
+        let destination = "Walking Eagle Pass";
         let mut object_4142895348942435842 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -244,7 +243,7 @@ pub mod spawner {
         let action_id_2294365566944327029_13058015828559547750 = h_util::action_hash(@action_2294365566944327029_13058015828559547750 );
         action_2294365566944327029_13058015828559547750.actionId = action_id_2294365566944327029_13058015828559547750;
         
-        let destination = "elis-barn.md";
+        let destination = "Eli's Barn";
         let mut object_2294365566944327029 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -338,27 +337,14 @@ pub mod spawner {
         let action_id_2655229238403616021_17136525110814971091 = h_util::action_hash(@action_2655229238403616021_17136525110814971091 );
         action_2655229238403616021_17136525110814971091.actionId = action_id_2655229238403616021_17136525110814971091;
         
-        // action 11591880505556989562
-        let mut action_2655229238403616021_11591880505556989562 = Action{
-            actionId: st::NONE, 
-            actionType: zrk::ActionType::Break,  
-            dBitTxt: "the window, smashes, glass flies everywhere, very very satisfying", enabled: false, 
-            revertable: false, dBit: true, 
-            affectsActionId: 0,
-            affectedByActionId: 0
-        };
-
-        let action_id_2655229238403616021_11591880505556989562 = h_util::action_hash(@action_2655229238403616021_11591880505556989562 );
-        action_2655229238403616021_11591880505556989562.actionId = action_id_2655229238403616021_11591880505556989562;
-        
-        let destination = "elis-barn.md";
+        let destination = "Eli's Barn";
         let mut object_2655229238403616021 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Window,
             matType: zrk::MaterialType::Glass,
             dirType: zrk::DirectionType::East,
             destId: h_util::str_hash(@destination),
-            objectActionIds: array![action_id_2655229238403616021_17136525110814971091,action_id_2655229238403616021_11591880505556989562,],
+            objectActionIds: array![action_id_2655229238403616021_17136525110814971091,],
             txtDefId: st::SETME 
         };
 
@@ -435,7 +421,7 @@ pub mod spawner {
         store_txt(w, td_id_b, object_id_5316783824151223577, object_desc);
 
         
-        store_actions(w, array![action_2655229238403616021_17136525110814971091,action_2655229238403616021_11591880505556989562,]);
+        store_actions(w, array![action_2655229238403616021_17136525110814971091,]);
         store_actions(w, array![action_3265630872681576966_6466932570877652873,]);
         store_actions(w, array![action_5316783824151223577_10056273856291699603,]);
         store_objects(w, array![object_2655229238403616021]);store_objects(w, array![object_3265630872681576966]);store_objects(w, array![object_5316783824151223577]);// store_objects(w, array![object_2655229238403616021,object_3265630872681576966,object_5316783824151223577,]);
@@ -477,7 +463,7 @@ pub mod spawner {
         let action_id_745772409139972109_14833044636746871315 = h_util::action_hash(@action_745772409139972109_14833044636746871315 );
         action_745772409139972109_14833044636746871315.actionId = action_id_745772409139972109_14833044636746871315;
         
-        let destination = "bensons-plain.md";
+        let destination = "Bensons Plain";
         let mut object_745772409139972109 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -502,7 +488,7 @@ pub mod spawner {
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
             dBitTxt: "the path winds east, through piles of fresh rubble and charred pine cones", enabled: false, 
-            revertable: false, dBit: true, 
+            revertable: false, dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -510,27 +496,14 @@ pub mod spawner {
         let action_id_7479341928096534711_9807140808976004456 = h_util::action_hash(@action_7479341928096534711_9807140808976004456 );
         action_7479341928096534711_9807140808976004456.actionId = action_id_7479341928096534711_9807140808976004456;
         
-        // action 14334806480543773131
-        let mut action_7479341928096534711_14334806480543773131 = Action{
-            actionId: st::NONE, 
-            actionType: zrk::ActionType::Disintegrate,  
-            dBitTxt: "the boulder shatters into dust and shrapnel, pieces fly, deer run startled, cows drop dead, crows and squirrels drop out of the sky. satisfying essentially.", enabled: false, 
-            revertable: false, dBit: false, 
-            affectsActionId: 0,
-            affectedByActionId: 0
-        };
-
-        let action_id_7479341928096534711_14334806480543773131 = h_util::action_hash(@action_7479341928096534711_14334806480543773131 );
-        action_7479341928096534711_14334806480543773131.actionId = action_id_7479341928096534711_14334806480543773131;
-        
-        let destination = "the-alley-off-main-street.md";
+        let destination = "The Alley Off Main Street";
         let mut object_7479341928096534711 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
             matType: zrk::MaterialType::Dirt,
             dirType: zrk::DirectionType::East,
             destId: h_util::str_hash(@destination),
-            objectActionIds: array![action_id_7479341928096534711_9807140808976004456,action_id_7479341928096534711_14334806480543773131,],
+            objectActionIds: array![action_id_7479341928096534711_9807140808976004456,],
             txtDefId: st::SETME 
         };
 
@@ -543,10 +516,46 @@ pub mod spawner {
         store_txt(w, td_id_b, object_id_7479341928096534711, object_desc);
 
         
+        // object 383324005557581461// action 5294932446722202844
+        let mut action_383324005557581461_5294932446722202844 = Action{
+            actionId: st::NONE, 
+            actionType: zrk::ActionType::Disintegrate,  
+            dBitTxt: "the boulder shatters into dust and shrapnel,\npieces fly,\ndeer run startled,\ncows drop dead,\ncrows and squirrels drop out of the sky.\nsatisfying essentially.\na small fly takes a dump in your ear. you don't notice this luckily.", enabled: true, 
+            revertable: false, dBit: false, 
+            affectsActionId: 0,
+            affectedByActionId: 0
+        };
+
+        let action_id_383324005557581461_5294932446722202844 = h_util::action_hash(@action_383324005557581461_5294932446722202844 );
+        action_383324005557581461_5294932446722202844.actionId = action_id_383324005557581461_5294932446722202844;
+        
+        let mut object_383324005557581461 = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Boulder,
+            matType: zrk::MaterialType::Stone,
+            dirType: zrk::DirectionType::None,
+            destId: st::NONE,
+            objectActionIds: array![action_id_383324005557581461_5294932446722202844,],
+            txtDefId: st::SETME 
+        };
+
+        let object_id_383324005557581461 = h_util::obj_hash(@object_383324005557581461); 
+        object_383324005557581461.objectId = object_id_383324005557581461;
+        let object_desc: ByteArray = "a huge boulder blocks the pass east,\nit is full of the stony remains of creatures designed by an easily bored god and then discarded.\ndarwin may have some thoughts on this.\nsomeone has drawn a cock on it.";
+        let td_id_b = h_util::str_hash(@object_desc);
+        object_383324005557581461.txtDefId = td_id_b;
+
+        store_txt(w, td_id_b, object_id_383324005557581461, object_desc);
+
+        
+        action_383324005557581461_5294932446722202844.affectsActionId = action_id_7479341928096534711_9807140808976004456;
+        action_7479341928096534711_9807140808976004456.affectedByActionId = action_id_383324005557581461_5294932446722202844;
         store_actions(w, array![action_745772409139972109_14833044636746871315,]);
-        action_7479341928096534711_14334806480543773131.affectsActionId = action_id_7479341928096534711_9807140808976004456;
-        action_7479341928096534711_9807140808976004456.affectedByActionId = action_id_7479341928096534711_14334806480543773131;store_actions(w, array![action_7479341928096534711_9807140808976004456,action_7479341928096534711_14334806480543773131,]);
-        store_objects(w, array![object_745772409139972109]);store_objects(w, array![object_7479341928096534711]);// store_objects(w, array![object_745772409139972109,object_7479341928096534711,]);
+        store_actions(w, array![action_7479341928096534711_9807140808976004456,]);
+        store_actions(w, array![action_383324005557581461_5294932446722202844,]);
+        store_objects(w, array![object_745772409139972109]);
+        store_objects(w, array![object_7479341928096534711]);
+        store_objects(w, array![object_383324005557581461]);// store_objects(w, array![object_745772409139972109,object_7479341928096534711,object_383324005557581461,]);
         
         // now store a room with all its shizzle
         let room_desc: ByteArray = "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep\nvalley sides below you.\nOn closer inspection the TP might\nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
@@ -560,7 +569,7 @@ pub mod spawner {
             biomeType: zrk::BiomeType::Mountains,
             txtDefId: _txt_id,
             shortTxt: place_name,
-            objectIds: array![],
+            objectIds: array![object_id_383324005557581461,],
             dirObjIds: array![object_id_745772409139972109,object_id_7479341928096534711,],
             players: array![]
         };
@@ -585,7 +594,7 @@ pub mod spawner {
         let action_id_16637690103936120658_17581850991508748471 = h_util::action_hash(@action_16637690103936120658_17581850991508748471 );
         action_16637690103936120658_17581850991508748471.actionId = action_id_16637690103936120658_17581850991508748471;
         
-        let destination = "walking-eagle-pass.md";
+        let destination = "Walking Eagle Pass";
         let mut object_16637690103936120658 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -609,7 +618,7 @@ pub mod spawner {
         store_objects(w, array![object_16637690103936120658]);// store_objects(w, array![object_16637690103936120658,]);
         
         // now store a room with all its shizzle
-        let room_desc: ByteArray = "the alley composed of stinking mud sits between main street and the praries, seems that\nthe town uses uses it as dump, for both iscared humans and discarded, well, literal shit.\nall in all not somewhere wants to linger unless dead, or drunk and in that case probably\nbest to be dead drunk.\noddly it reminds you of home. this isnt a good thing.";
+        let room_desc: ByteArray = "the alley composed of stinking mud sits between main street and the praries, seems that\nthe town uses uses it as dump, for both discarded humans and discarded, well, literal shit.\nall in all not somewhere wants to linger unless dead, or drunk and in that case probably\nbest to be dead drunk.\noddly it reminds you of home. this isnt a good thing.";
         let _txt_id = h_util::str_hash(@room_desc);
         let place_name: ByteArray = "The Alley Off Main Street";
         let rmid = h_util::str_hash(@place_name);
@@ -645,7 +654,7 @@ pub mod spawner {
         let action_id_10414226638441273874_4328927602301159032 = h_util::action_hash(@action_10414226638441273874_4328927602301159032 );
         action_10414226638441273874_4328927602301159032.actionId = action_id_10414226638441273874_4328927602301159032;
         
-        let destination = "bensons-plain.md";
+        let destination = "Bensons Plain";
         let mut object_10414226638441273874 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Door,
@@ -669,8 +678,8 @@ pub mod spawner {
         let mut action_4916953867006087388_14604306511083742153 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the window, now broken, falls open", enabled: false, 
-            revertable: false, dBit: false, 
+            dBitTxt: "the window, now broken, falls open", enabled: true, 
+            revertable: false, dBit: true, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -683,7 +692,7 @@ pub mod spawner {
             actionId: st::NONE, 
             actionType: zrk::ActionType::Break,  
             dBitTxt: "the window, smashes, glass flies everywhere, very very satisfying", enabled: true, 
-            revertable: false, dBit: false, 
+            revertable: false, dBit: true, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -691,7 +700,7 @@ pub mod spawner {
         let action_id_4916953867006087388_3629301349604561982 = h_util::action_hash(@action_4916953867006087388_3629301349604561982 );
         action_4916953867006087388_3629301349604561982.actionId = action_id_4916953867006087388_3629301349604561982;
         
-        let destination = "elis-forge.md";
+        let destination = "Eli's Forge";
         let mut object_4916953867006087388 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Window,
@@ -715,9 +724,8 @@ pub mod spawner {
         let mut action_2400306486137228273_7672293217203074089 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the trap door, opens with a bang releasing a small puff of something troubling", 
-            enabled: false, 
-            revertable: false, dBit: true, 
+            dBitTxt: "the trap door, opens with a bang releasing a small puff of something troubling", enabled: false, 
+            revertable: true, dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -725,7 +733,7 @@ pub mod spawner {
         let action_id_2400306486137228273_7672293217203074089 = h_util::action_hash(@action_2400306486137228273_7672293217203074089 );
         action_2400306486137228273_7672293217203074089.actionId = action_id_2400306486137228273_7672293217203074089;
         
-        let destination = "elis-basement.md";
+        let destination = "Eli's Basement";
         let mut object_2400306486137228273 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::None,
@@ -790,15 +798,12 @@ pub mod spawner {
         store_txt(w, td_id_b, object_id_17975420477260050648, object_desc);
 
         
-        // the ordering of the store is wrong
         store_actions(w, array![action_10414226638441273874_4328927602301159032,]);
         action_4916953867006087388_3629301349604561982.affectsActionId = action_id_4916953867006087388_14604306511083742153;
-        action_4916953867006087388_14604306511083742153.affectedByActionId = action_id_4916953867006087388_3629301349604561982;
-        store_actions(w, array![action_4916953867006087388_14604306511083742153,action_4916953867006087388_3629301349604561982,]);
-        store_actions(w, array![action_2400306486137228273_7672293217203074089]);
+        action_4916953867006087388_14604306511083742153.affectedByActionId = action_id_4916953867006087388_3629301349604561982;store_actions(w, array![action_4916953867006087388_14604306511083742153,action_4916953867006087388_3629301349604561982,]);
+        action_2400306486137228273_7672293217203074089.affectedByActionId = action_id_17975420477260050648_4600616935932793690;action_17975420477260050648_6511208778142832924.affectsActionId = action_id_17975420477260050648_4600616935932793690;
+        store_actions(w, array![action_2400306486137228273_7672293217203074089,]);
         action_17975420477260050648_4600616935932793690.affectsActionId = action_id_2400306486137228273_7672293217203074089;
-        action_2400306486137228273_7672293217203074089.affectedByActionId = action_id_17975420477260050648_4600616935932793690;
-        action_17975420477260050648_6511208778142832924.affectsActionId = action_id_17975420477260050648_4600616935932793690;
         action_17975420477260050648_4600616935932793690.affectedByActionId = action_id_17975420477260050648_6511208778142832924;store_actions(w, array![action_17975420477260050648_4600616935932793690,action_17975420477260050648_6511208778142832924,]);
         store_objects(w, array![object_10414226638441273874]);store_objects(w, array![object_4916953867006087388]);store_objects(w, array![object_2400306486137228273]);store_objects(w, array![object_17975420477260050648]);// store_objects(w, array![object_10414226638441273874,object_4916953867006087388,object_2400306486137228273,object_17975420477260050648,]);
         

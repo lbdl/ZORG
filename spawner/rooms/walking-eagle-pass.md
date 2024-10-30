@@ -56,7 +56,16 @@ dBit: false
 revertable: false
 ```
 
-#### the boulder shatters into dust and shrapnel, pieces fly, deer run startled, cows drop dead, crows and squirrels drop out of the sky. satisfying essentially.
+## a huge boulder blocks the pass east,\nit is full of the stony remains of creatures designed by an easily bored god and then discarded.\ndarwin may have some thoughts on this.\nsomeone has drawn a cock on it.
+
+```yaml
+direction: None
+type: "Boulder"
+material: "Stone"
+```
+
+### actions:
+#### the boulder shatters into dust and shrapnel,\npieces fly,\ndeer run startled,\ncows drop dead,\ncrows and squirrels drop out of the sky.\nsatisfying essentially.\na small fly takes a dump in your ear. you don't notice this luckily.
 
 ```yaml
 type: "Disintegrate"

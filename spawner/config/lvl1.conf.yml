@@ -16,7 +16,7 @@ levels:
       material: Wood
       objDescription: a slightly charcoaled wooden trap door, leads upwards
       direction: U
-      destination: elis-barn.md
+      destination: Eli's Barn
       actions:
       - actionID: 16332049259031098349
         type: Open
@@ -45,7 +45,7 @@ levels:
         revertable: false
         dBitText: the fuse comes into menacing life, sparkling like a demented god, the air fills with the smell of gunpowder, its not at all unpleasant
         dBit: true
-        affectsAction: 12578911564611469734
+        affectsAction: null
     objectIds:
     - 15610790850353037754
     dirObjIds:
@@ -67,7 +67,7 @@ levels:
       material: Dirt
       objDescription: a path east leads upwards toward the mountains
       direction: E
-      destination: walking-eagle-pass.md
+      destination: Walking Eagle Pass
       actions:
       - actionID: 16668157595971844890
         type: Open
@@ -81,7 +81,7 @@ levels:
       material: Dirt
       objDescription: a path north leads toward a large wooden barn
       direction: 'N'
-      destination: elis-barn.md
+      destination: Eli's Barn
       actions:
       - actionID: 13058015828559547750
         type: Open
@@ -127,20 +127,13 @@ levels:
       material: Glass
       objDescription: a dusty window, at chest height
       direction: E
-      destination: elis-barn.md
+      destination: Eli's Barn
       actions:
       - actionID: 17136525110814971091
         type: Open
         enabled: true
         revertable: false
         dBitText: the window, closes with a creak
-        dBit: true
-        affectsAction: null
-      - actionID: 11591880505556989562
-        type: Break
-        enabled: false
-        revertable: false
-        dBitText: the window, smashes, glass flies everywhere, very very satisfying
         dBit: true
         affectsAction: null
     - objID: 3265630872681576966
@@ -219,16 +212,24 @@ levels:
         enabled: false
         revertable: false
         dBitText: the path winds east, through piles of fresh rubble and charred pine cones
-        dBit: true
+        dBit: false
         affectsAction: null
-      - actionID: 14334806480543773131
+    - objID: 383324005557581461
+      type: Boulder
+      material: Stone
+      objDescription: a huge boulder blocks the pass east,\nit is full of the stony remains of creatures designed by an easily bored god and then discarded.\ndarwin may have some thoughts on this.\nsomeone has drawn a cock on it.
+      direction: None
+      destination: null
+      actions:
+      - actionID: 5294932446722202844
         type: Disintegrate
-        enabled: false
+        enabled: true
         revertable: false
-        dBitText: the boulder shatters into dust and shrapnel, pieces fly, deer run startled, cows drop dead, crows and squirrels drop out of the sky. satisfying essentially.
+        dBitText: the boulder shatters into dust and shrapnel,\npieces fly,\ndeer run startled,\ncows drop dead,\ncrows and squirrels drop out of the sky.\nsatisfying essentially.\na small fly takes a dump in your ear. you don't notice this luckily.
         dBit: false
         affectsAction: 9807140808976004456
-    objectIds: []
+    objectIds:
+    - 383324005557581461
     dirObjIds:
     - 745772409139972109
     - 7479341928096534711
@@ -292,17 +293,17 @@ levels:
       actions:
       - actionID: 14604306511083742153
         type: Open
-        enabled: false
+        enabled: true
         revertable: false
         dBitText: the window, now broken, falls open
-        dBit: false
+        dBit: true
         affectsAction: null
       - actionID: 3629301349604561982
         type: Break
         enabled: true
         revertable: false
         dBitText: the window, smashes, glass flies everywhere, very very satisfying
-        dBit: false
+        dBit: true
         affectsAction: 14604306511083742153
     - objID: 2400306486137228273
       type: Trapdoor
@@ -314,9 +315,9 @@ levels:
       - actionID: 7672293217203074089
         type: Open
         enabled: false
-        revertable: false
+        revertable: true
         dBitText: the trap door, opens with a bang releasing a small puff of something troubling
-        dBit: true
+        dBit: false
         affectsAction: null
     - objID: 17975420477260050648
       type: Bale
