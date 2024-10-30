@@ -16,7 +16,7 @@ levels:
       material: Wood
       objDescription: a slightly charcoaled wooden trap door, leads upwards
       direction: U
-      destination: elis-barn.md
+      destination: Eli's Barn
       actions:
       - actionID: 16332049259031098349
         type: Open
@@ -67,7 +67,7 @@ levels:
       material: Dirt
       objDescription: a path east leads upwards toward the mountains
       direction: E
-      destination: walking-eagle-pass.md
+      destination: Walking Eagle Pass
       actions:
       - actionID: 16668157595971844890
         type: Open
@@ -81,7 +81,7 @@ levels:
       material: Dirt
       objDescription: a path north leads toward a large wooden barn
       direction: 'N'
-      destination: elis-barn.md
+      destination: Eli's Barn
       actions:
       - actionID: 13058015828559547750
         type: Open

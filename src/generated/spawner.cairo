@@ -210,7 +210,7 @@ pub mod spawner {
         let action_id_4142895348942435842_16668157595971844890 = h_util::action_hash(@action_4142895348942435842_16668157595971844890 );
         action_4142895348942435842_16668157595971844890.actionId = action_id_4142895348942435842_16668157595971844890;
         
-        let destination = "walking-eagle-pass.md";
+        let destination = "Walking Eagle Pass";
         let mut object_4142895348942435842 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -243,7 +243,7 @@ pub mod spawner {
         let action_id_2294365566944327029_13058015828559547750 = h_util::action_hash(@action_2294365566944327029_13058015828559547750 );
         action_2294365566944327029_13058015828559547750.actionId = action_id_2294365566944327029_13058015828559547750;
         
-        let destination = "elis-barn.md";
+        let destination = "Eli's Barn";
         let mut object_2294365566944327029 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -463,7 +463,7 @@ pub mod spawner {
         let action_id_745772409139972109_14833044636746871315 = h_util::action_hash(@action_745772409139972109_14833044636746871315 );
         action_745772409139972109_14833044636746871315.actionId = action_id_745772409139972109_14833044636746871315;
         
-        let destination = "bensons-plain.md";
+        let destination = "Bensons Plain";
         let mut object_745772409139972109 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -496,7 +496,7 @@ pub mod spawner {
         let action_id_7479341928096534711_9807140808976004456 = h_util::action_hash(@action_7479341928096534711_9807140808976004456 );
         action_7479341928096534711_9807140808976004456.actionId = action_id_7479341928096534711_9807140808976004456;
         
-        let destination = "the-alley-off-main-street.md";
+        let destination = "The Alley Off Main Street";
         let mut object_7479341928096534711 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -594,7 +594,7 @@ pub mod spawner {
         let action_id_16637690103936120658_17581850991508748471 = h_util::action_hash(@action_16637690103936120658_17581850991508748471 );
         action_16637690103936120658_17581850991508748471.actionId = action_id_16637690103936120658_17581850991508748471;
         
-        let destination = "walking-eagle-pass.md";
+        let destination = "Walking Eagle Pass";
         let mut object_16637690103936120658 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -618,7 +618,7 @@ pub mod spawner {
         store_objects(w, array![object_16637690103936120658]);// store_objects(w, array![object_16637690103936120658,]);
         
         // now store a room with all its shizzle
-        let room_desc: ByteArray = "the alley composed of stinking mud sits between main street and the praries, seems that\nthe town uses uses it as dump, for both iscared humans and discarded, well, literal shit.\nall in all not somewhere wants to linger unless dead, or drunk and in that case probably\nbest to be dead drunk.\noddly it reminds you of home. this isnt a good thing.";
+        let room_desc: ByteArray = "the alley composed of stinking mud sits between main street and the praries, seems that\nthe town uses uses it as dump, for both discarded humans and discarded, well, literal shit.\nall in all not somewhere wants to linger unless dead, or drunk and in that case probably\nbest to be dead drunk.\noddly it reminds you of home. this isnt a good thing.";
         let _txt_id = h_util::str_hash(@room_desc);
         let place_name: ByteArray = "The Alley Off Main Street";
         let rmid = h_util::str_hash(@place_name);
@@ -654,7 +654,7 @@ pub mod spawner {
         let action_id_10414226638441273874_4328927602301159032 = h_util::action_hash(@action_10414226638441273874_4328927602301159032 );
         action_10414226638441273874_4328927602301159032.actionId = action_id_10414226638441273874_4328927602301159032;
         
-        let destination = "bensons-plain.md";
+        let destination = "Bensons Plain";
         let mut object_10414226638441273874 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Door,
@@ -700,7 +700,7 @@ pub mod spawner {
         let action_id_4916953867006087388_3629301349604561982 = h_util::action_hash(@action_4916953867006087388_3629301349604561982 );
         action_4916953867006087388_3629301349604561982.actionId = action_id_4916953867006087388_3629301349604561982;
         
-        let destination = "elis-forge.md";
+        let destination = "Eli's Forge";
         let mut object_4916953867006087388 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Window,
@@ -733,7 +733,7 @@ pub mod spawner {
         let action_id_2400306486137228273_7672293217203074089 = h_util::action_hash(@action_2400306486137228273_7672293217203074089 );
         action_2400306486137228273_7672293217203074089.actionId = action_id_2400306486137228273_7672293217203074089;
         
-        let destination = "elis-basement.md";
+        let destination = "Eli's Basement";
         let mut object_2400306486137228273 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::None,

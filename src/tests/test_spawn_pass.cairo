@@ -117,11 +117,20 @@ mod tests {
         let exits: Array<felt252> = pass.dirObjIds.clone();
         assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
-        // exit should have:
-        // 1 action
-        let exit_id = exits.at(0).clone();
-        let exit: Object = get!(sys.world, exit_id, (Object));
-        let actions: Array<felt252> = exit.objectActionIds.clone();
+        // exits
+        let exit_w_id = exits.at(0).clone();
+        let exit_w: Object = get!(sys.world, exit_w_id, (Object));
+        // exit should be a path
+        assert_eq!(exit_w.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
+        // exit should be west
+        assert_eq!(exit_w.dirType, DirectionType::West, "got {:?}, expected {:?}", exit_w.dirType, DirectionType::West);
+        // should lead to Bensons Plain
+        let dest_w_name = "Bensons Plain";
+        let dest_w_id = p_hash::str_hash(@dest_w_name);
+        assert_eq!(exit_w.destId, dest_w_id, "got {:?}, expected {:?}", exit_w.destId, dest_w_id);
+
+        // exits should be open       
+        let actions: Array<felt252> = exit_w.objectActionIds.clone();
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
         let action_id = actions.at(0).clone();
