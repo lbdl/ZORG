@@ -118,6 +118,7 @@ mod tests {
         assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
         // exits
+        // WEST
         let exit_w_id = exits.at(0).clone();
         let exit_w: Object = get!(sys.world, exit_w_id, (Object));
         // exit should be a path
@@ -129,7 +130,8 @@ mod tests {
         let dest_w_id = p_hash::str_hash(@dest_w_name);
         assert_eq!(exit_w.destId, dest_w_id, "got {:?}, expected {:?}", exit_w.destId, dest_w_id);
 
-        // exits should be open       
+        // exit west 
+        // should be open       
         let actions: Array<felt252> = exit_w.objectActionIds.clone();
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
@@ -149,5 +151,20 @@ mod tests {
         assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
         // affectedByActionId 0
         assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
+
+
+        // EAST
+        let exit_e_id = exits.at(1).clone();
+        let exit_e: Object = get!(sys.world, exit_e_id, (Object));
+        // exit should be a path
+        assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
+        // exit should be west
+        assert_eq!(exit_e.dirType, DirectionType::East, "got {:?}, expected {:?}", exit_e.dirType, DirectionType::East);
+        // should lead to Bensons Plain
+        let dest_e_name = "The Alley Off Main Street";
+        let dest_e_id = p_hash::str_hash(@dest_e_name);
+        assert_eq!(exit_e.destId, dest_e_id, "got {:?}, expected {:?}", exit_e.destId, dest_e_id);
+
+
     }
 }
