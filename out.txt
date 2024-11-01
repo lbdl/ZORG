@@ -1,0 +1,1396 @@
+   Compiling the_oruggin_trail v0.1.0 (/Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/Scarb.toml)
+warn: Unused import: `the_oruggin_trail::systems::outputter::outputter::ModelValueStorage`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/outputter.cairo:20:37
+    use dojo::model::{ModelStorage, ModelValueStorage};
+                                    ^***************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::pull_strings::IWorldDispatcher`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:131:23
+    use dojo::world::{IWorldDispatcher};
+                      ^**************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::pull_strings::ActionType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:132:85
+    use the_oruggin_trail::models::{output::{Output}, player::{Player}, zrk_enums::{ActionType, ObjectType}};
+                                                                                    ^********^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::pull_strings::ObjectType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:132:97
+    use the_oruggin_trail::models::{output::{Output}, player::{Player}, zrk_enums::{ActionType, ObjectType}};
+                                                                                                ^********^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::pull_strings::ec`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:133:54
+    use the_oruggin_trail::constants::zrk_constants::ErrCode as ec;
+                                                     ^***********^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::pull_strings::err_dispatch`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:134:46
+    use the_oruggin_trail::lib::err_handler::err_dispatcher as err_dispatch;
+                                             ^****************************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::Player`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:38:64
+    use the_oruggin_trail::models::{output::{Output}, player::{Player}, zrk_enums::{ActionType, ObjectType}};
+                                                               ^****^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::ActionType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:38:85
+    use the_oruggin_trail::models::{output::{Output}, player::{Player}, zrk_enums::{ActionType, ObjectType}};
+                                                                                    ^********^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::ObjectType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:38:97
+    use the_oruggin_trail::models::{output::{Output}, player::{Player}, zrk_enums::{ActionType, ObjectType}};
+                                                                                                ^********^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::lexer`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:39:49
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+                                                ^****************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::Garble`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:39:91
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+                                                                                          ^****^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::badmouth`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:42:46
+    use the_oruggin_trail::lib::insult_meat::insulter as badmouth;
+                                             ^******************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::h_util`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:45:45
+    use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
+                                            ^*****************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::Store`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:47:41
+    use the_oruggin_trail::lib::store::{Store, StoreTrait};
+                                        ^***^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::StoreTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:47:48
+    use the_oruggin_trail::lib::store::{Store, StoreTrait};
+                                               ^********^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::WorldSystemsTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:49:42
+    use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
+                                         ^***************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::lookat`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:51:39
+    use the_oruggin_trail::lib::look::lookat;
+                                      ^****^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::ModelValueStorage`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:53:37
+    use dojo::model::{ModelStorage, ModelValueStorage};
+                                    ^***************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::IWorldDispatcher`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:54:23
+    use dojo::world::{IWorldDispatcher};
+                      ^**************^
+
+warn: Unused import: `the_oruggin_trail::systems::meatpuppet::meatpuppet::move`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:57:39
+    use the_oruggin_trail::lib::move::relocate as move;
+                                      ^**************^
+
+warn: Plugin diagnostic: Failed to generate ABI: Got unexpected type.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:33:1
+#[dojo::contract]
+^***************^
+
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:92:48
+                err_dispatch::error_handle(ref wrld, p_id, isErr);
+                                               ^**^
+
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:100:46
+                        ad::handleGarble(ref wrld, p_id, r);
+                                             ^**^
+
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:104:56
+                        err_dispatch::error_handle(ref wrld, p_id, isErr);
+                                                       ^**^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:102:33
+                    Result::Err(r) => {
+                                ^
+
+error: Expected variable or constant, found type.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:122:59
+            let cmd_output: Output = world.read_model(23, Output);
+                                                          ^****^
+
+error: Wrong number of arguments. Expected 2, found: 3
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:122:44
+            let cmd_output: Output = world.read_model(23, Output);
+                                           ^********************^
+
+error: Argument to immutable parameter cannot have modifiers.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:33:1
+#[dojo::contract]
+^***************^
+
+[2m2024-10-31T16:08:40.528835Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::systems::meatpuppet::meatpuppet::listen` has semantic diagnostics in its body:
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:92:48
+                err_dispatch::error_handle(ref wrld, p_id, isErr);
+                                               ^**^
+
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:100:46
+                        ad::handleGarble(ref wrld, p_id, r);
+                                             ^**^
+
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:104:56
+                        err_dispatch::error_handle(ref wrld, p_id, isErr);
+                                                       ^**^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:102:33
+                    Result::Err(r) => {
+                                ^
+
+    
+[2m2024-10-31T16:08:40.528993Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::systems::meatpuppet::meatpuppet::command_shoggoth` has semantic diagnostics in its body:
+error: Expected variable or constant, found type.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:122:59
+            let cmd_output: Output = world.read_model(23, Output);
+                                                          ^****^
+
+error: Wrong number of arguments. Expected 2, found: 3
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:122:44
+            let cmd_output: Output = world.read_model(23, Output);
+                                           ^********************^
+
+    
+[2m2024-10-31T16:08:40.544146Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::systems::meatpuppet::meatpuppet::__wrapper__IDojoInitImpl__dojo_init` has semantic diagnostics in its body:
+error: Argument to immutable parameter cannot have modifiers.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/meatpuppet.cairo:33:1
+#[dojo::contract]
+^***************^
+
+    
+warn: Unused import: `the_oruggin_trail::systems::tokeniser::tokeniser::MaterialType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/tokeniser.cairo:10:45
+        zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
+                                            ^**********^
+
+warn: Unused import: `the_oruggin_trail::systems::tokeniser::confessor::MaterialType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/tokeniser.cairo:94:45
+        zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
+                                            ^**********^
+
+error: Plugin diagnostic: Starknet interfaces must have exactly one generic parameter, which is a type.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:9:16
+trait ISpawner {
+               ^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:10:25
+    fn setup(ref world: IWorldDispatcher);
+                        ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:11:32
+    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
+                               ^**************^
+
+error: Plugin diagnostic: The first parameter of an entry point must be `self`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:41:18
+        fn setup(ref world: IWorldDispatcher) {
+                 ^*************************^
+
+error: Plugin diagnostic: The first parameter of an entry point must be `self`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:45:25
+        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+                        ^*************************^
+
+error: Expected 0 generic arguments, found 1.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:40:34
+    impl SpawnerImpl of ISpawner<ContractState> {
+                                 ^***********^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:61:22
+    fn make_rooms(w: IWorldDispatcher, pl: felt252) {
+                     ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:73:21
+    fn plain_gen(w: IWorldDispatcher, playerid: felt252) {
+                    ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:215:20
+    fn barn_gen(w: IWorldDispatcher, playerid: felt252) {
+                   ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:336:21
+    fn forge_gen(w: IWorldDispatcher, playerid: felt252) {
+                    ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:465:20
+    fn pass_gen(w: IWorldDispatcher, playerid: felt252) {
+                   ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:546:25
+    fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
+                        ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:548:13
+            set!(w, (element));
+            ^****************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:547:13
+        for element in t {
+            ^*****^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:552:25
+    fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
+                        ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:554:13
+            set!(w, (element));
+            ^****************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:553:13
+        for element in t {
+            ^*****^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:558:24
+    fn store_places(w: IWorldDispatcher, t: Array<Room>) {
+                       ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:560:13
+            set!(w, (element));
+            ^****************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:559:13
+        for element in t {
+            ^*****^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:565:25
+    fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
+                        ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/systems/spawner.cairo:566:9
+        set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
+        ^**********************************************************^
+
+error: Plugin diagnostic: The first parameter must be named `self`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:10:14
+    fn setup(ref world: IWorldDispatcher);
+             ^*************************^
+
+error: Plugin diagnostic: `starknet::interface` function first parameter must be a reference to the trait's generic parameter or a snapshot of it.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:10:14
+    fn setup(ref world: IWorldDispatcher);
+             ^*************************^
+
+error: Plugin diagnostic: The first parameter must be named `self`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:11:21
+    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
+                    ^*************************^
+
+error: Plugin diagnostic: `starknet::interface` function first parameter must be a reference to the trait's generic parameter or a snapshot of it.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:11:21
+    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
+                    ^*************************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:10:25
+    fn setup(ref world: IWorldDispatcher);
+                        ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:11:32
+    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
+                               ^**************^
+
+error: Plugin diagnostic: The first parameter of an entry point must be `self`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:38:18
+        fn setup(ref world: IWorldDispatcher) {
+                 ^*************************^
+
+error: Plugin diagnostic: The first parameter of an entry point must be `self`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:42:25
+        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+                        ^*************************^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::testing`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:16:37
+    use starknet::{ContractAddress, testing, get_caller_address};
+                                    ^*****^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::get_caller_address`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:16:46
+    use starknet::{ContractAddress, testing, get_caller_address};
+                                             ^****************^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::ByteArrayTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:17:27
+    use core::byte_array::ByteArrayTrait;
+                          ^************^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::OptionTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:19:23
+    use core::option::OptionTrait;
+                      ^*********^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::Txtdef`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:24:18
+        txtdef::{Txtdef}, 
+                 ^****^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::zc`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:32:39
+    use the_oruggin_trail::constants::zrk_constants as zc;
+                                      ^*****************^
+
+warn: Unused import: `the_oruggin_trail::generated::spawner::spawner::rm`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:33:55
+    use the_oruggin_trail::constants::zrk_constants::{roomid as rm, statusid as st};
+                                                      ^**********^
+
+warn: Plugin diagnostic: Failed to generate ABI: Entrypoints must have a self first param.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:14:1
+#[dojo::contract]
+^***************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:38:29
+        fn setup(ref world: IWorldDispatcher) {
+                            ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:42:36
+        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+                                   ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:51:13
+            set!(world, (inv));
+            ^****************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:52:13
+            set!(world, (player));
+            ^*******************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:43:17
+            let player = Player{
+                ^****^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:50:17
+            let inv = Inventory {owner_id: pid, items: array![]};
+                ^*^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:58:25
+    fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
+                        ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:60:13
+            set!(w, (o));
+            ^**********^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:59:13
+        for o in t {
+            ^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:64:25
+    fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
+                        ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:66:13
+            set!(w, (o));
+            ^**********^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:65:13
+        for o in t {
+            ^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:70:24
+    fn store_places(w: IWorldDispatcher, t: Array<Room>) {
+                       ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:72:13
+            set!(w, (o));
+            ^**********^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:71:13
+        for o in t {
+            ^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:76:25
+    fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
+                        ^**************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:77:9
+        set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
+        ^**********************************************************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:84:22
+    fn make_rooms(w: IWorldDispatcher, pl: felt252) {
+                     ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:101:41
+    fn gen_room_13246886194600585633(w: IWorldDispatcher, playerid: felt252) {// object 4405246086034713577// action 16332049259031098349
+                                        ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:207:41
+    fn gen_room_15740072870286221930(w: IWorldDispatcher, playerid: felt252) {// object 4142895348942435842// action 16668157595971844890
+                                        ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:334:41
+    fn gen_room_12897738261327393418(w: IWorldDispatcher, playerid: felt252) {// object 2655229238403616021// action 17136525110814971091
+                                        ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:460:40
+    fn gen_room_8892581999139148090(w: IWorldDispatcher, playerid: felt252) {// object 745772409139972109// action 14833044636746871315
+                                       ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:591:40
+    fn gen_room_2103159215482208020(w: IWorldDispatcher, playerid: felt252) {// object 16637690103936120658// action 17581850991508748471
+                                       ^**************^
+
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:651:41
+    fn gen_room_11107137240536497418(w: IWorldDispatcher, playerid: felt252) {// object 10414226638441273874// action 4328927602301159032
+                                        ^**************^
+
+[2m2024-10-31T16:08:41.225986Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::setup` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:38:29
+        fn setup(ref world: IWorldDispatcher) {
+                            ^**************^
+
+    
+[2m2024-10-31T16:08:41.226057Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::spawn_player` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:42:36
+        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+                                   ^**************^
+
+    
+[2m2024-10-31T16:08:41.226786Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::store_objects` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:58:25
+    fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
+                        ^**************^
+
+    
+[2m2024-10-31T16:08:41.226844Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::store_actions` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:64:25
+    fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
+                        ^**************^
+
+    
+[2m2024-10-31T16:08:41.226918Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::store_places` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:70:24
+    fn store_places(w: IWorldDispatcher, t: Array<Room>) {
+                       ^**************^
+
+    
+[2m2024-10-31T16:08:41.226974Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::store_txt` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:76:25
+    fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
+                        ^**************^
+
+    
+[2m2024-10-31T16:08:41.227036Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::make_rooms` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:84:22
+    fn make_rooms(w: IWorldDispatcher, pl: felt252) {
+                     ^**************^
+
+    
+[2m2024-10-31T16:08:41.227091Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::gen_room_13246886194600585633` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:101:41
+    fn gen_room_13246886194600585633(w: IWorldDispatcher, playerid: felt252) {// object 4405246086034713577// action 16332049259031098349
+                                        ^**************^
+
+    
+[2m2024-10-31T16:08:41.227153Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::gen_room_15740072870286221930` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:207:41
+    fn gen_room_15740072870286221930(w: IWorldDispatcher, playerid: felt252) {// object 4142895348942435842// action 16668157595971844890
+                                        ^**************^
+
+    
+[2m2024-10-31T16:08:41.227207Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::gen_room_12897738261327393418` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:334:41
+    fn gen_room_12897738261327393418(w: IWorldDispatcher, playerid: felt252) {// object 2655229238403616021// action 17136525110814971091
+                                        ^**************^
+
+    
+[2m2024-10-31T16:08:41.227260Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::gen_room_8892581999139148090` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:460:40
+    fn gen_room_8892581999139148090(w: IWorldDispatcher, playerid: felt252) {// object 745772409139972109// action 14833044636746871315
+                                       ^**************^
+
+    
+[2m2024-10-31T16:08:41.227329Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::gen_room_2103159215482208020` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:591:40
+    fn gen_room_2103159215482208020(w: IWorldDispatcher, playerid: felt252) {// object 16637690103936120658// action 17581850991508748471
+                                       ^**************^
+
+    
+[2m2024-10-31T16:08:41.227402Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::generated::spawner::spawner::gen_room_11107137240536497418` has semantic diagnostics in its declaration:
+error: Type not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/generated/spawner.cairo:651:41
+    fn gen_room_11107137240536497418(w: IWorldDispatcher, playerid: felt252) {// object 10414226638441273874// action 4328927602301159032
+                                        ^**************^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::HashStateExTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:14:38
+    use core::hash::{HashStateTrait, HashStateExTrait};
+                                     ^**************^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::MaterialType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:13
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+            ^**********^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::ObjectType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:27
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+                          ^********^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::ActionType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:39
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+                                      ^********^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::TxtDefType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:51
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+                                                  ^********^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::DirectionType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:63
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+                                                              ^***********^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::RoomType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:78
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+                                                                             ^******^
+
+warn: Unused import: `the_oruggin_trail::lib::hash_utils::hashutils::BiomeType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/hash_utils.cairo:19:88
+            MaterialType, ObjectType, ActionType, TxtDefType, DirectionType, RoomType, BiomeType
+                                                                                       ^*******^
+
+warn: Unused import: `the_oruggin_trail::lib::store::IWorldDispatcherTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:8:37
+use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+                                    ^*******************^
+
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:12:23
+    output::{ Output, OutputStore, OutputEntity, OutputEntityStore },
+                      ^*********^
+
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:12:36
+    output::{ Output, OutputStore, OutputEntity, OutputEntityStore },
+                                   ^**********^
+
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:12:50
+    output::{ Output, OutputStore, OutputEntity, OutputEntityStore },
+                                                 ^***************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:39:9
+        get!( self.world, 23, Output )
+        ^****************************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:48:9
+        set!(self.world, (output));
+        ^************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:47:13
+        let output: Output = Output{ playerId: pid, text_o_vision: msg };
+            ^****^
+
+[2m2024-10-31T16:08:41.531903Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::store::get_output` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:39:9
+        get!( self.world, 23, Output )
+        ^****************************^
+
+    
+[2m2024-10-31T16:08:41.531990Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::store::set_output` has semantic diagnostics in its body:
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:48:9
+        set!(self.world, (output));
+        ^************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/store.cairo:47:13
+        let output: Output = Output{ playerId: pid, text_o_vision: msg };
+            ^****^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::err_handler::err_dispatcher::Output`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/err_handler.cairo:12:46
+    use the_oruggin_trail::models::{output::{Output}};
+                                             ^****^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/err_handler.cairo:17:9
+        set!(world, Output { playerId: 23, text_o_vision: speech })
+        ^*********************************************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/err_handler.cairo:16:13
+        let speech = badmouth::opine_on_errors(err, @bogus_cmd);
+            ^****^
+
+[2m2024-10-31T16:08:41.532316Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::err_handler::err_dispatcher::error_handle` has semantic diagnostics in its body:
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/err_handler.cairo:17:9
+        set!(world, Output { playerId: 23, text_o_vision: speech })
+        ^*********************************************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/err_handler.cairo:16:13
+        let speech = badmouth::opine_on_errors(err, @bogus_cmd);
+            ^****^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::verb_eater::verb_dispatcher::Output`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:19:18
+        output::{Output}, player::{Player}, room::{Room}, object::{Object}, inventory::{Inventory},
+                 ^****^
+
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:26:20
+        let wrld = self.world(@"the_oruggin_trail");
+                   ^**^
+
+error[E0002]: Method `world` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:26:25
+        let wrld = self.world(@"the_oruggin_trail");
+                        ^***^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:30:34
+        let mut player: Player = get!(world, pid, (Player));
+                                 ^************************^
+
+error: Unexpected argument type. Expected: "dojo::world::storage::WorldStorage", found: "dojo::world::iworld::IWorldDispatcher".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:36:59
+                let output: ByteArray = lookat::stuff(ref world, msg, pid);
+                                                          ^***^
+
+error: Argument to immutable parameter cannot have modifiers.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:36:59
+                let output: ByteArray = lookat::stuff(ref world, msg, pid);
+                                                          ^***^
+
+error[E0002]: Method `setup` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:50:29
+                    spawner.setup();
+                            ^***^
+
+error[E0002]: Method `spawn_player` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:53:29
+                    spawner.spawn_player(pid, spawn_id);
+                            ^**********^
+
+error: Unexpected argument type. Expected: "dojo::world::storage::WorldStorage", found: "dojo::world::iworld::IWorldDispatcher".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:54:71
+                    let desc: ByteArray = lookat::describe_room_short(world, spawn_id);
+                                                                      ^***^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:65:40
+                    let mut rm: Room = get!(world, player.location.clone(), (Room));
+                                       ^******************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:68:46
+                    let mut inv: Inventory = get!(world, player.inventory.clone(), (Inventory));
+                                             ^************************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:72:43
+                        let obj: Object = get!(world, ele, (Object));
+                                          ^************************^
+
+error[E0002]: Method `write_model` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:90:26
+                    wrld.write_model(@rm, @inv);
+                         ^*********^
+
+error: Unexpected argument type. Expected: "dojo::world::storage::WorldStorage", found: "dojo::world::iworld::IWorldDispatcher".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:107:71
+                    let desc: ByteArray = lookat::describe_room_short(world, nxt_rm_id);
+                                                                      ^***^
+
+error[E0002]: Method `write_model` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:115:14
+        wrld.write_model(@Output{playerId: pid, text_o_vision: out});
+             ^*********^
+
+[2m2024-10-31T16:08:41.533975Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::verb_eater::verb_dispatcher::handleGarble` has semantic diagnostics in its body:
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:26:20
+        let wrld = self.world(@"the_oruggin_trail");
+                   ^**^
+
+error[E0002]: Method `world` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:26:25
+        let wrld = self.world(@"the_oruggin_trail");
+                        ^***^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:30:34
+        let mut player: Player = get!(world, pid, (Player));
+                                 ^************************^
+
+error: Unexpected argument type. Expected: "dojo::world::storage::WorldStorage", found: "dojo::world::iworld::IWorldDispatcher".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:36:59
+                let output: ByteArray = lookat::stuff(ref world, msg, pid);
+                                                          ^***^
+
+error: Argument to immutable parameter cannot have modifiers.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:36:59
+                let output: ByteArray = lookat::stuff(ref world, msg, pid);
+                                                          ^***^
+
+error[E0002]: Method `setup` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:50:29
+                    spawner.setup();
+                            ^***^
+
+error[E0002]: Method `spawn_player` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:53:29
+                    spawner.spawn_player(pid, spawn_id);
+                            ^**********^
+
+error: Unexpected argument type. Expected: "dojo::world::storage::WorldStorage", found: "dojo::world::iworld::IWorldDispatcher".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:54:71
+                    let desc: ByteArray = lookat::describe_room_short(world, spawn_id);
+                                                                      ^***^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:65:40
+                    let mut rm: Room = get!(world, player.location.clone(), (Room));
+                                       ^******************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:68:46
+                    let mut inv: Inventory = get!(world, player.inventory.clone(), (Inventory));
+                                             ^************************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:72:43
+                        let obj: Object = get!(world, ele, (Object));
+                                          ^************************^
+
+error[E0002]: Method `write_model` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:90:26
+                    wrld.write_model(@rm, @inv);
+                         ^*********^
+
+error: Unexpected argument type. Expected: "dojo::world::storage::WorldStorage", found: "dojo::world::iworld::IWorldDispatcher".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:107:71
+                    let desc: ByteArray = lookat::describe_room_short(world, nxt_rm_id);
+                                                                      ^***^
+
+error[E0002]: Method `write_model` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/verb_eater.cairo:115:14
+        wrld.write_model(@Output{playerId: pid, text_o_vision: out});
+             ^*********^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::look::lookat::ec`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:10:55
+    use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
+                                                      ^***********^
+
+warn: Unused import: `the_oruggin_trail::lib::look::lookat::lexer`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:11:49
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+                                                ^****************^
+
+warn: Unused import: `the_oruggin_trail::lib::look::lookat::confessor`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:11:69
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+                                                                    ^*******^
+
+warn: Unused import: `the_oruggin_trail::lib::look::lookat::MaterialType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:17:71
+            RoomType, room_type_to_str, BiomeType, biome_type_to_str, MaterialType,
+                                                                      ^**********^
+
+warn: Unused import: `the_oruggin_trail::lib::look::lookat::ObjectType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:18:35
+            material_type_to_str, ObjectType, object_type_to_str, DirectionType,
+                                  ^********^
+
+warn: Unused import: `the_oruggin_trail::lib::look::lookat::DirectionType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:18:67
+            material_type_to_str, ObjectType, object_type_to_str, DirectionType,
+                                                                  ^***********^
+
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:35:51
+        let mut output: ByteArray = describe_room(world, location);
+                                                  ^***^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:41:26
+        let room: Room = get!(world, location, (Room));
+                         ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:48:31
+            let obj: Object = get!(world, _id, (Object));
+                              ^************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:49:32
+            let _txt: Txtdef = get!(world, obj.txtDefId.clone(), (Txtdef));
+                               ^*****************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:60:26
+        let room: Room = get!(world, location, (Room));
+                         ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:68:32
+            let exit: Object = get!(world, rm_id, (Object));
+                               ^**************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:67:17
+            let rm_id: felt252 = exits.at(idx).clone();
+                ^***^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:136:26
+        let room: Room = get!(world, location, (Room));
+                         ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:142:34
+            let txt: ByteArray = get!(world, room.txtDefId, (Txtdef)).text;
+                                 ^**********************************^
+
+[2m2024-10-31T16:08:41.535005Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::look::lookat::stuff` has semantic diagnostics in its body:
+error: Unexpected argument type. Expected: "dojo::world::iworld::IWorldDispatcher", found: "dojo::world::storage::WorldStorage".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:35:51
+        let mut output: ByteArray = describe_room(world, location);
+                                                  ^***^
+
+    
+[2m2024-10-31T16:08:41.535162Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::look::lookat::collate_objects` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:41:26
+        let room: Room = get!(world, location, (Room));
+                         ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:48:31
+            let obj: Object = get!(world, _id, (Object));
+                              ^************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:49:32
+            let _txt: Txtdef = get!(world, obj.txtDefId.clone(), (Txtdef));
+                               ^*****************************************^
+
+    
+[2m2024-10-31T16:08:41.535283Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::look::lookat::collate_exits` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:60:26
+        let room: Room = get!(world, location, (Room));
+                         ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:68:32
+            let exit: Object = get!(world, rm_id, (Object));
+                               ^**************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:67:17
+            let rm_id: felt252 = exits.at(idx).clone();
+                ^***^
+
+    
+[2m2024-10-31T16:08:41.548816Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::look::lookat::describe_room` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:136:26
+        let room: Room = get!(world, location, (Room));
+                         ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/look.cairo:142:34
+            let txt: ByteArray = get!(world, room.txtDefId, (Txtdef)).text;
+                                 ^**********************************^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::move::relocate::Output`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:11:18
+        output::{Output}, 
+                 ^****^
+
+warn: Unused import: `the_oruggin_trail::lib::move::relocate::ObjectType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:13:33
+        zrk_enums::{ActionType, ObjectType}, 
+                                ^********^
+
+warn: Unused import: `the_oruggin_trail::lib::move::relocate::ec`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:18:55
+    use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec, statusid as st};
+                                                      ^***********^
+
+warn: Unused import: `the_oruggin_trail::lib::move::relocate::err_dispatch`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:20:22
+        err_handler::err_dispatcher as err_dispatch, 
+                     ^****************************^
+
+warn: Unused import: `the_oruggin_trail::lib::move::relocate::lookat`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:21:15
+        look::lookat};
+              ^****^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:29:34
+        let mut player: Player = get!(world, pid, (Player));
+                                 ^************************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:31:9
+        set!(world, (player));
+        ^*******************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:28:13
+        let pid = 23;
+            ^*^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:41:26
+        let pl: Player = get!(world, pid, (Player));
+                         ^************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:43:24
+        let rm: Room = get!(world, curr_rm, (Room));
+                       ^**************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:39:17
+        let mut next_rm: felt252 = st::NONE;
+                ^*****^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:42:13
+        let curr_rm = pl.location.clone();
+            ^*****^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:56:32
+            let exit: Object = get!(world, exit_id, (Object));
+                               ^****************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:55:17
+            let exit_id = exits.at(idx).clone();
+                ^*****^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:76:34
+            let action: Action = get!(world, action_id, (Action));
+                                 ^******************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:75:17
+            let action_id = action_ids.at(idx).clone();
+                ^*******^
+
+[2m2024-10-31T16:08:41.549890Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::move::relocate::enter_room` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:29:34
+        let mut player: Player = get!(world, pid, (Player));
+                                 ^************************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:31:9
+        set!(world, (player));
+        ^*******************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:28:13
+        let pid = 23;
+            ^*^
+
+    
+[2m2024-10-31T16:08:41.550029Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::move::relocate::get_next_room` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:41:26
+        let pl: Player = get!(world, pid, (Player));
+                         ^************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:43:24
+        let rm: Room = get!(world, curr_rm, (Room));
+                       ^**************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:39:17
+        let mut next_rm: felt252 = st::NONE;
+                ^*****^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:42:13
+        let curr_rm = pl.location.clone();
+            ^*****^
+
+    
+[2m2024-10-31T16:08:41.550131Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::move::relocate::_direction_check` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:56:32
+            let exit: Object = get!(world, exit_id, (Object));
+                               ^****************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:55:17
+            let exit_id = exits.at(idx).clone();
+                ^*****^
+
+    
+[2m2024-10-31T16:08:41.550215Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::move::relocate::_can_move` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:76:34
+            let action: Action = get!(world, action_id, (Action));
+                                 ^******************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/move.cairo:75:17
+            let action_id = action_ids.at(idx).clone();
+                ^*******^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::ec`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:9:55
+    use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
+                                                      ^***********^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::lexer`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:10:49
+    use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
+                                                ^****************^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::RoomType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:16:13
+            RoomType, room_type_to_str, 
+            ^******^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::room_type_to_str`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:16:23
+            RoomType, room_type_to_str, 
+                      ^**************^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::BiomeType`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:18:13
+            BiomeType, biome_type_to_str, 
+            ^*******^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::biome_type_to_str`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:18:24
+            BiomeType, biome_type_to_str, 
+                       ^***************^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::material_type_to_str`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:19:27
+            MaterialType, material_type_to_str, 
+                          ^******************^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::object_type_to_str`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:20:25
+            ObjectType, object_type_to_str, 
+                        ^****************^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::direction_type_to_str`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:21:28
+            DirectionType, direction_type_to_str
+                           ^*******************^
+
+warn: Unused import: `the_oruggin_trail::lib::act::pullstrings::Txtdef`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:23:17
+        txtdef::Txtdef, 
+                ^****^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:31:26
+        let pl: Player = get!(world, pid, (Player));
+                         ^************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:32:24
+        let rm: Room = get!(world, pl.location.clone(), (Room));
+                       ^**************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:39:34
+            let inv: Inventory = get!(world, inv_id, (Inventory));
+                                 ^******************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:38:17
+            let inv_id = pl.inventory;
+                ^****^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:33:13
+        let obj_tree: Array<felt252> = rm.objectIds.clone();
+            ^******^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:78:31
+            let obj: Object = get!(world, ele.clone(), (Object));
+                              ^********************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:91:39
+                let mut act: Action = get!(world, a_id.clone(), (Action));
+                                      ^*********************************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:98:25
+                        set!(world, (act.clone()));
+                        ^************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:100:29
+                        let desc: ByteArray = "the ball bounces off the broken frame and then, predictably rolls into dog shit";
+                            ^**^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:105:21
+                    set!(world, (act.clone()));
+                    ^************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:90:17
+            for a_id in act_ids {
+                ^**^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:132:31
+            let obj: Object = get!(world, obj_id, (Object));
+                              ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:138:46
+                    let mut action: Action = get!(world, *action_id, (Action));
+                                             ^*******************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:137:25
+                    let action_id = action_ids.at(inr);
+                        ^*******^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:131:17
+            let obj_id = objs.at(idx).clone();
+                ^****^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:129:13
+        let responds_to = confessor::vrb_to_response(vrb);
+            ^*********^
+
+[2m2024-10-31T16:08:41.552122Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::act::pullstrings::on` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:31:26
+        let pl: Player = get!(world, pid, (Player));
+                         ^************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:32:24
+        let rm: Room = get!(world, pl.location.clone(), (Room));
+                       ^**************************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:39:34
+            let inv: Inventory = get!(world, inv_id, (Inventory));
+                                 ^******************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:38:17
+            let inv_id = pl.inventory;
+                ^****^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:33:13
+        let obj_tree: Array<felt252> = rm.objectIds.clone();
+            ^******^
+
+    
+[2m2024-10-31T16:08:41.554986Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::act::pullstrings::handle_action` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:78:31
+            let obj: Object = get!(world, ele.clone(), (Object));
+                              ^********************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:91:39
+                let mut act: Action = get!(world, a_id.clone(), (Action));
+                                      ^*********************************^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:98:25
+                        set!(world, (act.clone()));
+                        ^************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:100:29
+                        let desc: ByteArray = "the ball bounces off the broken frame and then, predictably rolls into dog shit";
+                            ^**^
+
+error: Inline macro `set` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:105:21
+                    set!(world, (act.clone()));
+                    ^************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:90:17
+            for a_id in act_ids {
+                ^**^
+
+    
+[2m2024-10-31T16:08:41.555270Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::act::pullstrings::handle_default` has semantic diagnostics in its body:
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:132:31
+            let obj: Object = get!(world, obj_id, (Object));
+                              ^***************************^
+
+error: Inline macro `get` not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:138:46
+                    let mut action: Action = get!(world, *action_id, (Action));
+                                             ^*******************************^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:137:25
+                    let action_id = action_ids.at(inr);
+                        ^*******^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:131:17
+            let obj_id = objs.at(idx).clone();
+                ^****^
+
+warning[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/act.cairo:129:13
+        let responds_to = confessor::vrb_to_response(vrb);
+            ^*********^
+
+    
+warn: Unused import: `the_oruggin_trail::lib::system::ClassHash`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:8:33
+use starknet::{ContractAddress, ClassHash};
+                                ^*******^
+
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:12:47
+pub use the_oruggin_trail::systems::spawner::{ISpawnerDispatcher, ISpawnerDispatcherTrait};
+                                              ^****************^
+
+error: Identifier not found.
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:12:67
+pub use the_oruggin_trail::systems::spawner::{ISpawnerDispatcher, ISpawnerDispatcherTrait};
+                                                                  ^*********************^
+
+error: If blocks have incompatible types: "core::felt252" and "core::starknet::contract_address::ContractAddress"
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:21:9
+        if let Resource::Contract((_, contract_address)) = self.resource(selector) {
+        ^**************************************************************************^
+
+error: Unexpected return type. Expected: "core::starknet::contract_address::ContractAddress", found: "core::felt252".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:20:87
+    fn contract_address(self: IWorldDispatcher, selector: felt252) -> ContractAddress {
+                                                                                      ^
+
+[2m2024-10-31T16:08:41.555754Z[0m [33m WARN[0m [2mlog[0m[2m:[0m Function `the_oruggin_trail::lib::system::contract_address` has semantic diagnostics in its body:
+error: If blocks have incompatible types: "core::felt252" and "core::starknet::contract_address::ContractAddress"
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:21:9
+        if let Resource::Contract((_, contract_address)) = self.resource(selector) {
+        ^**************************************************************************^
+
+error: Unexpected return type. Expected: "core::starknet::contract_address::ContractAddress", found: "core::felt252".
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/lib/system.cairo:20:87
+    fn contract_address(self: IWorldDispatcher, selector: felt252) -> ContractAddress {
+                                                                                      ^
+
+    
+warn: Unused import: `the_oruggin_trail::models::txtdef::zrk`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/models/txtdef.cairo:8:32
+use the_oruggin_trail::models::zrk_enums as zrk;
+                               ^**************^
+
+warn: Unused import: `the_oruggin_trail::utils::misc::IWorldDispatcherTrait`
+ --> /Users/tims/DATA/BB/DOJO/TOT_ZK/the_oruggin_trail_dojo/src/utils/misc.cairo:10:37
+use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+                                    ^*******************^
+
+error: could not compile `the_oruggin_trail` due to previous error

@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
 
 // we can add models here to make custom getters and setters etc

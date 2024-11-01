@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 //! handle bad commands and idiocy, basicly take an err code and then
 // generate some text output which we can pass back to the caller
 

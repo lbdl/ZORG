@@ -1,8 +1,16 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 //! Handle LOOK type actions
 pub mod lookat {
     use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
     use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
-    use dojo::world::{IWorldDispatcher};
+    use dojo::world::{IWorldDispatcher, WorldStorage, WorldStorageTrait};
+    use dojo::model::{ModelStorage};
     use the_oruggin_trail::models::{
         player::Player, room::Room,
         zrk_enums::{
@@ -19,26 +27,27 @@ pub mod lookat {
     /// the general case is assumed to be for a room
     /// currently we just do the full description this should seperate into examination
     /// for objects etc.
-    pub fn stuff(ref world: IWorldDispatcher, thing: Garble, pid: felt252) -> ByteArray {
+        pub fn stuff(mut world: IWorldDispatcher, thing: Garble, pid: felt252) -> ByteArray {
         //get the player object
         // we are always player 23 right now
-        let player: Player = get!(world, pid, (Player));
+        let wrld: WorldStorage =  WorldStorageTrait::new(world, @"the_oruggin_trail");
+        let player: Player = wrld.read_model(pid);
         let location: felt252 = player.location;
-        let mut output: ByteArray = describe_room(world, location);
+        let mut output: ByteArray = describe_room(wrld, location);
         output
     }
 
     // needs to add the state of the objects into consideration
-    fn collate_objects(world: IWorldDispatcher, location: felt252) -> ByteArray {
-        let room: Room = get!(world, location, (Room));
+    fn collate_objects(world: WorldStorage, location: felt252) -> ByteArray {
+        let room: Room = world.read_model(location);
         let objects: Array<felt252> = room.objectIds.clone();
         let mut idx: u32 = 0;
         let mut out: ByteArray = "";
         let base: ByteArray = "you can see a";
         while idx < objects.len() {
             let _id: felt252 = objects.at(idx).clone();
-            let obj: Object = get!(world, _id, (Object));
-            let _txt: Txtdef = get!(world, obj.txtDefId.clone(), (Txtdef));
+            let obj: Object = world.read_model(_id);
+            let _txt: Txtdef = world.read_model(obj.txtDefId.clone());
             let mut desc: ByteArray = format!(
                 "{} {}, {}\n", base.clone(), object_type_to_str(obj.objType), _txt.text.clone(),
             );
@@ -48,8 +57,8 @@ pub mod lookat {
         out
     }
 
-    fn collate_exits(world: IWorldDispatcher, location: felt252) -> ByteArray {
-        let room: Room = get!(world, location, (Room));
+    fn collate_exits(world: WorldStorage, location: felt252) -> ByteArray {
+        let room: Room = world.read_model(location);
         let mut exits: Array<felt252> = room.dirObjIds.clone();
         let mut idx: u32 = 0;
         let mut out: ByteArray = "";
@@ -57,7 +66,7 @@ pub mod lookat {
         let dir_connective: ByteArray = "to the";
         while idx < exits.len() {
             let rm_id: felt252 = exits.at(idx).clone();
-            let exit: Object = get!(world, rm_id, (Object));
+            let exit: Object = world.read_model(rm_id);
             let mut desc: ByteArray = format!(
                 "{} {} {} {} {}\n",
                 base.clone(),
@@ -72,7 +81,7 @@ pub mod lookat {
         out
     }
 
-    fn describe_object(world: IWorldDispatcher, location: felt252) -> ByteArray {
+    fn describe_object(world: WorldStorage, location: felt252) -> ByteArray {
         let mut output: ByteArray = "You see Elvis... \n, he speaks... \n apparantly garbage";
         output
     }
@@ -87,8 +96,8 @@ pub mod lookat {
     /// "walking eagle pass" : name - shortTxt
     /// "You are standing on/in a pass in/on the prarie" : baseTxt + conn + roomType + conn +
     /// biomeType
-    pub fn describe_room_short(world: IWorldDispatcher, location: felt252) -> ByteArray {
-        let room: Room = get!(world, location, (Room));
+    pub fn describe_room_short(world: WorldStorage, location: felt252) -> ByteArray {
+        let room: Room = world.read_model(location);
         let mut base_txt: ByteArray = "You are standing";
         let mut connective_txt_type: ByteArray = "";
         let mut connective_txt_biome: ByteArray = "";
@@ -124,14 +133,15 @@ pub mod lookat {
     /// "the valley sides ...": txtDefId
     /// "you can see a path to the west ..." : exits - dirObjects
     /// "there is a manky otter pelt on the floor": objects
-    fn describe_room(world: IWorldDispatcher, location: felt252) -> ByteArray {
-        let room: Room = get!(world, location, (Room));
+    fn describe_room(world: WorldStorage, location: felt252) -> ByteArray {
+        let room: Room = world.read_model(location);
         if room.roomType == RoomType::None {
             let out: ByteArray =
                 "there is nothing to look at, this world has not yet spawned.... shoggoth stares...";
             out
         } else {
-            let txt: ByteArray = get!(world, room.txtDefId, (Txtdef)).text;
+            let txtModel: Txtdef = world.read_model(room.txtDefId);
+            let txt: ByteArray = txtModel.text;
             let connective_txt: ByteArray = "the";
             let place_type: ByteArray = room_type_to_str(room.roomType);
             let exit_txt: ByteArray = collate_exits(world, location);

@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 #[cfg(test)]
 pub mod test_rig {
     use starknet::{ContractAddress, testing, get_caller_address};

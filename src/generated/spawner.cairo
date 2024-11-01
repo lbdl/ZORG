@@ -1,7 +1,14 @@
-#[dojo::interface]
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
+#[starknet::interface]
 trait ISpawner<T> {
-    fn setup(ref world: IWorldDispatcher);
-    fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);
+    fn setup(ref self: T);
+    fn spawn_player(ref self: T, pid: felt252, start_room: felt252);
 }
 
 #[dojo::contract]
@@ -25,14 +32,16 @@ pub mod spawner {
     use the_oruggin_trail::constants::zrk_constants as zc;
     use the_oruggin_trail::constants::zrk_constants::{roomid as rm, statusid as st};
     use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
+    use dojo::world::{IWorldDispatcher, WorldStorage, WorldStorageTrait};
+    use dojo::model::{ModelStorage};
 
     #[abi(embed_v0)]
     impl SpawnerImpl of ISpawner<ContractState> {
-        fn setup(ref world: IWorldDispatcher) {
-            make_rooms(world, 23);
+        fn setup(ref self: ContractState) {
+            make_rooms(self.world(@"the_oruggin_trail").dispatcher, 23);
         }
 
-        fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252) {
+        fn spawn_player(ref self: ContractState, pid: felt252, start_room: felt252) {
             let player = Player{
                 player_id: pid,
                 player_adr: OTHER(),
@@ -40,34 +49,39 @@ pub mod spawner {
                 inventory: pid
             };
 
+            let mut world = self.world(@"the_oruggin_trail");
             let inv = Inventory {owner_id: pid, items: array![]};
-            set!(world, (inv));
-            set!(world, (player));
+            world.write_model(@inv);
+            world.write_model(@player);
         }
     }
 
     fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
 
     fn store_objects(w: IWorldDispatcher, t: Array<Object>) {
+        let mut world: WorldStorage =  WorldStorageTrait::new(w, @"the_oruggin_trail");
         for o in t {
-            set!(w, (o));
+            world.write_model(@o);
         }
     }
 
     fn store_actions(w: IWorldDispatcher, t: Array<Action>) {
+        let mut world: WorldStorage =  WorldStorageTrait::new(w, @"the_oruggin_trail");
         for o in t {
-            set!(w, (o));
+            world.write_model(@o);
         }
     }
 
     fn store_places(w: IWorldDispatcher, t: Array<Room>) {
+        let mut world: WorldStorage =  WorldStorageTrait::new(w, @"the_oruggin_trail");
         for o in t {
-            set!(w, (o));
+            world.write_model(@o);
         }
     }
 
     fn store_txt(world: IWorldDispatcher, id: felt252, ownedBy: felt252, val: ByteArray) {
-        set!(world, (Txtdef { id: id, owner: ownedBy, text: val },));
+        let mut world: WorldStorage =  WorldStorageTrait::new(world, @"the_oruggin_trail");
+        world.write_model(@Txtdef { id: id, owner: ownedBy, text: val });
     }
 
     // --------------------------------------------------------------------------------------------

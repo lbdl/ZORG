@@ -1,4 +1,4 @@
-#[dojo::interface]
+#[starknet::interface]
 trait ISpawner<T> {
     fn setup(ref world: IWorldDispatcher);
     fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);

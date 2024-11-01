@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod interop_dispatcher {
 use dojo::world::{IWorldDispatcher};
 

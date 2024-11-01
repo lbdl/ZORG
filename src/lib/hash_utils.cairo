@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod hashutils {
     use core::array::ArrayTrait;
     use core::traits::Into;

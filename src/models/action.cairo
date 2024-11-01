@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 use the_oruggin_trail::models::{zrk_enums as zrk};
 
 // TODO: add a default txt for when the this doesnt affect

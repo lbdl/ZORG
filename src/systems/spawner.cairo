@@ -1,4 +1,11 @@
-#[dojo::interface]
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
+#[starknet::interface]
 trait ISpawner {
     fn setup(ref world: IWorldDispatcher);
     fn spawn_player(ref world: IWorldDispatcher, pid: felt252, start_room: felt252);

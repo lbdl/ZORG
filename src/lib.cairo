@@ -1,8 +1,15 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod systems {
     pub mod outputter;
     pub mod meatpuppet;
     pub mod tokeniser;
-    pub mod spawner;
+    // pub mod spawner;
 }
 
 pub mod generated {
@@ -16,7 +23,7 @@ pub mod constants {
 pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
-    pub mod store;
+    // pub mod store;
     pub mod err_handler;
     pub mod verb_eater;
     pub mod look;

@@ -1,10 +1,20 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod verb_dispatcher {
     // use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
     use the_oruggin_trail::lib::system::{
         WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait
     };
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
-    use dojo::world::{IWorldDispatcher};
+    
+    use dojo::world::{IWorldDispatcher, WorldStorage, WorldStorageTrait};
+    use dojo::model::{ModelStorage};
+    
     use the_oruggin_trail::lib::look::lookat;
     use the_oruggin_trail::lib::move::relocate as mv;
     use the_oruggin_trail::lib::act::pullstrings as act;
@@ -16,16 +26,18 @@ pub mod verb_dispatcher {
     use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
 
     pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
+        // let wrld = self.world(@"the_oruggin_trail");
+        let mut wrld: WorldStorage =  WorldStorageTrait::new(world, @"the_oruggin_trail");
         println!("HNDL: ---> {:?}", msg.vrb);
         let mut out: ByteArray =
             "Shoggoth is loveable by default, but it understands not your commands";
-        let mut player: Player = get!(world, pid, (Player));
+        let mut player: Player = wrld.read_model(pid);
         match msg.vrb {
             ActionType::Look => {
                 // Pass payer id into look handle
                 // let output: ByteArray = "Shoggoth stares into the void<\n>the void is staring
                 // back<\n>shoggoth is a good boy";
-                let output: ByteArray = lookat::stuff(ref world, msg, pid);
+                let output: ByteArray = lookat::stuff(world, msg, pid);
                 out = output;
             },
             ActionType::Fight => {
@@ -79,7 +91,8 @@ pub mod verb_dispatcher {
                     };
 
                     rm.objectIds = new_obj_ids;
-                    set!(world, (rm, inv));
+                    wrld.write_model(@rm, @inv);
+                    // set!(world, (rm, inv));
                 }
                 out = desc;
             },
@@ -103,6 +116,7 @@ pub mod verb_dispatcher {
         }
         // we probably need to hand off to another routine here to interpolate
         // some results and create a string for now though
-        set!(world, Output { playerId: pid, text_o_vision: out })
+        wrld.write_model(@Output{playerId: pid, text_o_vision: out});
+        // set!(world, Output { playerId: pid, text_o_vision: out })
     }
 }

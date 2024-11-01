@@ -1,3 +1,10 @@
+
+//*
+//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod pullstrings {
     use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
     use the_oruggin_trail::systems::tokeniser::{tokeniser as lexer, confessor, confessor::Garble};
