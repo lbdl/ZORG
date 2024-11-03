@@ -8,8 +8,10 @@
 pub mod verb_dispatcher {
     // use the_oruggin_trail::lib::interop_dispatch::interop_dispatcher as interop;
     use the_oruggin_trail::lib::system::{
-        WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait
+        WorldSystemsTrait
     };
+
+    use the_oruggin_trail::systems::spawner::{ISpawner, ISpawnerDispatcher, ISpawnerDispatcherTrait};
     use the_oruggin_trail::systems::tokeniser::confessor::{Garble};
     
     use dojo::world::{IWorldDispatcher, WorldStorage, WorldStorageTrait};
@@ -48,14 +50,22 @@ pub mod verb_dispatcher {
                 out = stub;
             },
             ActionType::Spawn => {
+                let (contract_address, class_hash) = match wrld.dns(@"spawner") {
+                    Option::Some((addr, hash)) => (addr, hash),
+                    Option::None => panic!("Contract not found")
+                };
+
                 let spawner: ISpawnerDispatcher = world.spawner_dispatcher();
+
+
+                // let spawner: ISpawnerDispatcher = ISpawnerDispatcher{contract_address: contract_address};
                 // let mut player: Player = get!(world, pid, (Player));
                 if player.location == 0 {
                     spawner.setup();
                     let spawn_rm_name: ByteArray = "walking eagle pass";
                     let spawn_id = h_util::str_hash(@spawn_rm_name);
                     spawner.spawn_player(pid, spawn_id);
-                    let desc: ByteArray = lookat::describe_room_short(world, spawn_id);
+                    let desc: ByteArray = lookat::describe_room_short(wrld, spawn_id);
                     out = desc;
                 }
             },
@@ -66,14 +76,14 @@ pub mod verb_dispatcher {
                     // let item_desc: ByteArray = object_type_to_str(msg.dobj);
                     desc = "hmmm, there isnt one of those here to take. are you mad fam?";
                 } else {
-                    let mut rm: Room = get!(world, player.location.clone(), (Room));
+                    let mut rm: Room = wrld.read_model(player.location.clone());
                     let mut obj_ids: Array<felt252> = rm.objectIds.clone();
                     let mut new_obj_ids: Array<felt252> = array![];
-                    let mut inv: Inventory = get!(world, player.inventory.clone(), (Inventory));
+                    let mut inv: Inventory = wrld.read_model(player.inventory.clone());
                     // let mut found: bool = false;
                     println!("objs {:?}", obj_ids.len());
                     for ele in obj_ids {
-                        let obj: Object = get!(world, ele, (Object));
+                        let obj: Object = wrld.read_model(ele);
                         println!("{:?}", obj.objType);
                         if obj.objType == msg.dobj {
                             // found = true;
@@ -91,8 +101,8 @@ pub mod verb_dispatcher {
                     };
 
                     rm.objectIds = new_obj_ids;
-                    wrld.write_model(@rm, @inv);
-                    // set!(world, (rm, inv));
+                    wrld.write_model(@rm);
+                    wrld.write_model(@inv);
                 }
                 out = desc;
             },
@@ -102,13 +112,13 @@ pub mod verb_dispatcher {
                 out = txt;
             },
             ActionType::Move => {
-                let nxt_rm_id = mv::get_next_room(world, pid, msg);
+                let nxt_rm_id = mv::get_next_room(wrld, pid, msg);
                 if nxt_rm_id == st::NONE {
                     out =
                         "no. you cannot go that way.\n\"reasons\" mumbles shoggoth into his hat\n she seems to be waving a hand shaped thing"
                 } else {
-                    mv::enter_room(world, pid, nxt_rm_id);
-                    let desc: ByteArray = lookat::describe_room_short(world, nxt_rm_id);
+                    mv::enter_room(wrld, pid, nxt_rm_id);
+                    let desc: ByteArray = lookat::describe_room_short(wrld, nxt_rm_id);
                     out = desc;
                 }
             },

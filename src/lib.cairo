@@ -9,12 +9,21 @@ pub mod systems {
     pub mod outputter;
     pub mod meatpuppet;
     pub mod tokeniser;
-    // pub mod spawner;
+    pub mod spawner;
 }
 
 pub mod generated {
     pub mod spawner;
+    // pub use spawner::{ISpawnerDispatcher, ISpawnerDispatcherTrait, ISpawner};
 }
+
+// pub use systems::spawner::ISpawnerDispatcher;
+
+// pub use generated::spawner::{
+//     ISpawnerDispatcher, 
+//     ISpawnerDispatcherTrait, 
+//     ISpawner
+// }
 
 pub mod constants {
     pub mod zrk_constants;
