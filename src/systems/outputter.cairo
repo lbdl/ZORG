@@ -17,7 +17,7 @@ trait IOutputter<T> {
 #[dojo::contract]
 mod outputter {
     use super::{IOutputter};
-    use dojo::model::{ModelStorage, ModelValueStorage};
+    use dojo::model::{ModelStorage};
     use the_oruggin_trail::models::output::{Output} ;
 
     #[abi(embed_v0)]

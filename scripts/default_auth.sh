@@ -27,7 +27,7 @@ echo "--------------------------------------------------------------------------
 
 # enable system -> models authorizations
 sozo auth grant --world $WORLD_ADDRESS --wait writer \
-  model:the_origgin_trail-Output,the_oruggin_trail-meatpuppet
+  model:the_oruggin_trail-Output,the_oruggin_trail-meatpuppet
   #>/dev/null
 
 echo "Default authorizations have been successfully set."

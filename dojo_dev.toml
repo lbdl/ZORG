@@ -26,3 +26,7 @@ world_address = "0x7b378a92d7c10143413760513c1cded0024a02793971c8250e7ebd6531d4a
 # | Account address |  0x6b86e40118f29ebe393a75469b4d926c7a44c2e2681b6d319520b7c1156d114
 # | Private key     |  0x1c9053c053edf324aec366a34c6901b1095b07af69495bffec7d7fe21effb1b
 # | Public key      |  0x4c339f18b9d1b95b64a6d378abd1480b2e0d5d5bd33cd0828cbce4d65c27284
+
+# not sure we nnes to set this for outputter any more
+[writers]
+"the_oruggin_trail" = ["the_oruggin_trail-meatpuppet", "the_oruggin_trail-outputter"]

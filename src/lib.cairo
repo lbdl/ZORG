@@ -14,16 +14,7 @@ pub mod systems {
 
 pub mod generated {
     pub mod spawner;
-    // pub use spawner::{ISpawnerDispatcher, ISpawnerDispatcherTrait, ISpawner};
 }
-
-// pub use systems::spawner::ISpawnerDispatcher;
-
-// pub use generated::spawner::{
-//     ISpawnerDispatcher, 
-//     ISpawnerDispatcherTrait, 
-//     ISpawner
-// }
 
 pub mod constants {
     pub mod zrk_constants;
@@ -32,7 +23,7 @@ pub mod constants {
 pub mod lib {
     pub mod insult_meat;
     pub mod hash_utils;
-    // pub mod store;
+    pub mod store;
     pub mod err_handler;
     pub mod verb_eater;
     pub mod look;

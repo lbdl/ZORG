@@ -7,7 +7,8 @@
 
 #[cfg(test)]
 mod tests {
-    use core::clone::Clone;
+    use dojo::model::ModelStorage;
+use core::clone::Clone;
     use core::array::ArrayTrait;
     // import world dispatcher
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
@@ -15,12 +16,13 @@ mod tests {
     use dojo::utils::test::{deploy_contract, spawn_test_world};
 
     use the_oruggin_trail::{
-        generated::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
+        systems::spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait},
         constants::zrk_constants::roomid as rm,
         models::{
-            txtdef::{Txtdef, txtdef}, room::{Room, room},
-            action::{Action, action, action_mock_hash as act_phash},
-            object::{Object, object, obj_mock_hash as obj_phash},
+            txtdef::{Txtdef}, 
+            room::{Room},
+            action::{Action},
+            object::{Object},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
         },
         lib::hash_utils::hashutils as p_hash
@@ -46,7 +48,7 @@ mod tests {
         let room_name: ByteArray = "Walking Eagle Pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(sys.world, pass_id, (Room));
+        let pass: Room = sys.world.read_model(pass_id);
 
         // assert on the PASS objects properties
         // the name/short description property
@@ -64,7 +66,7 @@ mod tests {
 
         //! check the stored text values
         let txtid = pass.txtDefId;
-        let txt = get!(sys.world, txtid, (Txtdef));
+        let txt = sys.world.read_model(txtid);
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep\nvalley sides below you.\nOn closer inspection the TP might\nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
 
@@ -86,13 +88,13 @@ mod tests {
 
         // object should be a boulder
         let object_id = objects.at(0).clone();
-        let object: Object = get!(sys.world, object_id, (Object));
+        let object: Object = sys.world.read_model(object_id);
         assert_eq!(object.objType, ObjectType::Boulder, "got {:?}, expected {:?}", object.objType, ObjectType::Boulder);
 
         // boulder should have a disintegrate action
         let actions: Array<felt252> = object.objectActionIds.clone();
         let action_id = actions.at(0).clone();
-        let action: Action = get!(sys.world, action_id, (Action));
+        let action: Action = sys.world.read_model(action_id);
         assert_eq!(action.actionType, ActionType::Disintegrate, "got {:?}, expected {:?}", action.actionType, ActionType::Disintegrate);
 
         // player ids should be empty
@@ -118,7 +120,7 @@ mod tests {
         let room_name: ByteArray = "Walking Eagle Pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(sys.world, pass_id, (Room));
+        let pass: Room = sys.world.read_model(pass_id);
 
         // room should have two exits 
         let exits: Array<felt252> = pass.dirObjIds.clone();
@@ -127,7 +129,7 @@ mod tests {
         // exits
         // WEST
         let exit_w_id = exits.at(0).clone();
-        let exit_w: Object = get!(sys.world, exit_w_id, (Object));
+        let exit_w: Object = sys.world.read_model(exit_w_id);
         // exit should be a path
         assert_eq!(exit_w.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
         // exit should be west
@@ -143,7 +145,7 @@ mod tests {
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
         let action_id = actions.at(0).clone();
-        let action: Action = get!(sys.world, action_id, (Action));
+        let action: Action = sys.world.read_model(action_id);
 
         // action should be:
         // open
@@ -162,7 +164,7 @@ mod tests {
 
         // EAST
         let exit_e_id = exits.at(1).clone();
-        let exit_e: Object = get!(sys.world, exit_e_id, (Object));
+        let exit_e: Object = sys.world.read_model(exit_e_id);
         // exit should be a path
         assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
         // exit should be west
