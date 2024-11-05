@@ -15,24 +15,23 @@ pub mod test_rig {
     use dojo_cairo_test::{spawn_test_world, NamespaceDef, TestResource, ContractDefTrait};
 
     use the_oruggin_trail::models::{
-        output::{m_Output},
-        action::{m_Action},
-        room::{m_Room},
-        object::{m_Object},
-        player::{m_Player},
-        txtdef::{m_Txtdef},
-        inventory::{m_Inventory}
+        output::{Output, m_Output},
+        action::{Action, m_Action},
+        room::{Room, m_Room},
+        object::{Object, m_Object},
+        player::{Player, m_Player},
+        txtdef::{Txtdef, m_Txtdef},
+        inventory::{Inventory, m_Inventory},
     };
 
     use the_oruggin_trail::systems::meatpuppet::{ 
-        meatpuppet, 
+        meatpuppet,
         IListenerDispatcher, 
-        IListenerDispatcherTrait 
     };
 
     use the_oruggin_trail::systems::spawner::{ 
+        spawner,
         ISpawnerDispatcher, 
-        ISpawnerDispatcherTrait 
     };
 
     use the_oruggin_trail::lib::store::{Store, StoreTrait}; 
@@ -43,9 +42,8 @@ pub mod test_rig {
 
 
     fn namespace_def() -> NamespaceDef {
-        let ns: ByteArray = "the_oruggin_trail";
         let ndef = NamespaceDef {
-            namespace: ns, resources: [
+            namespace: "the_oruggin_trail", resources: [
                 TestResource::Model(m_Output::TEST_CLASS_HASH.try_into().unwrap()),
                 TestResource::Model(m_Action::TEST_CLASS_HASH.try_into().unwrap()),
                 TestResource::Model(m_Room::TEST_CLASS_HASH.try_into().unwrap()),
@@ -54,8 +52,12 @@ pub mod test_rig {
                 TestResource::Model(m_Txtdef::TEST_CLASS_HASH.try_into().unwrap()),
                 TestResource::Model(m_Inventory::TEST_CLASS_HASH.try_into().unwrap()),
                 TestResource::Contract(
-                    ContractDefTrait::new(actions::TEST_CLASS_HASH, "spawner")
-                        .with_writer_of([dojo::utils::bytearray_hash(@ns)].span())
+                    ContractDefTrait::new(spawner::TEST_CLASS_HASH, "spawner")
+                        .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
+                ),
+                TestResource::Contract(
+                    ContractDefTrait::new(meatpuppet::TEST_CLASS_HASH, "meatpuppet")
+                        .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
                 ),
             ].span()
         };
@@ -78,8 +80,14 @@ pub mod test_rig {
 
     #[inline(always)]
     pub fn deploy_system(world: WorldStorage, contract: @ByteArray) -> ContractAddress {
-        let (contract_address, _) = world.dns(contract).unwrap();
-        (contract_address)
+         match world.dns(contract) {
+            Option::Some((contract_address, _)) => {
+                (contract_address)
+            },
+            Option::None => {
+                (ZERO())
+            }
+        }
     }
 
     pub fn setup_world() -> Systems {
@@ -87,23 +95,22 @@ pub mod test_rig {
         let ndef = namespace_def();
         let mut world = spawn_test_world([ndef].span());
 
+
         // deploy systems and set OWNER on the systems we want so we can write through
         let tot_listen = IListenerDispatcher{ contract_address:
             {
-                let address = deploy_system(world, @"meatpuppet");
-                (address)
+                deploy_system(world, @"meatpuppet")
             }
         };
 
         let tot_spawner = ISpawnerDispatcher{ contract_address:
             {
-                let address = deploy_system(world, @"spawner");
-                (address)
+                deploy_system(world, @"spawner")
             }
         };
         
 
-        let store: Store = StoreTrait::new(world);
+        // let store: Store = StoreTrait::new(world);
 
         (Systems{
             world,

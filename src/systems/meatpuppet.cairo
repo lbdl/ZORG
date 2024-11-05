@@ -14,7 +14,7 @@
 /// pre passing this information on to the rest
 /// of the system.
 #[starknet::interface]
-trait IListener<T> {
+pub trait IListener<T> {
     fn listen(ref self: T, cmd: Array<ByteArray>, p_id: felt252);
 
     // for interop with other worlds but doesnt have to be, could just be listen
@@ -74,7 +74,7 @@ pub mod meatpuppet {
     /// this needs a means of interogating the world to see
     /// if the player exists already and if not then we should
     /// spawn the player in the some defualt start location
-    impl ListenImpl of IListener<ContractState> {
+    pub impl ListenImpl of IListener<ContractState> {
         fn listen(ref self: ContractState, cmd: Array<ByteArray>, p_id: felt252) {
             //! we use this as an error flag to kick us into error
             //! catching routines later as we run the parses over

@@ -22,7 +22,6 @@ starknet = "2.8.4"
 dojo_cairo_test = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-rc.0" }
 
 [[target.starknet-contract]]
-siera = true
 build-external-contracts = ["dojo::world::world_contract::world"]
 
 

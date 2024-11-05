@@ -7,22 +7,21 @@
 
 #[cfg(test)]
 mod tests {
-    use dojo::model::ModelStorage;
-use core::clone::Clone;
+    use dojo::model::{ModelStorage, ModelStorageTest};
+    use core::clone::Clone;
     use core::array::ArrayTrait;
+
     // import world dispatcher
-    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
-    // import test utils
-    use dojo::utils::test::{deploy_contract, spawn_test_world};
+    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait, WorldStorage, WorldStorageTrait};
 
     use the_oruggin_trail::{
         systems::spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait},
         constants::zrk_constants::roomid as rm,
         models::{
-            txtdef::{Txtdef}, 
-            room::{Room},
-            action::{Action},
-            object::{Object},
+            txtdef::{Txtdef, m_Txtdef}, 
+            room::{Room, m_Room},
+            action::{Action, m_Action},
+            object::{Object, m_Object},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
         },
         lib::hash_utils::hashutils as p_hash
@@ -66,7 +65,7 @@ use core::clone::Clone;
 
         //! check the stored text values
         let txtid = pass.txtDefId;
-        let txt = sys.world.read_model(txtid);
+        let txt: Txtdef = sys.world.read_model(txtid);
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep\nvalley sides below you.\nOn closer inspection the TP might\nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
 
