@@ -19,6 +19,17 @@ pub enum ErrCode {
     None,                       // success, handly sometimes
 }
 
+
+pub trait ZrkSystemStrings {
+    fn ns() -> ByteArray;
+}
+
+pub impl ZrkSystemStringsImpl of ZrkSystemStrings {
+    fn ns() -> ByteArray {
+        "the_oruggin_trail"
+    }
+}
+
 /// Room Codes
 /// 
 /// used for setup calls right now

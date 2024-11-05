@@ -7,6 +7,7 @@
 
 use dojo::world::{IWorldDispatcher, WorldStorage, WorldStorageTrait};
 use dojo::model::{ModelStorage};
+use the_oruggin_trail::lib::system::{WorldSystemsTrait};
 
 // we can add models here to make custom getters and setters etc
 use the_oruggin_trail::models::{
@@ -21,11 +22,11 @@ pub struct Store {
 
 #[generate_trait]
 pub impl StoreImpl of StoreTrait {
-    #[inline]
-    fn new(world: IWorldDispatcher) -> Store {
+    fn new(world: IWorldDispatcher, namespace: @ByteArray) -> Store {
         (Store { 
             world: world, 
-            world_store: WorldStorageTrait::new(world, @"the_oruggin_trail") })
+            world_store: WorldSystemsTrait::storage(world, namespace) 
+        })
     }
 
     //
