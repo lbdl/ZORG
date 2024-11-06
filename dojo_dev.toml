@@ -24,4 +24,4 @@ world_address = "0x7f50de543f4d1093b7e9119f204849a75663a2b040ec45e5dc71e469ef523
 
 # not sure we need to set this for outputter any more
 [writers]
-"the_oruggin_trail" = ["the_oruggin_trail-meatpuppet", "the_oruggin_trail-outputter"]
+"the_oruggin_trail" = ["the_oruggin_trail-meatpuppet", "the_oruggin_trail-outputter", "the_oruggin_trail-spawner"]
