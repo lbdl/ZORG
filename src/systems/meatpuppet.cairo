@@ -102,7 +102,6 @@ pub mod meatpuppet {
                         ad::handleGarble(ref wrld_dispatcher, p_id, r);
                     },
                     Result::Err(r) => {
-                        // let mut wrld = world;
                         err_dispatch::error_handle(ref wrld_dispatcher, p_id, isErr);
                     }
                 }

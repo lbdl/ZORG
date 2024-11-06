@@ -1,6 +1,6 @@
 #!/usr/bin/awk -f
 
-/^warning:/ {
+/^warn/ {
     # Store the warning line
     warning=$0
     # Keep reading lines until we hit a blank line

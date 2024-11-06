@@ -504,8 +504,10 @@ pub mod spawner {
         let mut action_7479341928096534711_9807140808976004456 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the path winds east, through piles of fresh rubble and charred pine cones", enabled: false, 
-            revertable: false, dBit: false, 
+            dBitTxt: "the path winds east, through piles of fresh rubble and charred pine cones", 
+            enabled: false, 
+            revertable: false, 
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };

@@ -168,10 +168,17 @@ mod tests {
         assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
         // exit should be west
         assert_eq!(exit_e.dirType, DirectionType::East, "got {:?}, expected {:?}", exit_e.dirType, DirectionType::East);
-        // should lead to Bensons Plain
+        // should lead to The Alley off of main street
         let dest_e_name = "The Alley Off Main Street";
         let dest_e_id = p_hash::str_hash(@dest_e_name);
         assert_eq!(exit_e.destId, dest_e_id, "got {:?}, expected {:?}", exit_e.destId, dest_e_id);
+
+        // 
+        let actions_e: Array<felt252> = exit_e.objectActionIds.clone();
+        assert_eq!(actions_e.len(), 1, "got {:?}, expected {:?}", actions_e.len(), 1);
+
+        let action_id_e = actions.at(0).clone();
+        let action_e: Action = sys.world.read_model(action_id_e);
 
 
     }

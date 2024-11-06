@@ -26,18 +26,15 @@ pub mod hashutils {
     /// ObjectType hashing
     /// 
     /// Should/can it be a trait? Probably
-    /// We hash all the values othert than objectId as this
-    /// is returned and we then store the object with this
-    /// i.e. h => h(obj.*; if obj.* != id) 
    pub fn obj_hash(obj: @Object) -> felt252 {
         let local: Object = obj.clone();
         let mut hash = PoseidonTrait::new()
-            .update(local.objType.into())
-            .update(local.dirType.into())
-            .update(local.matType.into())
+            // .update(local.objType.into())
+            // .update(local.dirType.into())
+            // .update(local.matType.into())
             .update(local.destId)
             .update(local.txtDefId)
-            .update(poseidon_hash_span(local.objectActionIds.span()))
+            // .update(poseidon_hash_span(local.objectActionIds.span()))
             .finalize();
         if flags::DEBUG {
             println!("obj: {:?}", hash);
@@ -47,11 +44,10 @@ pub mod hashutils {
 
     pub fn place_hash(plc: @Room) -> felt252 {
         let local: Room = plc.clone();
-        let shrt: Array<felt252> = ba_to_felt(@local.shortTxt);
+        let shrt: felt252 = str_hash(@local.shortTxt);
         let mut hash = PoseidonTrait::new()
-            .update(poseidon_hash_span(shrt.span()))
+            .update(shrt)
             .finalize();
-
         if flags::DEBUG {
             println!("room: {:?}", hash);
         }
@@ -60,15 +56,15 @@ pub mod hashutils {
 
     pub fn action_hash(vrb: @Action) -> felt252 {
         let local: Action = vrb.clone();
-        let dbittxt: Array<felt252> = ba_to_felt(@local.dBitTxt);
+        let dbittxt: felt252 = str_hash(@local.dBitTxt);
         let mut hash = PoseidonTrait::new()
-            .update(local.actionType.into())
-            .update(poseidon_hash_span(dbittxt.span()))
-            .update(local.enabled.into())
-            .update(local.revertable.into())
-            .update(local.dBit.into())
+            // .update(local.actionType.into())
+            .update(dbittxt)
+            // .update(local.enabled.into())
+            // .update(local.revertable.into())
+            // .update(local.dBit.into())
             .update(local.affectsActionId)
-            .update(local.affectedByActionId)
+            // .update(local.affectedByActionId)
             .finalize();
         if flags::DEBUG {
             println!("vrb: {:?}, {:?}", local.actionType, hash);
