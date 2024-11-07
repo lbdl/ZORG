@@ -81,7 +81,8 @@ pub mod meatpuppet {
             //! the command string
             
             let mut world: WorldStorage = self.world(@"the_oruggin_trail");
-            world.write_model(@Output{playerId: 23, text_o_vision: ""});
+            
+            world.write_model(@Output{playerId: 23, text_o_vision: "..."});
 
             let mut isErr: ec = ec::None;
             let l_cmd = @cmd;

@@ -28,12 +28,12 @@ pub mod verb_dispatcher {
     use the_oruggin_trail::lib::hash_utils::hashutils as h_util;
 
     pub fn handleGarble(ref world: IWorldDispatcher, pid: felt252, msg: Garble) {
-        // let wrld = self.world(@"the_oruggin_trail");
         let mut wrld: WorldStorage =  WorldStorageTrait::new(world, @"the_oruggin_trail");
         println!("HNDL: ---> {:?}", msg.vrb);
         let mut out: ByteArray =
             "Shoggoth is loveable by default, but it understands not your commands";
         let mut player: Player = wrld.read_model(pid);
+        println!("HNDL:------> {:?}", player);
         match msg.vrb {
             ActionType::Look => {
                 // Pass payer id into look handle
@@ -57,12 +57,11 @@ pub mod verb_dispatcher {
 
                 let spawner: ISpawnerDispatcher = world.spawner_dispatcher();
 
-
-                // let spawner: ISpawnerDispatcher = ISpawnerDispatcher{contract_address: contract_address};
-                // let mut player: Player = get!(world, pid, (Player));
+                println!("spawning, {:?}", player.location);
                 if player.location == 0 {
                     spawner.setup();
-                    let spawn_rm_name: ByteArray = "walking eagle pass";
+                println!("spawned????");
+                    let spawn_rm_name: ByteArray = "Walking Eagle Pass";
                     let spawn_id = h_util::str_hash(@spawn_rm_name);
                     spawner.spawn_player(pid, spawn_id);
                     let desc: ByteArray = lookat::describe_room_short(wrld, spawn_id);
