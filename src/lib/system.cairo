@@ -20,8 +20,10 @@ pub impl WorldSystemsTraitImpl of WorldSystemsTrait {
         let ns: ByteArray = ZrkSystemStringsImpl::ns();
         let world: WorldStorage = WorldStorageTrait::new(self, @ns);
         if let Option::Some((address, _)) = world.dns(selector) {
+            println!("HNDL:SYS----> {:?}", address);
             (address)
         } else {
+            println!("HNDL:SYS----> ZERO");
             (ZERO())
         }
     }

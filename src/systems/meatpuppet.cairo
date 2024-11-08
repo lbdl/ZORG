@@ -82,7 +82,7 @@ pub mod meatpuppet {
             
             let mut world: WorldStorage = self.world(@"the_oruggin_trail");
             
-            world.write_model(@Output{playerId: 23, text_o_vision: "..."});
+            // world.write_model(@Output{playerId: 23, text_o_vision: "..."});
 
             let mut isErr: ec = ec::None;
             let l_cmd = @cmd;
@@ -100,9 +100,11 @@ pub mod meatpuppet {
                 match confessor::confess(l_cmd_cpy) {
                     Result::Ok(r) => {
                         // we have a valid command so pass it into a handler routine
+                        // this should really return err and a string
                         ad::handleGarble(ref wrld_dispatcher, p_id, r);
                     },
                     Result::Err(r) => {
+                        // this should really return err and a string
                         err_dispatch::error_handle(ref wrld_dispatcher, p_id, isErr);
                     }
                 }
@@ -142,6 +144,7 @@ pub mod pull_strings {
     // use the_oruggin_trail::lib::system::{WorldSystemsTrait, ISpawnerDispatcher, ISpawnerDispatcherTrait};
 
     pub fn enter_room(ref world: WorldStorage, ref player: Player, rm_id: felt252) {
+        println!("PULL_STRINGS:------> enter_room");
         player.location = rm_id;
         world.write_model(@player);
         // set!(world, (player));

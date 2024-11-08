@@ -57,14 +57,17 @@ pub mod verb_dispatcher {
 
                 let spawner: ISpawnerDispatcher = world.spawner_dispatcher();
 
-                println!("spawning, {:?}", player.location);
                 if player.location == 0 {
                     spawner.setup();
-                println!("spawned????");
+                    println!("spawned????");
                     let spawn_rm_name: ByteArray = "Walking Eagle Pass";
                     let spawn_id = h_util::str_hash(@spawn_rm_name);
-                    spawner.spawn_player(pid, spawn_id);
+                    spawner.spawn_player(pid, 0);
+                    mv::enter_room(wrld, pid, spawn_id);
                     let desc: ByteArray = lookat::describe_room_short(wrld, spawn_id);
+                    out = desc;
+                }else {
+                    let desc: ByteArray = "you already did that. stop this foolishness";
                     out = desc;
                 }
             },
@@ -106,6 +109,7 @@ pub mod verb_dispatcher {
                 out = desc;
             },
             ActionType::Help => {
+                println!("help------>");
                 let txt: ByteArray =
                     "there is little time\nwaste not time on \"I do thing\"\njust type \"do thing\"\ngo north, take ball, look around, fight the power, go to the north, sniff all the glue etc\nthere is no time...\nno time";
                 out = txt;

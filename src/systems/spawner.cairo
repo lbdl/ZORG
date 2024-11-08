@@ -41,6 +41,7 @@ pub mod spawner {
     pub impl SpawnerImpl of ISpawner<ContractState> {
         fn setup(ref self: ContractState) {
             let mut world = self.world(@"the_oruggin_trail");
+            println!("HNDL::SPWN:------> *");
             make_rooms(world.dispatcher, 23);
         }
 
@@ -54,6 +55,7 @@ pub mod spawner {
 
             let mut world = self.world(@"the_oruggin_trail");
             let inv = Inventory {owner_id: pid, items: array![]};
+            println!("HNDL::SPWN_PL:------> *");
             world.write_model(@inv);
             world.write_model(@player);
         }

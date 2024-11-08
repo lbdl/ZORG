@@ -29,6 +29,7 @@ pub mod relocate {
         let pid = 23;
         let mut player: Player = world.read_model(pid);
         player.location = rm_id;
+        println!("ENTER_RM:----->");
         world.write_model(@player);
     }
 

@@ -10,7 +10,7 @@ use starknet::ContractAddress;
 /// Player model
 /// 
 /// the player id should really be a felt252
-#[derive(Copy, Drop, Serde)]
+#[derive(Copy, Drop, Serde, Debug, Introspect)]
 #[dojo::model]
 pub struct Player {
     #[key]
