@@ -322,7 +322,7 @@ pub mod spawner {
         // now store a room with all its shizzle
         let room_desc: ByteArray = "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy";
         let _txt_id = h_util::str_hash(@room_desc);
-        let place_name: ByteArray = "Bensons plain";
+        let place_name: ByteArray = "Bensons Plain";
         let rmid = h_util::str_hash(@place_name);
 
         let mut place = Room{

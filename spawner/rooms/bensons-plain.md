@@ -1,4 +1,4 @@
-# Bensons plain
+# Bensons Plain
 
 the plain reaches seemingly endlessly to the sky in all directions
 
