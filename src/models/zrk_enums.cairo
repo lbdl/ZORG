@@ -8,7 +8,7 @@
 /// Biome types
 /// used later to generate text and seed ascii art
 /// type things
-#[derive(Serde, Copy, Drop, Introspect, PartialEq)]
+#[derive(Serde, Copy, Drop, Debug, Introspect, PartialEq)]
 pub enum BiomeType {
     None,
     Forest,

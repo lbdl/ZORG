@@ -1121,8 +1121,8 @@
   },
   "contracts": [
     {
-      "address": "0x5bf048a4076451bdebb1ee52e5d4fe82e149c7ebe4d270853b3dd0057d3c67a",
-      "class_hash": "0x36080c7e0740687c498ca2e23464027e54c89e87c203d9e881de9612d4c5d13",
+      "address": "0x4e81c9dad08d1d27e4ae9fd9dd560de124b6e913729604cbf4d9c867e2eacdd",
+      "class_hash": "0xa2af11f2bc771d09291c8cb5129481562b2cedf45a28de40933b310cb93dc5",
       "abi": [
         {
           "type": "impl",
@@ -1524,8 +1524,8 @@
       "systems": []
     },
     {
-      "address": "0x79d8cfb498d3daeb355a1381530fdb1a6139902669aa7ae0e8374f46205167c",
-      "class_hash": "0x62908ae9f3cf1752274d67c2f839b4c751dd7315cced92222780ac72b876257",
+      "address": "0x59365a43af7713a912941ec7e5a2b162131a92b09072fb78149f9e9d410fc4b",
+      "class_hash": "0x3676b1cdbda2b4e47e84898a631c1a021d244445e26fc6504acbfcd9828b30f",
       "abi": [
         {
           "type": "impl",
@@ -1570,11 +1570,11 @@
         {
           "type": "impl",
           "name": "SpawnerImpl",
-          "interface_name": "the_oruggin_trail::generated::spawner::ISpawner"
+          "interface_name": "the_oruggin_trail::systems::spawner::ISpawner"
         },
         {
           "type": "interface",
-          "name": "the_oruggin_trail::generated::spawner::ISpawner",
+          "name": "the_oruggin_trail::systems::spawner::ISpawner",
           "items": [
             {
               "type": "function",
@@ -1700,7 +1700,7 @@
         },
         {
           "type": "event",
-          "name": "the_oruggin_trail::generated::spawner::spawner::Event",
+          "name": "the_oruggin_trail::systems::spawner::spawner::Event",
           "kind": "enum",
           "variants": [
             {

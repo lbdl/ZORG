@@ -15,7 +15,7 @@ use the_oruggin_trail::models::{zrk_enums as zrk};
 /// use this to dump them into the world screaming
 /// 
 /// sadly we dont right now
-#[derive(Clone, Drop, Serde)]
+#[derive(Clone, Drop, Serde, Introspect, Debug)]
 #[dojo::model]
 pub struct Room{
     #[key]

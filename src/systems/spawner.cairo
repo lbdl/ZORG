@@ -80,6 +80,7 @@ pub mod spawner {
     fn store_places(w: IWorldDispatcher, t: Array<Room>) {
         let mut world: WorldStorage =  WorldStorageTrait::new(w, @"the_oruggin_trail");
         for o in t {
+            println!("RM:----> {:?}", o);
             world.write_model(@o);
         }
     }
@@ -95,6 +96,7 @@ pub mod spawner {
 
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         // Eli's Basement
+        println!("-------->MAKE_ROOMS<---------");
         let _  = gen_room_13246886194600585633(w, pl);
         // Bensons plain
         let _  = gen_room_15740072870286221930(w, pl);
@@ -111,6 +113,7 @@ pub mod spawner {
     
     // 1. Eli's Basement: the basement is a converted root cellar, with a small stool bolted to the floor\nit is not a comforting room and reminds you of far to many movies that you probably never should have watched\nthe light is just enough that you don't have to see too much.\nit smells damp and somehow of bad faith.
     fn gen_room_13246886194600585633(w: IWorldDispatcher, playerid: felt252) {// object 4405246086034713577// action 16332049259031098349
+        println!("<-----------Eli's Basement");
         let mut action_4405246086034713577_16332049259031098349 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
@@ -123,7 +126,7 @@ pub mod spawner {
         let action_id_4405246086034713577_16332049259031098349 = h_util::action_hash(@action_4405246086034713577_16332049259031098349 );
         action_4405246086034713577_16332049259031098349.actionId = action_id_4405246086034713577_16332049259031098349;
         
-        let destination = "elis-barn.md";
+        let destination = "Eli's Barn";
         let mut object_4405246086034713577 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::None,
@@ -217,6 +220,7 @@ pub mod spawner {
     }
     // 2. Bensons plain: the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy
     fn gen_room_15740072870286221930(w: IWorldDispatcher, playerid: felt252) {// object 4142895348942435842// action 16668157595971844890
+        println!("<------------ Bensons Plain");
         let mut action_4142895348942435842_16668157595971844890 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
@@ -317,7 +321,10 @@ pub mod spawner {
         store_actions(w, array![action_4142895348942435842_16668157595971844890,]);
         store_actions(w, array![action_2294365566944327029_13058015828559547750,]);
         store_actions(w, array![action_17189994194645879202_15552978697807030543,]);
-        store_objects(w, array![object_4142895348942435842]);store_objects(w, array![object_2294365566944327029]);store_objects(w, array![object_17189994194645879202]);// store_objects(w, array![object_4142895348942435842,object_2294365566944327029,object_17189994194645879202,]);
+        store_objects(w, array![object_4142895348942435842]);
+        store_objects(w, array![object_2294365566944327029]);
+        store_objects(w, array![object_17189994194645879202]);
+        // store_objects(w, array![object_4142895348942435842,object_2294365566944327029,object_17189994194645879202,]);
         
         // now store a room with all its shizzle
         let room_desc: ByteArray = "the plain reaches seemingly endlessly to the sky in all directions\nand the sky itself feels greasy and cold.\npyramidal rough shapes dot the horizin and land which\nupon closer examination are made from bufalo skulls.\nThe air tastes of grease and bensons.\nhappy happy happy";
@@ -344,6 +351,7 @@ pub mod spawner {
     }
     // 3. Eli's Forge: has been shuttered, well the door has been nailed shut and the window locked\nfrom this side. Now that the window is smashed light creeps in from the barn and through the cracks in the walls and roof\nthe hearth is cold and the place smells of petrol and soot
     fn gen_room_12897738261327393418(w: IWorldDispatcher, playerid: felt252) {// object 2655229238403616021// action 17136525110814971091
+        println!("<------------ Eli's Forge");
         let mut action_2655229238403616021_17136525110814971091 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
@@ -470,6 +478,7 @@ pub mod spawner {
     }
     // 4. Walking Eagle Pass: it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep\nvalley sides below you.\nOn closer inspection the TP might\nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.
     fn gen_room_8892581999139148090(w: IWorldDispatcher, playerid: felt252) {// object 745772409139972109// action 14833044636746871315
+        println!("<------------- Walking Eagle Pass");
         let mut action_745772409139972109_14833044636746871315 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
@@ -603,6 +612,7 @@ pub mod spawner {
     }
     // 5. The Alley Off Main Street: the alley composed of stinking mud sits between main street and the praries, seems that\nthe town uses uses it as dump, for both iscared humans and discarded, well, literal shit.\nall in all not somewhere wants to linger unless dead, or drunk and in that case probably\nbest to be dead drunk.\noddly it reminds you of home. this isnt a good thing.
     fn gen_room_2103159215482208020(w: IWorldDispatcher, playerid: felt252) {// object 16637690103936120658// action 17581850991508748471
+        println!("<----------- The Alley Off Main Street");
         let mut action_16637690103936120658_17581850991508748471 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
@@ -663,6 +673,7 @@ pub mod spawner {
     }
     // 6. Eli's Barn: the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks
     fn gen_room_11107137240536497418(w: IWorldDispatcher, playerid: felt252) {// object 10414226638441273874// action 4328927602301159032
+        println!("<-------------- Eli's Barn");
         let mut action_10414226638441273874_4328927602301159032 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
@@ -825,7 +836,8 @@ pub mod spawner {
         action_2400306486137228273_7672293217203074089.affectedByActionId = action_id_17975420477260050648_4600616935932793690;action_17975420477260050648_6511208778142832924.affectsActionId = action_id_17975420477260050648_4600616935932793690;
         store_actions(w, array![action_2400306486137228273_7672293217203074089,]);
         action_17975420477260050648_4600616935932793690.affectsActionId = action_id_2400306486137228273_7672293217203074089;
-        action_17975420477260050648_4600616935932793690.affectedByActionId = action_id_17975420477260050648_6511208778142832924;store_actions(w, array![action_17975420477260050648_4600616935932793690,action_17975420477260050648_6511208778142832924,]);
+        action_17975420477260050648_4600616935932793690.affectedByActionId = action_id_17975420477260050648_6511208778142832924;
+        store_actions(w, array![action_17975420477260050648_4600616935932793690,action_17975420477260050648_6511208778142832924,]);
         store_objects(w, array![object_10414226638441273874]);store_objects(w, array![object_4916953867006087388]);store_objects(w, array![object_2400306486137228273]);store_objects(w, array![object_17975420477260050648]);// store_objects(w, array![object_10414226638441273874,object_4916953867006087388,object_2400306486137228273,object_17975420477260050648,]);
         
         // now store a room with all its shizzle

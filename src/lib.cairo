@@ -12,9 +12,9 @@ pub mod systems {
     pub mod spawner;
 }
 
-pub mod generated {
-    pub mod spawner;
-}
+// pub mod generated {
+//     pub mod spawner;
+// }
 
 pub mod constants {
     pub mod zrk_constants;

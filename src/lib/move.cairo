@@ -29,7 +29,7 @@ pub mod relocate {
         let pid = 23;
         let mut player: Player = world.read_model(pid);
         player.location = rm_id;
-        println!("ENTER_RM:----->");
+        println!("ENTER_RM:-----> {:?}", rm_id);
         world.write_model(@player);
     }
 
@@ -37,6 +37,9 @@ pub mod relocate {
     /// 
     /// we check if the exits contains the correct direction
     /// then if this direction is open and enabled
+    /// 
+    /// TODO
+    /// we also nned to add checking for path/exit blocked by objects
     pub fn get_next_room(world: WorldStorage, pid: felt252, msg: Garble ) -> felt252 {
         let mut next_rm: felt252 = st::NONE;
         // fetch the room
@@ -60,6 +63,7 @@ pub mod relocate {
                 // it it open/passable
                 canMove = _can_move(world, @exit, msg);
                 if canMove {
+                    println!("can_move: -----> {:?}", exit.destId);
                     dest = exit.destId
                 }
             }

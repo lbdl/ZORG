@@ -98,6 +98,7 @@ pub mod lookat {
     /// biomeType
     pub fn describe_room_short(world: WorldStorage, location: felt252) -> ByteArray {
         let room: Room = world.read_model(location);
+        println!("ROOM:-----> {:?}, {:?}", location, room);
         let mut base_txt: ByteArray = "You are standing";
         let mut connective_txt_type: ByteArray = "";
         let mut connective_txt_biome: ByteArray = "";
