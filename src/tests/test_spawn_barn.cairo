@@ -11,15 +11,16 @@ mod tests {
     // import world dispatcher
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
     // import test utils
-    use dojo::utils::test::{deploy_contract, spawn_test_world};
+
+    use dojo::model::{ModelStorage, ModelStorageTest};
 
     use the_oruggin_trail::{
-        generated::spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait},
+        systems::spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait},
         constants::zrk_constants::roomid as rm,
         models::{
-            txtdef::{Txtdef, txtdef}, room::{Room, room},
-            action::{Action, action, action_mock_hash as act_phash},
-            object::{Object, object, obj_mock_hash as obj_phash},
+            txtdef::{Txtdef, m_Txtdef}, room::{Room, m_Room},
+            action::{Action, m_Action, action_mock_hash as act_phash},
+            object::{Object, m_Object, obj_mock_hash as obj_phash},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
         },
         lib::hash_utils::hashutils as p_hash
@@ -34,9 +35,9 @@ mod tests {
     #[test]
     #[available_gas(600000000)]
     fn test_spawn_barn_room_properties() {
-        // room should contain 0 objects
+        // room should contain 1 haybale
         // room should contain 0 players
-        // room should have 2 exit
+        // room should have 3 exits
         // room should have 1 textdef
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
@@ -44,8 +45,7 @@ mod tests {
 
         let room_name: ByteArray = "Eli's Barn";
         let barn_id: felt252 = p_hash::str_hash(@room_name);
-
-        let barn: Room = get!(sys.world, barn_id, (Room));
+        let barn: Room = sys.world.read_model(barn_id);
 
         // assert on the plain properties
         // type
@@ -63,7 +63,7 @@ mod tests {
 
         // description
         let txtid = barn.txtDefId;
-        let txt = get!(sys.world, txtid, (Txtdef));
+        let txt: Txtdef = sys.world.read_model(txtid);
         let actual_desc = txt.text.clone();
         let expected_desc: ByteArray = 
                 "the barn is old and smells of old hay and oddly dissolution\nthe floor is dirt and trampled dried horse shit scattered with straw and broken bottles\nthe smell is not unpleasent and reminds you faintly of petrol and old socks";
@@ -114,7 +114,7 @@ mod tests {
         let room_name: ByteArray = "Eli's Barn";
         let barn_id: felt252 = p_hash::str_hash(@room_name);
 
-        let barn: Room = get!(sys.world, barn_id, (Room));
+        let barn: Room = sys.world.read_model(barn_id);
 
         // room should have 3 exits 
         let exits: Array<felt252> = barn.dirObjIds.clone();
@@ -124,7 +124,7 @@ mod tests {
         // NB this is a kludge, we should be able to get the exit in a more
         // elegant way
         let exit_w_id = exits.at(1).clone();
-        let exit_w: Object = get!(sys.world, exit_w_id, (Object));
+        let exit_w: Object = sys.world.read_model(exit_w_id);
         
         // assert that
         // exit EAST is a WINDOW
@@ -137,7 +137,7 @@ mod tests {
         assert_eq!(exit_w.destId, dest_w_id, "got {:?}, expected {:?}", exit_w.destId, dest_w_id);
         // description matches
         let txt_id = exit_w.txtDefId;
-        let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
+        let txt: Txtdef = sys.world.read_model(txt_id);
         let _desc = txt.text.clone();
         let _desc_expected = "a dusty window set at chest height in the west wall";
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
@@ -155,7 +155,7 @@ mod tests {
         assert_eq!(actions.len(), 2, "got {:?}, expected {:?}", actions.len(), 1);
 
        let open_action_id = actions.at(0).clone();
-       let open_action: Action = get!(sys.world, open_action_id, (Action));
+       let open_action: Action = sys.world.read_model(open_action_id);
 
         // action 1 should be:
         // open
@@ -172,7 +172,7 @@ mod tests {
        // actions chain
        // action 2
        let break_action_id = actions.at(1).clone();
-       let break_action: Action = get!(sys.world, break_action_id, (Action));
+       let break_action: Action = sys.world.read_model(break_action_id);
        // action is smashable
        assert_eq!(break_action.actionType, ActionType::Break, "got {:?}, expected {:?}", break_action.actionType, ActionType::Break);
        
@@ -189,7 +189,7 @@ mod tests {
        
        // SOUTH
         let exit_s_id = exits.at(0).clone();
-        let exit_s: Object = get!(sys.world, exit_s_id, (Object));
+        let exit_s: Object = sys.world.read_model(exit_s_id);
         // exit direction should be:
         // South
         assert_eq!(exit_s.dirType, DirectionType::South, "got {:?}, expected {:?}", exit_s.dirType, DirectionType::South);
@@ -202,7 +202,7 @@ mod tests {
         assert_eq!(exit_s.destId, dest_id, "got {:?}, expected {:?}", exit_s.destId, dest_id);
         // description matches
         let txt_id = exit_s.txtDefId;
-        let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
+        let txt: Txtdef = sys.world.read_model(txt_id);
         let _desc = txt.text.clone();
         let _desc_expected = "an old wooden barn door, leads south";
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
@@ -217,7 +217,7 @@ mod tests {
 
         // SOUTH ACTIONS
         let action_id = actions.at(0).clone();
-        let action: Action = get!(sys.world, action_id, (Action));
+        let action: Action = sys.world.read_model(action_id);
 
         // action should be:
         // open
@@ -236,7 +236,7 @@ mod tests {
 
         // DOWN
         let exit_d_id = exits.at(2).clone();
-        let exit_d: Object = get!(sys.world, exit_d_id, (Object));
+        let exit_d: Object = sys.world.read_model(exit_d_id);
         // exit direction should be:
         // Down
         assert_eq!(exit_d.dirType, DirectionType::Down, "got {:?}, expected {:?}", exit_s.dirType, DirectionType::Down);
@@ -249,7 +249,7 @@ mod tests {
         assert_eq!(exit_d.destId, dest_id, "got {:?}, expected {:?}", exit_d.destId, dest_id);
         // description matches
         let txt_id = exit_d.txtDefId;
-        let txt: Txtdef = get!(sys.world, txt_id, (Txtdef));
+        let txt: Txtdef = sys.world.read_model(txt_id);
         let _desc = txt.text.clone();
         let _desc_expected = "a wooden trap door, is set in the floor leading downwards";
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
@@ -259,7 +259,7 @@ mod tests {
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
         let action_id = actions.at(0).clone();
-        let action_d: Action = get!(sys.world, action_id, (Action));
+        let action_d: Action = sys.world.read_model(action_id);
 
         // action should be:
         // open
@@ -276,7 +276,7 @@ mod tests {
         assert_eq!(action_d.affectedByActionId, 1563879268193041819558919326443056939467944909908174932852604425697481554773, "got {:?}, expected {:?}", action_d.affectedByActionId, 1563879268193041819558919326443056939467944909908174932852604425697481554773);
 
         // the basement trap door should be affected by the "burn" on the hay bale
-        let action_b: Action = get!(sys.world, 1563879268193041819558919326443056939467944909908174932852604425697481554773, (Action));
+        let action_b: Action = sys.world.read_model( 1563879268193041819558919326443056939467944909908174932852604425697481554773);
         // action should be:
         // burn
         assert_eq!(action_b.actionType, ActionType::Burn, "got {:?}, expected {:?}", action_b.actionType, ActionType::Burn);
