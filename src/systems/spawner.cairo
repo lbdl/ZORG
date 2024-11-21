@@ -709,8 +709,10 @@ pub mod spawner {
         let mut action_4916953867006087388_14604306511083742153 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,  
-            dBitTxt: "the window, now broken, falls open", enabled: true, 
-            revertable: false, dBit: true, 
+            dBitTxt: "the window, now broken, falls open", 
+            enabled: false, 
+            revertable: false, 
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -722,8 +724,10 @@ pub mod spawner {
         let mut action_4916953867006087388_3629301349604561982 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Break,  
-            dBitTxt: "the window, smashes, glass flies everywhere, very very satisfying", enabled: true, 
-            revertable: false, dBit: true, 
+            dBitTxt: "the window, smashes, glass flies everywhere, very very satisfying", 
+            enabled: true, 
+            revertable: false,
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
