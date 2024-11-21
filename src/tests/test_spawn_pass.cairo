@@ -100,7 +100,7 @@ mod tests {
         assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
 
         // check the rooms exits
-        // there should be one
+        // there should be 2
         let exits: Array<felt252> = pass.dirObjIds.clone();
         assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 1);
     }
@@ -160,25 +160,40 @@ mod tests {
         assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
 
 
-        // EAST
+        // EAST, blocked by a boulder
         let exit_e_id = exits.at(1).clone();
         let exit_e: Object = sys.world.read_model(exit_e_id);
         // exit should be a path
-        assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
-        // exit should be west
+        assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_e.objType, ObjectType::Path);
+        // exit should be east
         assert_eq!(exit_e.dirType, DirectionType::East, "got {:?}, expected {:?}", exit_e.dirType, DirectionType::East);
         // should lead to The Alley off of main street
         let dest_e_name = "The Alley Off Main Street";
         let dest_e_id = p_hash::str_hash(@dest_e_name);
         assert_eq!(exit_e.destId, dest_e_id, "got {:?}, expected {:?}", exit_e.destId, dest_e_id);
 
-        // 
+        // check the actions
         let actions_e: Array<felt252> = exit_e.objectActionIds.clone();
         assert_eq!(actions_e.len(), 1, "got {:?}, expected {:?}", actions_e.len(), 1);
 
-        let action_id_e = actions.at(0).clone();
+        let action_id_e = actions_e.at(0).clone();
         let action_e: Action = sys.world.read_model(action_id_e);
 
-
+        // action should be open
+        assert_eq!(action_e.actionType, ActionType::Open, "got {:?}, expected {:?}", action_e.actionType, ActionType::Open);
+        // action should be disabled
+        assert_eq!(action_e.enabled, false, "got {:?}, expected {:?}", action_e.enabled, false);
+        // should be un open ed
+        assert_eq!(action_e.dBit, false, "got {:?}, expected {:?}", action_e.dBit, false);
+        // should be non revertable
+        assert_eq!(action_e.revertable, false, "got {:?}, expected {:?}", action_e.revertable, false);
+        // should be "blocked" i.e. affected by the boulder
+        let objs = pass.objectIds.clone();
+        let bldr_id = objs.at(0).clone();
+        let bldr: Object = sys.world.read_model(bldr_id);
+        let bldr_actions = bldr.objectActionIds;
+        let bldr_action_id = bldr_actions.at(0);
+        let blocked_action_id = @action_e.affectedByActionId;
+        assert_eq!(bldr_action_id, blocked_action_id , "got {:?}, expected {:?}", bldr_action_id, action.affectedByActionId);
     }
 }
