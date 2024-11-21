@@ -1,6 +1,5 @@
 
 //*
-//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
 //*
 //* MeaCulpa (mc) 2024 lbdl | itrainspiders
 //*
@@ -72,4 +71,3 @@ use dojo::world::{IWorldDispatcher};
        pistols.move(s_id, 1, 'Gandalf', moves_gandalf.span());
        pistols.move(s_id, 1, 'Elron', moves_elron.span());
     }
-}

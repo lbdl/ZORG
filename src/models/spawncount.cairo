@@ -1,6 +1,5 @@
 
 //*
-//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
 //*
 //* MeaCulpa (mc) 2024 lbdl | itrainspiders
 //*
@@ -14,4 +13,3 @@
         pub d_c: felt252,
         pub o_c: felt252,
         pub t_c: felt252,
-    }

@@ -1,6 +1,5 @@
 
 //*
-//* Copyright (c) 2024 Tim Storey (itrainspiders) & Archetypal Tech
 //*
 //* MeaCulpa (mc) 2024 lbdl | itrainspiders
 //*
@@ -153,5 +152,4 @@ use the_oruggin_trail::constants::zrk_constants::{ErrCode as ec};
         };
         out
     }
-
 }
