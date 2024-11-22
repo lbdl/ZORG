@@ -128,7 +128,7 @@ pub mod spawner {
         let destination = "Eli's Barn";
         let mut object_4405246086034713577 = Object{
             objectId: st::SETME, 
-            objType: zrk::ObjectType::None,
+            objType: zrk::ObjectType::Stairs,
             matType: zrk::MaterialType::Wood,
             dirType: zrk::DirectionType::Up,
             destId: h_util::str_hash(@destination),
@@ -150,7 +150,8 @@ pub mod spawner {
             actionId: st::NONE, 
             actionType: zrk::ActionType::Explode,  
             dBitTxt: "the dynamite detonates, you are lucky, the blast wave passes through you, you shit your pants involuntarily, you are spared the clean up by dint of now being largely composed of meaty paste.", enabled: false, 
-            revertable: false, dBit: true, 
+            revertable: false, 
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -161,15 +162,20 @@ pub mod spawner {
         // action 6636732390253036532
         let mut action_15610790850353037754_6636732390253036532 = Action{
             actionId: st::NONE, 
-            actionType: zrk::ActionType::Light,  
-            dBitTxt: "the fuse comes into menacing life, sparkling like a demented god, the air fills with the smell of gunpowder, its not at all unpleasant", enabled: true, 
-            revertable: false, dBit: true, 
+            actionType: zrk::ActionType::Ignite,  
+            dBitTxt: "the fuse comes into menacing life, sparkling like a demented god, the air fills with the smell of gunpowder, its not at all unpleasant", 
+            enabled: true, 
+            revertable: false, 
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
 
         let action_id_15610790850353037754_6636732390253036532 = h_util::action_hash(@action_15610790850353037754_6636732390253036532 );
         action_15610790850353037754_6636732390253036532.actionId = action_id_15610790850353037754_6636732390253036532;
+        
+        action_15610790850353037754_12578911564611469734.affectedByActionId = action_id_15610790850353037754_6636732390253036532;
+        action_15610790850353037754_6636732390253036532.affectsActionId = action_id_15610790850353037754_12578911564611469734;   
         
         let mut object_15610790850353037754 = Object{
             objectId: st::SETME, 
@@ -202,7 +208,7 @@ pub mod spawner {
 
         let mut place = Room{
             roomId: rmid,
-            roomType: zrk::RoomType::None,
+            roomType: zrk::RoomType::Basement,
             biomeType: zrk::BiomeType::Prarie,
             txtDefId: _txt_id,
             shortTxt: place_name,
