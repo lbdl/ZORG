@@ -68,7 +68,7 @@ pub fn roomid_to_str(room_id: felt252) -> ByteArray {
 }
 
 pub mod flags {
-    pub const DEBUG: bool = true;
+    pub const DEBUG: bool = false;
 }
 
 /// Status Codes

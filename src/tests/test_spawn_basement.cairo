@@ -117,6 +117,13 @@ mod tests {
             dynamite.objType, 
             ObjectType::Dynamite);
 
+        let txtid = dynamite.txtDefId;
+        let txtdef: Txtdef = sys.world.read_model(txtid);
+        let txt: ByteArray = txtdef.text.clone();
+        let expected: ByteArray = "a stick of slightly sweaty dynamite almost like a caricature of itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?";
+        assert_eq!(txt, expected, "got {:?}, expected {:?}", txt, expected);
+        
+        // dynamite actions
         let action_ids = dynamite.objectActionIds.clone();
         assert_eq!(action_ids.len(), 2,
              "got {:?}, expected {:?}", 
@@ -214,7 +221,8 @@ mod tests {
         let txt_id = exit_u.txtDefId;
         let txt: Txtdef = sys.world.read_model(txt_id);
         let _desc = txt.text.clone();
-        let _desc_expected = "a dusty and smashed window, at chest height";
+        let _desc_expected = "a slightly charcoaled wooden set of stairs lead upwards";
+
         assert_eq!(_desc, _desc_expected, "got {:?}, expected {:?}", _desc, _desc_expected);
         // exit WEST should be a window
         assert_eq!(exit_u.objType, ObjectType::Stairs, "got {:?}, expected {:?}", exit_u.objType, ObjectType::Stairs);

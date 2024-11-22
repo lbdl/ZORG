@@ -138,7 +138,7 @@ pub mod spawner {
 
         let object_id_4405246086034713577 = h_util::obj_hash(@object_4405246086034713577); 
         object_4405246086034713577.objectId = object_id_4405246086034713577;
-        let object_desc: ByteArray = "a slightly charcoaled wooden trap door, leads upwards";
+        let object_desc: ByteArray = "a slightly charcoaled wooden set of stairs lead upwards";
         let td_id_b = h_util::str_hash(@object_desc);
         object_4405246086034713577.txtDefId = td_id_b;
 
@@ -189,7 +189,7 @@ pub mod spawner {
 
         let object_id_15610790850353037754 = h_util::obj_hash(@object_15610790850353037754); 
         object_15610790850353037754.objectId = object_id_15610790850353037754;
-        let object_desc: ByteArray = "a stick of slightly sweaty dynamite almost like a caricature ot itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?";
+        let object_desc: ByteArray = "a stick of slightly sweaty dynamite almost like a caricature of itself. It's fused and certainly unstable and capable of turning things including you into a fine meaty mist still holding exciteable explosives couldn't hurt right?";
         let td_id_b = h_util::str_hash(@object_desc);
         object_15610790850353037754.txtDefId = td_id_b;
 
