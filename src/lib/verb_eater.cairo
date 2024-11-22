@@ -32,7 +32,7 @@ pub mod verb_dispatcher {
         let mut out: ByteArray =
             "Shoggoth is loveable by default, but it understands not your commands";
         let mut player: Player = wrld.read_model(pid);
-        println!("HNDL:------> {:?}", player);
+        // println!("HNDL:------> {:?}", player);
         match msg.vrb {
             ActionType::Look => {
                 // Pass payer id into look handle
@@ -42,7 +42,7 @@ pub mod verb_dispatcher {
                 out = output;
             },
             ActionType::Fight => {
-                println!("starting a FIGHT. like a MAN");
+                // println!("starting a FIGHT. like a MAN");
                 // i_out = interop::kick_off(@world);
                 let stub: ByteArray = "Shoggoth is a good boy, he will fight you";
                 // out = i_out;
@@ -58,7 +58,7 @@ pub mod verb_dispatcher {
 
                 if player.location == 0 {
                     spawner.setup();
-                    println!("spawned????");
+                    // println!("spawned????");
                     let spawn_rm_name: ByteArray = "Walking Eagle Pass";
                     let spawn_id = h_util::str_hash(@spawn_rm_name);
                     spawner.spawn_player(pid, 0);
@@ -108,7 +108,7 @@ pub mod verb_dispatcher {
                 out = desc;
             },
             ActionType::Help => {
-                println!("help------>");
+                // println!("help------>");
                 let txt: ByteArray =
                     "there is little time\nwaste not time on \"I do thing\"\njust type \"do thing\"\ngo north, take ball, look around, fight the power, go to the north, sniff all the glue etc\nthere is no time...\nno time";
                 out = txt;
