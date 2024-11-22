@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 use the_oruggin_trail::models::{zrk_enums as zrk};
 
 #[derive(Clone, Drop, Serde)]

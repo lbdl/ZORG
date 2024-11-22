@@ -4,3 +4,4 @@ vscode
 local.db
 manifests
 *.code-workspace
+local.*

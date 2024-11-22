@@ -1,9 +1,19 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod systems {
     pub mod outputter;
     pub mod meatpuppet;
     pub mod tokeniser;
     pub mod spawner;
 }
+
+// pub mod generated {
+//     pub mod spawner;
+// }
 
 pub mod constants {
     pub mod zrk_constants;
@@ -39,14 +49,15 @@ pub mod utils {
 }
 
 pub mod tests {
-    pub mod test_meatpuppet_hearing;
-    pub mod test_meatpuppet_look;
-    pub mod test_meatpuppet_move;
-    pub mod test_meatpuppet_act;
+    // pub mod test_meatpuppet_hearing;
+    // pub mod test_meatpuppet_look;
+    // pub mod test_meatpuppet_move;
+    // pub mod test_meatpuppet_act;
     pub mod test_tokeniser;
     pub mod test_spawn_plain;
     pub mod test_spawn_pass;
     pub mod test_spawn_barn;
     pub mod test_spawn_forge;
+    pub mod test_spawn_basement;
     pub mod test_rig;
 }

@@ -1,20 +1,31 @@
-use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
+use dojo::world::{IWorldDispatcher, WorldStorage, WorldStorageTrait};
+use dojo::model::{ModelStorage};
+use the_oruggin_trail::lib::system::{WorldSystemsTrait};
 
 // we can add models here to make custom getters and setters etc
 use the_oruggin_trail::models::{
-    output::{ Output, OutputStore, OutputEntity, OutputEntityStore },
+    output::{ Output},
 };
 
 #[derive(Copy, Drop)]
 pub struct Store {
     world: IWorldDispatcher,
+    world_store: WorldStorage,
 }
 
 #[generate_trait]
 pub impl StoreImpl of StoreTrait {
-    #[inline]
-    fn new(world: IWorldDispatcher) -> Store {
-        (Store { world: world })
+    fn new(world: IWorldDispatcher, namespace: @ByteArray) -> Store {
+        (Store { 
+            world: world, 
+            world_store: WorldSystemsTrait::storage(world, namespace) 
+        })
     }
 
     //
@@ -23,26 +34,16 @@ pub impl StoreImpl of StoreTrait {
 
     #[inline(always)]
     fn get_output(self: Store, p_id: felt252) -> Output {
-        // (get!(self.world, duel_id, (Challenge)))
-        // dojo::model::ModelEntity::<ChallengeEntity>::get(self.world, 1); // OK
-        // let mut challenge_entity = ChallengeEntityStore::get(self.world, 1); // OK
-        // challenge_entity.update(self.world); // ERROR
-        // (OutputStore::get(self.world, playerId)) // ERROR
-        // dojo::model::Model::<Output>::get(self.world, 23)
-        get!( self.world, 23, Output )
+        self.world_store.read_model(23)
     }
     
     //
     // Setters
     //
     #[inline(always)]
-    fn set_output(self: Store, pid: felt252, msg: ByteArray) {
+    fn set_output(mut self: Store, pid: felt252, msg: ByteArray) {
         let output: Output = Output{ playerId: pid, text_o_vision: msg };
-        set!(self.world, (output));
-        // output.set(world); // ERROR
-        // dojo::model::Model::<Output>::set(@output, self.world);
+        self.world_store.write_model(@output);
     }
-
-
 
 }

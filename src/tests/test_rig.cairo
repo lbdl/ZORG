@@ -1,38 +1,67 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 #[cfg(test)]
 pub mod test_rig {
     use starknet::{ContractAddress, testing, get_caller_address};
     use core::traits::Into;
 
-    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
-    use dojo::utils::test::{spawn_test_world, deploy_contract};
+    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait, WorldStorageTrait, WorldStorage};
+    use dojo::model::{ModelStorage, ModelValueStorage, ModelStorageTest};
+    use dojo_cairo_test::{spawn_test_world, NamespaceDef, TestResource, ContractDefTrait};
 
     use the_oruggin_trail::models::{
-        output::{output, Output},
-        action::{action, Action},
-        room::{room, Room},
-        object::{object, Object},
-        player::{player, Player},
-        txtdef::{txtdef, Txtdef},
-        inventory::{inventory, Inventory}
+        output::{Output, m_Output},
+        action::{Action, m_Action},
+        room::{Room, m_Room},
+        object::{Object, m_Object},
+        player::{Player, m_Player},
+        txtdef::{Txtdef, m_Txtdef},
+        inventory::{Inventory, m_Inventory},
     };
 
     use the_oruggin_trail::systems::meatpuppet::{ 
-        meatpuppet, 
+        meatpuppet,
         IListenerDispatcher, 
-        IListenerDispatcherTrait 
     };
 
     use the_oruggin_trail::systems::spawner::{ 
-        spawner, 
+        spawner,
         ISpawnerDispatcher, 
-        ISpawnerDispatcherTrait 
     };
-    
+
     use the_oruggin_trail::lib::store::{Store, StoreTrait}; 
 
     pub fn ZERO() -> ContractAddress { starknet::contract_address_const::<0x0>() }
     pub fn OWNER() -> ContractAddress { starknet::contract_address_const::<0x1>() }
     pub fn OTHER() -> ContractAddress { starknet::contract_address_const::<0x2>() }
+
+
+    fn namespace_def() -> NamespaceDef {
+        let ndef = NamespaceDef {
+            namespace: "the_oruggin_trail", resources: [
+                TestResource::Model(m_Output::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Model(m_Action::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Model(m_Room::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Model(m_Object::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Model(m_Player::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Model(m_Txtdef::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Model(m_Inventory::TEST_CLASS_HASH.try_into().unwrap()),
+                TestResource::Contract(
+                    ContractDefTrait::new(spawner::TEST_CLASS_HASH, "spawner")
+                        .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
+                ),
+                TestResource::Contract(
+                    ContractDefTrait::new(meatpuppet::TEST_CLASS_HASH, "meatpuppet")
+                        .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
+                ),
+            ].span()
+        };
+        ndef
+    }
  
     // set_contract_address : to define the address of the calling contract,
     // set_account_contract_address : to define the address of the account used for the current transaction.
@@ -43,66 +72,49 @@ pub mod test_rig {
 
     #[derive(Copy, Drop)]
     pub struct Systems {
-        pub world: IWorldDispatcher,
+        pub world: WorldStorage,
         pub listener: IListenerDispatcher,
-        pub spawner: ISpawnerDispatcher,
-        pub store: Store,
+        pub spawner: ISpawnerDispatcher
     }
 
     #[inline(always)]
-    pub fn deploy_system(world: IWorldDispatcher, salt: felt252, class_hash: felt252) -> ContractAddress {
-        let contract_address = world.deploy_contract(salt, class_hash.try_into().unwrap());
-        (contract_address)
+    pub fn deploy_system(world: WorldStorage, contract: @ByteArray) -> ContractAddress {
+         match world.dns(contract) {
+            Option::Some((contract_address, _)) => {
+                (contract_address)
+            },
+            Option::None => {
+                (ZERO())
+            }
+        }
     }
 
     pub fn setup_world() -> Systems {
-
-        let mut models = array![
-            output::TEST_CLASS_HASH,
-            action::TEST_CLASS_HASH,
-            room::TEST_CLASS_HASH,
-            object::TEST_CLASS_HASH,
-            player::TEST_CLASS_HASH,
-            txtdef::TEST_CLASS_HASH,
-            inventory::TEST_CLASS_HASH,
-        ];
-
         // deploy world, models, systems etc
-        let namespace: ByteArray = "the_oruggin_trail";
-        let ns: ByteArray = namespace.clone();
-        let namespaces = [namespace];
-        let world: IWorldDispatcher = spawn_test_world(namespaces.span(),  models.span());
+        let ndef = namespace_def();
+        let mut world = spawn_test_world([ndef].span());
 
-        // allow us OWNER over stuff 
-        world.grant_owner(dojo::utils::bytearray_hash(@ns), OWNER());
-        // world.contract_address.print();
 
         // deploy systems and set OWNER on the systems we want so we can write through
         let tot_listen = IListenerDispatcher{ contract_address:
             {
-                let address = deploy_system(world, 'meatpuppet', meatpuppet::TEST_CLASS_HASH);
-                world.grant_owner(dojo::utils::bytearray_hash(@ns), address);
-                (address)
+                deploy_system(world, @"meatpuppet")
             }
         };
 
         let tot_spawner = ISpawnerDispatcher{ contract_address:
             {
-                let address = deploy_system(world, 'spawner', spawner::TEST_CLASS_HASH);
-                world.grant_owner(dojo::utils::bytearray_hash(@ns), address);
-                (address)
+                deploy_system(world, @"spawner")
             }
         };
         
-        impersonate(OWNER());
 
-        let store: Store = StoreTrait::new(world);
+        // let store: Store = StoreTrait::new(world);
 
         (Systems{
             world,
             listener:tot_listen,
             spawner:tot_spawner,
-            store,
         })
     }
 

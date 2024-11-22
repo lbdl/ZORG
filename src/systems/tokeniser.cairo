@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod tokeniser {
     use the_oruggin_trail::models::{
         zrk_enums::{ActionType, ObjectType, MaterialType, DirectionType}
@@ -28,10 +34,16 @@ pub mod tokeniser {
             ActionType::Take
         } else if s == "help" {
             ActionType::Help
-        } else if s == "follow" { // Added
+        } else if s == "follow" {
             ActionType::Follow
-        } else if s == "jump" {   // Added
+        } else if s == "jump" {
             ActionType::Jump
+        } else if s == "block" {
+            ActionType::Block
+        } else if s == "soak" {
+            ActionType::Soak
+        } else if s == "close" {
+            ActionType::Close
         } else {
             ActionType::None
         }
@@ -68,6 +80,8 @@ pub mod tokeniser {
             ObjectType::Door
         } else if s == "troll" {
             ObjectType::Troll
+        } else if s == "dynamite" {
+            ObjectType::Dynamite
         } else {
             ObjectType::None
         }
@@ -130,6 +144,10 @@ pub mod confessor {
             ActionType::Break
         } else if vrb == ActionType::Light {
             ActionType::Burn
+        } else if vrb == ActionType::Empty || vrb == ActionType::Pour {
+            ActionType::Soak
+        } else if vrb == ActionType::Explode {
+            ActionType::Disintegrate
         } else {
             ActionType::None
         }

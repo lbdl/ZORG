@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod interop_dispatcher {
 use dojo::world::{IWorldDispatcher};
 
@@ -65,4 +71,3 @@ use dojo::world::{IWorldDispatcher};
        pistols.move(s_id, 1, 'Gandalf', moves_gandalf.span());
        pistols.move(s_id, 1, 'Elron', moves_elron.span());
     }
-}

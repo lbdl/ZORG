@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 #[cfg(test)]
 mod tests {
      use core::clone::Clone;

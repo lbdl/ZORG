@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 use the_oruggin_trail::models::{zrk_enums as zrk};
 
 /// Room model
@@ -8,7 +14,7 @@ use the_oruggin_trail::models::{zrk_enums as zrk};
 /// use this to dump them into the world screaming
 /// 
 /// sadly we dont right now
-#[derive(Clone, Drop, Serde)]
+#[derive(Clone, Drop, Serde, Introspect, Debug)]
 #[dojo::model]
 pub struct Room{
     #[key]

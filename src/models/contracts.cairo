@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 use starknet::{ ContractAddress, ClassHash };
 
 #[derive(Copy, Drop, Serde)]

@@ -1,5 +1,12 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod relocate {
-    use dojo::world::{IWorldDispatcher};
+    use dojo::world::{IWorldDispatcher, WorldStorage};
+    use dojo::model::{ModelStorage};
     use the_oruggin_trail::models::{
         output::{Output}, 
         player::{Player}, 
@@ -17,40 +24,45 @@ pub mod relocate {
     /// TODO:
     /// this should really live in the meatpuppet also it should
     /// probably return a string
-    pub fn enter_room(world: IWorldDispatcher, pid: felt252, rm_id: felt252) {
+    pub fn enter_room(mut world: WorldStorage, pid: felt252, rm_id: felt252) {
         let pid = 23;
-        let mut player: Player = get!(world, pid, (Player));
+        let mut player: Player = world.read_model(pid);
         player.location = rm_id;
-        set!(world, (player));
+        println!("ENTER_RM:-----> {:?}", rm_id);
+        world.write_model(@player);
     }
 
     /// get the next room
     /// 
     /// we check if the exits contains the correct direction
     /// then if this direction is open and enabled
-    pub fn get_next_room(world: IWorldDispatcher, pid: felt252, msg: Garble ) -> felt252 {
+    /// 
+    /// TODO
+    /// we also nned to add checking for path/exit blocked by objects
+    pub fn get_next_room(world: WorldStorage, pid: felt252, msg: Garble ) -> felt252 {
         let mut next_rm: felt252 = st::NONE;
         // fetch the room
-        let pl: Player = get!(world, pid, (Player));
+        let pl: Player = world.read_model(pid);
         let curr_rm = pl.location.clone();
-        let rm: Room = get!(world, curr_rm, (Room));
+        let rm: Room = world.read_model(curr_rm);
         let exits: Array<felt252> = rm.dirObjIds.clone();
         // check for an exit
         _direction_check(world, exits, msg)
     }
 
-    fn _direction_check(world: IWorldDispatcher, exits: Array<felt252>, msg: Garble) -> felt252 {
+    fn _direction_check(world: WorldStorage, exits: Array<felt252>, msg: Garble) -> felt252 {
         // get the exits from the room
         let mut idx: u32 = 0;
         let mut dest: felt252 = st::NONE;
         let mut canMove: bool = false;
         while idx < exits.len() {
             let exit_id = exits.at(idx).clone();
-            let exit: Object = get!(world, exit_id, (Object));
+            let exit: Object = world.read_model(exit_id);
             if exit.dirType == msg.dir {
                 // it it open/passable
                 canMove = _can_move(world, @exit, msg);
                 if canMove {
+                    println!("can_move: -----> {:?}", exit.destId);
                     dest = exit.destId
                 }
             }
@@ -59,14 +71,14 @@ pub mod relocate {
         dest
     }
 
-    fn _can_move(world: IWorldDispatcher, exit: @Object, msg: Garble) -> bool {
+    fn _can_move(world: WorldStorage, exit: @Object, msg: Garble) -> bool {
        // get the actions and look for open
        let mut idx: u32 = 0;
        let mut canMove: bool = false;
        let action_ids: Array<felt252> = exit.objectActionIds.clone();
         while idx < action_ids.len() {
             let action_id = action_ids.at(idx).clone();
-            let action: Action = get!(world, action_id, (Action));
+            let action: Action = world.read_model(action_id);
             if action.actionType == ActionType::Open {
                 // it it enabled
                 canMove = action.enabled

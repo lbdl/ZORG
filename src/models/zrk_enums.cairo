@@ -1,7 +1,13 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 /// Biome types
 /// used later to generate text and seed ascii art
 /// type things
-#[derive(Serde, Copy, Drop, Introspect, PartialEq)]
+#[derive(Serde, Copy, Drop, Debug, Introspect, PartialEq)]
 pub enum BiomeType {
     None,
     Forest,
@@ -69,6 +75,7 @@ pub enum RoomType {
     WoodCabin,
     Store,
     Cavern,
+    Basement,
     StoneCabin,
     Fort,
     Room,
@@ -77,6 +84,7 @@ pub enum RoomType {
     Barn,
     Forge,
     Pass,
+    Alley,
 }
 
 impl RT_to_Felt252 of Into<RoomType, felt252> {
@@ -85,6 +93,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::WoodCabin => 'wood cabin',
             RoomType::Store => 'store',
             RoomType::Cavern => 'cavern',
+            RoomType::Basement => 'basement',
             RoomType::StoneCabin => 'stone cabin',
             RoomType::Fort => 'fort',
             RoomType::Plain => 'plain',
@@ -93,6 +102,7 @@ impl RT_to_Felt252 of Into<RoomType, felt252> {
             RoomType::Barn => 'barn',
             RoomType::Forge => 'forge',
             RoomType::Pass => 'pass',
+            RoomType::Alley => 'alley',
             RoomType::None => 'none',
         }
     }
@@ -123,6 +133,8 @@ pub fn room_type_to_str(room_type: RoomType) -> ByteArray {
         "forge"
     } else if room_type == RoomType::Pass {
         "pass"
+    } else if room_type == RoomType::Alley {
+        "alley"
     } else {
         "unknown" // This case handles any potential future additions to RoomType
     }
@@ -146,6 +158,8 @@ pub enum MaterialType {
     Mud,
     Leather,
     Metal,
+    TNT,
+    Hay,
 }
 
 /// MaterialType -> short_string or felt252
@@ -165,6 +179,8 @@ impl MT_to_Felt252 of Into<MaterialType, felt252> {
             MaterialType::Mud => 'mud',
             MaterialType::Leather => 'leather',
             MaterialType::Metal => 'metal',
+            MaterialType::TNT => 'TNT',
+            MaterialType::Hay => 'hay',
             _ => 'none',
         }
     }
@@ -195,6 +211,10 @@ pub fn material_type_to_str(material_type: MaterialType) -> ByteArray {
         "leather"
     } else if material_type == MaterialType::Metal {
         "metal"
+    } else if material_type == MaterialType::TNT {
+        "TNT"
+    } else if material_type == MaterialType::Hay {
+        "hay"
     } else {
         "unknown" // This case handles any potential future additions to MaterialType
     }
@@ -275,12 +295,19 @@ pub enum ActionType {
     Break,
     Burn,
     Light,
+    Ignite,
     Spawn,
     Take,
     Help,
     Pour,
-    Follow, // Added
-    Jump,   // Added
+    Follow,
+    Jump,
+    Block,
+    Soak,
+    Empty,
+    Explode,
+    Disintegrate,
+    Close,
 }
 
 impl AT_to_Felt252 of Into<ActionType, felt252> {
@@ -299,12 +326,19 @@ impl AT_to_Felt252 of Into<ActionType, felt252> {
             ActionType::Break => 'break',
             ActionType::Burn => 'burn',
             ActionType::Light => 'light',
+            ActionType::Ignite => 'ignite',
             ActionType::Spawn => 'spawn',
             ActionType::Take => 'take',
             ActionType::Help => 'help',
             ActionType::Pour => 'pour',
-            ActionType::Follow => 'follow', // Added
-            ActionType::Jump => 'jump',     // Added
+            ActionType::Follow => 'follow',
+            ActionType::Jump => 'jump',
+            ActionType::Block => 'block',
+            ActionType::Explode => 'explode',
+            ActionType::Disintegrate => 'disintegrate',
+            ActionType::Close => 'close',
+            ActionType::Soak => 'soak',
+            ActionType::Empty => 'empty',
             ActionType::None => 'none'
         }
     }
@@ -349,6 +383,9 @@ pub enum ObjectType {
     Matches,
     Petrol,
     Can,
+    Dynamite,
+    Boulder,
+    Bale,
 }
 
 impl OT_to_Felt252 of Into<ObjectType, felt252> {
@@ -367,6 +404,9 @@ impl OT_to_Felt252 of Into<ObjectType, felt252> {
             ObjectType::Matches => 'matches',
             ObjectType::Petrol => 'petrol',
             ObjectType::Can => 'can',
+            ObjectType::Dynamite => 'dynamite',
+            ObjectType::Boulder => 'boulder',
+            ObjectType::Bale => 'bale',
         }
     }
 }
@@ -396,6 +436,10 @@ pub fn object_type_to_str(object_type: ObjectType) -> ByteArray {
         "petrol"
     } else if object_type == ObjectType::Can {
         "can"
+    } else if object_type == ObjectType::Dynamite {
+        "dynamite"
+    } else if object_type == ObjectType::Boulder {
+        "boulder"
     } else {
         "unknown" // This case handles any potential future additions to ObjectType
     }
@@ -414,8 +458,10 @@ pub enum CompositeVerbType {
     GiveUp,
     ComeUp,
     StandUp,
+    ClimbUp,
     // "Down" group
     PutDown,
+    ClimbDown,
     // "On" group
     TurnOn,
     GoOn,
@@ -431,6 +477,8 @@ pub enum CompositeVerbType {
     GetOut,
     FindOut,
     HangOut,
+    PourOut,
+    EmptyOut,
     // "Over" group
     TakeOver,
     GetOver,
@@ -486,6 +534,8 @@ impl CVT_to_Felt252 of Into<CompositeVerbType, felt252> {
             CompositeVerbType::GetOut => 'get out',
             CompositeVerbType::FindOut => 'find out',
             CompositeVerbType::HangOut => 'hang out',
+            CompositeVerbType::PourOut => 'pour out',
+            CompositeVerbType::EmptyOut => 'empty out',
             CompositeVerbType::TakeOver => 'take over',
             CompositeVerbType::GetOver => 'get over',
             CompositeVerbType::PullOver => 'pull over',
@@ -502,6 +552,8 @@ impl CVT_to_Felt252 of Into<CompositeVerbType, felt252> {
             CompositeVerbType::GetRid => 'get rid',
             CompositeVerbType::BlowUp => 'blow up',
             CompositeVerbType::BringUp => 'bring up',
+            CompositeVerbType::ClimbUp => 'climb up',
+            CompositeVerbType::ClimbDown => 'climb down',
         }
     }
 }
@@ -529,6 +581,8 @@ pub fn composite_verb_type_to_str(composite_verb_type: CompositeVerbType) -> Byt
         CompositeVerbType::GetOut => "get out",
         CompositeVerbType::FindOut => "find out",
         CompositeVerbType::HangOut => "hang out",
+        CompositeVerbType::PourOut => "pour out",
+        CompositeVerbType::EmptyOut => "empty out",
         CompositeVerbType::TakeOver => "take over",
         CompositeVerbType::GetOver => "get over",
         CompositeVerbType::PullOver => "pull over",
@@ -545,5 +599,7 @@ pub fn composite_verb_type_to_str(composite_verb_type: CompositeVerbType) -> Byt
         CompositeVerbType::GetRid => "get rid",
         CompositeVerbType::BlowUp => "blow up",
         CompositeVerbType::BringUp => "bring up",
+        CompositeVerbType::ClimbUp => "climb up",
+        CompositeVerbType::ClimbDown => "climb down",
     }
 }

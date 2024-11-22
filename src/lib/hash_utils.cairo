@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 pub mod hashutils {
     use core::array::ArrayTrait;
     use core::traits::Into;

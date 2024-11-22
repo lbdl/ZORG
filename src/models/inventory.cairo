@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 /// player inventory
 /// 
 #[derive(Clone, Drop, Serde)]

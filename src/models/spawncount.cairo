@@ -1,3 +1,9 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 #[derive(Copy, Drop, Serde)]
     #[dojo::model]
     pub struct Spawncount {
@@ -7,4 +13,3 @@
         pub d_c: felt252,
         pub o_c: felt252,
         pub t_c: felt252,
-    }

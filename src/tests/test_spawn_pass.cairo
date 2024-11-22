@@ -1,19 +1,26 @@
+
+//*
+//*
+//* MeaCulpa (mc) 2024 lbdl | itrainspiders
+//*
+
 #[cfg(test)]
 mod tests {
+    use dojo::model::{ModelStorage, ModelStorageTest};
     use core::clone::Clone;
     use core::array::ArrayTrait;
+
     // import world dispatcher
-    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
-    // import test utils
-    use dojo::utils::test::{deploy_contract, spawn_test_world};
+    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait, WorldStorage, WorldStorageTrait};
 
     use the_oruggin_trail::{
-        systems::{spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait}},
+        systems::spawner::{spawner, ISpawnerDispatcher, ISpawnerDispatcherTrait},
         constants::zrk_constants::roomid as rm,
         models::{
-            txtdef::{Txtdef, txtdef}, room::{Room, room},
-            action::{Action, action, action_mock_hash as act_phash},
-            object::{Object, object, obj_mock_hash as obj_phash},
+            txtdef::{Txtdef, m_Txtdef}, 
+            room::{Room, m_Room},
+            action::{Action, m_Action},
+            object::{Object, m_Object},
             zrk_enums::{MaterialType, ActionType, ObjectType, DirectionType, RoomType}
         },
         lib::hash_utils::hashutils as p_hash
@@ -24,111 +31,42 @@ mod tests {
         test_rig::{Systems, ZERO, OWNER, OTHER}
     };
 
-    #[test]
-    #[available_gas(1000000000)]
-    fn test_spawn_pass_EXIT_WEST_OBJECT_properties() {
-        // WEST
-        // material is dirt
-        // dir is west
-        // dest is bensons plain
-        let sys: Systems = test_rig::setup_world();
-        let sut: ISpawnerDispatcher = sys.spawner;
-        sut.setup();
-
-        // let room_name: ByteArray = "walking eagle pass";
-        let pass_id: felt252 = obj_phash();
-        let west: Object = get!(sys.world, pass_id, (Object));
-
-        //! assert on the WEST objects properties
-        assert_eq!(
-            west.objType,
-            ObjectType::Path,
-            "got {:?}, expected {:?}",
-            west.objType,
-            ObjectType::Path
-        );
-        assert_eq!(
-            west.matType,
-            MaterialType::Dirt,
-            "got {:?}, expected {:?}",
-            west.matType,
-            MaterialType::Dirt
-        );
-        assert_eq!(
-            west.dirType,
-            DirectionType::West,
-            "got {:?}, expected {:?}",
-            west.dirType,
-            DirectionType::West
-        );
-
-        let destination_name: ByteArray = "bensons plain";
-        let dst_id: felt252 = p_hash::str_hash(@destination_name);
-        assert_eq!(west.destId, dst_id, "got {:?}, expected {:?}", west.destId, rm::PLAIN);
-        
-        //! assert the action has the expected ID
-        let expected = act_phash();
-        let actual: felt252 = west.objectActionIds.at(0).clone();
-        assert_eq!(
-            actual, expected, "got {:?}, expected {:?}", west.objectActionIds.at(0), act_phash()
-        );
-        // assert the action's properties 
-        let expected_action: Action = get!(sys.world, actual, (Action));
-        let expected_txt: ByteArray = "the path winds west, it is open";
-        let actual_txt = expected_action.dBitTxt.clone();
-
-        // action txt should be "the path winds west, it is open"e correct
-        assert_eq!(actual_txt, expected_txt, "got {:?}, expected {:?}", actual_txt, expected_txt);
-        // action should be enabled
-        assert_eq!(expected_action.enabled, true, "got {:?}, expected {:?}", expected_action.enabled, true);
-        // action should be open
-        assert_eq!(expected_action.actionType, ActionType::Open, "got {:?}, expected {:?}", expected_action.actionType, ActionType::Open);
-        // action should be !revertable
-        assert_eq!(expected_action.revertable, false, "got {:?}, expected {:?}", expected_action.revertable, false);
-        // action should be dBit
-        assert_eq!(expected_action.dBit, true, "got {:?}, expected {:?}", expected_action.dBit, true);
-        // action should be affectedByActionId 0
-        assert_eq!(expected_action.affectedByActionId, 0, "got {:?}, expected {:?}", expected_action.affectedByActionId, 0);
-        // action should be affectsActionId 0
-        assert_eq!(expected_action.affectsActionId, 0, "got {:?}, expected {:?}", expected_action.affectsActionId, 0);
-    }
 
     #[test]
     #[available_gas(1000000000)]
     fn test_spawn_pass_room_properties() {
         // room should contain 0 objects
         // room should contain 0 players
-        // room should have 1 exit
+        // room should have 2 exit
         // room should have 1 textdef
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
-        let room_name: ByteArray = "walking eagle pass";
+        let room_name: ByteArray = "Walking Eagle Pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(sys.world, pass_id, (Room));
+        let pass: Room = sys.world.read_model(pass_id);
 
         // assert on the PASS objects properties
         // the name/short description property
         assert_eq!(
             pass.roomType,
-            RoomType::Pass,
+            RoomType::Mountains,
             "got {:?}, expected {:?}",
             pass.roomType,
-            RoomType::Pass
+            RoomType::Mountains
         );
 
-        let expected_name: ByteArray = "walking eagle pass";
+        let expected_name: ByteArray = "Walking Eagle Pass";
         let actual = pass.shortTxt.clone();
         assert_eq!(actual, expected_name, "got {:?}, expected {:?}", pass.shortTxt, expected_name);
 
         //! check the stored text values
         let txtid = pass.txtDefId;
-        let txt = get!(sys.world, txtid, (Txtdef));
+        let txt: Txtdef = sys.world.read_model(txtid);
         let actual_desc = txt.text.clone();
-        let expected_desc: ByteArray = 
-                "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep \nvalley sides below you.\nOn closer inspection the TP might \nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
+        let expected_desc: ByteArray = "it winds through the mountains, the path is treacherous\ntoilet papered trees cover the steep\nvalley sides below you.\nOn closer inspection the TP might\nbe the remains of a cricket team\nor perhaps a lost and very dead KKK picnic group.\nIt's brass monkeys.";
 
         // assert description should be as expected
         assert_eq!(actual_desc, expected_desc, "got {:?}, expected {:?}", txt.text, expected_desc);
@@ -144,55 +82,68 @@ mod tests {
         // check the objects and players
         // object ids should be empty
         let objects: Array<felt252> = pass.objectIds.clone();
-        assert_eq!(objects.len(), 0, "got {:?}, expected {:?}", objects.len(), 0);
+        assert_eq!(objects.len(), 1, "got {:?}, expected {:?}", objects.len(), 1);
+
+        // object should be a boulder
+        let object_id = objects.at(0).clone();
+        let object: Object = sys.world.read_model(object_id);
+        assert_eq!(object.objType, ObjectType::Boulder, "got {:?}, expected {:?}", object.objType, ObjectType::Boulder);
+
+        // boulder should have a disintegrate action
+        let actions: Array<felt252> = object.objectActionIds.clone();
+        let action_id = actions.at(0).clone();
+        let action: Action = sys.world.read_model(action_id);
+        assert_eq!(action.actionType, ActionType::Disintegrate, "got {:?}, expected {:?}", action.actionType, ActionType::Disintegrate);
 
         // player ids should be empty
         let players: Array<felt252> = pass.players.clone();
         assert_eq!(players.len(), 0, "got {:?}, expected {:?}", players.len(), 0);
 
         // check the rooms exits
-        // there should be one
+        // there should be 2
         let exits: Array<felt252> = pass.dirObjIds.clone();
-        assert_eq!(exits.len(), 1, "got {:?}, expected {:?}", exits.len(), 1);
+        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 1);
     }
 
     #[test]
     #[available_gas(1000000000)]
     fn test_spawn_pass_exit_properties () {
         // room should have:
-        // 1 exit
-        // exit should have:
-        // 1 action
-        // action should be:
-        // open
-        // revertable
-        // dBit
-        // enabled
-        // affectsActionId 0
-        // affectedByActionId 0
+        // 2 exits
         let sys: Systems = test_rig::setup_world();
         let sut: ISpawnerDispatcher = sys.spawner;
         sut.setup();
 
 
-        let room_name: ByteArray = "walking eagle pass";
+        let room_name: ByteArray = "Walking Eagle Pass";
         let pass_id: felt252 = p_hash::str_hash(@room_name);
 
-        let pass: Room = get!(sys.world, pass_id, (Room));
+        let pass: Room = sys.world.read_model(pass_id);
 
-        // room should have one exit 
+        // room should have two exits 
         let exits: Array<felt252> = pass.dirObjIds.clone();
-        assert_eq!(exits.len(), 1, "got {:?}, expected {:?}", exits.len(), 1);
+        assert_eq!(exits.len(), 2, "got {:?}, expected {:?}", exits.len(), 2);
         
-        // exit should have:
-        // 1 action
-        let exit_id = exits.at(0).clone();
-        let exit: Object = get!(sys.world, exit_id, (Object));
-        let actions: Array<felt252> = exit.objectActionIds.clone();
+        // exits
+        // WEST
+        let exit_w_id = exits.at(0).clone();
+        let exit_w: Object = sys.world.read_model(exit_w_id);
+        // exit should be a path
+        assert_eq!(exit_w.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_w.objType, ObjectType::Path);
+        // exit should be west
+        assert_eq!(exit_w.dirType, DirectionType::West, "got {:?}, expected {:?}", exit_w.dirType, DirectionType::West);
+        // should lead to Bensons Plain
+        let dest_w_name = "Bensons Plain";
+        let dest_w_id = p_hash::str_hash(@dest_w_name);
+        assert_eq!(exit_w.destId, dest_w_id, "got {:?}, expected {:?}", exit_w.destId, dest_w_id);
+
+        // exit west 
+        // should be open       
+        let actions: Array<felt252> = exit_w.objectActionIds.clone();
         assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
         let action_id = actions.at(0).clone();
-        let action: Action = get!(sys.world, action_id, (Action));
+        let action: Action = sys.world.read_model(action_id);
 
         // action should be:
         // open
@@ -207,5 +158,42 @@ mod tests {
         assert_eq!(action.affectsActionId, 0, "got {:?}, expected {:?}", action.affectsActionId, 0);
         // affectedByActionId 0
         assert_eq!(action.affectedByActionId, 0, "got {:?}, expected {:?}", action.affectedByActionId, 0);
+
+
+        // EAST, blocked by a boulder
+        let exit_e_id = exits.at(1).clone();
+        let exit_e: Object = sys.world.read_model(exit_e_id);
+        // exit should be a path
+        assert_eq!(exit_e.objType, ObjectType::Path, "got {:?}, expected {:?}", exit_e.objType, ObjectType::Path);
+        // exit should be east
+        assert_eq!(exit_e.dirType, DirectionType::East, "got {:?}, expected {:?}", exit_e.dirType, DirectionType::East);
+        // should lead to The Alley off of main street
+        let dest_e_name = "The Alley Off Main Street";
+        let dest_e_id = p_hash::str_hash(@dest_e_name);
+        assert_eq!(exit_e.destId, dest_e_id, "got {:?}, expected {:?}", exit_e.destId, dest_e_id);
+
+        // check the actions
+        let actions_e: Array<felt252> = exit_e.objectActionIds.clone();
+        assert_eq!(actions_e.len(), 1, "got {:?}, expected {:?}", actions_e.len(), 1);
+
+        let action_id_e = actions_e.at(0).clone();
+        let action_e: Action = sys.world.read_model(action_id_e);
+
+        // action should be open
+        assert_eq!(action_e.actionType, ActionType::Open, "got {:?}, expected {:?}", action_e.actionType, ActionType::Open);
+        // action should be disabled
+        assert_eq!(action_e.enabled, false, "got {:?}, expected {:?}", action_e.enabled, false);
+        // should be un open ed
+        assert_eq!(action_e.dBit, false, "got {:?}, expected {:?}", action_e.dBit, false);
+        // should be non revertable
+        assert_eq!(action_e.revertable, false, "got {:?}, expected {:?}", action_e.revertable, false);
+        // should be "blocked" i.e. affected by the boulder
+        let objs = pass.objectIds.clone();
+        let bldr_id = objs.at(0).clone();
+        let bldr: Object = sys.world.read_model(bldr_id);
+        let bldr_actions = bldr.objectActionIds;
+        let bldr_action_id = bldr_actions.at(0);
+        let blocked_action_id = @action_e.affectedByActionId;
+        assert_eq!(bldr_action_id, blocked_action_id , "got {:?}, expected {:?}", bldr_action_id, action.affectedByActionId);
     }
 }
