@@ -180,7 +180,7 @@ mod tests {
         sut.setup();
 
 
-        let room_name: ByteArray = "eli's forge";
+        let room_name: ByteArray = "Eli's Forge";
         let forge_id: felt252 = p_hash::str_hash(@room_name);
 
         let forge: Room = sys.world.read_model(forge_id);
@@ -197,9 +197,9 @@ mod tests {
         // exit EAST is a WINDOW
         assert_eq!(exit_e.objType, ObjectType::Window, "got {:?}, expected {:?}", exit_e.objType, ObjectType::Window);
         // exit EAST destination should be:
-        // eli's forge
+        // Eli's Barn
         // ids match
-        let dest_e_name = "eli's forge";
+        let dest_e_name = "Eli's Barn";
         let dest_e_id = p_hash::str_hash(@dest_e_name);
         assert_eq!(exit_e.destId, dest_e_id, "got {:?}, expected {:?}", exit_e.destId, dest_e_id);
         // description matches
@@ -219,7 +219,7 @@ mod tests {
         // action
         // 1 actions
         let actions: Array<felt252> = exit_e.objectActionIds.clone();
-        assert_eq!(actions.len(), 2, "got {:?}, expected {:?}", actions.len(), 1);
+        assert_eq!(actions.len(), 1, "got {:?}, expected {:?}", actions.len(), 1);
 
        let open_action_id = actions.at(0).clone();
        let open_action: Action = sys.world.read_model(open_action_id);

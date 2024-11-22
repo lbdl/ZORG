@@ -376,7 +376,7 @@ pub mod spawner {
 
         let object_id_2655229238403616021 = h_util::obj_hash(@object_2655229238403616021); 
         object_2655229238403616021.objectId = object_id_2655229238403616021;
-        let object_desc: ByteArray = "a dusty window, at chest height";
+        let object_desc: ByteArray = "a dusty and smashed window, at chest height";
         let td_id_b = h_util::str_hash(@object_desc);
         object_2655229238403616021.txtDefId = td_id_b;
 
