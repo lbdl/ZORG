@@ -6,12 +6,13 @@
 
 #[cfg(test)]
 pub mod test_rig {
-    use starknet::{ContractAddress, testing, get_caller_address};
+    use dojo_cairo_test::WorldStorageTestTrait;
+use starknet::{ContractAddress, testing, get_caller_address};
     use core::traits::Into;
 
     use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait, WorldStorageTrait, WorldStorage};
     use dojo::model::{ModelStorage, ModelValueStorage, ModelStorageTest};
-    use dojo_cairo_test::{spawn_test_world, NamespaceDef, TestResource, ContractDefTrait};
+    use dojo_cairo_test::{spawn_test_world, NamespaceDef, TestResource, ContractDefTrait, ContractDef};
 
     use the_oruggin_trail::models::{
         output::{Output, m_Output},
@@ -43,26 +44,29 @@ pub mod test_rig {
     fn namespace_def() -> NamespaceDef {
         let ndef = NamespaceDef {
             namespace: "the_oruggin_trail", resources: [
-                TestResource::Model(m_Output::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Model(m_Action::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Model(m_Room::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Model(m_Object::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Model(m_Player::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Model(m_Txtdef::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Model(m_Inventory::TEST_CLASS_HASH.try_into().unwrap()),
-                TestResource::Contract(
-                    ContractDefTrait::new(spawner::TEST_CLASS_HASH, "spawner")
-                        .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
-                ),
-                TestResource::Contract(
-                    ContractDefTrait::new(meatpuppet::TEST_CLASS_HASH, "meatpuppet")
-                        .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
-                ),
+                TestResource::Model(m_Output::TEST_CLASS_HASH),
+                TestResource::Model(m_Action::TEST_CLASS_HASH),
+                TestResource::Model(m_Room::TEST_CLASS_HASH),
+                TestResource::Model(m_Object::TEST_CLASS_HASH),
+                TestResource::Model(m_Player::TEST_CLASS_HASH),
+                TestResource::Model(m_Txtdef::TEST_CLASS_HASH),
+                TestResource::Model(m_Inventory::TEST_CLASS_HASH),
+                TestResource::Contract(spawner::TEST_CLASS_HASH),
+                TestResource::Contract(meatpuppet::TEST_CLASS_HASH)
             ].span()
         };
         ndef
     }
- 
+    
+    fn contract_defs() -> Span<ContractDef> {
+        [
+            ContractDefTrait::new(@"the_oruggin_trail", @"spawner")
+                .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span()),
+            ContractDefTrait::new(@"the_oruggin_trail", @"meatpuppet")
+                .with_writer_of([dojo::utils::bytearray_hash(@"the_oruggin_trail")].span())
+        ].span()
+    }
+
     // set_contract_address : to define the address of the calling contract,
     // set_account_contract_address : to define the address of the account used for the current transaction.
     fn impersonate(address: ContractAddress) {
@@ -93,6 +97,7 @@ pub mod test_rig {
         // deploy world, models, systems etc
         let ndef = namespace_def();
         let mut world = spawn_test_world([ndef].span());
+        world.sync_perms_and_inits(contract_defs());
 
 
         // deploy systems and set OWNER on the systems we want so we can write through
