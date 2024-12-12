@@ -5,3 +5,5 @@ local.db
 manifests
 *.code-workspace
 local.*
+katana_local_db
+torii_local_db
