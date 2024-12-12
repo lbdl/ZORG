@@ -1,9 +1,32 @@
 {
   "world": {
-    "class_hash": "0x139239a99d627697b19b9856beaef7896fc75375caf3d750dd76982a7afeb78",
-    "address": "0x7f50de543f4d1093b7e9119f204849a75663a2b040ec45e5dc71e469ef5232b",
+    "class_hash": "0x79d9ce84b97bcc2a631996c3100d57966fc2f5b061fb1ec4dfd0040976bcac6",
+    "address": "0x67631b711ce310b8e6b32fb88f5427244534dba2a2584bb07c35256f618affa",
     "seed": "the_oruggin_trail",
     "name": "The Oruggin Trail",
+    "entrypoints": [
+      "uuid",
+      "set_metadata",
+      "register_namespace",
+      "register_event",
+      "register_model",
+      "register_contract",
+      "init_contract",
+      "upgrade_event",
+      "upgrade_model",
+      "upgrade_contract",
+      "emit_event",
+      "emit_events",
+      "set_entity",
+      "set_entities",
+      "delete_entity",
+      "delete_entities",
+      "grant_owner",
+      "revoke_owner",
+      "grant_writer",
+      "revoke_writer",
+      "upgrade"
+    ],
     "abi": [
       {
         "type": "impl",
@@ -83,16 +106,12 @@
         ]
       },
       {
-        "type": "enum",
-        "name": "core::bool",
-        "variants": [
+        "type": "struct",
+        "name": "core::array::Span::<core::array::Span::<core::felt252>>",
+        "members": [
           {
-            "name": "False",
-            "type": "()"
-          },
-          {
-            "name": "True",
-            "type": "()"
+            "name": "snapshot",
+            "type": "@core::array::Array::<core::array::Span::<core::felt252>>"
           }
         ]
       },
@@ -185,6 +204,30 @@
           {
             "name": "Enum",
             "type": "core::array::Span::<dojo::meta::layout::FieldLayout>"
+          }
+        ]
+      },
+      {
+        "type": "struct",
+        "name": "core::array::Span::<dojo::model::definition::ModelIndex>",
+        "members": [
+          {
+            "name": "snapshot",
+            "type": "@core::array::Array::<dojo::model::definition::ModelIndex>"
+          }
+        ]
+      },
+      {
+        "type": "enum",
+        "name": "core::bool",
+        "variants": [
+          {
+            "name": "False",
+            "type": "()"
+          },
+          {
+            "name": "True",
+            "type": "()"
           }
         ]
       },
@@ -398,10 +441,26 @@
               {
                 "name": "values",
                 "type": "core::array::Span::<core::felt252>"
+              }
+            ],
+            "outputs": [],
+            "state_mutability": "external"
+          },
+          {
+            "type": "function",
+            "name": "emit_events",
+            "inputs": [
+              {
+                "name": "event_selector",
+                "type": "core::felt252"
               },
               {
-                "name": "historical",
-                "type": "core::bool"
+                "name": "keys",
+                "type": "core::array::Span::<core::array::Span::<core::felt252>>"
+              },
+              {
+                "name": "values",
+                "type": "core::array::Span::<core::array::Span::<core::felt252>>"
               }
             ],
             "outputs": [],
@@ -433,6 +492,30 @@
           },
           {
             "type": "function",
+            "name": "entities",
+            "inputs": [
+              {
+                "name": "model_selector",
+                "type": "core::felt252"
+              },
+              {
+                "name": "indexes",
+                "type": "core::array::Span::<dojo::model::definition::ModelIndex>"
+              },
+              {
+                "name": "layout",
+                "type": "dojo::meta::layout::Layout"
+              }
+            ],
+            "outputs": [
+              {
+                "type": "core::array::Span::<core::array::Span::<core::felt252>>"
+              }
+            ],
+            "state_mutability": "view"
+          },
+          {
+            "type": "function",
             "name": "set_entity",
             "inputs": [
               {
@@ -457,6 +540,30 @@
           },
           {
             "type": "function",
+            "name": "set_entities",
+            "inputs": [
+              {
+                "name": "model_selector",
+                "type": "core::felt252"
+              },
+              {
+                "name": "indexes",
+                "type": "core::array::Span::<dojo::model::definition::ModelIndex>"
+              },
+              {
+                "name": "values",
+                "type": "core::array::Span::<core::array::Span::<core::felt252>>"
+              },
+              {
+                "name": "layout",
+                "type": "dojo::meta::layout::Layout"
+              }
+            ],
+            "outputs": [],
+            "state_mutability": "external"
+          },
+          {
+            "type": "function",
             "name": "delete_entity",
             "inputs": [
               {
@@ -466,6 +573,26 @@
               {
                 "name": "index",
                 "type": "dojo::model::definition::ModelIndex"
+              },
+              {
+                "name": "layout",
+                "type": "dojo::meta::layout::Layout"
+              }
+            ],
+            "outputs": [],
+            "state_mutability": "external"
+          },
+          {
+            "type": "function",
+            "name": "delete_entities",
+            "inputs": [
+              {
+                "name": "model_selector",
+                "type": "core::felt252"
+              },
+              {
+                "name": "indexes",
+                "type": "core::array::Span::<dojo::model::definition::ModelIndex>"
               },
               {
                 "name": "layout",
@@ -850,11 +977,6 @@
             "kind": "key"
           },
           {
-            "name": "historical",
-            "type": "core::bool",
-            "kind": "key"
-          },
-          {
             "name": "keys",
             "type": "core::array::Span::<core::felt252>",
             "kind": "data"
@@ -1121,13 +1243,23 @@
   },
   "contracts": [
     {
-      "address": "0x4e81c9dad08d1d27e4ae9fd9dd560de124b6e913729604cbf4d9c867e2eacdd",
-      "class_hash": "0xa2af11f2bc771d09291c8cb5129481562b2cedf45a28de40933b310cb93dc5",
+      "address": "0x6f758cfd367ac46b8cae5b74770503253f0fd090097cfb0d8772ce275ea1376",
+      "class_hash": "0x2c7363619e332e4c0d8c6531436cd22a6fe33cec010c8b32a41908c766f7698",
       "abi": [
         {
           "type": "impl",
           "name": "meatpuppet__ContractImpl",
           "interface_name": "dojo::contract::interface::IContract"
+        },
+        {
+          "type": "interface",
+          "name": "dojo::contract::interface::IContract",
+          "items": []
+        },
+        {
+          "type": "impl",
+          "name": "meatpuppet__DeployedContractImpl",
+          "interface_name": "dojo::meta::interface::IDeployedResource"
         },
         {
           "type": "struct",
@@ -1149,7 +1281,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo::contract::interface::IContract",
+          "name": "dojo::meta::interface::IDeployedResource",
           "items": [
             {
               "type": "function",
@@ -1328,16 +1460,31 @@
       ],
       "init_calldata": [],
       "tag": "the_oruggin_trail-meatpuppet",
-      "systems": []
+      "selector": "0x37b6ac738d1012bd12f2855e2233f4c16df6c884dfa6649e8e188f0cfb67fbf",
+      "systems": [
+        "listen",
+        "command_shoggoth",
+        "upgrade"
+      ]
     },
     {
-      "address": "0x58194926ec6847488d6c839deb49e19a35206f651fa3626ffb39e5586ffeaf5",
-      "class_hash": "0x67f03afd4edba6021bf9bbe099c73f87f2ae0ffcfc14c7ce6717c4a5e338fd2",
+      "address": "0x743573d012b712630f5c2a0b4d0ce8886986e9cac50e294dee45b7298106589",
+      "class_hash": "0x2099974b8069724da42f47d8ddca73f62e50b431cbe7607fb3467f29e4ab285",
       "abi": [
         {
           "type": "impl",
           "name": "outputter__ContractImpl",
           "interface_name": "dojo::contract::interface::IContract"
+        },
+        {
+          "type": "interface",
+          "name": "dojo::contract::interface::IContract",
+          "items": []
+        },
+        {
+          "type": "impl",
+          "name": "outputter__DeployedContractImpl",
+          "interface_name": "dojo::meta::interface::IDeployedResource"
         },
         {
           "type": "struct",
@@ -1359,7 +1506,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo::contract::interface::IContract",
+          "name": "dojo::meta::interface::IDeployedResource",
           "items": [
             {
               "type": "function",
@@ -1521,16 +1668,31 @@
       ],
       "init_calldata": [],
       "tag": "the_oruggin_trail-outputter",
-      "systems": []
+      "selector": "0x1a960edfcfc7c69c16b4f633c71c8d1613b50ec63682bd0cab36451a38f464",
+      "systems": [
+        "spawn",
+        "updateOutput",
+        "upgrade"
+      ]
     },
     {
-      "address": "0x59365a43af7713a912941ec7e5a2b162131a92b09072fb78149f9e9d410fc4b",
-      "class_hash": "0x3676b1cdbda2b4e47e84898a631c1a021d244445e26fc6504acbfcd9828b30f",
+      "address": "0x6a323a076ce878c41502d0af571ed750abca8ac8d415923c0468b7fa3e2a4f1",
+      "class_hash": "0x27c9bcd414ba6e0c28683f4e7eb5ac49dfc0f1c12d971848799dd6926b7ee3b",
       "abi": [
         {
           "type": "impl",
           "name": "spawner__ContractImpl",
           "interface_name": "dojo::contract::interface::IContract"
+        },
+        {
+          "type": "interface",
+          "name": "dojo::contract::interface::IContract",
+          "items": []
+        },
+        {
+          "type": "impl",
+          "name": "spawner__DeployedContractImpl",
+          "interface_name": "dojo::meta::interface::IDeployedResource"
         },
         {
           "type": "struct",
@@ -1552,7 +1714,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo::contract::interface::IContract",
+          "name": "dojo::meta::interface::IDeployedResource",
           "items": [
             {
               "type": "function",
@@ -1718,49 +1880,62 @@
       ],
       "init_calldata": [],
       "tag": "the_oruggin_trail-spawner",
-      "systems": []
+      "selector": "0x25ff96bcdaf8f97ebe459eca9f48defec40dc6664e26dca7793cce0eb948a86",
+      "systems": [
+        "setup",
+        "spawn_player",
+        "upgrade"
+      ]
     }
   ],
   "models": [
     {
       "members": [],
-      "class_hash": "0x3932de722d733c3fff81fead2b9b0a690a299fb316c52c7ab108411d078fa8",
-      "tag": "Action"
+      "class_hash": "0x781e4bdadac8fb2024fd7fab24df811ee47cb1ee46b6eca58b40c430d8b8d00",
+      "tag": "the_oruggin_trail-Action",
+      "selector": "0x73074e1ebd038077e439048a0ca7acc7adefe262afd21042e10f61a8c383456"
     },
     {
       "members": [],
-      "class_hash": "0x5835aca1746efd72f6cf441b30cb154ba86e1a8be2aaba88b123b5f033f0e0a",
-      "tag": "Inventory"
+      "class_hash": "0x34e83af563fb7e66d5f6672f08588d0e31a6de693ffc3b8f70e2c8c580e69b4",
+      "tag": "the_oruggin_trail-Inventory",
+      "selector": "0x39e2daf9ca66e2d67529350fbc09271a3c8bc1c8af38ca0720e901d8302b963"
     },
     {
       "members": [],
-      "class_hash": "0x1599982c53f54751a6c92a85ef5db8649b2d198f16d45c6bdba6cf1b38fd0aa",
-      "tag": "Object"
+      "class_hash": "0x4fe21ca95c91a8ec25329ce29dcb39fa7cd354cd7658a58cd14e8c42d8c32c0",
+      "tag": "the_oruggin_trail-Object",
+      "selector": "0x4fb4d030de6a33ed1299b70767b5efbf47af7f21535b4f094f4622e0dafd44"
     },
     {
       "members": [],
-      "class_hash": "0x493ac103235a13c2a000d1966053964458c75a5d4b8e60ccc73c7a0031fa961",
-      "tag": "Output"
+      "class_hash": "0x7d768d28e47bf245246972419342e31e9cdb33de82e83e1a746c1f0f7031ef0",
+      "tag": "the_oruggin_trail-Output",
+      "selector": "0x55f44298c07639e35f14dd8904f32219a4f0f4ba2efbca6414e73312da5b224"
     },
     {
       "members": [],
-      "class_hash": "0x2cb6c8b50be677f278f5a9dedcf7f6f97a50a174d30fab3b8f05d4684c5046a",
-      "tag": "Player"
+      "class_hash": "0x5f56ee3ea300668785104774c60e19d2e6759c8124aa7d4d2039be3972caea7",
+      "tag": "the_oruggin_trail-Player",
+      "selector": "0x320049d3f365911c63800593b9c78aaf9a1d5caa253af3980103a3424e17832"
     },
     {
       "members": [],
-      "class_hash": "0x4dcecf91aea724ae396cffe28d9c5f2e9f6323430aa6969fb80f6d5be7944ae",
-      "tag": "Room"
+      "class_hash": "0x6f2c325e041dab4b1fee6b30ce24ce9c9a1fe8a3cee93587654458aece33d9b",
+      "tag": "the_oruggin_trail-Room",
+      "selector": "0x29e011fc5da96859d49e5a6f65a5d7c57803d049b59a3e78c4f247a6013e13a"
     },
     {
       "members": [],
-      "class_hash": "0x76e03e1c8e113e92de78da233bf2caa3543ce7a902344215b02619871917b69",
-      "tag": "Spawnroom"
+      "class_hash": "0x22596ac236c2f8811581839897f4ccf1d951a2cdb2e5ddc4558d8f04355ab6",
+      "tag": "the_oruggin_trail-Spawnroom",
+      "selector": "0x11d8a3920e47b3b4587ef69133eb3f594e40e80e0a956607e5de6bc9026679c"
     },
     {
       "members": [],
-      "class_hash": "0x1cfc56bc7f966ad8e0dbf716fe65aed297a0360207f2dacebdc466cc28865f1",
-      "tag": "Txtdef"
+      "class_hash": "0x513e70e9e39d1ce57c33a6a1cfe7edc3441d17e9593a23bea8f1d266c855783",
+      "tag": "the_oruggin_trail-Txtdef",
+      "selector": "0x5ce865258cd7265d9ac3c68d1ac7503f2ca9d52d2e87f1fcccd24231dc28714"
     }
   ],
   "events": []
