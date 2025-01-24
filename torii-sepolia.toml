@@ -1,0 +1,30 @@
+# db_dir = "./torii-db"
+
+# The World address to index.
+world_address = "0x067631b711ce310b8e6b32fb88f5427244534dba2a2584bb07c35256f618affa"
+ 
+# Default RPC URL configuration
+rpc = "https://api.cartridge.gg/x/starknet/sepolia"
+
+# Server Options
+#[server]
+#http_addr = "127.0.0.1"
+#http_port = 8080
+#http_cors_origins = ["*"]
+ 
+# Relay Options
+#[relay]
+#port = 9090                   # TCP & UDP Quic transport
+#webrtc_port = 9091            # WebRTC transport
+#websocket_port = 9092         # WebSocket transport
+
+[indexing]
+events_chunk_size = 1024     # Size of events page to fetch
+blocks_chunk_size = 10240    # Blocks to process before DB commit
+index_pending = true         # Enable indexing pending blocks
+polling_interval = 500       # Polling interval in milliseconds
+max_concurrent_tasks = 100   # Maximum concurrent indexing tasks
+index_transactions = false   # Whether to index world transactions
+contracts = [
+    "erc721:0x02cf8f08f551ecb5b839726396d8c8600843078a30b2e288784980cb098ccb7b",
+]
