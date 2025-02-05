@@ -4,7 +4,13 @@
 world_address = "0x067631b711ce310b8e6b32fb88f5427244534dba2a2584bb07c35256f618affa"
  
 # Default RPC URL configuration
-rpc = "https://api.cartridge.gg/x/starknet/sepolia"
+rpc = "https://api.cartridge.gg/x/theoruggintrail/katana" #rpc = "https://api.cartridge.gg/x/starknet/sepolia"
+
+
+
+#External URL for GraphQL Playground
+# Optional: Used in hosted environments
+# external_url = "https://api.cartridge.gg/x/theoruggintrail/torii/graphql"
 
 # Server Options
 #[server]
@@ -26,5 +32,5 @@ polling_interval = 500       # Polling interval in milliseconds
 max_concurrent_tasks = 100   # Maximum concurrent indexing tasks
 index_transactions = false   # Whether to index world transactions
 contracts = [
-    "erc721:0x02cf8f08f551ecb5b839726396d8c8600843078a30b2e288784980cb098ccb7b",
+    "erc721:0x02cf8f08f551ecb5b839726396d8c8600843078a30b2e288784980cb098ccb7b", # Snake Oil. Batch 23.
 ]
