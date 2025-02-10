@@ -22,7 +22,7 @@ do
     echo "Iteration $i: Checking owner of token u256:$U256_VALUE..."
 
     # Run the starkli call command and capture the output
-    OWNER=$(starkli call 0x00e42c26b017863c5ad0b97373269398b9bc8bdbd6121d9c3705b644ffa29fe9 owner_of u256:$U256_VALUE --rpc https://api.cartridge.gg/x/theoruggintrail/katana | jq -r '.[0]')
+    OWNER=$(starkli call 0x01dc981317c9b40a04229c3e48724704a428aa9582c29dabc41233cc564f1706 owner_of u256:$U256_VALUE --rpc https://api.cartridge.gg/x/theoruggintrail/katana | jq -r '.[0]')
 
     # Check if OWNER is empty (in case of an error)
     if [[ -z "$OWNER" ]]; then

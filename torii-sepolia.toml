@@ -33,5 +33,5 @@ max_concurrent_tasks = 100   # Maximum concurrent indexing tasks
 index_transactions = false   # Whether to index world transactions
 contracts = [
     "erc721:0x02cf8f08f551ecb5b839726396d8c8600843078a30b2e288784980cb098ccb7b", # Snake Oil. Batch 23. Sepolia
-    "erc721:0x00e42c26b017863c5ad0b97373269398b9bc8bdbd6121d9c3705b644ffa29fe9", # Snake Oil. Batch 23. Katana
+    "erc721:0x01dc981317c9b40a04229c3e48724704a428aa9582c29dabc41233cc564f1706", # Snake Oil. Batch 23. Katana
 ]
