@@ -1243,8 +1243,8 @@
   },
   "contracts": [
     {
-      "address": "0x6f758cfd367ac46b8cae5b74770503253f0fd090097cfb0d8772ce275ea1376",
-      "class_hash": "0x2c7363619e332e4c0d8c6531436cd22a6fe33cec010c8b32a41908c766f7698",
+      "address": "0xb2e920157ab2c087a9e5c3f93daddcb59d1f29b40bfe3fe105ed67e1b62231",
+      "class_hash": "0x4fe5c7eb8b81dbdb86b7c822824a944e334eb09a36b9e78c1af6b5e3883ebaf",
       "abi": [
         {
           "type": "impl",
@@ -1676,8 +1676,8 @@
       ]
     },
     {
-      "address": "0x6a323a076ce878c41502d0af571ed750abca8ac8d415923c0468b7fa3e2a4f1",
-      "class_hash": "0x27c9bcd414ba6e0c28683f4e7eb5ac49dfc0f1c12d971848799dd6926b7ee3b",
+      "address": "0x7006048001705600482b38d1e50f52d5c6880291f125af5e5ecfd5daad2379f",
+      "class_hash": "0x72d59eae830c1242e5139cedfbf730bd1721a9d709ce435125857144c0c70d7",
       "abi": [
         {
           "type": "impl",
@@ -1891,7 +1891,7 @@
   "models": [
     {
       "members": [],
-      "class_hash": "0x781e4bdadac8fb2024fd7fab24df811ee47cb1ee46b6eca58b40c430d8b8d00",
+      "class_hash": "0x67764f648a3092736e0510146e586cd215be6b4c00458ff15913a75ec055487",
       "tag": "the_oruggin_trail-Action",
       "selector": "0x73074e1ebd038077e439048a0ca7acc7adefe262afd21042e10f61a8c383456"
     },
