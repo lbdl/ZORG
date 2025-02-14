@@ -13,7 +13,7 @@ default = "the_oruggin_trail"
 # mappings = { "armory-Flatbow" = "dojo_examples_weapons", "bestiary" = "dojo_examples_foes" }
 
 [env]
-rpc_url = "https://api.cartridge.gg/x/theoruggintrailv2/katana"
+rpc_url = "https://api.cartridge.gg/x/theoruggintrail/katana"
 
 # katana v1
 #| Account address |  0x6677fe62ee39c7b07401f754138502bab7fac99d2d3c5d37df7d1c6fab10819
