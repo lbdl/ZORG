@@ -7,3 +7,5 @@ manifests
 local.*
 katana_local_db
 torii_local_db
+nft_scripts
+starkli_owner_log.txt
