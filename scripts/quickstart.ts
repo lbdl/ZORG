@@ -22,17 +22,17 @@ if (!versionSatisfies(await $`bun --version`.text(), packageJson.engines.bun)) {
 }
 
 if (!(await isCommandAvailable("asdf"))) {
-	if (process.platform !== "darwin") {
+	if (process.platform !== "darwin" || !(await isCommandAvailable("brew"))) {
 		console.log(
 			`ℹ️ Please follow the installation instructions (https://asdf-vm.com/guide/getting-started.html) for installing ${bgDarkGray(" asdf ")}, then restart this script`,
 		);
 		process.exit(0);
 	}
-	// check if asdf is installed using which asdf
+	// install for OSX users
 	prompt(`Press enter to install ${bgDarkGray(" asdf ")} using HomeBrew`);
 	await $`brew install asdf`;
 	console.log(
-		`ℹ️ Please review the post-installation instructions (https://asdf-vm.com/guide/getting-started.html) for setting up ${bgDarkGray(" asdf ")}`,
+		`ℹ️ Please review the post-installation instructions (https://asdf-vm.com/guide/getting-started.html#_2-configure-asdf) for setting up ${bgDarkGray(" asdf ")}`,
 	);
 }
 
