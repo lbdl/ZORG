@@ -21,17 +21,27 @@ if (!versionSatisfies(await $`bun --version`.text(), packageJson.engines.bun)) {
 	process.exit(0);
 }
 
-// check if asdf is installed using which asdf
 if (!(await isCommandAvailable("asdf"))) {
+	if (process.platform !== "darwin") {
+		console.log(
+			`ℹ️ Please follow the installation instructions (https://asdf-vm.com/guide/getting-started.html) for installing ${bgDarkGray(" asdf ")}, then restart this script`,
+		);
+		process.exit(0);
+	}
+	// check if asdf is installed using which asdf
 	prompt(`Press enter to install ${bgDarkGray(" asdf ")} using HomeBrew`);
 	await $`brew install asdf`;
+	console.log(
+		`ℹ️ Please review the post-installation instructions (https://asdf-vm.com/guide/getting-started.html) for setting up ${bgDarkGray(" asdf ")}`,
+	);
 }
 
-if (
-	!versionSatisfies(await $`asdf --version`.text(), packageJson.engines.asdf)
-) {
-	prompt(`Press enter to update ${bgDarkGray(" asdf ")} using HomeBrew`);
-	await $`brew upgrade asdf`;
+// bail if we have ASDF below 0.16.0 because we don't support it
+if (!versionSatisfies(await $`asdf --version`.text(), "0.16.0")) {
+	console.log(
+		`ℹ️ Please review the upgrade instructions (https://asdf-vm.com/guide/upgrading-to-v0-16.html) and reinstall ${bgDarkGray(" asdf ")} through ${process.platform === "darwin" ? "HomeBrew" : "your package manager"}.`,
+	);
+	process.exit(0);
 }
 
 prompt(
@@ -48,8 +58,6 @@ await $`asdf reshim dojo`;
 await $`asdf reshim scarb`;
 
 console.log(`${lightGray("✅ Done!")}`);
-
-await SetupASDFPaths();
 
 const runScripts = Object.entries(packageJson.scripts).map(([key, value]) => {
 	const name = value.split("#")[0].trim();
