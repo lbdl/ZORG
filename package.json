@@ -9,7 +9,7 @@
 	},
 	"workspaces": ["packages/*"],
 	"engines": {
-		"bun": "^1.2.4",
+		"bun": "^1.2.3",
 		"asdf": "^0.16.0",
 		"scarb": "2.9.2",
 		"dojo": "1.2.1"
