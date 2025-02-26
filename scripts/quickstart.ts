@@ -48,7 +48,8 @@ prompt(
 	`\nPress enter to install ${yellow(" 🐞 scarb ")} and ${red(" ⛩️ dojo ")}`,
 );
 
-console.log(`asdf install scarb ${packageJson.engines.scarb}`);
+await $`asdf plugin add scarb`;
+await $`asdf plugin add dojo`;
 await $`asdf install scarb ${packageJson.engines.scarb}`;
 await $`asdf set scarb ${packageJson.engines.scarb}`;
 await $`asdf install dojo ${packageJson.engines.dojo}`;
