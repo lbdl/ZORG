@@ -83,11 +83,12 @@ export async function sendMessage(message: string) {
 	const cmd_array = cmds.map((cmd) => {
 		return byteArray.byteArrayFromString(cmd);
 	});
+    
 	// console.log(cmd_array);
 	const calldata = CallData.compile([cmd_array, 23]);
 	console.log("sending");
 	console.log(calldata);
-	// ionvoke the contract as we are doing a write
+	// invoke the contract as we are doing a write
 	let response = await theOutputter.invoke("listen", [calldata]);
 
 	return new Response(JSON.stringify(response), {

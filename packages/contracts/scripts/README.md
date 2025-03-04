@@ -3,7 +3,9 @@
 Utility scripts for development
 
 `filter-error`          : awkscript to cut down noise when running
-`filter-warnings`       : awkscript to cut down noise when g
+- eg: `sozo test | ./scripts/utils/filter-error` : will just show errors
+`filter-warnings`       : awkscript to cut down noise when running
+- eg: `sozo test | ./scripts/utils/filter-warnings` : will filter the warnings (which can be a lot)
 
 to use:
 ```sh
