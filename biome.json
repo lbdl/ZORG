@@ -5,7 +5,7 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentWidth": 2,
+		"indentWidth": 1,
 		"indentStyle": "tab"
 	},
 	"vcs": {
@@ -23,10 +23,17 @@
 			"style": {
 				"noNonNullAssertion": "off",
 				"useNumberNamespace": "off",
-				"noInferrableTypes": "off"
+				"noInferrableTypes": "off",
+				"noUnusedTemplateLiteral": "off"
 			},
 			"complexity": {
-				"noForEach": "off"
+				"noForEach": "off",
+				"noExcessiveCognitiveComplexity": {
+					"level": "error",
+					"options": {
+						"maxAllowedComplexity": 15
+					}
+				}
 			},
 			"suspicious": {
 				"noShadowRestrictedNames": "off",

@@ -1,39 +1,34 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { helpStore } from '$lib/stores/help_store';
-    import Typewriter from './Typewriter.svelte';
-    
-    let terminalElement: HTMLDivElement;
-    let currentText: string;
-    
-    function scrollToBottom() {
-        if (!terminalElement) return;
-        setTimeout(() => {
-            if (!terminalElement) return;
-            terminalElement.scrollTop = terminalElement.scrollHeight;
-        }, 0);
-    }
-    
-    // Watch for changes in the help store and create a new string reference
-    $: currentText = $helpStore.currentText ? String($helpStore.currentText) : '';
-    $: isDefaultHelp = $helpStore.topic === 'default';
-    
-    // Scroll when text changes, but only for non-default help
-    $: if (currentText && terminalElement && !isDefaultHelp) {
-        scrollToBottom();
-    }
+import { helpStore } from "$lib/stores/help_store";
+import { onMount } from "svelte";
+import Typewriter from "./Typewriter.svelte";
+
+let terminalElement: HTMLDivElement;
+let currentText: string;
+
+function scrollToBottom() {
+	if (!terminalElement) return;
+	setTimeout(() => {
+		if (!terminalElement) return;
+		terminalElement.scrollTop = terminalElement.scrollHeight;
+	}, 0);
+}
+
+// Watch for changes in the help store and create a new string reference
+$: currentText = $helpStore.currentText ? String($helpStore.currentText) : "";
+$: isDefaultHelp = $helpStore.topic === "default";
+
+// Scroll when text changes, but only for non-default help
+$: if (currentText && terminalElement && !isDefaultHelp) {
+	scrollToBottom();
+}
 </script>
 
 <div class="help-terminal" class:scrollable={isDefaultHelp} class:default={isDefaultHelp} bind:this={terminalElement}>
     <div class="title">HELP SYSTEM n23</div>
     <div class="content">
         {#key currentText}
-            <Typewriter
-                text={currentText}
-                minTypingDelay={0}
-                maxTypingDelay={0}
-                sentenceDelay={0}
-            />
+           <div>{currentText}</div>
         {/key}
     </div>
 </div>
