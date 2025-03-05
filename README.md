@@ -1,24 +1,12 @@
 <p align="center">
-  <h1 align="center">The Oruggin Trail</h1>
+  <h1 align="center">ZORG</h1>
 </p>
+
 <p align="center">
-A Dojo based Zork inspired composable fully onchain text adventure engine. 
-Begun designed aesthetised and largely entorely written by me `itrainspiders | lbdl`
-(with recently a lot of help on the front end)
-
-This is a large scale and complex art project around the fun that is a fully 3d, technicolor, smello-vision, black and white (well green mainly) text adventure.
-It is intended to be  build upon by others and endlessly explorable, assuming you can be arsed to solve the puzzles.
-
-Please feel free to enjoy or don't. We don't care! (much)
-</p>
-<p align="center">
-Welcomew to the best worst game ever where you can pit yourself against not only a onchain NLP parser but ehatever stories
-myself or yourselves can come up with. 
+The BEST and WORST game ever made. a `3d` `technicolor`, `smello-vision` game engine in black and white (mainly green) text. Wahay!
 </p>
 
-<p align="center" style="max-width: 50%;">
-    <img src="https://github.com/ArchetypalTech/TheOrugginTrail/assets/983878/b90bcc55-2ba1-4564-94e1-d08184c1e49c"/></a>
-</p>
+![ad_1_final](https://github.com/user-attachments/assets/149eafd8-c67e-4374-9eb2-9aa5692e3121)
 
 ## ⚡ Setup
 
@@ -64,4 +52,3 @@ This is a monorepo containing the following packages:
 | `contracts` | Dojo contracts        |
 | `room-generator`     | JSON based utility for room generation   |
 
-![ad_2_final](https://github.com/ArchetypalTech/TheOrugginTrail/assets/983878/b90bcc55-2ba1-4564-94e1-d08184c1e49c)
