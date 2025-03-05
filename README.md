@@ -2,19 +2,11 @@
   <h1 align="center">ZORG</h1>
 </p>
 
-* A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine. Just what you never needed!
-* Designed conceived and largely built by `lbdl` | `itrainspiders`
-* Possibly the finest art show ever created for the blockchain or indeed on a computer.
-* Hours for fun for about 10 minutes.
-* Causes virginity.
-
 <p align="center">
 The BEST and WORST game ever made. a 3d technicolor, smello-vision game engine in black and white (mainly green) text. Wahay!
 </p>
 
-
 ![ad_1_final](https://github.com/user-attachments/assets/149eafd8-c67e-4374-9eb2-9aa5692e3121)
-
 
 ## ⚡ Setup
 
