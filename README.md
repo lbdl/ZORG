@@ -1,13 +1,8 @@
 <p align="center">
   <h1 align="center">ZORG</h1>
 </p>
-<p align="center">
-A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine. Just what you never needed!
-</p>
-<p align="center">
-The BEST and WORST game ever made. a 3d technicolor, smello-vision game engine in black and white (mainly green) text. Wahay!
-</p>
 
+* A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine. Just what you never needed!
 * Designed conceived and largely built by `lbdl` | `itrainspiders`
 * Possibly the finest art show ever created for the blockchain or indeed on a computer.
 * Hours for fun for about 10 minutes.
@@ -18,7 +13,7 @@ The BEST and WORST game ever made. a 3d technicolor, smello-vision game engine i
 </p>
 
 <p align="center" style="max-width: 50%;">
-    <img src="https://github.com/ArchetypalTech/TheOrugginTrail/assets/983878/b90bcc55-2ba1-4564-94e1-d08184c1e49c"/></a>
+![ad_1_final](https://github.com/user-attachments/assets/149eafd8-c67e-4374-9eb2-9aa5692e3121)
 </p>
 
 ## ⚡ Setup
@@ -65,4 +60,4 @@ This is a monorepo containing the following packages:
 | `contracts` | Dojo contracts        |
 | `room-generator`     | JSON based utility for room generation   |
 
-![ad_2_final](https://github.com/ArchetypalTech/TheOrugginTrail/assets/983878/b90bcc55-2ba1-4564-94e1-d08184c1e49c)
+![ad_1_final](https://github.com/user-attachments/assets/149eafd8-c67e-4374-9eb2-9aa5692e3121)
