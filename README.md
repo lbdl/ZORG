@@ -1,11 +1,15 @@
 <p align="center">
-  <h1 align="center">The Oruggin Trail</h1>
+  <h1 align="center">ZORG</h1>
 </p>
 <p align="center">
-A Dojo based Zork inspired composable fully onchain text adventure engine.
+A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine.
+  Designed conceived and largely built by `lbdl | itrainspiders`
+  Possibly the finest art show ever created for teh blockchain ot indeed on a computer.
+  Hours for fun for about 10 minutes.
+  Causes virginity.
 </p>
 <p align="center">
-What lies ahead, is anyone's guess...
+The BEST and WORST game ever made. a 3d techeniclor, smellovision game engine in black and white (mainly green) text. Wahay!
 </p>
 
 <p align="center" style="max-width: 50%;">
