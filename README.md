@@ -4,8 +4,10 @@
 <p align="center">
 A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine.
 Designed conceived and largely built by `lbdl` | `itrainspiders`
-Possibly the finest art show ever created for the blockchain ot indeed on a computer.
-Hours for fun for about 10 minutes.
+Possibly the finest art show ever created for the blockchain or indeed on a computer.
+
+  Hours for fun for about 10 minutes.
+
 Causes virginity.
 </p>
 
