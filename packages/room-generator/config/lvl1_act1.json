@@ -208,7 +208,7 @@
                     "biomeType": "Prarie",
                     "objects": [
                         {
-                            "objID": 2655229238403616021
+                            "objID": 2655229238403616021,
                             "type": "Window",
                             "material": "Glass",
                             "objDescription": "a dusty and smashed window, at chest height",
@@ -216,7 +216,7 @@
                             "destination": "elisBarn",
                             "actions": [
                                 {
-                                    "actionID": 17581850991508748471,
+                                    "actionID": "openywindowy",
                                     "type": "Open",
                                     "enabled": true,
                                     "revertable": true,

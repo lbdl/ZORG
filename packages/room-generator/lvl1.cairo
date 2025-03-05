@@ -81,9 +81,10 @@ pub mod spawner {
 
     fn make_rooms(w: IWorldDispatcher, pl: felt252) {
         let _ = gen_room_walkingEaglePass(w, pl);
-        let _ = gen_room_2103159215482208000(w, pl);
-        let _ = gen_room_11107137240536498000(w, pl);
-        let _ = gen_room_13246886194600585000(w, pl);
+        let _ = gen_room_theAlleyOffMainStreet(w, pl);
+        let _ = gen_room_elisBarn(w, pl);
+        let _ = gen_room_elisForge(w, pl);
+        let _ = gen_room_elisBasement(w, pl);
     }
 
 
@@ -92,7 +93,7 @@ pub mod spawner {
         let mut action_745772409139972100_14833044636746870000 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,
-            dBitTxt: "the path winds west, it is open", 
+            dBitTxt: "the path winds west", 
             enabled: true, 
             revertable: false, 
             dBit: true, 
@@ -103,7 +104,7 @@ pub mod spawner {
         let action_id_745772409139972100_14833044636746870000 = h_util::action_hash(@action_745772409139972100_14833044636746870000);
         action_745772409139972100_14833044636746870000.actionId = action_id_745772409139972100_14833044636746870000;
         
-        let destination = "Walking Eagle Pass";
+        let destination = "bensonsPlain";
         let mut object_745772409139972100 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -123,40 +124,6 @@ pub mod spawner {
         store_txt(w, td_id_b, object_id_745772409139972100, object_desc);
 
 
-        let mut action_14833044636746870000_7479341928096535000 = Action{
-            actionId: st::NONE, 
-            actionType: zrk::ActionType::Open,
-            dBitTxt: "the path winds west, it is open", 
-            enabled: true, 
-            revertable: false, 
-            dBit: true, 
-            affectsActionId: 0,
-            affectedByActionId: 0
-        };
-
-        let action_id_14833044636746870000_7479341928096535000 = h_util::action_hash(@action_14833044636746870000_7479341928096535000);
-        action_14833044636746870000_7479341928096535000.actionId = action_id_14833044636746870000_7479341928096535000;
-        
-        let destination = "The Last Saloon";
-        let mut object_14833044636746870000 = Object{
-            objectId: st::SETME, 
-            objType: zrk::ObjectType::Path,
-            matType: zrk::MaterialType::Metal,
-            dirType: zrk::DirectionType::South,
-            destId: h_util::str_hash(@destination),
-            objectActionIds: array![action_id_14833044636746870000_7479341928096535000],
-            txtDefId: st::SETME 
-        };
-
-        let object_id_14833044636746870000 = h_util::obj_hash(@object_14833044636746870000); 
-        object_14833044636746870000.objectId = object_id_14833044636746870000;
-        let object_desc: ByteArray = "Train";
-        let td_id_b = h_util::str_hash(@object_desc);
-        object_14833044636746870000.txtDefId = td_id_b;
-
-        store_txt(w, td_id_b, object_id_14833044636746870000, object_desc);
-
-
         let mut action_7479341928096535000_9807140808976005000 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,
@@ -171,7 +138,7 @@ pub mod spawner {
         let action_id_7479341928096535000_9807140808976005000 = h_util::action_hash(@action_7479341928096535000_9807140808976005000);
         action_7479341928096535000_9807140808976005000.actionId = action_id_7479341928096535000_9807140808976005000;
         
-        let destination = "The Alley Off Main Street";
+        let destination = "theAlleyOffMainStreet";
         let mut object_7479341928096535000 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
@@ -235,11 +202,9 @@ someone has drawn a cock on it.";
         action_383324005557581440_5294932446722203000.affectsActionId = action_id_7479341928096535000_9807140808976005000;
         action_7479341928096535000_9807140808976005000.affectedByActionId = action_id_383324005557581440_5294932446722203000;
         store_actions(w, array![action_745772409139972100_14833044636746870000]);
-        store_actions(w, array![action_14833044636746870000_7479341928096535000]);
         store_actions(w, array![action_7479341928096535000_9807140808976005000]);
         store_actions(w, array![action_383324005557581440_5294932446722203000]);
         store_objects(w, array![object_745772409139972100]);
-        store_objects(w, array![object_14833044636746870000]);
         store_objects(w, array![object_7479341928096535000]);
         store_objects(w, array![object_383324005557581440]);
 
@@ -261,7 +226,7 @@ It's brass monkeys.";
             txtDefId: _txt_id,
             shortTxt: place_name,
             objectIds: array![object_id_383324005557581440],
-            dirObjIds: array![object_id_745772409139972100,object_id_14833044636746870000,object_id_7479341928096535000],
+            dirObjIds: array![object_id_745772409139972100,object_id_7479341928096535000],
             players: array![]
         };
 
@@ -270,7 +235,7 @@ It's brass monkeys.";
     }
 
 
-    fn gen_room_2103159215482208000(w: IWorldDispatcher, playerid: felt252) {
+    fn gen_room_theAlleyOffMainStreet(w: IWorldDispatcher, playerid: felt252) {
         
         let mut action_16637690103936120000_17581850991508748000 = Action{
             actionId: st::NONE, 
@@ -286,12 +251,12 @@ It's brass monkeys.";
         let action_id_16637690103936120000_17581850991508748000 = h_util::action_hash(@action_16637690103936120000_17581850991508748000);
         action_16637690103936120000_17581850991508748000.actionId = action_id_16637690103936120000_17581850991508748000;
         
-        let destination = "Walking Eagle Pass";
+        let destination = "walkingEaglePass";
         let mut object_16637690103936120000 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Path,
             matType: zrk::MaterialType::Shit,
-            dirType: zrk::DirectionType::North,
+            dirType: zrk::DirectionType::West,
             destId: h_util::str_hash(@destination),
             objectActionIds: array![action_id_16637690103936120000_17581850991508748000],
             txtDefId: st::SETME 
@@ -333,14 +298,14 @@ oddly it reminds you of home. this isnt a good thing.";
     }
 
 
-    fn gen_room_11107137240536498000(w: IWorldDispatcher, playerid: felt252) {
+    fn gen_room_elisBarn(w: IWorldDispatcher, playerid: felt252) {
         
         let mut action_10414226638441273000_4328927602301159000 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,
             dBitTxt: "the door, closes with a creak", 
             enabled: true, 
-            revertable: false, 
+            revertable: true, 
             dBit: true, 
             affectsActionId: 0,
             affectedByActionId: 0
@@ -349,7 +314,7 @@ oddly it reminds you of home. this isnt a good thing.";
         let action_id_10414226638441273000_4328927602301159000 = h_util::action_hash(@action_10414226638441273000_4328927602301159000);
         action_10414226638441273000_4328927602301159000.actionId = action_id_10414226638441273000_4328927602301159000;
         
-        let destination = "Walking Eagle Pass";
+        let destination = "bensonsPlain";
         let mut object_10414226638441273000 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Door,
@@ -375,7 +340,7 @@ oddly it reminds you of home. this isnt a good thing.";
             dBitTxt: "the window, now broken, falls open", 
             enabled: true, 
             revertable: false, 
-            dBit: true, 
+            dBit: false, 
             affectsActionId: 0,
             affectedByActionId: 0
         };
@@ -397,7 +362,7 @@ oddly it reminds you of home. this isnt a good thing.";
         let action_id_4916953867006087000_3629301349604562000 = h_util::action_hash(@action_4916953867006087000_3629301349604562000);
         action_4916953867006087000_3629301349604562000.actionId = action_id_4916953867006087000_3629301349604562000;
         
-        let destination = "Eli's Basement";
+        let destination = "elisForge";
         let mut object_4916953867006087000 = Object{
             objectId: st::SETME, 
             objType: zrk::ObjectType::Window,
@@ -537,14 +502,111 @@ the smell is not unpleasent and reminds you faintly of petrol and old socks";
     }
 
 
-    fn gen_room_13246886194600585000(w: IWorldDispatcher, playerid: felt252) {
+    fn gen_room_elisForge(w: IWorldDispatcher, playerid: felt252) {
+        
+        let mut action_2655229238403616300_openywindowy = Action{
+            actionId: st::NONE, 
+            actionType: zrk::ActionType::Open,
+            dBitTxt: "the window being little more now than a splintered frame, closes with a splinetery and weak creak", 
+            enabled: true, 
+            revertable: true, 
+            dBit: true, 
+            affectsActionId: 0,
+            affectedByActionId: 0
+        };
+
+        let action_id_2655229238403616300_openywindowy = h_util::action_hash(@action_2655229238403616300_openywindowy);
+        action_2655229238403616300_openywindowy.actionId = action_id_2655229238403616300_openywindowy;
+        
+        let destination = "elisBarn";
+        let mut object_2655229238403616300 = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Window,
+            matType: zrk::MaterialType::Glass,
+            dirType: zrk::DirectionType::East,
+            destId: h_util::str_hash(@destination),
+            objectActionIds: array![action_id_2655229238403616300_openywindowy],
+            txtDefId: st::SETME 
+        };
+
+        let object_id_2655229238403616300 = h_util::obj_hash(@object_2655229238403616300); 
+        object_2655229238403616300.objectId = object_id_2655229238403616300;
+        let object_desc: ByteArray = "a dusty and smashed window, at chest height";
+        let td_id_b = h_util::str_hash(@object_desc);
+        object_2655229238403616300.txtDefId = td_id_b;
+
+        store_txt(w, td_id_b, object_id_2655229238403616300, object_desc);
+
+
+        let mut action_3265630872681577000_burnyPetrol = Action{
+            actionId: st::NONE, 
+            actionType: zrk::ActionType::Burn,
+            dBitTxt: "burny burny", 
+            enabled: true, 
+            revertable: false, 
+            dBit: true, 
+            affectsActionId: 0,
+            affectedByActionId: 0
+        };
+
+        let action_id_3265630872681577000_burnyPetrol = h_util::action_hash(@action_3265630872681577000_burnyPetrol);
+        action_3265630872681577000_burnyPetrol.actionId = action_id_3265630872681577000_burnyPetrol;
+        
+        let mut object_3265630872681577000 = Object{
+            objectId: st::SETME, 
+            objType: zrk::ObjectType::Petrol,
+            matType: zrk::MaterialType::Metal,
+            dirType: zrk::DirectionType::None,
+            destId: st::NONE,
+            objectActionIds: array![action_id_3265630872681577000_burnyPetrol],
+            txtDefId: st::SETME 
+        };
+
+        let object_id_3265630872681577000 = h_util::obj_hash(@object_3265630872681577000); 
+        object_3265630872681577000.objectId = object_id_3265630872681577000;
+        let object_desc: ByteArray = "a army issue petrol can
+trade marked Cthonian Petroleum Corp n.23";
+        let td_id_b = h_util::str_hash(@object_desc);
+        object_3265630872681577000.txtDefId = td_id_b;
+
+        store_txt(w, td_id_b, object_id_3265630872681577000, object_desc);
+        
+        store_actions(w, array![action_2655229238403616300_openywindowy]);
+        store_actions(w, array![action_3265630872681577000_burnyPetrol]);
+        store_objects(w, array![object_2655229238403616300]);
+        store_objects(w, array![object_3265630872681577000]);
+
+        let room_desc: ByteArray = "has been shuttered, well the door has been nailed shut and the window locked
+from this side. Now that the window is smashed light creeps in from the barn and through the cracks in the walls and roof
+the hearth is cold and the place smells of petrol and soot";
+        let _txt_id = h_util::str_hash(@room_desc);
+        let place_name: ByteArray = "Elis's Forge";
+        let rmid = h_util::str_hash(@place_name);
+
+        let mut place = Room{
+            roomId: rmid,
+            roomType: zrk::RoomType::Forge,
+            biomeType: zrk::BiomeType::Prarie,
+            txtDefId: _txt_id,
+            shortTxt: place_name,
+            objectIds: array![object_id_3265630872681577000],
+            dirObjIds: array![object_id_2655229238403616300],
+            players: array![]
+        };
+
+        store_txt(w, _txt_id, rmid, room_desc);
+        store_places(w, array![place]);
+    }
+
+
+    fn gen_room_elisBasement(w: IWorldDispatcher, playerid: felt252) {
         
         let mut action_4405246086034713600_16332049259031097000 = Action{
             actionId: st::NONE, 
             actionType: zrk::ActionType::Open,
             dBitTxt: "the trap door, closes with a bang", 
             enabled: true, 
-            revertable: false, 
+            revertable: true, 
             dBit: true, 
             affectsActionId: 0,
             affectedByActionId: 0
