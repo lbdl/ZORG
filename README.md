@@ -3,13 +3,12 @@
 </p>
 <p align="center">
 A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine.
+</p>
+
 Designed conceived and largely built by `lbdl` | `itrainspiders`
 Possibly the finest art show ever created for the blockchain or indeed on a computer.
-
-  Hours for fun for about 10 minutes.
-
+Hours for fun for about 10 minutes.
 Causes virginity.
-</p>
 
 <p align="center">
 The BEST and WORST game ever made. a 3d techeniclor, smellovision game engine in black and white (mainly green) text. Wahay!
