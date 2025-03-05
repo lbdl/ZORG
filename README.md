@@ -3,7 +3,9 @@
 </p>
 <p align="center">
 A Dojo based Zork inspired composable fully onchain ridiculous and brilliant text adventure engine. Just what you never needed!
-  The BEST and WORST game ever made. a 3d technicolor, smello-vision game engine in black and white (mainly green) text. Wahay!
+</p>
+<p align="center">
+The BEST and WORST game ever made. a 3d technicolor, smello-vision game engine in black and white (mainly green) text. Wahay!
 </p>
 
 * Designed conceived and largely built by `lbdl` | `itrainspiders`
