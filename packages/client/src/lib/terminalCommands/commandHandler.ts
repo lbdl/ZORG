@@ -3,6 +3,7 @@ import { connectedToArX, connectedToCGC } from "$lib/stores/wallet_store";
 import { getBalance2 } from "$lib/tokens/interaction";
 import { get } from "svelte/store";
 import { TERMINAL_SYSTEM_COMMANDS } from "./systemCommands";
+import { Dojo_Config } from "$lib/stores/dojo_store";
 
 export const commandHandler = async (command: string, bypassSystem = false) => {
 	const [cmd, ...args] = command.trim().toLowerCase().split(/\s+/);
@@ -65,7 +66,6 @@ async function sendCommand(command: string): Promise<string> {
 			method: "POST",
 			body: formData,
 		});
-
 		return response.json();
 	} catch (error) {
 		const e = error as Error;
