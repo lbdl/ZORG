@@ -52,4 +52,3 @@ This is a monorepo containing the following packages:
 | `contracts` | Dojo contracts        |
 | `room-generator`     | JSON based utility for room generation   |
 
-![ad_1_final](https://github.com/user-attachments/assets/149eafd8-c67e-4374-9eb2-9aa5692e3121)
