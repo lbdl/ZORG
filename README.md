@@ -7,7 +7,7 @@ The BEST and WORST game ever made. A <code>3d</code>, <code>technicolor</code>, 
 </p>
 
 <p align="left">
-The project was inspired by playing adventure games as a kid and being fascinated with them. Infocom had a brief period of making some great games that have largely been forgotten and blockchains offer a means of pratical world permanance. The engine and initial game are intended to be a kind of world sim but in text. Yes now you too can play a frustrating game where you have to figure out to to get to the next chapter. You can smell the roses and burn things to the ground. Leave trash round and shout into a void. You can play the game with others, lock them in rooms only you have the keys to and then wait for them to die. All this an possibly more.
+The project was inspired by playing adventure games as a kid and being fascinated with them. Infocom had a brief period of making some great games that have largely been forgotten and blockchains offer a means of pratical world permanance. The engine and initial game are intended to be a kind of world sim but in text. Yes now you too can play a frustrating game where you have to figure out to to get to the next chapter. You can smell the roses and burn things to the ground. Leave trash round and shout into a void. You can play the game with others, lock them in rooms only you have the keys to and then wait for them to die. All this and possibly more.
 
 The idea is that anyone can extend the worlds that are deployed. Im working on it (and multiplayer) right now is some one breaks something then the next player will see that broken something. This is kind of fun but might get tiresome. Working on it.
 
@@ -21,7 +21,7 @@ There is a bunch of text on the whys and why nots on my substack
 
 This is the `dojo` version. There is also a `MUD` version.
 
-There is also a fork of the project that is being worked on by AT and myself but this version is more canonocal.
+There is also a fork of the project that is being worked on by AT and myself but this version is canonical.
 
 Enjoy or don't !
 
