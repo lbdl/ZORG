@@ -3,7 +3,7 @@
 </p>
 
 <p align="left">
-The BEST and WORST game ever made. a `3d` `technicolor`, `smello-vision` game engine in black and white (mainly green) text. Wahay!
+The BEST and WORST game ever made. A <code>3d</code>, <code>technicolor</code>, <code>smello-vision</code> game engine in black and white (mainly green) text. Wahay!. Hours of fun (for 10 minutes). Product may cause virginity.
 </p>
 
 <p align="left">
@@ -17,7 +17,7 @@ There is a rudimentary adeventure here that you can play through that will be de
 
 See more at my site itrainspiders.com/whoreallycares
 
-There is a bunch of etxt on the whys and why nots on my substack
+There is a bunch of text on the whys and why nots on my substack
 
 This is the `dojo` version. There is also a `MUD` version.
 
