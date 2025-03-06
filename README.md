@@ -21,6 +21,8 @@ There is a bunch of etxt on the whys and why nots on my substack
 
 This is the `dojo` version. There is also a `MUD` version.
 
+There is also a fork of the project that is being worked on by AT and myself but this version is more canonocal.
+
 Enjoy or don't !
 
 Love You.
