@@ -1,9 +1,31 @@
 <p align="center">
-  <h1 align="center">ZORG</h1>
+  <h1 align="center">ZORG - an onchain ever world that no one asked for</h1>
 </p>
 
-<p align="center">
+<p align="left">
 The BEST and WORST game ever made. a `3d` `technicolor`, `smello-vision` game engine in black and white (mainly green) text. Wahay!
+</p>
+
+<p align="left">
+The project was inspired by playing adventure games as a kid and being fascinated with them. Infocom had a brief period of making some great games that have largely been forgotten and blockchains offer a means of pratical world permanance. The engine and initial game are intended to be a kind of world sim but in text. Yes now you too can play a frustrating game where you have to figure out to to get to the next chapter. You can smell the roses and burn things to the ground. Leave trash round and shout into a void. You can play the game with others, lock them in rooms only you have the keys to and then wait for them to die. All this an possibly more.
+
+The idea is that anyone can extend the worlds that are deployed. Im working on it (and multiplayer) right now is some one breaks something then the next player will see that broken something. This is kind of fun but might get tiresome. Working on it.
+
+There are no solid deploys yet but you can run it locally.
+
+There is a rudimentary adeventure here that you can play through that will be deployed somewhere.
+
+See more at my site itrainspiders.com/whoreallycares
+
+There is a bunch of etxt on the whys and why nots on my substack
+
+This is the `dojo` version. There is also a `MUD` version.
+
+There is also a fork of the project that is being worked on by AT and myself but this version is more canonocal.
+
+Enjoy or don't !
+
+Love You.
 </p>
 
 ![ad_1_final](https://github.com/user-attachments/assets/149eafd8-c67e-4374-9eb2-9aa5692e3121)
